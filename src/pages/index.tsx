@@ -1,18 +1,20 @@
 import {Link} from 'gatsby'
 import {StaticImage} from 'gatsby-plugin-image'
-import React from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
 import {Box, Button, Container, createStyles, Grid, makeStyles, Typography} from '@material-ui/core'
 import {Hero} from '../components/style'
 import LeftBall from '../images/left_ball.svg'
 import RightBall from '../images/right_ball.svg'
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight'
+import lottie from 'lottie-web'
+import data from './data.json'
 
 const useStyles = makeStyles((theme) =>
   createStyles({
     banner: {
-      minHeight: 'calc(100vh - 80px)',
+      minHeight: '600vh',
       display: 'flex',
       alignItems: 'center'
     },
@@ -77,96 +79,127 @@ const useStyles = makeStyles((theme) =>
 
 const IndexPage = () => {
   const classes = useStyles()
+  const divRef = useRef()
+  const [animation, setAnimation] = useState()
+  const [scrollTop, setScrollTop] = useState(0)
+  const [opacity, setOpacity] = useState(1)
+  const [opacity2, setOpacity2] = useState(0)
+
+  useEffect(() => {
+    const onScroll = e => {
+      console.log(e.target.documentElement.scrollTop)
+      setScrollTop(e.target.documentElement.scrollTop)
+      // setScrolling(e.target.documentElement.scrollTop > scrollTop);
+    }
+    window.addEventListener('scroll', onScroll)
+
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [scrollTop])
+
+  useEffect(() => {
+    setOpacity(1 - scrollTop / 1000)
+    if (scrollTop > 1000) {
+      setOpacity2((scrollTop - 300) / 1000 / 2)
+    } else {
+      setOpacity2(0)
+    }
+    if (animation) {
+      animation.goToAndStop(scrollTop)
+    }
+  }, [scrollTop])
+
+  useEffect(() => {
+    console.log(divRef.current)
+    const animation = lottie.loadAnimation({
+      animationData: data,
+      container: divRef.current
+    })
+
+    setAnimation(animation)
+
+    // animation.setSpeed(2)
+    // animation.setDirection(-1)
+    animation.goToAndStop(0, true)
+  }, [])
 
   return (
     <Layout>
       <SEO title='Home' />
       <Container maxWidth='lg'>
+        <div ref={divRef} style={{position: 'fixed', top: '0px', zIndex: -1, right: '0px', minHeight: '300vh'}} />
         <Box className={classes.banner}>
-          <Grid container>
-            <Grid item md={5}>
-              <Box className={classes.title}>万链互连</Box>
-              <Box mb={6} fontSize='72px'>共建生态</Box>
-              <Typography variant='body1' mb={6}>
-                为链上的资产、数据、服务开拓价值互通的渠道，助力区块链技术从“链孤岛”到形成“链网络”的发展
-              </Typography>
-              <Button variant='outlined' size='large'>
-                快速开始
-                <ChevronRightIcon />
-              </Button>
-            </Grid>
-            <Grid item md={7}>
-            </Grid>
-          </Grid>
-        </Box>
-      </Container>
-      <Container maxWidth='lg'>
-        <Hero>
-          <Grid container>
-            <Grid item md={6}>
-            </Grid>
-            <Grid item md={6}>
-              <Box display='flex' mb={8}>
-                <Box fontSize='48px' mr={2} className={classes.title}>万链如一</Box>
-                <Box mb={2} fontSize='48px'>一可链万</Box>
-              </Box>
-              <Grid container spacing={4}>
-                <Grid item md={6}>
-                  <Box className={classes.card} p={5}>
-                    <Typography variant='subtitle1' mb={4} display='flex' alignItems='center'>
-                      <StaticImage src='../images/1.svg' height={30} alt='icon' />
-                      <Box ml={3}>
-                        异构适配
-                      </Box>
-                    </Typography>
-                    <Typography variant='body1'>
-                      异构区块链协议适配，同时支持同构和异构应用链的适配
-                    </Typography>
-                  </Box>
-                </Grid>
-                <Grid item md={6}>
-                  <Box className={classes.card} p={5}>
-                    <Typography variant='subtitle1' mb={4} display='flex' alignItems='center'>
-                      <StaticImage src='../images/2.svg' height={30} alt='icon' />
-                      <Box ml={3}>
-                        异构适配
-                      </Box>
-                    </Typography>
-                    <Typography variant='body1'>
-                      异构区块链协议适配，同时支持同构和异构应用链的适配
-                    </Typography>
-                  </Box>
-                </Grid>
-                <Grid item md={6}>
-                  <Box className={classes.card} p={5}>
-                    <Typography variant='subtitle1' mb={4} display='flex' alignItems='center'>
-                      <StaticImage src='../images/3.svg' height={30} alt='icon' />
-                      <Box ml={3}>
-                        异构适配
-                      </Box>
-                    </Typography>
-                    <Typography variant='body1'>
-                      异构区块链协议适配，同时支持同构和异构应用链的适配
-                    </Typography>
-                  </Box>
-                </Grid>
-                <Grid item md={6}>
-                  <Box className={classes.card} p={5}>
-                    <Typography variant='subtitle1' mb={4} display='flex' alignItems='center'>
-                      <StaticImage src='../images/4.svg' height={30} alt='icon' />
-                      <Box ml={3}>
-                        异构适配
-                      </Box>
-                    </Typography>
-                    <Typography variant='body1'>
-                      异构区块链协议适配，同时支持同构和异构应用链的适配
-                    </Typography>
-                  </Box>
-                </Grid>
+          <Box position='fixed' style={{bottom: '40%', opacity: opacity}}>
+            <Box className={classes.title}>万链互连</Box>
+            <Box mb={6} fontSize='72px'>共建生态</Box>
+            <Typography variant='body1' mb={6}>
+              为链上的资产、数据、服务开拓价值互通的渠道，助力区块链技术从“链孤岛”到形成“链网络”的发展
+            </Typography>
+            <Button variant='outlined' size='large'>
+              快速开始
+              <ChevronRightIcon />
+            </Button>
+          </Box>
+          <Box position='fixed' style={{position: 'fixed', bottom: '40%', right: '200px', width: '700px', opacity: opacity2}}>
+            <Box display='flex' mb={8}>
+              <Box fontSize='48px' mr={2} className={classes.title}>万链如一</Box>
+              <Box mb={2} fontSize='48px'>一可链万</Box>
+            </Box>
+            <Grid container spacing={4}>
+              <Grid item md={6}>
+                <Box className={classes.card} p={5}>
+                  <Typography variant='subtitle1' mb={4} display='flex' alignItems='center'>
+                    <StaticImage src='../images/1.svg' height={30} alt='icon' />
+                    <Box ml={3}>
+                      异构适配
+                    </Box>
+                  </Typography>
+                  <Typography variant='body1'>
+                    异构区块链协议适配，同时支持同构和异构应用链的适配
+                  </Typography>
+                </Box>
+              </Grid>
+              <Grid item md={6}>
+                <Box className={classes.card} p={5}>
+                  <Typography variant='subtitle1' mb={4} display='flex' alignItems='center'>
+                    <StaticImage src='../images/2.svg' height={30} alt='icon' />
+                    <Box ml={3}>
+                      异构适配
+                    </Box>
+                  </Typography>
+                  <Typography variant='body1'>
+                    异构区块链协议适配，同时支持同构和异构应用链的适配
+                  </Typography>
+                </Box>
+              </Grid>
+              <Grid item md={6}>
+                <Box className={classes.card} p={5}>
+                  <Typography variant='subtitle1' mb={4} display='flex' alignItems='center'>
+                    <StaticImage src='../images/3.svg' height={30} alt='icon' />
+                    <Box ml={3}>
+                      异构适配
+                    </Box>
+                  </Typography>
+                  <Typography variant='body1'>
+                    异构区块链协议适配，同时支持同构和异构应用链的适配
+                  </Typography>
+                </Box>
+              </Grid>
+              <Grid item md={6}>
+                <Box className={classes.card} p={5}>
+                  <Typography variant='subtitle1' mb={4} display='flex' alignItems='center'>
+                    <StaticImage src='../images/4.svg' height={30} alt='icon' />
+                    <Box ml={3}>
+                      异构适配
+                    </Box>
+                  </Typography>
+                  <Typography variant='body1'>
+                    异构区块链协议适配，同时支持同构和异构应用链的适配
+                  </Typography>
+                </Box>
               </Grid>
             </Grid>
-          </Grid>
-        </Hero>
+          </Box>
+        </Box>
       </Container>
       <Container maxWidth='lg'>
         <Hero>
@@ -278,19 +311,31 @@ const IndexPage = () => {
       <Box textAlign='center'>
         <Box className={classes.title} fontSize='48px' mr={2}>了解更多</Box>
       </Box>
-      {/*<StaticImage*/}
-      {/*  src='../images/gatsby-astronaut.png'*/}
-      {/*  width={300}*/}
-      {/*  quality={95}*/}
-      {/*  formats={['AUTO', 'WEBP', 'AVIF']}*/}
-      {/*  alt='A Gatsby astronaut'*/}
-      {/*  style={{marginBottom: `1.45rem`}}*/}
-      {/*/>*/}
-      {/*<p>*/}
-      {/*  <Link to='/page-2/'>Go to page 2</Link> <br />*/}
-      {/*  <Link to='/using-typescript/'>Go to "Using TypeScript"</Link>*/}
-      {/*</p>*/}
+      {/*<StaticImage*/
+      }
+      {/*  src='../images/gatsby-astronaut.png'*/
+      }
+      {/*  width={300}*/
+      }
+      {/*  quality={95}*/
+      }
+      {/*  formats={['AUTO', 'WEBP', 'AVIF']}*/
+      }
+      {/*  alt='A Gatsby astronaut'*/
+      }
+      {/*  style={{marginBottom: `1.45rem`}}*/
+      }
+      {/*/>*/
+      }
+      {/*<p>*/
+      }
+      {/*  <Link to='/page-2/'>Go to page 2</Link> <br />*/
+      }
+      {/*  <Link to='/using-typescript/'>Go to "Using TypeScript"</Link>*/
+      }
+      {/*</p>*/
+      }
     </Layout>
-  )
+)
 }
 export default IndexPage

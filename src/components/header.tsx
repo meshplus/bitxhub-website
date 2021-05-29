@@ -9,6 +9,7 @@ const useStyles = makeStyles((theme) =>
     main: {
       minHeight: '80px',
       fontSize: '14px',
+      position: 'fixed',
       [theme.breakpoints.down('sm')]: {
         padding: theme.spacing(6)
       }
