@@ -18,10 +18,12 @@ module.exports = {
       resolve: 'gatsby-source-strapi',
       options: {
         apiURL: 'http://localhost:1337',
-        contentTypes: [ // List of the Content Types you want to be able to request from Gatsby.
+        contentTypes: [
+          // List of the Content Types you want to be able to request from Gatsby.
           'article',
+          'activity',
         ],
-        collectionTypes: [`article`, `user`],
+        collectionTypes: [`article`, `user`, 'activity'],
         queryLimit: 1000,
       },
     },
