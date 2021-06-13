@@ -1,6 +1,9 @@
-import {createMuiTheme} from '@material-ui/core'
+import {createTheme} from '@material-ui/core'
+import createBreakpoints from '@material-ui/core/styles/createBreakpoints'
 
-export const theme = createMuiTheme({
+const breakpoints = createBreakpoints({})
+
+export const theme = createTheme({
   spacing: 5,
   palette: {
     primary: {
@@ -12,6 +15,14 @@ export const theme = createMuiTheme({
     },
   },
   components: {
+    MuiContainer: {
+      styleOverrides: {
+        root: {
+          paddingLeft: '15px',
+          paddingRight: '15px',
+        },
+      },
+    },
     MuiDivider: {
       styleOverrides: {
         root: {
@@ -40,7 +51,6 @@ export const theme = createMuiTheme({
     MuiButton: {
       styleOverrides: {
         root: {
-          fontSize: '16px',
           textTransform: 'capitalize',
           borderRadius: '2em',
           color: '#ffffff',
@@ -79,6 +89,13 @@ export const theme = createMuiTheme({
           '&:hover': {
             // backgroundColor: isBSC() ? '#EFB23D' : '#3679f4',
             backgroundColor: '#3679f4',
+          },
+        },
+        containedInherit: {
+          background: '#313131CC',
+          transition: 'all 1.3s',
+          '&:hover': {
+            background: 'radial-gradient(95.45% 255.77% at 95.45% 50.51%, #01E1FF 0%, #2E7CFE 66.23%, rgba(125, 188, 252, 0.92) 100%)',
           },
         },
       },
@@ -169,6 +186,9 @@ export const theme = createMuiTheme({
         },
         h3: {
           fontFamily: '"AlibabaPuHui", "Roboto", "Helvetica", "Arial", sans-serif !important',
+          [breakpoints.down('sm')]: {
+            fontSize: '36px',
+          },
         },
         h4: {
           fontFamily: '"AlibabaPuHui", "Roboto", "Helvetica", "Arial", sans-serif !important',

@@ -15,6 +15,17 @@ export const useCustomStyles = makeStyles(theme =>
   })
 )
 
+export const useHelperStyles = makeStyles(theme =>
+  createStyles({
+    title: {
+      background: '-webkit-linear-gradient(left, #7DBCFC, #2E7CFE, #01E1FF)',
+      color: 'transparent',
+      WebkitBackgroundClip: 'text',
+      WebkitTextFillColor: 'transparent',
+    },
+  })
+)
+
 const useStyles = makeStyles(theme =>
   createStyles({
     main: {
@@ -22,6 +33,7 @@ const useStyles = makeStyles(theme =>
     },
     card: {
       borderRadius: '12px',
+      display: 'block',
       '&:hover': {
         cursor: 'pointer',
         transition: 'all .5s',
@@ -48,12 +60,17 @@ const useStyles = makeStyles(theme =>
   })
 )
 
-export interface WithBoxProps extends BoxProps, StyledComponentProps {
-  children?: React.ReactNode
-  className?: string
+export const ColorText = ({children, className, ...other}) => {
+  const classes = useHelperStyles()
+
+  return (
+    <Box display='inline-block' className={clsx(classes.title, className)} {...other}>
+      {children}
+    </Box>
+  )
 }
 
-export const Hero = ({children, className, ...other}: WithBoxProps) => {
+export const Hero = ({children, className, ...other}) => {
   const classes = useStyles()
 
   return (
@@ -63,21 +80,12 @@ export const Hero = ({children, className, ...other}: WithBoxProps) => {
   )
 }
 
-export interface WithCardProps extends BoxProps, StyledComponentProps {
-  children?: React.ReactNode
-  className?: string
-  img: string
-  title: string
-  desc?: string
-  date: string
-  singleTitle?: boolean
-}
-
-export const Card = ({children, className, title, singleTitle, img, desc, date, ...other}: WithCardProps) => {
+export const Card = ({children, className, title, singleTitle, img, desc, date, link, ...other}) => {
   const classes = useStyles()
 
   return (
-    <Box className={clsx(classes.card, className)} {...other}>
+    <Box className={clsx(classes.card, className)} {...other} component='a' href={link} target='_blank'>
+      {console.log(2, link)}
       <img src={img} alt='' style={{display: 'block', width: '100%'}} className={classes.cardCover} />
       <Box p={6} className={classes.cardContent}>
         <Typography mb={4} variant='h5' height={singleTitle ? '32px' : '64px'}>
@@ -94,7 +102,7 @@ export const Card = ({children, className, title, singleTitle, img, desc, date, 
   )
 }
 
-export const Divider = ({children, className, ...other}: WithBoxProps): JSX.Element => {
+export const Divider = ({children, className, ...other}) => {
   const classes = useStyles()
 
   return <Box className={clsx(classes.hr, className)} {...other} />

@@ -20,6 +20,8 @@ const useStyles = makeStyles(theme =>
       '& a': {
         color: '#fff',
         marginLeft: '30px',
+        display: 'inline-block',
+        marginBottom: '5px',
       },
     },
     beian: {},

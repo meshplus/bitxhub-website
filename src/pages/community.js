@@ -23,6 +23,7 @@ export const pageQuery = graphql`
           title
           content
           published_at
+          link
           cover {
             formats {
               thumbnail {
@@ -43,6 +44,14 @@ const useStyles = makeStyles(theme =>
       minHeight: 'calc(100vh - 80px)',
       display: 'flex',
       alignItems: 'center',
+    },
+    item: {
+      '&:hover': {
+        background: '-webkit-linear-gradient(left, #7DBCFC, #2E7CFE, #01E1FF)',
+        color: 'transparent',
+        WebkitBackgroundClip: 'text',
+        WebkitTextFillColor: 'transparent',
+      },
     },
     maxHeight: {
       height: '100%',
@@ -80,7 +89,6 @@ const BlogPage = ({data}) => {
   const [users, setUsers] = useState()
 
   useEffect(() => {
-    console.log(222)
     const octokit = new Octokit()
     octokit.rest.repos
       .listContributors({
@@ -98,7 +106,7 @@ const BlogPage = ({data}) => {
     <Box className={classes.bg}>
       <Layout>
         <Container maxWidth='lg'>
-          <SEO title='Home' />
+          <SEO title='Community' />
           <Box pt={35}>
             <Typography variant='h3' mb={3}>
               打通价值孤岛 ，从开源开始
@@ -117,8 +125,10 @@ const BlogPage = ({data}) => {
               <Box mt={8}>
                 <Grid container spacing={4}>
                   <Grid item md={8}>
+                    {console.log(data.allStrapiActivity.edges[0])}
                     {data.allStrapiActivity.edges.slice(0, 1).map(activity => (
                       <Card
+                        link={activity.node.link}
                         singleTitle={true}
                         title={activity.node.title}
                         desc={activity.node.content.slice(0, 80)}
@@ -129,14 +139,16 @@ const BlogPage = ({data}) => {
                   </Grid>
                   <Grid item md={4}>
                     <Box className={classes.list} p={6}>
-                      {data.allStrapiActivity.edges.slice(1).map(article => (
+                      {data.allStrapiActivity.edges.slice(1).map(activity => (
                         <>
-                          <Typography variant='body1'>2021.02.01</Typography>
-                          <Typography variant='subtitle1'>技术沙龙直播间——跨链开源一周年</Typography>
+                          <Typography variant='body1'>{new Date(activity.node.published_at).toDateString()}</Typography>
+                          <Typography variant='subtitle1' component='a' href={activity.node.link} target='_blank' className={classes.item}>
+                            {activity.node.title}
+                          </Typography>
                           <Divider my={4} />
                         </>
                       ))}
-                      <Box my={6}>
+                      <Box my={5}>
                         <Link to={'/'} className={custom.link}>
                           查看更多
                           <ChevronRightIcon />
@@ -158,7 +170,7 @@ const BlogPage = ({data}) => {
                 }}
               >
                 <Grid container spacing={4}>
-                  <Grid item md={4}>
+                  <Grid item md={4} xs={12}>
                     <Box
                       className={classes.card}
                       p={4}
@@ -179,7 +191,7 @@ const BlogPage = ({data}) => {
                       </Box>
                     </Box>
                   </Grid>
-                  <Grid item md={4}>
+                  <Grid item md={4} xs={12}>
                     <Box
                       className={classes.card}
                       p={4}
@@ -200,7 +212,7 @@ const BlogPage = ({data}) => {
                       </Box>
                     </Box>
                   </Grid>
-                  <Grid item md={4}>
+                  <Grid item md={4} xs={12}>
                     <Box
                       className={classes.card}
                       p={4}
@@ -231,7 +243,7 @@ const BlogPage = ({data}) => {
               </Typography>
               <Grid container spacing={10}>
                 {users?.slice(0, 6).map(user => (
-                  <Grid item md={2}>
+                  <Grid item md={2} sm={4} xs={6} textAlign='center'>
                     <a href={user.html_url} target='_blank'>
                       <img src={user.avatar_url} width='120' alt='' className={classes.border} />
                       <Typography variant='subtitle2' mt={4}>

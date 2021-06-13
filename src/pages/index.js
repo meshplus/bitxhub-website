@@ -1,39 +1,28 @@
-import {Link} from 'gatsby'
 import {StaticImage} from 'gatsby-plugin-image'
 import React, {useEffect, useRef, useState} from 'react'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
 import {Box, Button, Container, createStyles, Drawer, Grid, makeStyles, Typography} from '@material-ui/core'
-import {Hero} from '../components/style'
+import {ColorText, Hero} from '../components/style'
 import LeftBall from '../images/left_ball.svg'
 import RightBall from '../images/right_ball.svg'
 import ChevronRightIcon from '@material-ui/icons/ChevronRight'
 import lottie from 'lottie-web'
 import data from './data.json'
 
-const useStyles = makeStyles(theme =>
+export const useStyles = makeStyles(theme =>
   createStyles({
     drawer: {
       background: '#000',
       borderRadius: '10px',
     },
     banner: {
-      minHeight: '12500px',
+      minHeight: '42500px',
       display: 'flex',
       alignItems: 'center',
     },
     maxHeight: {
       height: '100%',
-    },
-    title: {
-      // background: '-webkit-linear-gradient(left, #2E7CFE, #01E1FF, #7DBCFC)',
-      background: '-webkit-linear-gradient(left, #7DBCFC, #2E7CFE, #01E1FF)',
-      color: 'transparent',
-      fontSize: '72px',
-      fontWeight: 800,
-      WebkitBackgroundClip: 'text',
-      WebkitTextFillColor: 'transparent',
-      display: 'inline-block',
     },
     build: {
       background: `url(${LeftBall})`,
@@ -69,6 +58,9 @@ const useStyles = makeStyles(theme =>
       borderTop: '1px dashed #ffffff',
       zIndex: -1,
       left: '-20px',
+    },
+    hidden: {
+      opacity: 0,
     },
     carder: {
       display: 'flex',
@@ -109,13 +101,21 @@ const IndexPage = () => {
   const [opacity2, setOpacity2] = useState(0)
   const [opacity3, setOpacity3] = useState(0)
 
+  const [name, setName] = useState('')
+  const [firstName, setFirstName] = useState('')
+
   const [open, setOpen] = useState()
+
+  const [current, setCurrent] = useState()
+
+  window.onbeforeunload = function () {
+    window.scrollTo(0, 0)
+  }
 
   useEffect(() => {
     const onScroll = e => {
       console.log(e.target.documentElement.scrollTop)
       setScrollTop(e.target.documentElement.scrollTop)
-      // setScrolling(e.target.documentElement.scrollTop > scrollTop);
     }
     window.addEventListener('scroll', onScroll)
 
@@ -123,44 +123,44 @@ const IndexPage = () => {
   }, [scrollTop])
 
   useEffect(() => {
-    if (scrollTop > 200) {
-      setOpacity(1 - scrollTop / 1000)
+    if (scrollTop > 500) {
+      setName('animate__fadeInUp')
     } else {
-      setOpacity(1)
-    }
-    if (scrollTop > 1000) {
-      setOpacity2((scrollTop - 300) / 1000 / 2)
-    } else {
-      setOpacity2(0)
+      if (name !== '') {
+        setName('animate__fadeOutDown')
+      }
     }
 
-    if (scrollTop > 7600) {
-      setOpacity2(1 - (scrollTop - 5900) / 600)
-    }
-
-    if (scrollTop > 8400) {
-      setOpacity3((scrollTop - 8400) / 1000 / 1)
+    if (scrollTop > 400) {
+      setFirstName('animate__fadeOutDown')
     } else {
-      setOpacity3(0)
+      setFirstName('')
     }
 
     if (animation) {
-      animation.goToAndStop(scrollTop)
+      animation.goToAndStop(scrollTop / 2, true)
+
+      if (scrollTop < 1000) {
+        animation.goToAndStop(500 + scrollTop / 6, true)
+        return
+      }
+
+      if (scrollTop > 1200) {
+        animation.goToAndPlay(scrollTop / 6)
+      }
     }
   }, [scrollTop])
 
   useEffect(() => {
-    console.log(divRef.current)
     const animation = lottie.loadAnimation({
       animationData: data,
       container: divRef.current,
     })
 
     setAnimation(animation)
-
-    // animation.setSpeed(2)
-    // animation.setDirection(-1)
     animation.goToAndStop(0, true)
+    animation.playSegments([0, 500], true)
+    animation.addEventListener('enterFrame', e => setCurrent(e.currentTime))
   }, [])
 
   return (
@@ -169,66 +169,72 @@ const IndexPage = () => {
       <Container maxWidth='lg'>
         <div ref={divRef} style={{position: 'fixed', top: '50%', transform: 'translateY(-50%)', zIndex: -1, right: '0px'}} />
         <Box className={classes.banner}>
-          <Box position='fixed' style={{bottom: '50%', transform: 'translateY(50%)', opacity: opacity}}>
-            <Box className={classes.title}>万链互连</Box>
-            <Box mb={6} fontSize='72px'>
-              共建生态
+          <Box position='fixed' style={{bottom: '50%', transform: 'translateY(50%)'}}>
+            <Box className={`animate__animated animate__fadeInUp animate__faster ${firstName}`}>
+              <Typography variant='h2'>
+                <ColorText>万链互连</ColorText>
+              </Typography>
+              <Typography variant='h2' mb={6}>
+                共建生态
+              </Typography>
+              <Typography variant='body1' mb={6} maxWidth='72%'>
+                为链上的资产、数据、服务开拓价值互通的渠道，助力区块链技术从“链孤岛”到形成“链网络”的发展
+              </Typography>
+              <Button variant='outlined' size='large'>
+                快速开始
+                <ChevronRightIcon />
+              </Button>
             </Box>
-            <Typography variant='body1' mb={6} maxWidth='72%'>
-              为链上的资产、数据、服务开拓价值互通的渠道，助力区块链技术从“链孤岛”到形成“链网络”的发展
-            </Typography>
-            <Button variant='outlined' size='large'>
-              快速开始
-              <ChevronRightIcon />
-            </Button>
           </Box>
-          <Box position='fixed' style={{bottom: '50%', transform: 'translate(123%, 50%)', width: '560px', opacity: opacity2}}>
-            <Box display='flex' mb={8}>
-              <Box fontSize='48px' mr={2} className={classes.title}>
-                万链如一
+          <Box position='fixed' style={{bottom: '50%', transform: 'translate(123%, 50%)', width: '560px'}}>
+            <Box className={`${classes.hidden} animate__animated ${name}`}>
+              <Box display='flex' mb={8}>
+                <Box fontSize='48px' mr={2} className={classes.title}>
+                  万链如一
+                </Box>
+                <Box mb={2} fontSize='48px'>
+                  一可链万
+                </Box>
               </Box>
-              <Box mb={2} fontSize='48px'>
-                一可链万
-              </Box>
+              <Grid container spacing={4}>
+                <Grid item md={6}>
+                  <Box className={classes.card} p={5}>
+                    <Typography variant='subtitle1' mb={4} display='flex' alignItems='center'>
+                      <StaticImage src='../images/1.svg' height={30} alt='icon' />
+                      <Box ml={3}>异构适配</Box>
+                    </Typography>
+                    <Typography variant='body1'>异构区块链协议适配，同时支持同构和异构应用链的适配</Typography>
+                  </Box>
+                </Grid>
+                <Grid item md={6}>
+                  <Box className={classes.card} p={5}>
+                    <Typography variant='subtitle1' mb={4} display='flex' alignItems='center'>
+                      <StaticImage src='../images/2.svg' height={30} alt='icon' />
+                      <Box ml={3}>异构适配</Box>
+                    </Typography>
+                    <Typography variant='body1'>异构区块链协议适配，同时支持同构和异构应用链的适配</Typography>
+                  </Box>
+                </Grid>
+                <Grid item md={6}>
+                  <Box className={classes.card} p={5}>
+                    <Typography variant='subtitle1' mb={4} display='flex' alignItems='center'>
+                      <StaticImage src='../images/3.svg' height={30} alt='icon' />
+                      <Box ml={3}>异构适配</Box>
+                    </Typography>
+                    <Typography variant='body1'>异构区块链协议适配，同时支持同构和异构应用链的适配</Typography>
+                  </Box>
+                </Grid>
+                <Grid item md={6}>
+                  <Box className={classes.card} p={5}>
+                    <Typography variant='subtitle1' mb={4} display='flex' alignItems='center'>
+                      <StaticImage src='../images/4.svg' height={30} alt='icon' />
+                      <Box ml={3}>异构适配</Box>
+                    </Typography>
+                    <Typography variant='body1'>异构区块链协议适配，同时支持同构和异构应用链的适配</Typography>
+                  </Box>
+                </Grid>
+              </Grid>
             </Box>
-            <Grid container spacing={4}>
-              <Grid item md={6}>
-                <Box className={classes.card} p={5}>
-                  <Typography variant='subtitle1' mb={4} display='flex' alignItems='center'>
-                    <StaticImage src='../images/1.svg' height={30} alt='icon' />
-                    <Box ml={3}>异构适配</Box>
-                  </Typography>
-                  <Typography variant='body1'>异构区块链协议适配，同时支持同构和异构应用链的适配</Typography>
-                </Box>
-              </Grid>
-              <Grid item md={6}>
-                <Box className={classes.card} p={5}>
-                  <Typography variant='subtitle1' mb={4} display='flex' alignItems='center'>
-                    <StaticImage src='../images/2.svg' height={30} alt='icon' />
-                    <Box ml={3}>异构适配</Box>
-                  </Typography>
-                  <Typography variant='body1'>异构区块链协议适配，同时支持同构和异构应用链的适配</Typography>
-                </Box>
-              </Grid>
-              <Grid item md={6}>
-                <Box className={classes.card} p={5}>
-                  <Typography variant='subtitle1' mb={4} display='flex' alignItems='center'>
-                    <StaticImage src='../images/3.svg' height={30} alt='icon' />
-                    <Box ml={3}>异构适配</Box>
-                  </Typography>
-                  <Typography variant='body1'>异构区块链协议适配，同时支持同构和异构应用链的适配</Typography>
-                </Box>
-              </Grid>
-              <Grid item md={6}>
-                <Box className={classes.card} p={5}>
-                  <Typography variant='subtitle1' mb={4} display='flex' alignItems='center'>
-                    <StaticImage src='../images/4.svg' height={30} alt='icon' />
-                    <Box ml={3}>异构适配</Box>
-                  </Typography>
-                  <Typography variant='body1'>异构区块链协议适配，同时支持同构和异构应用链的适配</Typography>
-                </Box>
-              </Grid>
-            </Grid>
           </Box>
           <Box position='fixed' style={{bottom: '50%', transform: 'translateY(50%)', opacity: opacity3}}>
             <Box fontSize='48px' className={classes.title} mb={15}>
@@ -332,22 +338,39 @@ const IndexPage = () => {
         </Container>
       </Hero>
       <Box textAlign='center'>
-        <Box className={classes.title} fontSize='48px' mr={2}>
+        <Box className={classes.title} fontSize='48px' mb={8}>
           了解更多
         </Box>
+        <Grid container maxWidth='lg' spacing={8}>
+          <Grid item md={4} textAlign='right'>
+            <Typography variant='body2' mr={7} mb={4}>
+              关于技术实现
+            </Typography>
+            <Button variant='outlined' color='primary' size='large'>
+              白皮书
+              <ChevronRightIcon />
+            </Button>
+          </Grid>
+          <Grid item md={4}>
+            <Typography variant='body2' mb={4}>
+              关于技术指导
+            </Typography>
+            <Button variant='outlined' color='primary' size='large'>
+              查看文档
+              <ChevronRightIcon />
+            </Button>
+          </Grid>
+          <Grid item md={4} textAlign='left'>
+            <Typography variant='body2' ml={7} mb={4}>
+              快速体验跨链
+            </Typography>
+            <Button variant='outlined' color='primary' size='large'>
+              快速开始
+              <ChevronRightIcon />
+            </Button>
+          </Grid>
+        </Grid>
       </Box>
-      {/*<StaticImage*/}
-      {/*  src='../images/gatsby-astronaut.png'*/}
-      {/*  width={300}*/}
-      {/*  quality={95}*/}
-      {/*  formats={['AUTO', 'WEBP', 'AVIF']}*/}
-      {/*  alt='A Gatsby astronaut'*/}
-      {/*  style={{marginBottom: `1.45rem`}}*/}
-      {/*/>*/}
-      {/*<p>*/}
-      {/*  <Link to='/page-2/'>Go to page 2</Link> <br />*/}
-      {/*  <Link to='/using-typescript/'>Go to "Using TypeScript"</Link>*/}
-      {/*</p>*/}
     </Layout>
   )
 }

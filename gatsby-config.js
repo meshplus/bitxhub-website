@@ -23,7 +23,7 @@ module.exports = {
           'article',
           'activity',
         ],
-        collectionTypes: [`article`, `user`, 'activity'],
+        collectionTypes: [`article`, `user`, 'activity', 'category'],
         queryLimit: 1000,
       },
     },
