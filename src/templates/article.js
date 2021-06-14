@@ -1,9 +1,9 @@
 import React from 'react'
 import {graphql} from 'gatsby'
-
 import ReactMarkdown from 'react-markdown'
 import Layout from '../components/layout'
-import {Box, Button, Container, createStyles, makeStyles, Typography} from '@material-ui/core'
+import {Box, Button, Container, makeStyles, Typography} from '@material-ui/core'
+import {createStyles} from '@material-ui/styles'
 import SEO from '../components/seo'
 import {useHelperStyles} from '../components/style'
 

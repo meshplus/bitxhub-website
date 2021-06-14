@@ -1,5 +1,6 @@
-import {Box, BoxProps, createStyles, makeStyles, Typography} from '@material-ui/core'
+import {Box, makeStyles, Typography} from '@material-ui/core'
 import * as React from 'react'
+import {createStyles} from '@material-ui/styles'
 import clsx from 'clsx'
 
 export const useCustomStyles = makeStyles(theme =>

@@ -1,7 +1,8 @@
 import React, {useEffect, useRef, useState} from 'react'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
-import {Box, Button, Container, createStyles, Drawer, Grid, makeStyles, SwipeableDrawer, Typography} from '@material-ui/core'
+import {Box, Container, Grid, makeStyles, SwipeableDrawer, Typography} from '@material-ui/core'
+import {createStyles} from '@material-ui/styles'
 import Relaychain from '../images/relaychain.svg'
 import Pier from '../images/pier.svg'
 import Hyperchain from '../images/hyperchain.svg'
@@ -12,6 +13,7 @@ import {ColorText} from '../components/style'
 import {AnimationOnScroll} from 'react-animation-on-scroll'
 import {usePrevious} from 'react-use'
 import TX from '../images/tx.svg'
+import TXDemo from '../images/tx_demo.svg'
 import DID from '../images/did.svg'
 import Mng from '../images/mng.svg'
 import Protocol from '../images/protocol.jpg'
@@ -27,30 +29,11 @@ const useStyles = makeStyles(theme =>
     maxHeight: {
       height: '100%',
     },
-    title: {
-      background: '-webkit-linear-gradient(right, #01E1FF, #7DBCFC)',
-      color: 'transparent',
-      fontSize: '72px',
-      fontWeight: 800,
-      WebkitBackgroundClip: 'text',
-      WebkitTextFillColor: 'transparent',
-    },
     bg: {
       backgroundImage: `url(${Banner})`,
       backgroundPosition: 'left top',
       backgroundRepeat: 'no-repeat',
       backgroundSize: '100%',
-    },
-    list: {
-      border: '1px solid rgba(255, 255, 255, 0.5)',
-      borderRadius: '12px',
-    },
-    card: {
-      background: 'linear-gradient(360deg, #000000 0%, #040E22 0.01%, #121B30 100%)',
-      borderRadius: '16px',
-    },
-    border: {
-      borderRadius: '16px',
     },
     step: {
       background: 'linear-gradient(360deg, #181818 0%, #1D2735 0.01%, #1D2735 100%)',
@@ -102,7 +85,9 @@ const TechPage = ({data}) => {
   const [animation, setAnimation] = useState()
   const [step, setStep] = useState(0)
   const prevStep = usePrevious(step)
-  const [open, setOpen] = useState(false)
+  const [status1, setStatus1] = useState(false)
+  const [status2, setStatus2] = useState(false)
+  const [status3, setStatus3] = useState(false)
 
   useEffect(() => {
     const animation = lottie.loadAnimation({
@@ -129,7 +114,8 @@ const TechPage = ({data}) => {
         prevStep === 2 && animation.playSegments([200, 0], true)
       }
     }
-  }, [step])
+  }, [step, animation, prevStep])
+
   return (
     <Box className={classes.bg} mt={10}>
       <SEO title='技术' />
@@ -277,28 +263,65 @@ const TechPage = ({data}) => {
           <Container maxWidth='md'>
             <Grid container spacing={8} mt={6}>
               <Grid item md={4}>
-                <Box className={classes.carder} onClick={() => setOpen(true)}>
+                <Box className={classes.carder} onClick={() => setStatus1(true)}>
                   <img src={TX} alt='tx' height={40} width={40} />
                   <Typography variant='h5' mb={5} mt={2}>
                     跨链事务
                   </Typography>
                   <Typography variant='body2'>BitXHub平台的中继链提供了完善有效的跨链治理机制。中继链自身节点的构成是联盟自治的基础，通过丰富的治理服务实现全方位的治理管控。</Typography>
-                  <SwipeableDrawer anchor={'right'} open={open} onClose={() => setOpen(false)}>
-                    <Box style={{borderRadius: '10px', maxWidth: '400px', width: '400px', background: 'linear-gradient(360deg, #181818 0%, #05070B 0.01%, #1D2735 100%);'}}>2222222222</Box>
-                  </SwipeableDrawer>
                 </Box>
+                <SwipeableDrawer
+                  ModalProps={{
+                    keepMounted: true, // Better open performance on mobile.
+                  }}
+                  anchor={'right'}
+                  open={status1}
+                  onOpen={() => setStatus1(true)}
+                  onClose={() => setStatus1(false)}
+                >
+                  <Box style={{borderRadius: '10px', maxWidth: '100%', width: '400px', background: 'linear-gradient(360deg, #181818 0%, #05070B 0.01%, #1D2735 100%)'}}>
+                    <img src={TX} alt='tx' height={40} width={40} />
+                    <Typography variant='h5' mb={5} mt={2} color='#fafafa'>
+                      跨链事务
+                    </Typography>
+                    <Typography variant='body2' mb={4} color='#fafafa'>
+                      BitXHub平台的中继链提供了完善有效的跨链治理机制。中继链自身节点的构成是联盟自治的基础，通过丰富的治理服务实现全方位的治理管控。
+                    </Typography>
+                    <img src={TXDemo} alt='demo' width='100%' />
+                  </Box>
+                </SwipeableDrawer>
               </Grid>
               <Grid item md={4}>
-                <Box className={classes.carder}>
+                <Box className={classes.carder} onClick={() => setStatus2(true)}>
                   <img src={Mng} alt='tx' height={40} width={40} />
                   <Typography variant='h5' mb={5} mt={2}>
                     联盟治理
                   </Typography>
                   <Typography variant='body2'>BitXHub平台的中继链提供了完善有效的跨链治理机制。中继链自身节点的构成是联盟自治的基础，通过丰富的治理服务实现全方位的治理管控。</Typography>
                 </Box>
+                <SwipeableDrawer
+                  ModalProps={{
+                    keepMounted: true, // Better open performance on mobile.
+                  }}
+                  anchor={'right'}
+                  open={status2}
+                  onOpen={() => setStatus2(true)}
+                  onClose={() => setStatus2(false)}
+                >
+                  <Box style={{borderRadius: '10px', maxWidth: '100%', width: '400px', background: 'linear-gradient(360deg, #181818 0%, #05070B 0.01%, #1D2735 100%)'}}>
+                    <img src={Mng} alt='tx' height={40} width={40} />
+                    <Typography variant='h5' mb={5} mt={2} color='#fafafa'>
+                      联盟治理
+                    </Typography>
+                    <Typography variant='body2' color='#fafafa' mb={4}>
+                      BitXHub平台的中继链提供了完善有效的跨链治理机制。中继链自身节点的构成是联盟自治的基础，通过丰富的治理服务实现全方位的治理管控。
+                    </Typography>
+                    <img src={TXDemo} alt='demo' width='100%' />
+                  </Box>
+                </SwipeableDrawer>
               </Grid>
               <Grid item md={4}>
-                <Box className={classes.carder}>
+                <Box className={classes.carder} onClick={() => setStatus3(true)}>
                   <img src={DID} alt='tx' height={40} width={40} />
                   <Typography variant='h5' mb={5} mt={2}>
                     DID数字身份
@@ -307,6 +330,26 @@ const TechPage = ({data}) => {
                     BitXHub跨链平台首次提出的区块链原生支持的数字身份机制，能够实现身份在多条链间的互通互认，可以更加方便地实现以身份为中心的数字资产在不同链间的可信流转。
                   </Typography>
                 </Box>
+                <SwipeableDrawer
+                  ModalProps={{
+                    keepMounted: true, // Better open performance on mobile.
+                  }}
+                  anchor={'right'}
+                  open={status3}
+                  onOpen={() => setStatus3(true)}
+                  onClose={() => setStatus3(false)}
+                >
+                  <Box style={{borderRadius: '10px', background: 'linear-gradient(360deg, #181818 0%, #05070B 0.01%, #1D2735 100%)'}}>
+                    <img src={Mng} alt='tx' height={40} width={40} />
+                    <Typography variant='h5' mb={5} mt={2} color='#fafafa'>
+                      DID数字身份
+                    </Typography>
+                    <Typography variant='body2' color='#fafafa' mb={4}>
+                      BitXHub跨链平台首次提出的区块链原生支持的数字身份机制，能够实现身份在多条链间的互通互认，可以更加方便地实现以身份为中心的数字资产在不同链间的可信流转。
+                    </Typography>
+                    <img src={TXDemo} alt='demo' width='100%' />
+                  </Box>
+                </SwipeableDrawer>
               </Grid>
             </Grid>
           </Container>

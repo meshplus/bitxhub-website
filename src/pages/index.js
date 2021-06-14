@@ -1,8 +1,9 @@
 import {StaticImage} from 'gatsby-plugin-image'
-import React, {useEffect, useRef, useState} from 'react'
+import React, {useCallback, useEffect, useRef, useState} from 'react'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
-import {Box, Button, Container, createStyles, Drawer, Grid, makeStyles, Typography} from '@material-ui/core'
+import {Box, Button, Container, Drawer, Grid, makeStyles, Typography} from '@material-ui/core'
+import {createStyles} from '@material-ui/styles'
 import {ColorText, Hero} from '../components/style'
 import LeftBall from '../images/left_ball.svg'
 import RightBall from '../images/right_ball.svg'
@@ -10,14 +11,14 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight'
 import lottie from 'lottie-web'
 import data from './data.json'
 
-export const useStyles = makeStyles(theme =>
+const useStyles = makeStyles(theme =>
   createStyles({
     drawer: {
       background: '#000',
       borderRadius: '10px',
     },
     banner: {
-      minHeight: '42500px',
+      minHeight: '5200px',
       display: 'flex',
       alignItems: 'center',
     },
@@ -97,16 +98,11 @@ const IndexPage = () => {
   const divRef = useRef()
   const [animation, setAnimation] = useState()
   const [scrollTop, setScrollTop] = useState(0)
-  const [opacity, setOpacity] = useState(1)
-  const [opacity2, setOpacity2] = useState(0)
-  const [opacity3, setOpacity3] = useState(0)
 
-  const [name, setName] = useState('')
   const [firstName, setFirstName] = useState('')
-
+  const [secondName, setSecondName] = useState('')
+  const [thirdName, setThirdName] = useState('')
   const [open, setOpen] = useState()
-
-  const [current, setCurrent] = useState()
 
   window.onbeforeunload = function () {
     window.scrollTo(0, 0)
@@ -123,33 +119,26 @@ const IndexPage = () => {
   }, [scrollTop])
 
   useEffect(() => {
-    if (scrollTop > 500) {
-      setName('animate__fadeInUp')
-    } else {
-      if (name !== '') {
-        setName('animate__fadeOutDown')
-      }
-    }
-
-    if (scrollTop > 400) {
-      setFirstName('animate__fadeOutDown')
-    } else {
-      setFirstName('')
-    }
-
+    const fadeIn = 'animate__fadeInUpBig'
+    const fadeOut = 'animate__fadeOutDown'
+    console.log(secondName !== '')
+    setFirstName(scrollTop > 700 ? fadeOut : '')
+    setSecondName(scrollTop > 800 && scrollTop < 3600 ? fadeIn : secondName !== '' && '')
+    setThirdName(scrollTop > 3800 && scrollTop < 4600 ? fadeIn : scrollTop > 4600 ? 'animate__fadeOutUp' : '')
     if (animation) {
-      animation.goToAndStop(scrollTop / 2, true)
-
-      if (scrollTop < 1000) {
-        animation.goToAndStop(500 + scrollTop / 6, true)
-        return
+      if (scrollTop > 0 && scrollTop < 1000) {
+        animation.goToAndStop(400 + scrollTop * 0.2, true)
       }
 
-      if (scrollTop > 1200) {
-        animation.goToAndPlay(scrollTop / 6)
+      if (scrollTop > 1000) {
+        animation.goToAndStop(400 + scrollTop * 0.5, true)
+      }
+
+      if (scrollTop > 3400) {
+        animation.goToAndStop(400 + 3400 * 0.3 + scrollTop * 0.2, true)
       }
     }
-  }, [scrollTop])
+  }, [scrollTop, animation])
 
   useEffect(() => {
     const animation = lottie.loadAnimation({
@@ -160,7 +149,6 @@ const IndexPage = () => {
     setAnimation(animation)
     animation.goToAndStop(0, true)
     animation.playSegments([0, 500], true)
-    animation.addEventListener('enterFrame', e => setCurrent(e.currentTime))
   }, [])
 
   return (
@@ -187,7 +175,7 @@ const IndexPage = () => {
             </Box>
           </Box>
           <Box position='fixed' style={{bottom: '50%', transform: 'translate(123%, 50%)', width: '560px'}}>
-            <Box className={`${classes.hidden} animate__animated ${name}`}>
+            <Box className={`${classes.hidden} animate__animated animate__faster ${secondName}`}>
               <Box display='flex' mb={8}>
                 <Box fontSize='48px' mr={2} className={classes.title}>
                   万链如一
@@ -236,47 +224,49 @@ const IndexPage = () => {
               </Grid>
             </Box>
           </Box>
-          <Box position='fixed' style={{bottom: '50%', transform: 'translateY(50%)', opacity: opacity3}}>
-            <Box fontSize='48px' className={classes.title} mb={15}>
-              更安全、更高效
-            </Box>
-            <Box display='flex' alignItems='center' mb={8} position='relative'>
-              <Box mr={3} position='relative'>
-                <StaticImage src='../images/ball.svg' alt='ball' />
-                <StaticImage src='../images/5.svg' alt='ball' style={{position: 'absolute', left: '15px', top: '15px'}} />
+          <Box position='fixed' style={{bottom: '50%', transform: 'translateY(50%)'}}>
+            <Box className={`${classes.hidden} animate__animated animate__faster ${thirdName}`}>
+              <Box fontSize='48px' className={classes.title} mb={15}>
+                更安全、更高效
               </Box>
-              <Box className={classes.line} />
-              <Box className={classes.card} p={4}>
-                <Typography variant='subtitle1' mb={2} display='flex' alignItems='center'>
-                  <Box> 异构适配 </Box>
-                </Typography>
-                <Typography variant='body1'>异构区块链协议适配，同时支持同构和异构应用链的适配</Typography>
+              <Box display='flex' alignItems='center' mb={8} position='relative'>
+                <Box mr={3} position='relative'>
+                  <StaticImage src='../images/ball.svg' alt='ball' />
+                  <StaticImage src='../images/5.svg' alt='ball' style={{position: 'absolute', left: '15px', top: '15px'}} />
+                </Box>
+                <Box className={classes.line} />
+                <Box className={classes.card} p={4}>
+                  <Typography variant='subtitle1' mb={2} display='flex' alignItems='center'>
+                    <Box> 异构适配 </Box>
+                  </Typography>
+                  <Typography variant='body1'>异构区块链协议适配，同时支持同构和异构应用链的适配</Typography>
+                </Box>
               </Box>
-            </Box>
-            <Box display='flex' alignItems='center' mb={8} className={classes.carding}>
-              <Box mr={3} position='relative'>
-                <StaticImage src='../images/ball.svg' alt='ball' />
-                <StaticImage src='../images/6.svg' alt='ball' style={{position: 'absolute', left: '20px', top: '20px'}} />
+              <Box display='flex' alignItems='center' mb={8} className={classes.carding}>
+                <Box mr={3} position='relative'>
+                  <StaticImage src='../images/ball.svg' alt='ball' />
+                  <StaticImage src='../images/6.svg' alt='ball' style={{position: 'absolute', left: '20px', top: '20px'}} />
+                </Box>
+                <Box className={classes.line} />
+                <Box className={classes.card} p={4}>
+                  <Typography variant='subtitle1' mb={2} display='flex' alignItems='center'>
+                    <Box>跨链网关</Box>
+                  </Typography>
+                  <Typography variant='body1'>便捷地接入跨链系统及支持跨链网络多层级扩展关键</Typography>
+                </Box>
               </Box>
-              <Box className={classes.line} />
-              <Box className={classes.card} p={4}>
-                <Typography variant='subtitle1' mb={2} display='flex' alignItems='center'>
-                  <Box>跨链网关</Box>
-                </Typography>
-                <Typography variant='body1'>便捷地接入跨链系统及支持跨链网络多层级扩展关键</Typography>
-              </Box>
-            </Box>
-            <Box display='flex' alignItems='center' position='relative'>
-              <Box mr={3} position='relative'>
-                <StaticImage src='../images/ball.svg' alt='ball' />
-                <StaticImage src='../images/7.svg' alt='ball' style={{position: 'absolute', left: '20px', top: '20px'}} />
-              </Box>
-              <Box className={classes.line} />
-              <Box className={classes.card} p={4}>
-                <Typography variant='subtitle1' mb={2} display='flex' alignItems='center'>
-                  <Box>应用链</Box>
-                </Typography>
-                <Typography variant='body1'>承载具体应用业务逻辑，分为同构应用链与异构应用链。</Typography>
+              <Box display='flex' alignItems='center' position='relative'>
+                <Box mr={3} position='relative'>
+                  <StaticImage src='../images/ball.svg' alt='ball' />
+                  <StaticImage src='../images/7.svg' alt='ball' style={{position: 'absolute', left: '20px', top: '20px'}} />
+                </Box>
+                <Box className={classes.line} />
+                <Box className={classes.card} p={4}>
+                  <Typography variant='subtitle1' mb={2} display='flex' alignItems='center'>
+                    <Box>应用链</Box>
+                  </Typography>
+                  <Typography variant='body1'>承载具体应用业务逻辑，分为同构应用链与异构应用链。</Typography>
+                </Box>
               </Box>
             </Box>
           </Box>

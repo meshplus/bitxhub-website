@@ -1,10 +1,11 @@
-import {Box, Container, createStyles, Grid, makeStyles, SwipeableDrawer, Typography} from '@material-ui/core'
+import {Box, Container, makeStyles, SwipeableDrawer, Typography} from '@material-ui/core'
+import {createStyles} from '@material-ui/styles'
 import {Link} from 'gatsby'
 import {StaticImage} from 'gatsby-plugin-image'
 import PropTypes from 'prop-types'
 import * as React from 'react'
-import MenuIcon from '@material-ui/icons/Menu'
 import {useState} from 'react'
+import MenuIcon from '@material-ui/icons/Menu'
 
 const useStyles = makeStyles(theme =>
   createStyles({

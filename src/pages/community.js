@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from 'react'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
-import {Box, Button, Container, createStyles, Grid, makeStyles, Typography} from '@material-ui/core'
+import {Box, Button, Container, Grid, makeStyles, Typography} from '@material-ui/core'
+import {createStyles} from '@material-ui/styles'
 import CommunityBanner from '../images/community_banner.svg'
 import First from '../images/1.png'
 import Link from 'gatsby-link'
@@ -244,7 +245,7 @@ const BlogPage = ({data}) => {
               <Grid container spacing={10}>
                 {users?.slice(0, 6).map(user => (
                   <Grid item md={2} sm={4} xs={6} textAlign='center'>
-                    <a href={user.html_url} target='_blank'>
+                    <a href={user.html_url} target='_blank' rel='noopener noreferrer'>
                       <img src={user.avatar_url} width='120' alt='' className={classes.border} />
                       <Typography variant='subtitle2' mt={4}>
                         {user.login}

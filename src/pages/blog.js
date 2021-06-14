@@ -2,7 +2,8 @@ import {graphql} from 'gatsby'
 import React from 'react'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
-import {Box, Button, Container, createStyles, Grid, makeStyles, Typography} from '@material-ui/core'
+import {Box, Button, Container, Grid, makeStyles, Typography} from '@material-ui/core'
+import {createStyles} from '@material-ui/styles'
 import BlogBanner from '../images/blog_banner.svg'
 
 const useStyles = makeStyles(theme =>
