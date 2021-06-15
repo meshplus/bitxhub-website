@@ -2,43 +2,9 @@ import {graphql} from 'gatsby'
 import React from 'react'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
-import {Box, Button, Container, Grid, makeStyles, Typography} from '@material-ui/core'
-import {createStyles} from '@material-ui/styles'
+import {Box, Button, Container, Grid, Typography} from '@material-ui/core'
 import BlogBanner from '../images/blog_banner.svg'
-
-const useStyles = makeStyles(theme =>
-  createStyles({
-    banner: {
-      minHeight: 'calc(100vh - 80px)',
-      display: 'flex',
-      alignItems: 'center',
-    },
-    maxHeight: {
-      height: '100%',
-    },
-    title: {
-      background: '-webkit-linear-gradient(right, #01E1FF, #7DBCFC)',
-      color: 'transparent',
-      fontSize: '72px',
-      fontWeight: 800,
-      WebkitBackgroundClip: 'text',
-      WebkitTextFillColor: 'transparent',
-    },
-    bg: {
-      backgroundImage: `url(${BlogBanner})`,
-      backgroundPosition: 'top 50px center',
-      backgroundSize: '75%',
-      backgroundRepeat: 'no-repeat',
-    },
-    categories: {
-      fontSize: '12px',
-      '& button': {
-        margin: '0 8px 10px',
-      },
-    },
-    tn: {},
-  })
-)
+import {ColorText} from '../components/style'
 
 export const pageQuery = graphql`
   query {
@@ -73,23 +39,37 @@ export const pageQuery = graphql`
 `
 
 const BlogPage = ({data}) => {
-  const classes = useStyles()
-
   return (
     <Layout>
       <SEO title='Blog' />
-      <Box className={classes.bg} pt={38}>
+      <Box
+        pt={38}
+        sx={{
+          backgroundImage: `url(${BlogBanner})`,
+          backgroundPosition: 'top 50px center',
+          backgroundSize: '75%',
+          backgroundRepeat: 'no-repeat',
+        }}
+      >
         <Container maxWidth='md'>
           <Box px={{md: 10, sm: 0}}>
             <Box textAlign='center' mb={1}>
-              <Box fontSize='48px' className={classes.title} display='inline-block'>
-                博客
+              <Box fontSize='48px'>
+                <ColorText>博客</ColorText>
               </Box>
             </Box>
             <Box textAlign='center' mb={30}>
               博观而约取，厚积而薄发
             </Box>
-            <Box mb={30} className={classes.categories}>
+            <Box
+              mb={30}
+              sx={{
+                fontSize: '12px',
+                '& button': {
+                  margin: '0 8px 10px',
+                },
+              }}
+            >
               {data.allStrapiCategory.edges.map(category => (
                 <Button variant='contained' color='inherit'>
                   {category.node.name}

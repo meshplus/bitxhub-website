@@ -6,7 +6,7 @@
 
 // You can delete this file if you're not using it
 
-const path = require('path')
+const webpack = require('webpack')
 
 exports.createPages = async ({graphql, actions}) => {
   const {createPage} = actions
@@ -58,4 +58,30 @@ exports.createPages = async ({graphql, actions}) => {
   //     },
   //   })
   // })
+}
+
+exports.onCreateWebpackConfig = ({stage, loaders, actions}) => {
+  if (stage === 'build-html') {
+    actions.setWebpackConfig({
+      module: {
+        rules: [
+          {
+            test: /react-animation-on-scroll/,
+            use: loaders.null(),
+          },
+          {
+            test: /lottie-web/,
+            use: loaders.null(),
+          },
+        ],
+      },
+      plugins: [
+        new webpack.ProvidePlugin({
+          $: 'jquery',
+          jQuery: 'jquery',
+          'window.jQuery': 'jquery',
+        }),
+      ],
+    })
+  }
 }

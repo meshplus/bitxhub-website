@@ -1,96 +1,96 @@
 import React from 'react'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
-import {Box, makeStyles} from '@material-ui/core'
-import {createStyles} from '@material-ui/styles'
+import {Box, Container, Grid, Typography} from '@material-ui/core'
 import Banner from '../images/tech_banner.svg'
-
-const useStyles = makeStyles(theme =>
-  createStyles({
-    banner: {
-      minHeight: 'calc(100vh - 80px)',
-      display: 'flex',
-      alignItems: 'center',
-    },
-    maxHeight: {
-      height: '100%',
-    },
-    title: {
-      background: '-webkit-linear-gradient(right, #01E1FF, #7DBCFC)',
-      color: 'transparent',
-      fontSize: '72px',
-      fontWeight: 800,
-      WebkitBackgroundClip: 'text',
-      WebkitTextFillColor: 'transparent',
-    },
-    bg: {
-      backgroundImage: `url(${Banner})`,
-      backgroundPosition: 'left top',
-      backgroundRepeat: 'no-repeat',
-      backgroundSize: '100%',
-    },
-    list: {
-      border: '1px solid rgba(255, 255, 255, 0.5)',
-      borderRadius: '12px',
-    },
-    card: {
-      background: 'linear-gradient(360deg, #000000 0%, #040E22 0.01%, #121B30 100%)',
-      borderRadius: '16px',
-    },
-    border: {
-      borderRadius: '16px',
-    },
-    step: {
-      background: 'linear-gradient(360deg, #181818 0%, #1D2735 0.01%, #1D2735 100%)',
-      fontSize: 0,
-      padding: '3px',
-      borderRadius: '56px',
-      fontWeight: 300,
-      height: 16,
-      width: 16,
-      cursor: 'pointer',
-    },
-    step_active: {
-      background: 'linear-gradient(360deg, #181818 0%, #05070B 0.01%, #1D2735 100%)',
-      padding: '10px 20px',
-      fontSize: '14px',
-      height: 'auto',
-      width: 'auto',
-    },
-    carder: {
-      textAlign: 'left',
-      background: 'linear-gradient(360deg, #000000 0%, #040E22 0.01%, #1D2A45 100%)',
-      boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
-      borderRadius: '16px',
-      padding: '50px',
-      height: '380px',
-      marginLeft: '20px',
-      position: 'relative',
-      transition: 'all .3s',
-      cursor: 'pointer',
-      '&:hover': {
-        transform: 'scaleY(1.1)',
-      },
-      '&:before': {
-        display: 'block',
-        content: ' ',
-        position: 'absolute',
-        top: '30px',
-        width: '30px',
-        height: '30px',
-        color: '#fff',
-      },
-    },
-  })
-)
+import {ColorText} from '../components/style'
+import Group from '../images/group.png'
+import GZH from '../images/gzh.png'
 
 const AboutPage = ({data}) => {
-  const classes = useStyles()
-
   return (
-    <Box className={classes.bg} mt={10}>
+    <Box
+      mt={10}
+      sx={{
+        backgroundImage: `url(${Banner})`,
+        backgroundPosition: 'left top',
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: '100%',
+      }}
+    >
       <SEO title='Home' />
-      <Layout>2</Layout>
+      <Layout>
+        <Container maxWidth='lg'>
+          <Typography variant='h3' mb={8} mt={40} textAlign='center'>
+            关于我们
+          </Typography>
+          <Typography variant='body2' textAlign='center' px={20}>
+            我们是趣链科技BH团队，依托技术先发优势不断探索，并为用户提供在信息和资产交换场景下，专注于多方共治理、安全高可用、通用易扩展、留痕可追溯的跨链服务，真正实现万链互联、价值互通的区块链互联网。
+          </Typography>
+          <Box py={40}>
+            <Grid container>
+              <Grid item md={4}>
+                <Typography variant='h2'>
+                  <ColorText display='block'>跨链</ColorText>
+                  行业领导者
+                </Typography>
+              </Grid>
+              <Grid item md={8}></Grid>
+            </Grid>
+          </Box>
+          <Box py={30}>
+            <Grid container>
+              <Grid item md={6}>
+                <Typography variant='h3' mb={2}>
+                  我们的成长历程
+                </Typography>
+                <Typography variant='body2'>我们专注于多方共治理、安全高可用、通用易扩展、留痕可追溯的跨链服务，真正实现万链互联、价值互通的区块链互联网。</Typography>
+              </Grid>
+            </Grid>
+          </Box>
+          {/* */}
+          <Box py={20}>
+            <Grid container>
+              <Grid item md={6}>
+                <Typography variant='h3'>
+                  <Box>有任何问题</Box>
+                  欢迎联系我们
+                </Typography>
+              </Grid>
+              <Grid item md={6}>
+                <Typography variant='h6' mb={4}>
+                  公司总部
+                </Typography>
+                <Typography variant='subtitle2' mb={2}>
+                  杭州市滨江区丹枫路399号2号楼A楼2001室
+                </Typography>
+                <Typography variant='subtitle2'>电话：0571-89995238</Typography>
+                <Typography variant='h6' mt={8} mb={4}>
+                  邮箱
+                </Typography>
+                <Typography variant='subtitle2'>杭州市滨江区丹枫路399号2号楼A楼2001室</Typography>
+                <Typography variant='h6' mt={4} mb={4}>
+                  微信公众号
+                </Typography>
+                <Grid container>
+                  <Grid item md={4}>
+                    <Typography variant='subtitle2' mb={2}>
+                      趣链科技公众号
+                    </Typography>
+                    <img src={Group} alt='group' width={145} />
+                  </Grid>
+                  <Grid item md={4}>
+                    <Typography variant='subtitle2' mb={2}>
+                      进入开源技术交流群
+                    </Typography>
+                    <img src={GZH} alt='gzh' width={145} />
+                  </Grid>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Box>
+        </Container>
+      </Layout>
     </Box>
   )
 }

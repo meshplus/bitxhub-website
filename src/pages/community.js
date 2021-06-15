@@ -1,8 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
-import {Box, Button, Container, Grid, makeStyles, Typography} from '@material-ui/core'
-import {createStyles} from '@material-ui/styles'
+import {Box, Button, Container, Grid, Typography} from '@material-ui/core'
 import CommunityBanner from '../images/community_banner.svg'
 import First from '../images/1.png'
 import Link from 'gatsby-link'
@@ -39,54 +38,7 @@ export const pageQuery = graphql`
   }
 `
 
-const useStyles = makeStyles(theme =>
-  createStyles({
-    banner: {
-      minHeight: 'calc(100vh - 80px)',
-      display: 'flex',
-      alignItems: 'center',
-    },
-    item: {
-      '&:hover': {
-        background: '-webkit-linear-gradient(left, #7DBCFC, #2E7CFE, #01E1FF)',
-        color: 'transparent',
-        WebkitBackgroundClip: 'text',
-        WebkitTextFillColor: 'transparent',
-      },
-    },
-    maxHeight: {
-      height: '100%',
-    },
-    title: {
-      background: '-webkit-linear-gradient(right, #01E1FF, #7DBCFC)',
-      color: 'transparent',
-      fontSize: '72px',
-      fontWeight: 800,
-      WebkitBackgroundClip: 'text',
-      WebkitTextFillColor: 'transparent',
-    },
-    bg: {
-      backgroundImage: `url(${CommunityBanner})`,
-      backgroundPosition: 'left top',
-      backgroundRepeat: 'no-repeat',
-      backgroundSize: '100%',
-    },
-    list: {
-      border: '1px solid rgba(255, 255, 255, 0.5)',
-      borderRadius: '12px',
-    },
-    card: {
-      borderRadius: '16px',
-    },
-    border: {
-      borderRadius: '16px',
-    },
-  })
-)
-
-const BlogPage = ({data}) => {
-  const classes = useStyles()
-  const custom = useCustomStyles()
+const CommunityPage = ({data}) => {
   const [users, setUsers] = useState()
 
   useEffect(() => {
@@ -104,7 +56,7 @@ const BlogPage = ({data}) => {
   }, [])
 
   return (
-    <Box className={classes.bg}>
+    <Box sx={{backgroundImage: `url(${CommunityBanner})`, backgroundPosition: 'left top', backgroundRepeat: 'no-repeat', backgroundSize: '100%'}}>
       <Layout>
         <Container maxWidth='lg'>
           <SEO title='Community' />
@@ -126,7 +78,6 @@ const BlogPage = ({data}) => {
               <Box mt={8}>
                 <Grid container spacing={4}>
                   <Grid item md={8}>
-                    {console.log(data.allStrapiActivity.edges[0])}
                     {data.allStrapiActivity.edges.slice(0, 1).map(activity => (
                       <Card
                         link={activity.node.link}
@@ -139,18 +90,37 @@ const BlogPage = ({data}) => {
                     ))}
                   </Grid>
                   <Grid item md={4}>
-                    <Box className={classes.list} p={6}>
+                    <Box
+                      p={6}
+                      sx={{
+                        border: '1px solid rgba(255, 255, 255, 0.5)',
+                        borderRadius: '12px',
+                      }}
+                    >
                       {data.allStrapiActivity.edges.slice(1).map(activity => (
                         <>
                           <Typography variant='body1'>{new Date(activity.node.published_at).toDateString()}</Typography>
-                          <Typography variant='subtitle1' component='a' href={activity.node.link} target='_blank' className={classes.item}>
+                          <Typography
+                            variant='subtitle1'
+                            component='a'
+                            href={activity.node.link}
+                            target='_blank'
+                            sx={{
+                              '&:hover': {
+                                background: '-webkit-linear-gradient(left, #7DBCFC, #2E7CFE, #01E1FF)',
+                                color: 'transparent',
+                                WebkitBackgroundClip: 'text',
+                                WebkitTextFillColor: 'transparent',
+                              },
+                            }}
+                          >
                             {activity.node.title}
                           </Typography>
                           <Divider my={4} />
                         </>
                       ))}
                       <Box my={5}>
-                        <Link to={'/'} className={custom.link}>
+                        <Link to={'/'}>
                           查看更多
                           <ChevronRightIcon />
                         </Link>
@@ -173,7 +143,7 @@ const BlogPage = ({data}) => {
                 <Grid container spacing={4}>
                   <Grid item md={4} xs={12}>
                     <Box
-                      className={classes.card}
+                      borderRadius='16px'
                       p={4}
                       style={{
                         background: `url(${Union}) right 20px bottom 20px, linear-gradient(360deg, #000000 0%, #040E22 0.01%, #121B30 100%)`,
@@ -185,7 +155,7 @@ const BlogPage = ({data}) => {
                         提交你发现的漏洞，保护bitxhub的安全
                       </Typography>
                       <Box>
-                        <Link to={'/'} className={custom.link}>
+                        <Link to={'/'}>
                           查看更多
                           <ChevronRightIcon />
                         </Link>
@@ -194,7 +164,7 @@ const BlogPage = ({data}) => {
                   </Grid>
                   <Grid item md={4} xs={12}>
                     <Box
-                      className={classes.card}
+                      borderRadius='16px'
                       p={4}
                       style={{
                         background: `url(${Right}) right 20px bottom 20px, linear-gradient(360deg, #000000 0%, #040E22 0.01%, #121B30 100%)`,
@@ -206,7 +176,7 @@ const BlogPage = ({data}) => {
                         提交你发现的漏洞，保护bitxhub的安全
                       </Typography>
                       <Box>
-                        <Link to={'/'} className={custom.link}>
+                        <Link to={'/'}>
                           查看更多
                           <ChevronRightIcon />
                         </Link>
@@ -215,7 +185,7 @@ const BlogPage = ({data}) => {
                   </Grid>
                   <Grid item md={4} xs={12}>
                     <Box
-                      className={classes.card}
+                      borderRadius='16px'
                       p={4}
                       style={{
                         background: `url(${Smile}) right 20px bottom 20px, linear-gradient(360deg, #000000 0%, #040E22 0.01%, #121B30 100%)`,
@@ -227,7 +197,7 @@ const BlogPage = ({data}) => {
                         提交你发现的漏洞，保护bitxhub的安全
                       </Typography>
                       <Box>
-                        <Link to={'/'} className={custom.link}>
+                        <Link to={'/'}>
                           查看更多
                           <ChevronRightIcon />
                         </Link>
@@ -246,7 +216,7 @@ const BlogPage = ({data}) => {
                 {users?.slice(0, 6).map(user => (
                   <Grid item md={2} sm={4} xs={6} textAlign='center'>
                     <a href={user.html_url} target='_blank' rel='noopener noreferrer'>
-                      <img src={user.avatar_url} width='120' alt='' className={classes.border} />
+                      <img src={user.avatar_url} width='120' alt='' style={{borderRadius: '16px'}} />
                       <Typography variant='subtitle2' mt={4}>
                         {user.login}
                       </Typography>
@@ -275,4 +245,4 @@ const BlogPage = ({data}) => {
     </Box>
   )
 }
-export default BlogPage
+export default CommunityPage

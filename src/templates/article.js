@@ -5,25 +5,7 @@ import Layout from '../components/layout'
 import {Box, Button, Container, makeStyles, Typography} from '@material-ui/core'
 import {createStyles} from '@material-ui/styles'
 import SEO from '../components/seo'
-import {useHelperStyles} from '../components/style'
-
-const useStyles = makeStyles(theme =>
-  createStyles({
-    main: {
-      border: '1px solid rgba(255, 255, 255, 0.2)',
-      borderRadius: '8px',
-    },
-    content: {
-      color: 'rgba(255, 255, 255, 0.8)',
-      lineHeight: '26px',
-      '& img': {
-        display: 'block',
-        maxWidth: '100%',
-        margin: '25px 0',
-      },
-    },
-  })
-)
+import {ColorText} from '../components/style'
 
 export const query = graphql`
   query ArticleQuery($id: Int!) {
@@ -43,8 +25,6 @@ export const query = graphql`
 `
 
 const Article = ({data}) => {
-  const classes = useStyles()
-  const helperClasses = useHelperStyles()
   const article = data.strapiArticle
 
   return (
@@ -52,11 +32,27 @@ const Article = ({data}) => {
       <SEO title={article.title} />
       <Container maxWidth='md'>
         <Box pt={20} px={{md: 10, xs: 0}}>
-          <Box className={classes.main} p={{md: 15}}>
+          <Box
+            p={{md: 15}}
+            sx={{
+              border: '1px solid rgba(255, 255, 255, 0.2)',
+              borderRadius: '8px',
+            }}
+          >
             <Typography variant='h4' textAlign='center' mb={4}>
               {article.title}
             </Typography>
-            <Box className={classes.content}>
+            <Box
+              sx={{
+                color: 'rgba(255, 255, 255, 0.8)',
+                lineHeight: '26px',
+                '& img': {
+                  display: 'block',
+                  maxWidth: '100%',
+                  margin: '25px 0',
+                },
+              }}
+            >
               <ReactMarkdown children={article.content} transformImageUri={uri => (uri.startsWith('http') ? uri : `http://localhost:1337${uri}`)} />
             </Box>
             <Box my={6}>
@@ -69,8 +65,8 @@ const Article = ({data}) => {
             <Box>
               {article.authors.map(author => (
                 <Box display='flex' alignItems='center'>
-                  <Typography display='inline' className={helperClasses.title} mr={2}>
-                    {author.username}
+                  <Typography display='inline' mr={2}>
+                    <ColorText>{author.username}</ColorText>
                   </Typography>
                   <Typography variant='body2' mr={2}>
                     发表于
