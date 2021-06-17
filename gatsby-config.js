@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
     title: `BitXHub`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
+    description: `趣链科技自主研发的开源跨链技术平台BitXHub同时支持同构及异构区块链间的跨链交易，允许异构的资产互换、数据互通及服务互补。BitXHub致力于打造高可扩展、强鲁棒性、易运维升级的联盟链跨链通用协议及示范平台，为区块链互联网络的形成与价值孤岛的互通提供可靠的底层技术支撑。`,
     author: `@meshplus`,
   },
   plugins: [
@@ -38,7 +38,7 @@ module.exports = {
         background_color: `#663399`,
         theme_color: `#663399`,
         display: `minimal-ui`,
-        icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+        icon: `src/images/logo.svg`, // This path is relative to the root of the site.
       },
     },
     `gatsby-plugin-gatsby-cloud`,

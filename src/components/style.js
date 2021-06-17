@@ -1,18 +1,52 @@
 import {Box, Typography} from '@material-ui/core'
 import * as React from 'react'
 import clsx from 'clsx'
+import Moment from 'react-moment'
+import Link from 'gatsby-link'
 
-export const ColorText = ({children, className, ...other}) => {
+export const ReadMore = ({to, ...other}) => {
+  return (
+    <Box {...other} sx={{cursor: 'pointer'}}>
+      <Link to={to}>
+        <HoverColorText display='inline-flex' alignItems='center'>
+          <Box mr={2}>查看更多</Box>
+          <i className='icon icon-right' style={{fontSize: '22px'}} />
+        </HoverColorText>
+      </Link>
+    </Box>
+  )
+}
+
+export const ColorText = ({children, ...other}) => {
   return (
     <Box
       display='inline-block'
-      className={clsx(className)}
       {...other}
       sx={{
         background: '-webkit-linear-gradient(left, #7DBCFC, #2E7CFE, #01E1FF)',
         color: 'transparent',
         WebkitBackgroundClip: 'text',
         WebkitTextFillColor: 'transparent',
+      }}
+    >
+      {children}
+    </Box>
+  )
+}
+
+export const HoverColorText = ({children, className, ...other}) => {
+  return (
+    <Box
+      display='inline-block'
+      className={clsx(className)}
+      {...other}
+      sx={{
+        '&:hover': {
+          background: '-webkit-linear-gradient(left, #7DBCFC, #2E7CFE, #01E1FF)',
+          color: 'transparent',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+        },
       }}
     >
       {children}
@@ -42,21 +76,27 @@ export const Card = ({children, className, title, singleTitle, img, desc, date, 
       component='a'
       href={link}
       target='_blank'
+      position='relative'
       sx={{
         borderRadius: '12px',
         display: 'block',
+        paddingTop: '50%',
         '&:hover': {
           cursor: 'pointer',
-          transition: 'all .5s',
-          transform: 'translateY(-6px)',
+          transition: 'all .6s',
+          transform: 'translateY(-4px)',
         },
       }}
     >
       <img
         src={img}
-        alt=''
-        style={{display: 'block', width: '100%'}}
-        sx={{
+        alt='cover'
+        style={{
+          position: 'absolute',
+          display: 'block',
+          top: 0,
+          width: '100%',
+          objectFit: 'cover',
           borderTopLeftRadius: '12px',
           borderTopRightRadius: '12px',
         }}
@@ -75,8 +115,8 @@ export const Card = ({children, className, title, singleTitle, img, desc, date, 
         <Typography variant='subtitle1' maxHeight='60px' overflow='hidden'>
           {desc}
         </Typography>
-        <Typography mt={8} variant='body1'>
-          {date}
+        <Typography mt={4} variant='body1'>
+          <Moment date={date} format='YYYY.MM.DD' />
         </Typography>
       </Box>
     </Box>

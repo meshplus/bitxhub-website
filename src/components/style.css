@@ -1,18 +1,33 @@
 /*@font-face {*/
-/*    font-family: AlibabaPuHui;*/
-/*    src: url("../fonts/AlibabaPuHuiTi-2-55-Regular.otf");*/
-/*}*/
-/*@font-face {*/
-/*    font-family: AlibabaPuHui;*/
-/*    src: url("../fonts/AlibabaPuHuiTi-2-55-Regular.ttf");*/
+    /*font-family: AlibabaPuHui;*/
+    /*src: url("../fonts/AlibabaPuHuiTi-2-55-Regular.ttf") format("truetype");*/
+    /*font-weight: normal;*/
 /*}*/
 
 @font-face {
     font-family: AlibabaPuHui;
-    src: url("../fonts/AlibabaPuHuiTi-2-105-Heavy.ttf");
+    font-weight: normal;
+    src: url('//at.alicdn.com/t/webfont_6idbzhh8wv8.eot'); /* IE9*/
+    src: url('//at.alicdn.com/t/webfont_6idbzhh8wv8.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('//at.alicdn.com/t/webfont_6idbzhh8wv8.woff2') format('woff2'),
+    url('//at.alicdn.com/t/webfont_6idbzhh8wv8.woff') format('woff'), /* chrome、firefox */
+    url('//at.alicdn.com/t/webfont_6idbzhh8wv8.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+    url('//at.alicdn.com/t/webfont_6idbzhh8wv8.svg#Alibaba-PuHuiTi-Regular') format('svg'); /* iOS 4.1- */
+}
+
+@font-face {
+    font-family: AlibabaPuHui;
+    src: url("../fonts/AlibabaPuHuiTi-2-85-Bold.ttf") format("truetype");
+    font-weight: bold;
 }
 
 /*@font-face {*/
 /*    font-family: AlibabaPuHui;*/
-/*    src: url("../fonts/AlibabaPuHuiTi-2-85-Bold.otf");*/
+/*    font-weight: bold;*/
+/*    src: url('//at.alicdn.com/t/webfont_no5wpyz9xfe.eot'); !* IE9*!*/
+/*    src: url('//at.alicdn.com/t/webfont_no5wpyz9xfe.eot?#iefix') format('embedded-opentype'), !* IE6-IE8 *!*/
+/*    url('//at.alicdn.com/t/webfont_no5wpyz9xfe.woff2') format('woff2'),*/
+/*    url('//at.alicdn.com/t/webfont_no5wpyz9xfe.woff') format('woff'), !* chrome、firefox *!*/
+/*    url('//at.alicdn.com/t/webfont_no5wpyz9xfe.ttf') format('truetype'), !* chrome、firefox、opera、Safari, Android, iOS 4.2+*!*/
+/*    url('//at.alicdn.com/t/webfont_no5wpyz9xfe.svg#Alibaba-PuHuiTi-Bold') format('svg'); !* iOS 4.1- *!*/
 /*}*/

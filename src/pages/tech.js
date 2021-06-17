@@ -3,11 +3,11 @@ import Layout from '../components/layout'
 import SEO from '../components/seo'
 import {Box, Container, Grid, SwipeableDrawer, Typography} from '@material-ui/core'
 import Relaychain from '../images/relaychain.svg'
-import Pier from '../images/pier.svg'
 import Hyperchain from '../images/hyperchain.svg'
 import lottie from 'lottie-web'
-import tech from './tech1.json'
-import Banner from '../images/tech_banner.svg'
+import tech from './tech.json'
+import BG from '../images/tech_bg.png'
+import BG2 from '../images/tech_bg_2.png'
 import {ColorText} from '../components/style'
 import {AnimationOnScroll} from 'react-animation-on-scroll'
 import {usePrevious} from 'react-use'
@@ -15,8 +15,13 @@ import TX from '../images/tx.svg'
 import TXDemo from '../images/tx_demo.svg'
 import DID from '../images/did.svg'
 import Mng from '../images/mng.svg'
-import Protocol from '../images/protocol.jpg'
-import PierImg from '../images/pier.jpg'
+import PierGif from '../images/pier.gif'
+import Pier from '../images/pier.svg'
+import Wasm from '../images/wasm.gif'
+import CardBG1 from '../images/tech_card_bg_1.png'
+import CardBG2 from '../images/tech_card_bg_2.png'
+import CardBG3 from '../images/tech_card_bg_3.png'
+import IBTP from '../images/ibtp.gif'
 
 const TechPage = ({data}) => {
   const divRef = useRef()
@@ -58,10 +63,10 @@ const TechPage = ({data}) => {
     return (
       <Box
         sx={{
-          backgroundImage: `url(${Banner})`,
-          backgroundPosition: 'left top',
+          backgroundImage: `url(${BG}), url(${BG2})`,
+          backgroundPosition: 'center top, center 900px',
           backgroundRepeat: 'no-repeat',
-          backgroundSize: '100%',
+          backgroundSize: '2000px 1000px, 2000px 884px',
         }}
         mt={10}
       >
@@ -70,7 +75,7 @@ const TechPage = ({data}) => {
           <Box my={20}>
             <Container maxWidth='lg'>
               <Grid item md={5}>
-                <Box pt={50}>
+                <Box pt={90}>
                   <AnimationOnScroll animateIn='animate__fadeInUp' duration={0.8}>
                     <Typography variant='h3' mb={3}>
                       BitXHub技术强大
@@ -88,33 +93,35 @@ const TechPage = ({data}) => {
           <Box mt={80} mb={30}>
             <Container maxWidth='lg'>
               <Grid container>
-                <Grid item md={5}>
-                  <AnimationOnScroll animateIn='animate__fadeInLeft' duration={0.6}>
-                    <Typography variant='h3'>
-                      <ColorText>链</ColorText>有定论
-                    </Typography>
-                    <Typography variant='h3' mb={4}>
-                      <ColorText>跨</ColorText>无常形
-                    </Typography>
-                  </AnimationOnScroll>
-                  <Typography variant='body2' mb={6}>
-                    为了适用不同的业务应用场景，我们的跨链组件可以通过灵活组合形成不同的架构，我们称之为“积木架构”。
-                  </Typography>
+                <Grid item md={5} display='flex' alignItems='center'>
                   <Box>
-                    <Grid container>
-                      <Grid item xs={3}>
-                        <img src={Relaychain} alt='relaychain' />
-                        <Typography variant='subtitle1'>中继链</Typography>
+                    <AnimationOnScroll animateIn='animate__fadeInUp' duration={0.6}>
+                      <Typography variant='h3'>
+                        <ColorText>链</ColorText>有定论
+                      </Typography>
+                      <Typography variant='h3' mb={4}>
+                        <ColorText>跨</ColorText>无常形
+                      </Typography>
+                    </AnimationOnScroll>
+                    <Typography variant='body2' mb={6}>
+                      为了适用不同的业务应用场景，我们的跨链组件可以通过灵活组合形成不同的架构，我们称之为“积木架构”。
+                    </Typography>
+                    <Box>
+                      <Grid container>
+                        <Grid item xs={3}>
+                          <img src={Relaychain} alt='relaychain' />
+                          <Typography variant='subtitle1'>中继链</Typography>
+                        </Grid>
+                        <Grid item xs={3} textAlign='center'>
+                          <img src={Pier} alt='pier' />
+                          <Typography variant='subtitle1'>跨链网关</Typography>
+                        </Grid>
+                        <Grid item xs={4} textAlign='center'>
+                          <img src={Hyperchain} alt='hyperchain' height={48} />
+                          <Typography variant='subtitle1'>应用链</Typography>
+                        </Grid>
                       </Grid>
-                      <Grid item xs={3} textAlign='center'>
-                        <img src={Pier} alt='pier' />
-                        <Typography variant='subtitle1'>跨链网关</Typography>
-                      </Grid>
-                      <Grid item xs={4} textAlign='center'>
-                        <img src={Hyperchain} alt='hyperchain' height={48} />
-                        <Typography variant='subtitle1'>应用链</Typography>
-                      </Grid>
-                    </Grid>
+                    </Box>
                   </Box>
                 </Grid>
                 <Grid item md={7} textAlign='left'>
@@ -200,23 +207,28 @@ const TechPage = ({data}) => {
             <Container maxWidth='lg'>
               <Grid container>
                 <Grid item md={7}>
-                  <AnimationOnScroll animateIn='animate__animated animate__fadeInLeft animate__faster'>
-                    <img src={Protocol} alt='img' height={400} />
+                  <AnimationOnScroll animateIn='animate__animated animate__fadeInUp animate__faster'>
+                    <img src={IBTP} alt='img' height={420} />
                   </AnimationOnScroll>
                 </Grid>
-                <Grid item md={5}>
-                  <AnimationOnScroll animateIn='animate__fadeInRight' duration={0.4}>
-                    <Typography variant='h3'>
-                      <ColorText>万链如一</ColorText>
+                <Grid item md={5} display='flex' alignItems='center'>
+                  <Box>
+                    <AnimationOnScroll animateIn='animate__fadeInUp' duration={0.4}>
+                      <Typography variant='h3'>
+                        <ColorText>万链如一</ColorText>
+                      </Typography>
+                    </AnimationOnScroll>
+                    <Typography variant='h3' mb={4}>
+                      的链间传输协议
                     </Typography>
-                  </AnimationOnScroll>
-                  <Typography variant='h3' mb={4}>
-                    的链间传输协议
-                  </Typography>
-                  <Typography variant='body2' mb={2}>
-                    是所有跨链消息的格式化工厂，将异构链的跨链消息格式统一。 让中继链更方便地进行跨链消息的验证和路由以及跨链网关更一致地进行跨链消息处理
-                  </Typography>
-                  <Typography variant='body2'>所有异构链的跨链消息都可以封装成统一格式 (调用信息Payload+证明信息Proof)字段可以适配所有异构链</Typography>
+                    <Typography variant='body2' mb={2}>
+                      是所有跨链消息的格式化工厂，将异构链的跨链消息格式统一。
+                      让中继链更方便地进行跨链消息的验证和路由以及跨链网关更一致地进行跨链消息处理
+                    </Typography>
+                    <Typography variant='body2'>
+                      所有异构链的跨链消息都可以封装成统一格式 (调用信息Payload+证明信息Proof)字段可以适配所有异构链
+                    </Typography>
+                  </Box>
                 </Grid>
               </Grid>
             </Container>
@@ -224,21 +236,23 @@ const TechPage = ({data}) => {
           <Box my={30}>
             <Container maxWidth='lg'>
               <Grid container>
-                <Grid item md={5}>
-                  <AnimationOnScroll animateIn='animate__fadeInLeft animate__faster' duration={0.6}>
-                    <Typography variant='h3'>
-                      <ColorText>左右逢源</ColorText>
+                <Grid item md={5} display='flex' alignItems='center'>
+                  <Box>
+                    <AnimationOnScroll animateIn='animate__fadeInUp animate__faster' duration={0.6}>
+                      <Typography variant='h3'>
+                        <ColorText>左右逢源</ColorText>
+                      </Typography>
+                    </AnimationOnScroll>
+                    <Typography variant='h3'>的跨链网关</Typography>
+                    <Typography variant='body2' mt={8}>
+                      通过动态加载插件的形式适配应用链，并可随时进行热更新，对应用链的零侵入.
+                      插件机制的设计将Pier中和应用链交互的模块与跨链网关自身核心功能模块进行解耦，从而方便更多的应用链加入跨链系统。
                     </Typography>
-                  </AnimationOnScroll>
-                  <Typography variant='h3'>的跨链网关</Typography>
-                  <Typography variant='body2' mt={8}>
-                    通过动态加载插件的形式适配应用链，并可随时进行热更新，对应用链的零侵入.
-                    插件机制的设计将Pier中和应用链交互的模块与跨链网关自身核心功能模块进行解耦，从而方便更多的应用链加入跨链系统。
-                  </Typography>
+                  </Box>
                 </Grid>
                 <Grid item md={7}>
-                  <AnimationOnScroll animateIn='animate__animated animate__fadeInRight'>
-                    <img src={PierImg} alt='pier' height={400} />
+                  <AnimationOnScroll animateIn='animate__animated animate__fadeInUp'>
+                    <img src={PierGif} alt='pier' height={400} />
                   </AnimationOnScroll>
                 </Grid>
               </Grid>
@@ -248,27 +262,31 @@ const TechPage = ({data}) => {
             <Container maxWidth='lg'>
               <Grid container>
                 <Grid item md={7}>
-                  <AnimationOnScroll animateIn='animate__fadeInLeft animate__faster' duration={0.6}>
-                    <img src={PierImg} alt='pier' height={400} />
+                  <AnimationOnScroll animateIn='animate__fadeInUp animate__faster' duration={0.6}>
+                    <img src={Wasm} alt='pier' height={400} />
                   </AnimationOnScroll>
                 </Grid>
-                <Grid item md={5}>
-                  <AnimationOnScroll animateIn='animate__fadeInUp' duration={0.6}>
-                    <Typography variant='h3'>
-                      <ColorText>因链制宜</ColorText>的异构验证引擎
+                <Grid item md={5} display='flex' alignItems='center'>
+                  <Box>
+                    <AnimationOnScroll animateIn='animate__fadeInUp' duration={0.6}>
+                      <Typography variant='h3'>
+                        <ColorText>因链制宜</ColorText>的异构验证引擎
+                      </Typography>
+                    </AnimationOnScroll>
+                    <Typography variant='body2' mt={8}>
+                      通过交易解析，自动调用不同验证规则验证不同异构链的交易，进而到达高效验证
                     </Typography>
-                  </AnimationOnScroll>
-                  <Typography variant='body2' mt={8}>
-                    通过交易解析，自动调用不同验证规则验证不同异构链的交易，进而到达高效验证
-                  </Typography>
-                  <Typography variant='body2'>自动调用不同验证规则验证不同异构链的交易，支持验证规则一键升级</Typography>
+                    <Typography variant='body2'>
+                      自动调用不同验证规则验证不同异构链的交易，支持验证规则一键升级
+                    </Typography>
+                  </Box>
                 </Grid>
               </Grid>
             </Container>
           </Box>
           <Typography variant='h2' textAlign='center'>
             <AnimationOnScroll animateIn='animate__fadeInUp' duration={0.6}>
-              <ColorText>更多特效</ColorText>
+              <ColorText>更多特性</ColorText>
             </AnimationOnScroll>
             <Container maxWidth='md'>
               <Grid container spacing={8} mt={6}>
@@ -276,26 +294,31 @@ const TechPage = ({data}) => {
                   <Box
                     sx={{
                       textAlign: 'left',
-                      background: 'linear-gradient(360deg, #000000 0%, #040E22 0.01%, #1D2A45 100%)',
                       boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
-                      borderRadius: '16px',
                       padding: '50px',
                       height: '380px',
-                      marginLeft: '20px',
                       position: 'relative',
-                      transition: 'all .3s',
                       cursor: 'pointer',
                       '&:hover': {
-                        transform: 'scaleY(1.1)',
+                        '&:before': {
+                          transform: 'scaleY(1.1)',
+                        },
                       },
                       '&:before': {
+                        backgroundImage: `url(${CardBG1}), linear-gradient(360deg, #000000 0%, #040E22 0.01%, #1D2A45 100%)`,
+                        backgroundSize: '286px 306px, 100% 380px',
+                        backgroundRepeat: 'no-repeat',
                         display: 'block',
                         content: '" "',
                         position: 'absolute',
-                        top: '30px',
-                        width: '30px',
-                        height: '30px',
+                        width: '100%',
+                        top: 0,
+                        left: 0,
+                        borderRadius: '16px',
+                        height: '100%',
                         color: '#fff',
+                        transition: 'transform .7s cubic-bezier(.19,1,.22,1)',
+                        zIndex: -1,
                       },
                     }}
                     onClick={() => setStatus1(true)}
@@ -304,7 +327,9 @@ const TechPage = ({data}) => {
                     <Typography variant='h5' mb={5} mt={2}>
                       跨链事务
                     </Typography>
-                    <Typography variant='body2'>BitXHub平台的中继链提供了完善有效的跨链治理机制。中继链自身节点的构成是联盟自治的基础，通过丰富的治理服务实现全方位的治理管控。</Typography>
+                    <Typography variant='body2'>
+                      BitXHub平台的中继链提供了完善有效的跨链治理机制。中继链自身节点的构成是联盟自治的基础，通过丰富的治理服务实现全方位的治理管控。
+                    </Typography>
                   </Box>
                   <SwipeableDrawer
                     ModalProps={{
@@ -320,7 +345,7 @@ const TechPage = ({data}) => {
                         borderRadius: '10px',
                         maxWidth: '100%',
                         width: '400px',
-                        background: 'linear-gradient(360deg, #181818 0%, #05070B 0.01%, #1D2735 100%)',
+                        background: `linear-gradient(360deg, #181818 0%, #05070B 0.01%, #1D2735 100%)`,
                       }}
                     >
                       <img src={TX} alt='tx' height={40} width={40} />
@@ -338,26 +363,31 @@ const TechPage = ({data}) => {
                   <Box
                     sx={{
                       textAlign: 'left',
-                      background: 'linear-gradient(360deg, #000000 0%, #040E22 0.01%, #1D2A45 100%)',
                       boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
-                      borderRadius: '16px',
                       padding: '50px',
                       height: '380px',
-                      marginLeft: '20px',
                       position: 'relative',
-                      transition: 'all .3s',
                       cursor: 'pointer',
                       '&:hover': {
-                        transform: 'scaleY(1.1)',
+                        '&:before': {
+                          transform: 'scaleY(1.1)',
+                        },
                       },
                       '&:before': {
+                        backgroundImage: `url(${CardBG2}), linear-gradient(360deg, #000000 0%, #040E22 0.01%, #1D2A45 100%)`,
+                        backgroundSize: '286px 306px, 100% 380px',
+                        backgroundRepeat: 'no-repeat',
                         display: 'block',
                         content: '" "',
                         position: 'absolute',
-                        top: '30px',
-                        width: '30px',
-                        height: '30px',
+                        width: '100%',
+                        top: 0,
+                        left: 0,
+                        borderRadius: '16px',
+                        height: '100%',
                         color: '#fff',
+                        transition: 'transform .7s cubic-bezier(.19,1,.22,1)',
+                        zIndex: -1,
                       },
                     }}
                     onClick={() => setStatus2(true)}
@@ -366,7 +396,9 @@ const TechPage = ({data}) => {
                     <Typography variant='h5' mb={5} mt={2}>
                       联盟治理
                     </Typography>
-                    <Typography variant='body2'>BitXHub平台的中继链提供了完善有效的跨链治理机制。中继链自身节点的构成是联盟自治的基础，通过丰富的治理服务实现全方位的治理管控。</Typography>
+                    <Typography variant='body2'>
+                      BitXHub平台的中继链提供了完善有效的跨链治理机制。中继链自身节点的构成是联盟自治的基础，通过丰富的治理服务实现全方位的治理管控。
+                    </Typography>
                   </Box>
                   <SwipeableDrawer
                     ModalProps={{
@@ -400,26 +432,32 @@ const TechPage = ({data}) => {
                   <Box
                     sx={{
                       textAlign: 'left',
-                      background: 'linear-gradient(360deg, #000000 0%, #040E22 0.01%, #1D2A45 100%)',
                       boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
                       borderRadius: '16px',
                       padding: '50px',
                       height: '380px',
-                      marginLeft: '20px',
                       position: 'relative',
-                      transition: 'all .3s',
                       cursor: 'pointer',
                       '&:hover': {
-                        transform: 'scaleY(1.1)',
+                        '&:before': {
+                          transform: 'scaleY(1.1)',
+                        },
                       },
                       '&:before': {
+                        backgroundImage: `url(${CardBG3}), linear-gradient(360deg, #000000 0%, #040E22 0.01%, #1D2A45 100%)`,
+                        backgroundSize: '286px 306px, 100% 380px',
+                        backgroundRepeat: 'no-repeat',
                         display: 'block',
                         content: '" "',
                         position: 'absolute',
-                        top: '30px',
-                        width: '30px',
-                        height: '30px',
+                        width: '100%',
+                        top: 0,
+                        left: 0,
+                        borderRadius: '16px',
+                        height: '100%',
                         color: '#fff',
+                        transition: 'transform .7s cubic-bezier(.19,1,.22,1)',
+                        zIndex: -1,
                       },
                     }}
                     onClick={() => setStatus3(true)}

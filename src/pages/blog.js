@@ -5,6 +5,7 @@ import SEO from '../components/seo'
 import {Box, Button, Container, Grid, Typography} from '@material-ui/core'
 import BlogBanner from '../images/blog_banner.svg'
 import {ColorText} from '../components/style'
+import Moment from 'react-moment'
 
 export const pageQuery = graphql`
   query {
@@ -47,26 +48,26 @@ const BlogPage = ({data}) => {
         sx={{
           backgroundImage: `url(${BlogBanner})`,
           backgroundPosition: 'top 50px center',
-          backgroundSize: '75%',
+          backgroundSize: {md: '75%', xs: '120%'},
           backgroundRepeat: 'no-repeat',
         }}
       >
         <Container maxWidth='md'>
-          <Box px={{md: 10, sm: 0}}>
+          <Box>
             <Box textAlign='center' mb={1}>
               <Box fontSize='48px'>
-                <ColorText>博客</ColorText>
+                <ColorText fontWeight='bold'>博客</ColorText>
               </Box>
             </Box>
-            <Box textAlign='center' mb={30}>
+            <Box textAlign='center' mb={{md: 30, xs: 15}}>
               博观而约取，厚积而薄发
             </Box>
             <Box
-              mb={30}
+              mb={{md: 30, xs: 15}}
+              fontSize={12}
               sx={{
-                fontSize: '12px',
                 '& button': {
-                  margin: '0 8px 10px',
+                  margin: '0 8px 16px',
                 },
               }}
             >
@@ -78,24 +79,35 @@ const BlogPage = ({data}) => {
             </Box>
           </Box>
           {data.allStrapiArticle.edges.map(article => (
-            <Box mb={16} px={10}>
-              <Grid container>
+            <Box mb={16}>
+              <Grid container flexDirection={{xs: 'row', md: 'row-reverse'}}>
+                <Grid item md={4}>
+                  <Box ml={{md: 5, xs: 0}} mb={4}>
+                    <img
+                      src={`http://localhost:1337${article.node.cover.formats.small.url}`}
+                      height={160}
+                      alt='thumbnail'
+                      style={{display: 'block', width: '100%', objectFit: 'cover'}}
+                    />
+                  </Box>
+                </Grid>
                 <Grid item md={8}>
-                  <Typography variant='h5' fontSize='24px' mb={3} component='a' display='block' href={`/article/${article.node.strapiId}`}>
+                  <Typography
+                    variant='h5'
+                    fontSize='24px'
+                    mb={3}
+                    component='a'
+                    display='block'
+                    href={`/article/${article.node.strapiId}`}
+                  >
                     {article.node.title}
-                    {console.log(article)}
                   </Typography>
                   <Typography variant='body1' fontSize='16px' color='rgba(255, 255, 255, 0.8)'>
                     {article.node.content.slice(0, 80)}
                   </Typography>
-                  <Box mt={5} color='#828282' fontSize='16px'>
-                    {new Date(article.node.published_at).toDateString()}
-                  </Box>
-                </Grid>
-                <Grid item md={4}>
-                  <Box ml={5}>
-                    <img src={`http://localhost:1337${article.node.cover.formats.small.url}`} height={160} alt='thumbnail' style={{display: 'block', width: '100%', objectFit: 'cover'}} />
-                  </Box>
+                  <Typography variant='body1' mt={5}>
+                    <Moment date={article.node.published_at} format='YYYY.MM.DD' />
+                  </Typography>
                 </Grid>
               </Grid>
             </Box>

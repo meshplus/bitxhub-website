@@ -81,6 +81,9 @@ export const theme = createTheme({
         },
         outlinedPrimary: {
           border: '1px solid #2E7CFE',
+          disabled: {
+            background: 'transparent',
+          },
         },
         containedPrimary: {
           // backgroundColor: isBSC() ? '#EFB82D' : '#1164FB',
@@ -95,7 +98,8 @@ export const theme = createTheme({
           background: '#313131CC',
           transition: 'all 1.3s',
           '&:hover': {
-            background: 'radial-gradient(95.45% 255.77% at 95.45% 50.51%, #01E1FF 0%, #2E7CFE 66.23%, rgba(125, 188, 252, 0.92) 100%)',
+            background:
+              'radial-gradient(95.45% 255.77% at 95.45% 50.51%, #01E1FF 0%, #2E7CFE 66.23%, rgba(125, 188, 252, 0.92) 100%)',
           },
         },
       },
@@ -180,24 +184,30 @@ export const theme = createTheme({
         },
         h1: {
           fontFamily: '"AlibabaPuHui", "Roboto", "Helvetica", "Arial", sans-serif !important',
+          fontWeight: 'bold',
         },
         h2: {
           fontFamily: '"AlibabaPuHui", "Roboto", "Helvetica", "Arial", sans-serif !important',
+          fontWeight: 'bold',
         },
         h3: {
           fontFamily: '"AlibabaPuHui", "Roboto", "Helvetica", "Arial", sans-serif !important',
+          fontWeight: 'bold',
           [breakpoints.down('sm')]: {
             fontSize: '36px',
           },
         },
         h4: {
           fontFamily: '"AlibabaPuHui", "Roboto", "Helvetica", "Arial", sans-serif !important',
+          fontWeight: 'bold',
         },
         h5: {
           fontFamily: '"AlibabaPuHui", "Roboto", "Helvetica", "Arial", sans-serif !important',
+          fontWeight: 'bold',
         },
         h6: {
           fontFamily: '"AlibabaPuHui", "Roboto", "Helvetica", "Arial", sans-serif !important',
+          fontWeight: 'bold',
         },
         caption: {
           color: '#7B89B7',
@@ -257,7 +267,8 @@ export const theme = createTheme({
           },
         },
         '.Toastify__toast--info': {
-          background: 'radial-gradient(circle, rgba(223,232,254,1) 0%, rgba(252,255,251,1) 45%, rgba(255,242,250,1) 80%);',
+          background:
+            'radial-gradient(circle, rgba(223,232,254,1) 0%, rgba(252,255,251,1) 45%, rgba(255,242,250,1) 80%);',
         },
         '.MuiStepLabel-root.Mui-disabled': {
           background: '#fff !important',

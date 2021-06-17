@@ -11,9 +11,24 @@ const Header = ({siteTitle}) => {
   const toggleDrawer = s => () => setOpen(s)
 
   return (
-    <Box bgcolor='#000' left={0} right={0} fontSize='14px' py={{xs: 3, sm: 5}} zIndex={999999} top={0} position='fixed'>
+    <Box
+      bgcolor='rgba(0, 0, 0, .5)'
+      left={0}
+      right={0}
+      fontSize='14px'
+      py={{xs: 3, sm: 5}}
+      zIndex={999999}
+      top={0}
+      position='fixed'
+    >
       <Container maxWidth='lg'>
-        <SwipeableDrawer anchor='left' open={open} onClose={toggleDrawer(false)} onOpen={toggleDrawer(true)} disableSwipeToOpen={false}>
+        <SwipeableDrawer
+          anchor='left'
+          open={open}
+          onClose={toggleDrawer(false)}
+          onOpen={toggleDrawer(true)}
+          disableSwipeToOpen={false}
+        >
           2222222222222222222222222
         </SwipeableDrawer>
         <Box display='flex' alignItems='center' justifyContent={{xs: 'space-between', md: ''}}>
@@ -41,6 +56,7 @@ const Header = ({siteTitle}) => {
             <Link to='/tech'>技术</Link>
             <Link to='/blog'>博客</Link>
             <Link to='/community'>社区</Link>
+            <Link to='/tool'>工具</Link>
             <Link to='/about'>关于</Link>
           </Box>
           <Box />

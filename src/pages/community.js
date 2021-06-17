@@ -2,17 +2,18 @@ import React, {useEffect, useState} from 'react'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
 import {Box, Button, Container, Grid, Typography} from '@material-ui/core'
-import CommunityBanner from '../images/community_banner.svg'
+import CommunityBanner from '../images/community_bg.png'
+import CommunityBG2 from '../images/community_bg_2.png'
+import CommunityBG3 from '../images/community_bg_3.png'
 import First from '../images/1.png'
-import Link from 'gatsby-link'
-import {Card, Divider, useCustomStyles} from '../components/style'
-import ChevronRightIcon from '@material-ui/icons/ChevronRight'
+import {Card, Divider, HoverColorText, ReadMore} from '../components/style'
 import {graphql} from 'gatsby'
 import Union from '../images/union.svg'
 import Right from '../images/right.svg'
 import Smile from '../images/smile.svg'
 import BG from '../images/community_bg.svg'
 import {Octokit} from '@octokit/rest'
+import Moment from 'react-moment'
 
 export const pageQuery = graphql`
   query {
@@ -56,7 +57,14 @@ const CommunityPage = ({data}) => {
   }, [])
 
   return (
-    <Box sx={{backgroundImage: `url(${CommunityBanner})`, backgroundPosition: 'left top', backgroundRepeat: 'no-repeat', backgroundSize: '100%'}}>
+    <Box
+      sx={{
+        backgroundImage: `url(${CommunityBanner}), url(${CommunityBG2}), url(${CommunityBG3})`,
+        backgroundPosition: 'center top, center 1200px, center 1500px',
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: '1837px 610px, 2000px 500px, 2000px 1011px',
+      }}
+    >
       <Layout>
         <Container maxWidth='lg'>
           <SEO title='Community' />
@@ -77,19 +85,19 @@ const CommunityPage = ({data}) => {
               <Typography variant='subtitle1'>查看最新的活动</Typography>
               <Box mt={8}>
                 <Grid container spacing={4}>
-                  <Grid item md={8}>
+                  <Grid item md={8} xs={12}>
                     {data.allStrapiActivity.edges.slice(0, 1).map(activity => (
                       <Card
                         link={activity.node.link}
                         singleTitle={true}
                         title={activity.node.title}
                         desc={activity.node.content.slice(0, 80)}
-                        date={new Date(activity.node.published_at).toDateString()}
+                        date={activity.node.published_at}
                         img={`http://localhost:1337${activity.node.cover.url}`}
                       />
                     ))}
                   </Grid>
-                  <Grid item md={4}>
+                  <Grid item md={4} xs={12}>
                     <Box
                       p={6}
                       sx={{
@@ -99,32 +107,16 @@ const CommunityPage = ({data}) => {
                     >
                       {data.allStrapiActivity.edges.slice(1).map(activity => (
                         <>
-                          <Typography variant='body1'>{new Date(activity.node.published_at).toDateString()}</Typography>
-                          <Typography
-                            variant='subtitle1'
-                            component='a'
-                            href={activity.node.link}
-                            target='_blank'
-                            sx={{
-                              '&:hover': {
-                                background: '-webkit-linear-gradient(left, #7DBCFC, #2E7CFE, #01E1FF)',
-                                color: 'transparent',
-                                WebkitBackgroundClip: 'text',
-                                WebkitTextFillColor: 'transparent',
-                              },
-                            }}
-                          >
-                            {activity.node.title}
+                          <Typography variant='body1' mb={1}>
+                            <Moment date={activity.node.published_at} format='YYYY.MM.DD' />
+                          </Typography>
+                          <Typography variant='subtitle1' component='a' href={activity.node.link} target='_blank'>
+                            <HoverColorText>{activity.node.title}</HoverColorText>
                           </Typography>
                           <Divider my={4} />
                         </>
                       ))}
-                      <Box my={5}>
-                        <Link to={'/'}>
-                          查看更多
-                          <ChevronRightIcon />
-                        </Link>
-                      </Box>
+                      <ReadMore to='/' my={6} />
                     </Box>
                   </Grid>
                 </Grid>
@@ -135,11 +127,7 @@ const CommunityPage = ({data}) => {
               <Typography variant='subtitle1' mb={8}>
                 可以提供的开发人物
               </Typography>
-              <Box
-                style={{
-                  background: `url(${BG})`,
-                }}
-              >
+              <Box style={{background: `url(${BG})`}}>
                 <Grid container spacing={4}>
                   <Grid item md={4} xs={12}>
                     <Box
@@ -154,12 +142,7 @@ const CommunityPage = ({data}) => {
                       <Typography variant='body2' mb={6}>
                         提交你发现的漏洞，保护bitxhub的安全
                       </Typography>
-                      <Box>
-                        <Link to={'/'}>
-                          查看更多
-                          <ChevronRightIcon />
-                        </Link>
-                      </Box>
+                      <ReadMore to='/' />
                     </Box>
                   </Grid>
                   <Grid item md={4} xs={12}>
@@ -175,12 +158,7 @@ const CommunityPage = ({data}) => {
                       <Typography variant='body2' mb={6}>
                         提交你发现的漏洞，保护bitxhub的安全
                       </Typography>
-                      <Box>
-                        <Link to={'/'}>
-                          查看更多
-                          <ChevronRightIcon />
-                        </Link>
-                      </Box>
+                      <ReadMore to='/' />
                     </Box>
                   </Grid>
                   <Grid item md={4} xs={12}>
@@ -196,12 +174,7 @@ const CommunityPage = ({data}) => {
                       <Typography variant='body2' mb={6}>
                         提交你发现的漏洞，保护bitxhub的安全
                       </Typography>
-                      <Box>
-                        <Link to={'/'}>
-                          查看更多
-                          <ChevronRightIcon />
-                        </Link>
-                      </Box>
+                      <ReadMore to='/' />
                     </Box>
                   </Grid>
                 </Grid>
