@@ -64,18 +64,18 @@ const TechPage = ({data}) => {
       <Box
         sx={{
           backgroundImage: `url(${BG}), url(${BG2})`,
-          backgroundPosition: 'center top, center 900px',
+          backgroundPosition: 'center -50px, center 900px',
           backgroundRepeat: 'no-repeat',
-          backgroundSize: '2000px 1000px, 2000px 884px',
+          backgroundSize: '2000px, 2000px',
         }}
-        mt={10}
+        pt={10}
       >
         <SEO title='技术' />
         <Layout>
           <Box my={20}>
             <Container maxWidth='lg'>
               <Grid item md={5}>
-                <Box pt={90}>
+                <Box pt={40}>
                   <AnimationOnScroll animateIn='animate__fadeInUp' duration={0.8}>
                     <Typography variant='h3' mb={3}>
                       BitXHub技术强大
@@ -103,7 +103,7 @@ const TechPage = ({data}) => {
                         <ColorText>跨</ColorText>无常形
                       </Typography>
                     </AnimationOnScroll>
-                    <Typography variant='body2' mb={6}>
+                    <Typography variant='body1' mb={6}>
                       为了适用不同的业务应用场景，我们的跨链组件可以通过灵活组合形成不同的架构，我们称之为“积木架构”。
                     </Typography>
                     <Box>
@@ -208,7 +208,7 @@ const TechPage = ({data}) => {
               <Grid container>
                 <Grid item md={7}>
                   <AnimationOnScroll animateIn='animate__animated animate__fadeInUp animate__faster'>
-                    <img src={IBTP} alt='img' height={420} />
+                    <img src={IBTP} alt='img' width={720} />
                   </AnimationOnScroll>
                 </Grid>
                 <Grid item md={5} display='flex' alignItems='center'>
@@ -221,11 +221,11 @@ const TechPage = ({data}) => {
                     <Typography variant='h3' mb={4}>
                       的链间传输协议
                     </Typography>
-                    <Typography variant='body2' mb={2}>
+                    <Typography variant='subtitle1' mb={2}>
                       是所有跨链消息的格式化工厂，将异构链的跨链消息格式统一。
                       让中继链更方便地进行跨链消息的验证和路由以及跨链网关更一致地进行跨链消息处理
                     </Typography>
-                    <Typography variant='body2'>
+                    <Typography variant='subtitle1'>
                       所有异构链的跨链消息都可以封装成统一格式 (调用信息Payload+证明信息Proof)字段可以适配所有异构链
                     </Typography>
                   </Box>
@@ -244,15 +244,15 @@ const TechPage = ({data}) => {
                       </Typography>
                     </AnimationOnScroll>
                     <Typography variant='h3'>的跨链网关</Typography>
-                    <Typography variant='body2' mt={8}>
+                    <Typography variant='subtitle1' mt={8}>
                       通过动态加载插件的形式适配应用链，并可随时进行热更新，对应用链的零侵入.
                       插件机制的设计将Pier中和应用链交互的模块与跨链网关自身核心功能模块进行解耦，从而方便更多的应用链加入跨链系统。
                     </Typography>
                   </Box>
                 </Grid>
-                <Grid item md={7}>
+                <Grid item md={7} textAlign='center'>
                   <AnimationOnScroll animateIn='animate__animated animate__fadeInUp'>
-                    <img src={PierGif} alt='pier' height={400} />
+                    <img src={PierGif} alt='pier' width={720} />
                   </AnimationOnScroll>
                 </Grid>
               </Grid>
@@ -263,7 +263,7 @@ const TechPage = ({data}) => {
               <Grid container>
                 <Grid item md={7}>
                   <AnimationOnScroll animateIn='animate__fadeInUp animate__faster' duration={0.6}>
-                    <img src={Wasm} alt='pier' height={400} />
+                    <img src={Wasm} alt='pier' width={720} />
                   </AnimationOnScroll>
                 </Grid>
                 <Grid item md={5} display='flex' alignItems='center'>

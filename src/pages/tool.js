@@ -3,8 +3,6 @@ import Layout from '../components/layout'
 import SEO from '../components/seo'
 import {Box, Button, Container, Grid, Typography} from '@material-ui/core'
 import {ColorText} from '../components/style'
-import Group from '../images/group.png'
-import GZH from '../images/gzh.png'
 import BG1 from '../images/tool_bg_1.png'
 import BG2 from '../images/tool_bg_2.png'
 import Tool1 from '../images/tool_1.png'
@@ -34,7 +32,7 @@ const AboutPage = ({data}) => {
                     <Typography variant='h3' mb={4}>
                       <ColorText>跨链</ColorText>, 尽在掌握之中
                     </Typography>
-                    <Typography variant='body2' pr={25} mb={8}>
+                    <Typography variant='subtitle1' pr={25} mb={8}>
                       通过可视化方式进行应用链管理和中继链自治管理, 实时查看跨链数据; 即将在2021年的更新中上线.
                     </Typography>
                     <Button variant='outlined' color='primary' size='large' disabled>
@@ -55,7 +53,7 @@ const AboutPage = ({data}) => {
                       <Typography variant='h3' mb={2}>
                         <ColorText>一键</ColorText>启动跨链系统
                       </Typography>
-                      <Typography variant='body2' pr={20} mb={15}>
+                      <Typography variant='subtitle1' pr={20} mb={15}>
                         Goduck 跨链运维工具可以一键启动任一跨链组件; 一键生成组件配置; 一键启动整套跨链系统
                       </Typography>
                       <Button variant='outlined' color='primary' size='large'>

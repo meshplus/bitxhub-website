@@ -2,7 +2,6 @@ import React from 'react'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
 import {Box, Button, Container, Grid, Typography} from '@material-ui/core'
-import {ColorText} from '../components/style'
 import BG1 from '../images/quick_bg_1.png'
 import BG2 from '../images/quick_bg_2.png'
 import Quick1 from '../images/quick_1.png'
@@ -21,9 +20,9 @@ const QuickPage = ({data}) => {
           pb={30}
           sx={{
             backgroundImage: `url(${BG1}), url(${BG2})`,
-            backgroundSize: '2000px 1264px, 2000px 770px',
+            backgroundSize: '2000px, 2000px',
             backgroundRepeat: 'no-repeat',
-            backgroundPosition: 'center -50px, center 980px',
+            backgroundPosition: 'center -50px, center 1240px',
           }}
         >
           <Container maxWidth='lg'>
@@ -31,7 +30,7 @@ const QuickPage = ({data}) => {
               <Typography variant='h3' mb={4}>
                 快速开始
               </Typography>
-              <Typography variant='subtitle2' pr={25} mb={8} maxWidth='530px'>
+              <Typography variant='subtitle1' pr={25} mb={8} maxWidth='530px'>
                 通过Goduck可以一键搭建BitxHub快速体验跨链流程,
                 想深入了解BitXHub跨链技术的小伙伴也可以通过快速开始文档分步搭建。
               </Typography>
@@ -43,7 +42,7 @@ const QuickPage = ({data}) => {
                     <Typography variant='h3' mb={4}>
                       跨链体验
                     </Typography>
-                    <Typography variant='subtitle2' pr={25} mb={8}>
+                    <Typography variant='subtitle1' pr={25} mb={8}>
                       通过Goduck运维小工具来快速体验跨链流程。
                     </Typography>
                     <Button variant='outlined' color='primary' size='large'>
@@ -52,7 +51,7 @@ const QuickPage = ({data}) => {
                   </Box>
                 </Grid>
                 <Grid item md={7} textAlign='center'>
-                  <img src={Quick1} alt='tool' height={330} />
+                  <img src={Quick1} alt='tool' height={540} />
                 </Grid>
               </Grid>
             </Box>
@@ -60,7 +59,7 @@ const QuickPage = ({data}) => {
               <Typography variant='h3' textAlign='center' mb={2}>
                 快速开始
               </Typography>
-              <Typography variant='subtitle2' textAlign='center' mb={11}>
+              <Typography variant='subtitle1' textAlign='center' mb={11}>
                 通过单独搭建bitxhub各个组件, 以深入了解BitXHub
               </Typography>
               <Box display='flex' alignItems='center' justifyContent='center'>

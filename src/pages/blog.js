@@ -3,7 +3,7 @@ import React from 'react'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
 import {Box, Button, Container, Grid, Typography} from '@material-ui/core'
-import BlogBanner from '../images/blog_banner.svg'
+import BlogBanner from '../images/blog_bg.png'
 import {ColorText} from '../components/style'
 import Moment from 'react-moment'
 
@@ -48,8 +48,9 @@ const BlogPage = ({data}) => {
         sx={{
           backgroundImage: `url(${BlogBanner})`,
           backgroundPosition: 'top 50px center',
-          backgroundSize: {md: '75%', xs: '120%'},
+          backgroundSize: '2000px',
           backgroundRepeat: 'no-repeat',
+          backgroundAttachment: 'fixed',
         }}
       >
         <Container maxWidth='md'>

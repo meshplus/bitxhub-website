@@ -230,7 +230,6 @@ export const theme = createTheme({
           WebkitFontSmoothing: 'auto',
         },
         body: {
-          overflow: 'inherit !important',
           backgroundColor: '#000000',
           color: '#ffffff',
           minHeight: '100vh',

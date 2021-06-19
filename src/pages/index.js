@@ -18,11 +18,14 @@ import IndexBG1 from '../images/index_bg_1.png'
 import CardBG1 from '../images/01.png'
 import CardBG2 from '../images/02.png'
 import CardBG3 from '../images/03.png'
+import {usePrevious} from 'react-use'
+import {Link} from 'gatsby'
 
 const IndexPage = () => {
   const divRef = useRef()
   const [animation, setAnimation] = useState()
   const [scrollTop, setScrollTop] = useState(0)
+  const prevScrollTop = usePrevious(scrollTop)
 
   const [firstName, setFirstName] = useState('')
   const [secondName, setSecondName] = useState('')
@@ -37,9 +40,7 @@ const IndexPage = () => {
   })
 
   const handleActive = p => {
-    console.log(p)
     const init = {1: false, 2: false, 3: false, 4: false}
-    console.log({...init, [p]: true})
     setActive({...init, [p]: true})
   }
 
@@ -57,7 +58,21 @@ const IndexPage = () => {
     window.addEventListener('scroll', onScroll)
 
     return () => window.removeEventListener('scroll', onScroll)
-  }, [scrollTop])
+  }, [setScrollTop, window])
+
+  const sleep = milliseconds => {
+    return new Promise(resolve => setTimeout(resolve, milliseconds))
+  }
+
+  const handle = async () => {
+    document.body.style.overflow = 'hidden'
+    for (let i = 500; i < 600; i++) {
+      animation.goToAndStop(i, true)
+      await sleep(7)
+    }
+    document.body.style.overflow = ''
+    animation.playSegments([600, 2000], true)
+  }
 
   useEffect(() => {
     const fadeIn = 'animate__fadeInUpBig'
@@ -100,13 +115,15 @@ const IndexPage = () => {
         <Typography variant='h2' mb={6}>
           共建生态
         </Typography>
-        <Typography variant='body1' mb={6} maxWidth='72%'>
+        <Typography variant='subtitle1' mb={6} maxWidth='72%'>
           为链上的资产、数据、服务开拓价值互通的渠道，助力区块链技术从“链孤岛”到形成“链网络”的发展
         </Typography>
-        <Button variant='outlined' size='large'>
-          快速开始
-          <ChevronRightIcon />
-        </Button>
+        <Link to='/quick'>
+          <Button variant='outlined' size='large'>
+            快速开始
+            <ChevronRightIcon />
+          </Button>
+        </Link>
       </>
     )
   }
@@ -139,10 +156,10 @@ const IndexPage = () => {
               style={{bottom: '50%', zIndex: -1, transform: 'translate(123%, 50%)', width: '560px'}}
             >
               <Box sx={{opacity: 0}} className={`animate__animated animate__faster ${secondName}`}>
-                <Box display='flex' mb={8} fontSize='48px'>
+                <Typography display='flex' mb={8} variant='h3'>
                   <ColorText>万链如一</ColorText>
                   <Box mb={2}>一可链万</Box>
-                </Box>
+                </Typography>
                 <Grid container spacing={4}>
                   <Grid item md={6}>
                     <Box
@@ -386,7 +403,7 @@ const IndexPage = () => {
                   <Typography variant='body2' mb={7}>
                     为链上的资产、数据、服务开拓价值互通的渠道，助力区块链技术从“链孤岛”到形成“链网络”的发展
                   </Typography>
-                  <ReadMore onClick={() => setOpen(true)} />
+                  <ReadMore to='/' onClick={() => setOpen(true)} />
                 </Box>
               </Box>
               <Drawer anchor={'right'} open={open} onClose={() => setOpen(false)}>
@@ -444,7 +461,7 @@ const IndexPage = () => {
                   <Typography variant='body2' mb={7}>
                     为链上的资产、数据、服务开拓价值互通的渠道，助力区块链技术从“链孤岛”到形成“链网络”的发展
                   </Typography>
-                  <ReadMore onClick={() => setOpen(true)} />
+                  <ReadMore to='/' onClick={() => setOpen(true)} />
                 </Box>
               </Box>
               <Box
@@ -490,7 +507,7 @@ const IndexPage = () => {
                   <Typography variant='body2' mb={7}>
                     为链上的资产、数据、服务开拓价值互通的渠道，助力区块链技术从“链孤岛”到形成“链网络”的发展
                   </Typography>
-                  <ReadMore onClick={() => setOpen(true)} />
+                  <ReadMore to='/' onClick={() => setOpen(true)} />
                 </Box>
               </Box>
             </Box>
