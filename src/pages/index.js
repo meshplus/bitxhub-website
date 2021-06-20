@@ -4,8 +4,8 @@ import Layout from '../components/layout'
 import SEO from '../components/seo'
 import {Box, Button, Container, Divider, Drawer, Grid, Typography} from '@material-ui/core'
 import {ColorText, ReadMore} from '../components/style'
-import LeftBall from '../images/index_case_bg.png'
-import RightBall from '../images/right_ball.svg'
+import CaseBG from '../images/index_case_bg.png'
+import DataBG from '../images/index_data_bg.png'
 import ChevronRightIcon from '@material-ui/icons/ChevronRight'
 import lottie from 'lottie-web'
 import data from './data.json'
@@ -18,19 +18,32 @@ import IndexBG1 from '../images/index_bg_1.png'
 import CardBG1 from '../images/01.png'
 import CardBG2 from '../images/02.png'
 import CardBG3 from '../images/03.png'
-import {usePrevious} from 'react-use'
+import {usePrevious, useWindowScroll} from 'react-use'
 import {Link} from 'gatsby'
+
+let firstUpFlag = false
+let firstDownFlag = false
+let secondUpFlag = false
+let secondDownFlag = false
+let secondFinish = false
+let scrolled = false
+
+const fadeInUp = 'animate__fadeInUp'
+const fadeOutDown = 'animate__fadeOutDown'
 
 const IndexPage = () => {
   const divRef = useRef()
   const [animation, setAnimation] = useState()
-  const [scrollTop, setScrollTop] = useState(0)
-  const prevScrollTop = usePrevious(scrollTop)
+  // const [scrollTop, setScrollTop] = useState(0)
 
-  const [firstName, setFirstName] = useState('')
+  const [firstName, setFirstName] = useState('animate__fadeInUp')
   const [secondName, setSecondName] = useState('')
   const [thirdName, setThirdName] = useState('')
   const [open, setOpen] = useState()
+
+  const {y} = useWindowScroll()
+  const prevY = usePrevious(y)
+  const isUp = prevY > y
 
   const [active, setActive] = useState({
     1: false,
@@ -50,50 +63,174 @@ const IndexPage = () => {
     }
   }
 
-  useEffect(() => {
-    const onScroll = e => {
-      console.log(e.target.documentElement.scrollTop)
-      setScrollTop(e.target.documentElement.scrollTop)
-    }
-    window.addEventListener('scroll', onScroll)
-
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [setScrollTop, window])
+  // useEffect(() => {
+  //   console.log('set')
+  //   const onScroll = e => {
+  //     console.log(e.target.documentElement.scrollTop)
+  //     setScrollTop(e.target.documentElement.scrollTop)
+  //   }
+  //   window.addEventListener('scroll', onScroll)
+  //
+  //   return () => window.removeEventListener('scroll', onScroll)
+  // }, [setScrollTop, window])
 
   const sleep = milliseconds => {
     return new Promise(resolve => setTimeout(resolve, milliseconds))
   }
 
-  const handle = async () => {
+  const handleFirstUp = async () => {
+    if (firstUpFlag) return
+    firstUpFlag = true
+    console.log('Handle first up')
     document.body.style.overflow = 'hidden'
+    animation.resetSegments(true)
+    setSecondName(fadeOutDown)
+    for (let i = animation.currentFrame; i > 600; i--) {
+      animation.goToAndStop(i, true)
+      await sleep(4 / 10)
+    }
+
+    for (let i = 600; i > 500; i--) {
+      animation.goToAndStop(i, true)
+      await sleep(8 / 10)
+    }
+
+    setFirstName(fadeInUp)
+    document.body.style.overflow = ''
+    window.scrollTo(0, 1500)
+    animation.playSegments([0, 500], true)
+    firstDownFlag = false
+  }
+
+  const handle = async () => {
+    if (firstDownFlag) return
+    firstDownFlag = true
+    console.log('Handle first down')
+    document.body.style.overflow = 'hidden'
+    // console.log(animation.currentFrame)
+    setFirstName('animate__fadeOutDown')
+    for (let i = animation.currentFrame; i < 500; i++) {
+      animation.goToAndStop(i, true)
+    }
     for (let i = 500; i < 600; i++) {
       animation.goToAndStop(i, true)
-      await sleep(7)
+      await sleep(4 / 10)
+    }
+    setSecondName('animate__fadeInUp')
+    for (let i = 600; i < 700; i++) {
+      animation.goToAndStop(i, true)
+      await sleep(8 / 10)
     }
     document.body.style.overflow = ''
-    animation.playSegments([600, 2000], true)
+    window.scrollTo(0, 1500)
+    animation.playSegments([700, 2000], true)
+    firstUpFlag = false
+  }
+
+  const handleSecond = async () => {
+    if (secondDownFlag) return
+    secondDownFlag = true
+    console.log('Handle second down animation')
+    document.body.style.overflow = 'hidden'
+    setSecondName('animate__fadeOutDown')
+    for (let i = 1300; i < 1500; i++) {
+      animation.goToAndStop(i, true)
+      await sleep(1)
+    }
+    setThirdName('animate__fadeInUp')
+    document.body.style.overflow = ''
+    window.scrollTo(0, 3000)
+    secondFinish = true
+    secondUpFlag = false
+  }
+
+  const handleSecondUp = async () => {
+    if (secondUpFlag) return
+    secondUpFlag = true
+    console.log('Handle second up animation')
+    document.body.style.overflow = 'hidden'
+    animation.resetSegments(true)
+    setThirdName(fadeOutDown)
+    for (let i = 2200; i > 2000; i--) {
+      animation.goToAndStop(i, true)
+      await sleep(2)
+    }
+    document.body.style.overflow = ''
+    window.scrollTo(0, 3000)
+    setSecondName(fadeInUp)
+    secondDownFlag = false
+    animation.playSegments([700, 2000], true)
   }
 
   useEffect(() => {
-    const fadeIn = 'animate__fadeInUpBig'
-    const fadeOut = 'animate__fadeOutDown'
-    setFirstName(scrollTop > 700 ? fadeOut : '')
-    setSecondName(scrollTop > 800 && scrollTop < 3600 ? fadeIn : secondName !== '' && '')
-    setThirdName(scrollTop > 3800 && scrollTop < 4600 ? fadeIn : scrollTop > 4600 ? 'animate__fadeOutUp' : '')
+    // setFirstName(scrollTop > 1500 ? fadeOut : '')
+    // setSecondName(scrollTop > 800 && scrollTop < 3600 ? fadeIn : secondName !== '' && '')
+    // setThirdName(scrollTop > 3800 && scrollTop < 4600 ? fadeIn : scrollTop > 4600 ? 'animate__fadeOutUp' : '')
     if (animation) {
-      if (scrollTop > 0 && scrollTop < 1000) {
-        animation.goToAndStop(400 + scrollTop * 0.2, true)
+      if (y > 0 && y < 1500) {
+        if (!isUp) {
+          animation.goToAndPlay(animation.currentFrame + 5, true)
+        } else {
+          animation.goToAndPlay(animation.currentFrame - 15, true)
+        }
       }
 
-      if (scrollTop > 1000) {
-        animation.goToAndStop(400 + scrollTop * 0.5, true)
+      if (isUp) {
+        if (y < 1500 && y > 500) {
+          if (firstDownFlag) {
+            handleFirstUp()
+          }
+        }
       }
 
-      if (scrollTop > 3400) {
-        animation.goToAndStop(400 + 3400 * 0.3 + scrollTop * 0.2, true)
+      if (y > 1500 && y < 3500) {
+        handle()
+      }
+
+      if (y > 1500 && y < 3000) {
+        if (!isUp) {
+          animation.goToAndPlay(animation.currentFrame + 10, true)
+        } else {
+          animation.goToAndPlay(animation.currentFrame - 15, true)
+        }
+      }
+
+      if (y > 3000 && y < 5500) {
+        handleSecond()
+      }
+
+      if (isUp) {
+        if (y < 3000 && y > 1500) {
+          if (secondDownFlag) {
+            handleSecondUp()
+          }
+        }
+      }
+
+      if (y > 3200 && y < 5500 && secondFinish) {
+        if (scrolled) return
+        scrolled = true
+        console.log('Auto scroll')
+        // window.scrollTo(0, 4200)
+        window.scrollTo({
+          top: 4000,
+          left: 0,
+          behavior: 'smooth',
+        })
+        setThirdName('animate__fadeOutUp')
+        animation.goToAndStop(2000000)
+      }
+      if (y < 4000 && y > 3000 && secondFinish) {
+        if (isUp) {
+          window.scrollTo({
+            top: 3200,
+            left: 0,
+            behavior: 'smooth',
+          })
+        }
       }
     }
-  }, [scrollTop, animation])
+  }, [y, animation])
 
   useEffect(() => {
     const animation = lottie.loadAnimation({
@@ -104,6 +241,9 @@ const IndexPage = () => {
     setAnimation(animation)
     animation.goToAndStop(0, true)
     animation.playSegments([0, 500], true)
+    animation.addEventListener('enterFrame', e => {
+      // console.log(e)
+    })
   }, [])
 
   const FirstContent = () => {
@@ -145,9 +285,9 @@ const IndexPage = () => {
             ref={divRef}
             style={{position: 'fixed', top: '50%', transform: 'translateY(-50%)', zIndex: -1, right: '0px'}}
           />
-          <Box minHeight='5200px'>
+          <Box minHeight='4000px'>
             <Box position='fixed' style={{bottom: '50%', transform: 'translateY(50%)'}}>
-              <Box className={`animate__animated animate__fadeInUp animate__faster ${firstName}`}>
+              <Box className={`animate__animated animate__faster ${firstName}`}>
                 <FirstContent />
               </Box>
             </Box>
@@ -349,13 +489,13 @@ const IndexPage = () => {
       <Box
         pt={20}
         sx={{
-          background: `url(${LeftBall})`,
+          background: `url(${CaseBG})`,
           backgroundPosition: 'center top',
           backgroundRepeat: 'no-repeat',
           backgroundSize: '2000px 1233px',
         }}
       >
-        <Box pt={24} pb={70}>
+        <Box pt={24} pb={70} id='fuck'>
           <Container maxWidth='lg'>
             <Typography variant='h3' mb={14}>
               <ColorText mr={1}>BitXHub</ColorText>构建解决方案
@@ -687,66 +827,74 @@ const IndexPage = () => {
             </Box>
           </Container>
         </Box>
-        <Container maxWidth='lg'>
-          <Box
-            py={30}
-            sx={{
-              background: `url(${RightBall})`,
-              backgroundPosition: '80% 50%',
-              backgroundRepeat: 'no-repeat',
-              backgroundSize: '76%',
-            }}
-          >
-            <Grid container alignItems='stretch'>
-              <Grid item md={4} display='flex' alignItems='center'>
-                <Box>
-                  <Typography variant='h2'>
-                    <ColorText display='block'>跨链</ColorText>
-                    行业领导者
-                  </Typography>
-                </Box>
+        <Box
+          py={50}
+          sx={{
+            background: `url(${DataBG})`,
+            backgroundPosition: 'center -180px',
+            backgroundRepeat: 'no-repeat',
+            backgroundSize: '2000px',
+          }}
+        >
+          <Container maxWidth='lg'>
+            <Box
+              sx={{
+                // background: `url(${RightBall})`,
+                backgroundPosition: '80% 50%',
+                backgroundRepeat: 'no-repeat',
+                backgroundSize: '76%',
+              }}
+            >
+              <Grid container alignItems='stretch'>
+                <Grid item md={4} display='flex' alignItems='center'>
+                  <Box>
+                    <Typography variant='h2'>
+                      <ColorText display='block'>跨链</ColorText>
+                      行业领导者
+                    </Typography>
+                  </Box>
+                </Grid>
+                <Grid item md={8}>
+                  <Box>
+                    <Box position='relative' mb={10} ml={12}>
+                      <img src={Datum1} alt='datum' height={139} />
+                      <Box position='absolute' top='44px' left='44px'>
+                        <Typography variant='h3' display='inline-block'>
+                          3
+                        </Typography>
+                        <Typography variant='body1' display='inline-block'>
+                          项
+                        </Typography>
+                      </Box>
+                    </Box>
+                    <Box position='relative' ml={2}>
+                      <img src={Datum2} alt='datum' height={139} />
+                      <Box position='absolute' top='44px' left='44px'>
+                        <Typography variant='h3' display='inline-block'>
+                          4
+                        </Typography>
+                        <Typography variant='body1' display='inline-block'>
+                          项
+                        </Typography>
+                      </Box>
+                    </Box>
+                    <Box position='relative' mt={10} ml={12}>
+                      <img src={Datum3} alt='datum' height={139} />
+                      <Box position='absolute' top='44px' left='44px'>
+                        <Typography variant='h3' display='inline-block'>
+                          23
+                        </Typography>
+                        <Typography variant='body1' display='inline-block'>
+                          篇
+                        </Typography>
+                      </Box>
+                    </Box>
+                  </Box>
+                </Grid>
               </Grid>
-
-              <Grid item md={8}>
-                <Box>
-                  <Box position='relative' mb={10} ml={47}>
-                    <img src={Datum1} alt='datum' height={139} />
-                    <Box position='absolute' top='44px' left='44px'>
-                      <Typography variant='h3' display='inline-block'>
-                        3
-                      </Typography>
-                      <Typography variant='body1' display='inline-block'>
-                        项
-                      </Typography>
-                    </Box>
-                  </Box>
-                  <Box position='relative' ml={36}>
-                    <img src={Datum2} alt='datum' height={139} />
-                    <Box position='absolute' top='44px' left='44px'>
-                      <Typography variant='h3' display='inline-block'>
-                        4
-                      </Typography>
-                      <Typography variant='body1' display='inline-block'>
-                        项
-                      </Typography>
-                    </Box>
-                  </Box>
-                  <Box position='relative' mt={10} ml={48}>
-                    <img src={Datum3} alt='datum' height={139} />
-                    <Box position='absolute' top='44px' left='44px'>
-                      <Typography variant='h3' display='inline-block'>
-                        23
-                      </Typography>
-                      <Typography variant='body1' display='inline-block'>
-                        篇
-                      </Typography>
-                    </Box>
-                  </Box>
-                </Box>
-              </Grid>
-            </Grid>
-          </Box>
-        </Container>
+            </Box>
+          </Container>
+        </Box>
         <Box textAlign='center'>
           <Typography variant='h3' mb={8}>
             <ColorText>了解更多</ColorText>

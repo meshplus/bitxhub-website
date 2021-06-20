@@ -5,6 +5,10 @@ import Layout from '../components/layout'
 import {Box, Button, Container, Typography} from '@material-ui/core'
 import SEO from '../components/seo'
 import {ColorText} from '../components/style'
+import BlogBG from '../images/community_bg.png'
+import Dot from '../images/dot.png'
+import Layer from '../images/layer.png'
+import Moment from 'react-moment'
 
 export const query = graphql`
   query ArticleQuery($id: Int!) {
@@ -15,6 +19,13 @@ export const query = graphql`
       published_at
       authors {
         username
+      }
+      cover {
+        formats {
+          small {
+            url
+          }
+        }
       }
       categories {
         name
@@ -29,18 +40,67 @@ const Article = ({data}) => {
   return (
     <Layout>
       <SEO title={article.title} />
-      <Container maxWidth='md'>
-        <Box pt={20} px={{md: 10, xs: 0}}>
+      <Box
+        pt={30}
+        pb={10}
+        mt={17}
+        sx={{
+          // backgroundImage: `url(http://localhost:1337${article.cover.formats.small.url}), url(${Layer})`,
+          backgroundImage: `linear-gradient(180deg , rgb(26 33 39 / 69%) 0%, #000 100%), url(http://localhost:1337${article.cover.formats.small.url})`,
+          backgroundPosition: 'center top, center top',
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: '100% 100%, 100%',
+        }}
+      >
+        <Container maxWidth='md'>
+          <Typography variant='h4' mb={4} color='primary'>
+            {article.title}
+          </Typography>
+          <Box my={6}>
+            {article.categories.map(category => (
+              <Button variant='contained' color='inherit' style={{marginRight: '10px'}}>
+                {category.name}
+              </Button>
+            ))}
+          </Box>
+          <Box>
+            {article.authors.map(author => (
+              <Box display='flex' alignItems='center'>
+                <Typography display='inline' mr={2}>
+                  <ColorText>{author.username}</ColorText>
+                </Typography>
+                <Typography variant='body2' mr={2}>
+                  发表于
+                </Typography>
+                <Typography variant='subtitle1'>
+                  <Moment date={article.published_at} format='YYYY.MM.DD' />
+                </Typography>
+              </Box>
+            ))}
+          </Box>
+        </Container>
+      </Box>
+      <Box
+        pt={10}
+        px={{md: 10, xs: 0}}
+        sx={{
+          backgroundImage: `url(${BlogBG}), url(${Dot})`,
+          backgroundPosition: 'center 400px, center 300px',
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: '2000px, 2000px',
+          backgroundAttachment: 'fixed, fixed',
+        }}
+      >
+        <Container maxWidth='md'>
           <Box
+            mb={20}
             p={{md: 15}}
             sx={{
-              border: '1px solid rgba(255, 255, 255, 0.2)',
-              borderRadius: '8px',
+              border: '2px solid #262D3D',
+              borderRadius: '16px',
+              background: '#151B2B',
             }}
           >
-            <Typography variant='h4' textAlign='center' mb={4}>
-              {article.title}
-            </Typography>
             <Box
               sx={{
                 color: 'rgba(255, 255, 255, 0.8)',
@@ -52,31 +112,14 @@ const Article = ({data}) => {
                 },
               }}
             >
-              <ReactMarkdown children={article.content} transformImageUri={uri => (uri.startsWith('http') ? uri : `http://localhost:1337${uri}`)} />
-            </Box>
-            <Box my={6}>
-              {article.categories.map(category => (
-                <Button variant='contained' color='inherit' style={{marginRight: '10px'}}>
-                  {category.name}
-                </Button>
-              ))}
-            </Box>
-            <Box>
-              {article.authors.map(author => (
-                <Box display='flex' alignItems='center'>
-                  <Typography display='inline' mr={2}>
-                    <ColorText>{author.username}</ColorText>
-                  </Typography>
-                  <Typography variant='body2' mr={2}>
-                    发表于
-                  </Typography>
-                  <Typography variant='subtitle1'>{new Date(article.published_at).toDateString()}</Typography>
-                </Box>
-              ))}
+              <ReactMarkdown
+                children={article.content}
+                transformImageUri={uri => (uri.startsWith('http') ? uri : `http://localhost:1337${uri}`)}
+              />
             </Box>
           </Box>
-        </Box>
-      </Container>
+        </Container>
+      </Box>
     </Layout>
   )
 }

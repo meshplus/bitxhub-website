@@ -50,7 +50,6 @@ const BlogPage = ({data}) => {
           backgroundPosition: 'top 50px center',
           backgroundSize: '2000px',
           backgroundRepeat: 'no-repeat',
-          backgroundAttachment: 'fixed',
         }}
       >
         <Container maxWidth='md'>
