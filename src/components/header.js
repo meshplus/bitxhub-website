@@ -12,7 +12,7 @@ const Header = ({siteTitle}) => {
 
   return (
     <Box
-      bgcolor='rgba(0, 0, 0, .5)'
+      bgcolor='rgba(0, 0, 0, .6)'
       left={0}
       right={0}
       fontSize='14px'

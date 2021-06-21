@@ -216,9 +216,9 @@ const TechPage = ({data}) => {
             <Container maxWidth='lg'>
               <Grid container>
                 <Grid item md={7}>
-                  <AnimationOnScroll animateIn='animate__animated animate__fadeInUp animate__faster'>
-                    <img src={IBTP} alt='img' width={720} />
-                  </AnimationOnScroll>
+                  {/*<AnimationOnScroll animateIn='animate__animated animate__fadeInUp animate__faster'>*/}
+                  <img src={IBTP} alt='img' width={720} />
+                  {/*</AnimationOnScroll>*/}
                 </Grid>
                 <Grid item md={5} display='flex' alignItems='center'>
                   <Box>
@@ -260,9 +260,9 @@ const TechPage = ({data}) => {
                   </Box>
                 </Grid>
                 <Grid item md={7} textAlign='center'>
-                  <AnimationOnScroll animateIn='animate__animated animate__fadeInUp'>
-                    <img src={PierGif} alt='pier' width={720} />
-                  </AnimationOnScroll>
+                  {/*<AnimationOnScroll animateIn='animate__animated animate__fadeInUp'>*/}
+                  <img src={PierGif} alt='pier' width={720} />
+                  {/*</AnimationOnScroll>*/}
                 </Grid>
               </Grid>
             </Container>
@@ -271,9 +271,9 @@ const TechPage = ({data}) => {
             <Container maxWidth='lg'>
               <Grid container>
                 <Grid item md={7}>
-                  <AnimationOnScroll animateIn='animate__fadeInUp animate__faster' duration={0.6}>
-                    <img src={Wasm} alt='pier' width={720} />
-                  </AnimationOnScroll>
+                  {/*<AnimationOnScroll animateIn='animate__fadeInUp animate__faster' duration={0.6}>*/}
+                  <img src={Wasm} alt='pier' width={720} />
+                  {/*</AnimationOnScroll>*/}
                 </Grid>
                 <Grid item md={5} display='flex' alignItems='center'>
                   <Box>
@@ -285,7 +285,7 @@ const TechPage = ({data}) => {
                     <Typography variant='body2' mt={8}>
                       通过交易解析，自动调用不同验证规则验证不同异构链的交易，进而到达高效验证
                     </Typography>
-                    <Typography variant='body2'>
+                    <Typography variant='body1'>
                       自动调用不同验证规则验证不同异构链的交易，支持验证规则一键升级
                     </Typography>
                   </Box>
@@ -350,10 +350,14 @@ const TechPage = ({data}) => {
                     onClose={() => setStatus1(false)}
                   >
                     <Box
+                      p={10}
+                      minHeight='100%'
+                      display='flex'
+                      flexDirection='column'
+                      justifyContent='center'
                       style={{
                         borderRadius: '10px',
-                        maxWidth: '100%',
-                        width: '400px',
+                        width: '600px',
                         background: `linear-gradient(360deg, #181818 0%, #05070B 0.01%, #1D2735 100%)`,
                       }}
                     >
@@ -361,7 +365,7 @@ const TechPage = ({data}) => {
                       <Typography variant='h5' mb={5} mt={2} color='#fafafa'>
                         跨链事务
                       </Typography>
-                      <Typography variant='body2' mb={4} color='#fafafa'>
+                      <Typography variant='body1' mb={4} color='#fafafa'>
                         BitXHub平台的中继链提供了完善有效的跨链治理机制。中继链自身节点的构成是联盟自治的基础，通过丰富的治理服务实现全方位的治理管控。
                       </Typography>
                       <img src={TXDemo} alt='demo' width='100%' />
@@ -419,10 +423,14 @@ const TechPage = ({data}) => {
                     onClose={() => setStatus2(false)}
                   >
                     <Box
+                      p={10}
+                      minHeight='100%'
+                      display='flex'
+                      flexDirection='column'
+                      justifyContent='center'
                       style={{
                         borderRadius: '10px',
-                        maxWidth: '100%',
-                        width: '400px',
+                        width: '600px',
                         background: 'linear-gradient(360deg, #181818 0%, #05070B 0.01%, #1D2735 100%)',
                       }}
                     >
@@ -430,7 +438,7 @@ const TechPage = ({data}) => {
                       <Typography variant='h5' mb={5} mt={2} color='#fafafa'>
                         联盟治理
                       </Typography>
-                      <Typography variant='body2' color='#fafafa' mb={4}>
+                      <Typography variant='body1' color='#fafafa' mb={4}>
                         BitXHub平台的中继链提供了完善有效的跨链治理机制。中继链自身节点的构成是联盟自治的基础，通过丰富的治理服务实现全方位的治理管控。
                       </Typography>
                       <img src={TXDemo} alt='demo' width='100%' />
@@ -489,18 +497,22 @@ const TechPage = ({data}) => {
                     onClose={() => setStatus3(false)}
                   >
                     <Box
+                      p={10}
+                      minHeight='100%'
+                      display='flex'
+                      flexDirection='column'
+                      justifyContent='center'
                       style={{
                         borderRadius: '10px',
                         background: 'linear-gradient(360deg, #181818 0%, #05070B 0.01%, #1D2735 100%)',
-                        maxWidth: '100%',
-                        width: '400px',
+                        width: '600px',
                       }}
                     >
                       <img src={Mng} alt='tx' height={40} width={40} />
                       <Typography variant='h5' mb={5} mt={2} color='#fafafa'>
                         DID数字身份
                       </Typography>
-                      <Typography variant='body2' color='#fafafa' mb={4}>
+                      <Typography variant='body1' color='#fafafa' mb={4}>
                         BitXHub跨链平台首次提出的区块链原生支持的数字身份机制，能够实现身份在多条链间的互通互认，可以更加方便地实现以身份为中心的数字资产在不同链间的可信流转。
                       </Typography>
                       <img src={TXDemo} alt='demo' width='100%' />

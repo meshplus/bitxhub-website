@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
 import {Box, Button, Container, Grid, Typography} from '@material-ui/core'
@@ -9,12 +9,37 @@ import One from '../images/01.png'
 import Two from '../images/02.png'
 import Third from '../images/03.png'
 import Arrow from '../images/arrow.png'
+import lottie from 'lottie-web'
 
 const QuickPage = ({data}) => {
+  const divRef = useRef()
+
+  useEffect(() => {
+    fetch('http://cdn.yourtheme.cn/quick.json')
+      .then(async res => {
+        const result = await res.json()
+        const animation = lottie.loadAnimation({
+          animationData: result,
+          container: divRef.current,
+          loop: true,
+        })
+
+        animation.setSpeed(0.5)
+        animation.play()
+      })
+      .catch(e => {
+        console.error(e)
+      })
+  }, [])
+
   return (
     <Box>
       <SEO title='快速开始' />
       <Layout>
+        <div
+          ref={divRef}
+          style={{position: 'fixed', top: '50%', transform: 'translateY(-50%)', zIndex: -1, right: '0px'}}
+        />
         <Box
           pt={20}
           pb={30}

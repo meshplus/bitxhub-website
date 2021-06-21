@@ -54,6 +54,11 @@ export const theme = createTheme({
           textTransform: 'capitalize',
           borderRadius: '2em',
           color: '#ffffff',
+          '&.Mui-disabled': {
+            border: '1px solid #828282',
+            color: '#828282',
+            cursor: 'not-allowed',
+          },
         },
         contained: {
           backgroundColor: '#f1f2f6',
@@ -80,9 +85,13 @@ export const theme = createTheme({
           },
         },
         outlinedPrimary: {
-          border: '1px solid #2E7CFE',
-          disabled: {
-            background: 'transparent',
+          border: '1px solid #6c9ae6',
+          '&:hover': {
+            border: '1px solid #6c9ae6',
+            background: '-webkit-linear-gradient(left, #7DBCFC, #2E7CFE, #01E1FF)',
+            color: 'transparent',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
           },
         },
         containedPrimary: {
@@ -245,9 +254,6 @@ export const theme = createTheme({
         },
         '.MuiListItem-root': {
           fontSize: '14px !important',
-        },
-        '.Mui-disabled': {
-          background: '#F1F2F6 !important',
         },
         '.Toastify__toast-container': {
           maxWidth: '260px',

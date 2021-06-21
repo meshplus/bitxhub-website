@@ -2,11 +2,10 @@ import {StaticImage} from 'gatsby-plugin-image'
 import React, {useEffect, useRef, useState} from 'react'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
-import {Box, Button, Container, Divider, Drawer, Grid, SwipeableDrawer, Typography} from '@material-ui/core'
+import {Box, Button, Container, Divider, Grid, SwipeableDrawer, Typography} from '@material-ui/core'
 import {ColorText, ReadMore} from '../components/style'
 import CaseBG from '../images/index_case_bg.png'
 import DataBG from '../images/index_data_bg.png'
-import ChevronRightIcon from '@material-ui/icons/ChevronRight'
 import lottie from 'lottie-web'
 import data from './data.json'
 import RoadmapBall from '../images/roadmap_ball.svg'
@@ -18,7 +17,7 @@ import IndexBG1 from '../images/index_bg_1.png'
 import CardBG1 from '../images/01.png'
 import CardBG2 from '../images/02.png'
 import CardBG3 from '../images/03.png'
-import {usePrevious, useScroll, useWindowScroll, useWindowSize} from 'react-use'
+import {usePrevious, useWindowScroll, useWindowSize} from 'react-use'
 import {Link} from 'gatsby'
 
 let firstUpFlag = false
@@ -34,8 +33,8 @@ const fadeOutDown = 'animate__fadeOutDown'
 
 const IndexPage = () => {
   const divRef = useRef()
+  const bgRef = useRef()
   const [animation, setAnimation] = useState()
-  // const [scrollTop, setScrollTop] = useState(0)
 
   const [firstName, setFirstName] = useState('animate__fadeInUp')
   const [secondName, setSecondName] = useState('')
@@ -47,7 +46,24 @@ const IndexPage = () => {
   const isUp = prevY > y
   const {height} = useWindowSize()
 
-  // Hook
+  useEffect(() => {
+    fetch('http://cdn.yourtheme.cn/index_bg.json')
+      .then(async res => {
+        const result = await res.json()
+        const animation = lottie.loadAnimation({
+          animationData: result,
+          container: bgRef.current,
+          loop: true,
+        })
+
+        animation.setSpeed(0.5)
+        animation.play()
+      })
+      .catch(e => {
+        console.error(e)
+      })
+  }, [])
+
   function useOnScreen(ref, rootMargin = '0px') {
     // State and setter for storing whether element is visible
     const [isIntersecting, setIntersecting] = useState(false)
@@ -130,12 +146,12 @@ const IndexPage = () => {
     }
     for (let i = 500; i < 600; i++) {
       animation.goToAndStop(i, true)
-      await sleep(4 / 10)
+      await sleep(8)
     }
     setSecondName('animate__fadeInUp')
     for (let i = 600; i < 700; i++) {
       animation.goToAndStop(i, true)
-      await sleep(8 / 10)
+      await sleep(4)
     }
     document.body.style.overflow = ''
     window.scrollTo(0, 1500)
@@ -150,11 +166,15 @@ const IndexPage = () => {
     console.log('Handle second down animation')
     document.body.style.overflow = 'hidden'
     setSecondName('animate__fadeOutDown')
-    for (let i = 1300; i < 1500; i++) {
+    for (let i = 1300; i < 1450; i++) {
+      animation.goToAndStop(i, true)
+      await sleep(10)
+    }
+    setThirdName('animate__fadeInUp')
+    for (let i = 1450; i < 1550; i++) {
       animation.goToAndStop(i, true)
       await sleep(1)
     }
-    setThirdName('animate__fadeInUp')
     document.body.style.overflow = ''
     window.scrollTo(0, 3000)
     secondFinish = true
@@ -299,7 +319,7 @@ const IndexPage = () => {
         <Link to='/quick'>
           <Button variant='outlined' size='large'>
             快速开始
-            <ChevronRightIcon />
+            <i className='icon icon-chevron-right' />
           </Button>
         </Link>
       </>
@@ -320,6 +340,10 @@ const IndexPage = () => {
         }}
       >
         <Container maxWidth='lg'>
+          <div
+            ref={bgRef}
+            style={{position: 'fixed', top: '50%', transform: 'translateY(-50%)', zIndex: 0, right: '0px'}}
+          />
           <div
             ref={divRef}
             style={{position: 'fixed', top: '50%', transform: 'translateY(-50%)', zIndex: -1, right: '0px'}}
@@ -588,7 +612,11 @@ const IndexPage = () => {
               </Box>
               <SwipeableDrawer anchor={'right'} open={open} onClose={() => setOpen(false)}>
                 <Box
-                  py={10}
+                  p={10}
+                  minHeight='100%'
+                  display='flex'
+                  flexDirection='column'
+                  justifyContent='center'
                   style={{
                     color: '#fff',
                     borderRadius: '10px',
@@ -653,7 +681,11 @@ const IndexPage = () => {
               </Box>
               <SwipeableDrawer anchor={'right'} open={open} onClose={() => setOpen(false)}>
                 <Box
-                  py={10}
+                  p={10}
+                  minHeight='100%'
+                  display='flex'
+                  flexDirection='column'
+                  justifyContent='center'
                   style={{
                     color: '#fff',
                     borderRadius: '10px',
@@ -718,7 +750,11 @@ const IndexPage = () => {
               </Box>
               <SwipeableDrawer anchor={'right'} open={open} onClose={() => setOpen(false)}>
                 <Box
-                  py={10}
+                  p={10}
+                  minHeight='100%'
+                  display='flex'
+                  flexDirection='column'
+                  justifyContent='center'
                   style={{
                     color: '#fff',
                     borderRadius: '10px',
@@ -1051,7 +1087,7 @@ const IndexPage = () => {
               </Typography>
               <Button variant='outlined' color='primary' size='large'>
                 白皮书
-                <ChevronRightIcon />
+                <i className='icon icon-chevron-right' />
               </Button>
             </Grid>
             <Grid item md={4}>
@@ -1060,7 +1096,7 @@ const IndexPage = () => {
               </Typography>
               <Button variant='outlined' color='primary' size='large'>
                 查看文档
-                <ChevronRightIcon />
+                <i className='icon icon-chevron-right' />
               </Button>
             </Grid>
             <Grid item md={4} textAlign='left'>
@@ -1069,7 +1105,7 @@ const IndexPage = () => {
               </Typography>
               <Button variant='outlined' color='primary' size='large'>
                 快速开始
-                <ChevronRightIcon />
+                <i className='icon icon-chevron-right' />
               </Button>
             </Grid>
           </Grid>

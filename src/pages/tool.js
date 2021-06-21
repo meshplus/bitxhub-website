@@ -10,6 +10,7 @@ import Screen from '../images/screen.png'
 import {Link} from 'gatsby'
 import {TypingStep} from 'typing-effect-reactjs'
 import Typewriter from 'typewriter-effect'
+import {ChevronRight} from '@material-ui/icons'
 
 const sequence = [
   {
@@ -88,11 +89,12 @@ const AboutPage = ({data}) => {
                     </Typography>
                     <Button variant='outlined' color='primary' size='large' disabled>
                       敬请期待
+                      <ChevronRight />
                     </Button>
                   </Box>
                 </Grid>
                 <Grid item md={7} textAlign='center'>
-                  <img src={Tool1} alt='tool' height={330} />
+                  <img src={Tool1} alt='tool' height={384} />
                 </Grid>
               </Grid>
             </Box>
@@ -108,7 +110,10 @@ const AboutPage = ({data}) => {
                         Goduck 跨链运维工具可以一键启动任一跨链组件; 一键生成组件配置; 一键启动整套跨链系统
                       </Typography>
                       <Button variant='outlined' color='primary' size='large'>
-                        <Link to='/quick'>立即使用</Link>
+                        <Link to='/quick'>
+                          立即使用
+                          <i className='icon icon-chevron-right' />
+                        </Link>
                       </Button>
                     </Box>
                   </Grid>
@@ -117,7 +122,7 @@ const AboutPage = ({data}) => {
                       pb={15}
                       pl={20}
                       pt={12}
-                      height={400}
+                      height={480}
                       fontSize={11}
                       fontFamily='menlo'
                       sx={{
@@ -129,12 +134,15 @@ const AboutPage = ({data}) => {
                           color: '#5a8cde',
                           fontWeight: '800',
                         },
+                        '& pre': {
+                          margin: '2px 0',
+                        },
                       }}
                     >
                       <Typewriter
                         options={{
                           loop: true,
-                          deleteSpeed: 0.5,
+                          deleteSpeed: 0.1,
                         }}
                         onInit={typewriter => {
                           typewriter
@@ -144,8 +152,9 @@ const AboutPage = ({data}) => {
                             .pauseFor(200)
                             .deleteChars(1)
                             .typeString(' start')
-                            .pauseFor(1000)
-                            .pasteString('<p>===== Start demo service...</p>')
+                            .pauseFor(800)
+                            .pasteString('<pre>=====> Start demo service...</pre>')
+                            .changeDelay(1)
                             .pasteString(
                               '<pre><span style="color: #20bf77">ethereum-1   |</span> INFO Starting Geth in ephemeral dev mode...</pre>'
                             )
@@ -153,12 +162,39 @@ const AboutPage = ({data}) => {
                               '<pre><span style="color: #ab3fc5">ethereum-2   |</span> INFO Starting Geth in ephemeral dev mode...</pre>'
                             )
                             .pasteString(
-                              '<p><span style="color: #52cbd2">bitxhub-solo |</span> BitXHub version: 1.9.0</p>'
+                              '<pre><span style="color: #52cbd2">bitxhub-solo |</span> BitXHub version: 1.9.0</pre>'
                             )
-                            .pasteString('<p><span style="color: #52cbd2">bitxhub-solo |</span> Order is ready </p>')
+                            .pasteString(
+                              '<pre><span style="color: #52cbd2">bitxhub-solo |</span> Order is ready </pre>'
+                            )
+                            .pasteString(
+                              '<pre><span style="color: #52cbd2">bitxhub-solo |</span> msg="Start monitor" module=cmd port=40011 </pre>'
+                            )
+                            .pasteString(
+                              '<pre><span style="color: #52cbd2">bitxhub-solo |</span> msg="Initialize genesis" module=app </pre>'
+                            )
+                            .pasteString(
+                              '<pre><span style="color: #52cbd2">bitxhub-solo |</span> msg="Executor started" hash=eb10b...90a8d height=1 port=40011 </pre>'
+                            )
+                            .pasteString(
+                              '<pre><span style="color: #20bf77">ethereum-1   |</span> INFO Maximum peer count </pre>'
+                            )
+                            .pasteString(
+                              '<pre><span style="color: #ab3fc5">ethereum-2   |</span> INFO Maximum peer count </pre>'
+                            )
+                            .pasteString(
+                              '<pre><span style="color: #52cbd2">bitxhub-solo |</span> msg="Router started" module=router </pre>'
+                            )
+                            .pasteString(
+                              '<pre><span style="color: #52cbd2">bitxhub-solo |</span> msg="Gateway service started" port=9091 </pre>'
+                            )
+                            .pasteString(
+                              '<pre><span style="color: #52cbd2">bitxhub-solo |</span> msg="Order is ready" plugin=plugins/solo.so </pre>'
+                            )
+                            .pasteString('<pre><span style="color: #52cbd2">bitxhub-solo |</span></pre>')
                             .changeDelay(10)
                             .pasteString(
-                              `<pre><p>=======================================================</p>` +
+                              `<pre>=======================================================` +
                                 `<div>    ____     _    __    _  __    __  __            __</div>` +
                                 `<div>   / __ )   (_)  / /_  | |/ /   / / / /  __  __   / /_</div>` +
                                 '<div>  / __  |  / /  / __/  |   /   / /_/ /  / / / /  / __ \\</div>' +
@@ -166,7 +202,7 @@ const AboutPage = ({data}) => {
                                 '<div>/_____/  /_/   \\__/  /_/|_|  /_/ /_/   \\__,_/  /_.___/</div>' +
                                 '<p>=======================================================</p></pre>'
                             )
-                            .pauseFor(10000)
+                            .pauseFor(15000)
                             .start()
                         }}
                       />

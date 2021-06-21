@@ -106,6 +106,7 @@ const AboutPage = ({data}) => {
                 </Grid>
                 <Box
                   mt={30}
+                  px={15}
                   position='relative'
                   sx={{
                     '&:after': {
@@ -144,7 +145,8 @@ const AboutPage = ({data}) => {
                         </Typography>
                         <Box
                           mt={1}
-                          p={4}
+                          py={4}
+                          px={8}
                           borderRadius={3}
                           sx={{
                             background: 'linear-gradient(360deg, #181818 0%, #0B1425 0.01%, #29395A 100%)',
