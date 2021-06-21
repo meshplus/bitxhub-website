@@ -10,7 +10,7 @@ import BG from '../images/tech_bg.png'
 import BG2 from '../images/tech_bg_2.png'
 import {ColorText} from '../components/style'
 import {AnimationOnScroll} from 'react-animation-on-scroll'
-import {usePrevious} from 'react-use'
+import {useInterval, usePrevious} from 'react-use'
 import TX from '../images/tx.svg'
 import TXDemo from '../images/tx_demo.svg'
 import DID from '../images/did.svg'
@@ -31,6 +31,15 @@ const TechPage = ({data}) => {
   const [status1, setStatus1] = useState(false)
   const [status2, setStatus2] = useState(false)
   const [status3, setStatus3] = useState(false)
+
+  const [counter, setCounter] = useState(1)
+
+  useInterval(() => {
+    counter % 3 === 0 && setStep(0)
+    counter % 3 === 1 && setStep(1)
+    counter % 3 === 2 && setStep(2)
+    setCounter(counter + 1)
+  }, 6000)
 
   useEffect(() => {
     const animation = lottie.loadAnimation({
@@ -483,6 +492,8 @@ const TechPage = ({data}) => {
                       style={{
                         borderRadius: '10px',
                         background: 'linear-gradient(360deg, #181818 0%, #05070B 0.01%, #1D2735 100%)',
+                        maxWidth: '100%',
+                        width: '400px',
                       }}
                     >
                       <img src={Mng} alt='tx' height={40} width={40} />

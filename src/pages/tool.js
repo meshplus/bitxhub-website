@@ -8,6 +8,57 @@ import BG2 from '../images/tool_bg_2.png'
 import Tool1 from '../images/tool_1.png'
 import Screen from '../images/screen.png'
 import {Link} from 'gatsby'
+import {TypingStep} from 'typing-effect-reactjs'
+import Typewriter from 'typewriter-effect'
+
+const sequence = [
+  {
+    content: 'bitxhub@meshplus:~$ ',
+    config: {
+      styleClass: 'correct',
+    },
+  },
+  {
+    content: 'goduck playground start\n',
+    config: {
+      styleClass: 'typing',
+      typeSpeed: 0,
+    },
+  },
+  {
+    content: '===> Start the demo service... \n',
+    config: {
+      typeSpeed: 20,
+    },
+  },
+  {
+    content: 'foo@bar:~$ ',
+    config: {
+      typeSpeed: 0,
+    },
+  },
+  {
+    content: 'cd typing-effect/\n',
+  },
+  {
+    content: 'foo@bar:~$ ',
+    config: {
+      typeSpeed: 0,
+    },
+  },
+  {
+    content: 'npm install\n',
+  },
+  {
+    content: 'foo@bar:~$ ',
+    config: {
+      typeSpeed: 0,
+    },
+  },
+  {
+    content: 'npm start',
+  },
+]
 
 const AboutPage = ({data}) => {
   return (
@@ -62,7 +113,64 @@ const AboutPage = ({data}) => {
                     </Box>
                   </Grid>
                   <Grid item md={7}>
-                    <img src={Screen} alt='screen' height={440} />
+                    <Box
+                      pb={15}
+                      pl={20}
+                      pt={12}
+                      height={400}
+                      fontSize={11}
+                      fontFamily='menlo'
+                      sx={{
+                        backgroundImage: `url(${Screen})`,
+                        backgroundRepeat: 'no-repeat',
+                        backgroundSize: '120%',
+                        backgroundPosition: '-50px top',
+                        '& .color': {
+                          color: '#5a8cde',
+                          fontWeight: '800',
+                        },
+                      }}
+                    >
+                      <Typewriter
+                        options={{
+                          loop: true,
+                          deleteSpeed: 0.5,
+                        }}
+                        onInit={typewriter => {
+                          typewriter
+                            .pasteString('<span class="color">bitxhub@meshplus:~$ </span>', null)
+                            .changeDelay(50)
+                            .typeString('goduck playgrounds')
+                            .pauseFor(200)
+                            .deleteChars(1)
+                            .typeString(' start')
+                            .pauseFor(1000)
+                            .pasteString('<p>===== Start demo service...</p>')
+                            .pasteString(
+                              '<pre><span style="color: #20bf77">ethereum-1   |</span> INFO Starting Geth in ephemeral dev mode...</pre>'
+                            )
+                            .pasteString(
+                              '<pre><span style="color: #ab3fc5">ethereum-2   |</span> INFO Starting Geth in ephemeral dev mode...</pre>'
+                            )
+                            .pasteString(
+                              '<p><span style="color: #52cbd2">bitxhub-solo |</span> BitXHub version: 1.9.0</p>'
+                            )
+                            .pasteString('<p><span style="color: #52cbd2">bitxhub-solo |</span> Order is ready </p>')
+                            .changeDelay(10)
+                            .pasteString(
+                              `<pre><p>=======================================================</p>` +
+                                `<div>    ____     _    __    _  __    __  __            __</div>` +
+                                `<div>   / __ )   (_)  / /_  | |/ /   / / / /  __  __   / /_</div>` +
+                                '<div>  / __  |  / /  / __/  |   /   / /_/ /  / / / /  / __ \\</div>' +
+                                '<div> / /_/ /  / /  / /_   /   |   / __  /  / /_/ /  / /_/ /</div>' +
+                                '<div>/_____/  /_/   \\__/  /_/|_|  /_/ /_/   \\__,_/  /_.___/</div>' +
+                                '<p>=======================================================</p></pre>'
+                            )
+                            .pauseFor(10000)
+                            .start()
+                        }}
+                      />
+                    </Box>
                   </Grid>
                 </Grid>
               </Container>

@@ -9,6 +9,7 @@ import BG from '../images/about_bg.png'
 import GrowBG from '../images/about_grow_bg.png'
 import ContactBG from '../images/about_contact_bg.png'
 import SmallBall from '../images/about_sm_ball.png'
+import Ball from '../images/roadmap_ball.svg'
 
 const AboutPage = ({data}) => {
   return (
@@ -41,22 +42,46 @@ const AboutPage = ({data}) => {
                   </Typography>
                 </Grid>
                 <Grid item md={7}>
-                  <Box display='flex' alignItems='center' mb={8} ml={10}>
+                  <Box display='flex' alignItems='center' mb={8} ml={10} position='relative'>
                     <img src={SmallBall} alt='ball' width={139} />
+                    <Box position='absolute' top='44px' left='44px'>
+                      <Typography variant='h3' display='inline-block'>
+                        4
+                      </Typography>
+                      <Typography variant='body1' display='inline-block'>
+                        项
+                      </Typography>
+                    </Box>
                     <Box>
                       <Typography variant='subtitle1'>参与测评</Typography>
                       <Typography variant='body2'>首批通过《区块链技术金融应用》评估规则</Typography>
                     </Box>
                   </Box>
-                  <Box display='flex' alignItems='center' mb={8}>
+                  <Box display='flex' alignItems='center' mb={8} position='relative'>
                     <img src={SmallBall} alt='ball' width={139} />
+                    <Box position='absolute' top='44px' left='44px'>
+                      <Typography variant='h3' display='inline-block'>
+                        23
+                      </Typography>
+                      <Typography variant='body1' display='inline-block'>
+                        篇
+                      </Typography>
+                    </Box>
                     <Box>
                       <Typography variant='subtitle1'>参与测评</Typography>
                       <Typography variant='body2'>首批通过《区块链技术金融应用》评估规则</Typography>
                     </Box>
                   </Box>
-                  <Box display='flex' alignItems='center' ml={10}>
+                  <Box display='flex' alignItems='center' ml={10} position='relative'>
                     <img src={SmallBall} alt='ball' width={139} />
+                    <Box position='absolute' top='44px' left='44px'>
+                      <Typography variant='h3' display='inline-block'>
+                        3
+                      </Typography>
+                      <Typography variant='body1' display='inline-block'>
+                        项
+                      </Typography>
+                    </Box>
                     <Box>
                       <Typography variant='subtitle1'>专利&论文</Typography>
                       <Typography variant='body2'>
@@ -67,7 +92,7 @@ const AboutPage = ({data}) => {
                 </Grid>
               </Grid>
             </Box>
-            <Box pt={20} pb={200}>
+            <Box pt={20} pb={30}>
               <Container maxWidth='lg'>
                 <Grid container>
                   <Grid item md={6}>
@@ -79,6 +104,267 @@ const AboutPage = ({data}) => {
                     </Typography>
                   </Grid>
                 </Grid>
+                <Box
+                  mt={30}
+                  position='relative'
+                  sx={{
+                    '&:after': {
+                      content: '" "',
+                      display: 'block',
+                      position: 'absolute',
+                      width: '2px',
+                      height: '110%',
+                      background: '#4266ad',
+                      left: '50%',
+                      top: '0',
+                    },
+                    '& .item': {
+                      position: 'relative',
+                    },
+                    '& .ball': {
+                      position: 'absolute',
+                      left: '50%',
+                      transform: 'translateX(-16px)',
+                      zIndex: 6,
+                    },
+                  }}
+                >
+                  {/* 1 */}
+                  <Box className='item'>
+                    <Grid container>
+                      <Grid item md={6}>
+                        <Typography variant='h1' color='#66748D' textAlign='right' pr={5} mt={-8}>
+                          2021
+                        </Typography>
+                      </Grid>
+                      <Grid item md={6}>
+                        <img src={Ball} alt='ball' width={32} className='ball' />
+                        <Typography variant='subtitle2' pl={4} mt={-2}>
+                          2021.12
+                        </Typography>
+                        <Box
+                          mt={1}
+                          p={4}
+                          borderRadius={3}
+                          sx={{
+                            background: 'linear-gradient(360deg, #181818 0%, #0B1425 0.01%, #29395A 100%)',
+                          }}
+                        >
+                          <Typography variant='h6' mb={1}>
+                            联盟跨链自治
+                          </Typography>
+                          <Typography variant='body2'>
+                            支持统一的身份管理，跨链权限控制，节点管理服务及数据审计追溯等模块
+                          </Typography>
+                        </Box>
+                      </Grid>
+                    </Grid>
+                  </Box>
+                  {/* 2 */}
+                  <Box className='item' mt={4}>
+                    <Grid container>
+                      <Grid item md={6}>
+                        <Typography variant='subtitle2' pr={4} mt={-2} textAlign='right'>
+                          2021.09
+                        </Typography>
+                        <Box
+                          mt={1}
+                          p={4}
+                          borderRadius={3}
+                          sx={{
+                            background: 'linear-gradient(360deg, #181818 0%, #0B1425 0.01%, #29395A 100%)',
+                          }}
+                        >
+                          <Typography variant='h6' mb={1}>
+                            联盟跨链自治
+                          </Typography>
+                          <Typography variant='body2'>
+                            支持统一的身份管理，跨链权限控制，节点管理服务及数据审计追溯等模块
+                          </Typography>
+                        </Box>
+                      </Grid>
+                      <Grid item md={6}>
+                        <img src={Ball} alt='ball' width={32} className='ball' />
+                      </Grid>
+                    </Grid>
+                  </Box>
+                  {/* 3 */}
+                  <Box className='item' mt={4}>
+                    <Grid container>
+                      <Grid item md={6} />
+                      <Grid item md={6}>
+                        <img src={Ball} alt='ball' width={32} className='ball' />
+                        <Typography variant='subtitle2' pl={4} mt={-2}>
+                          2021.06
+                        </Typography>
+                        <Box
+                          mt={1}
+                          p={4}
+                          borderRadius={3}
+                          sx={{
+                            marginLeft: '5px',
+                            background: 'linear-gradient(360deg, #000000 0%, #0B1425 0.01%, #182B5C 100%)',
+                            border: '3px solid #7d6ca9',
+                          }}
+                        >
+                          <Typography variant='h6' mb={1}>
+                            联盟跨链自治
+                          </Typography>
+                          <Typography variant='body2'>
+                            支持统一的身份管理，跨链权限控制，节点管理服务及数据审计追溯等模块
+                          </Typography>
+                        </Box>
+                      </Grid>
+                    </Grid>
+                  </Box>
+                  {/* 4 */}
+                  <Box className='item' mt={4}>
+                    <Grid container>
+                      <Grid item md={6}>
+                        <Typography variant='subtitle2' pr={4} mt={-2} textAlign='right'>
+                          2021.03
+                        </Typography>
+                        <Box
+                          mt={1}
+                          p={4}
+                          borderRadius={3}
+                          sx={{
+                            background: 'linear-gradient(360deg, #181818 0%, #0B1425 0.01%, #29395A 100%)',
+                          }}
+                        >
+                          <Typography variant='h6' mb={1}>
+                            联盟跨链自治
+                          </Typography>
+                          <Typography variant='body2'>
+                            支持统一的身份管理，跨链权限控制，节点管理服务及数据审计追溯等模块
+                          </Typography>
+                        </Box>
+                      </Grid>
+                      <Grid item md={6}>
+                        <img src={Ball} alt='ball' width={32} className='ball' />
+                      </Grid>
+                    </Grid>
+                  </Box>
+
+                  {/* 2020-1 */}
+                  <Box className='item' mt={30}>
+                    <Grid container>
+                      <Grid item md={6}>
+                        <Typography variant='h1' color='#66748D' textAlign='right' pr={5} mt={-8}>
+                          2020
+                        </Typography>
+                      </Grid>
+                      <Grid item md={6}>
+                        <img src={Ball} alt='ball' width={32} className='ball' />
+                        <Typography variant='subtitle2' pl={4} mt={-2}>
+                          2021.12
+                        </Typography>
+                        <Box
+                          mt={1}
+                          p={4}
+                          borderRadius={3}
+                          sx={{
+                            background: 'linear-gradient(360deg, #181818 0%, #0B1425 0.01%, #29395A 100%)',
+                          }}
+                        >
+                          <Typography variant='h6' mb={1}>
+                            联盟跨链自治
+                          </Typography>
+                          <Typography variant='body2'>
+                            支持统一的身份管理，跨链权限控制，节点管理服务及数据审计追溯等模块
+                          </Typography>
+                        </Box>
+                      </Grid>
+                    </Grid>
+                  </Box>
+                  {/* 2020-2 */}
+                  <Box className='item' mt={4}>
+                    <Grid container>
+                      <Grid item md={6}>
+                        <Typography variant='subtitle2' pr={4} mt={-2} textAlign='right'>
+                          2021.12
+                        </Typography>
+                        <Box
+                          mt={1}
+                          p={4}
+                          borderRadius={3}
+                          sx={{
+                            background: 'linear-gradient(360deg, #181818 0%, #0B1425 0.01%, #29395A 100%)',
+                          }}
+                        >
+                          <Typography variant='h6' mb={1}>
+                            联盟跨链自治
+                          </Typography>
+                          <Typography variant='body2'>
+                            支持统一的身份管理，跨链权限控制，节点管理服务及数据审计追溯等模块
+                          </Typography>
+                        </Box>
+                      </Grid>
+                      <Grid item md={6}>
+                        <img src={Ball} alt='ball' width={32} className='ball' />
+                      </Grid>
+                    </Grid>
+                  </Box>
+                  {/* 2020-3 */}
+                  <Box className='item' mt={4}>
+                    <Grid container>
+                      <Grid item md={6} />
+                      <Grid item md={6}>
+                        <img src={Ball} alt='ball' width={32} className='ball' />
+                        <Typography variant='subtitle2' pl={4} mt={-2}>
+                          2021.12
+                        </Typography>
+                        <Box
+                          mt={1}
+                          p={4}
+                          borderRadius={3}
+                          sx={{
+                            background: 'linear-gradient(360deg, #181818 0%, #0B1425 0.01%, #29395A 100%)',
+                          }}
+                        >
+                          <Typography variant='h6' mb={1}>
+                            联盟跨链自治
+                          </Typography>
+                          <Typography variant='body2'>
+                            支持统一的身份管理，跨链权限控制，节点管理服务及数据审计追溯等模块
+                          </Typography>
+                        </Box>
+                      </Grid>
+                    </Grid>
+                  </Box>
+
+                  {/* 2019-1 */}
+                  <Box className='item' mt={30}>
+                    <Grid container>
+                      <Grid item md={6}>
+                        <Typography variant='h1' color='#66748D' textAlign='right' pr={5} mt={-8}>
+                          2019
+                        </Typography>
+                      </Grid>
+                      <Grid item md={6}>
+                        <img src={Ball} alt='ball' width={32} className='ball' />
+                        <Typography variant='subtitle2' pl={4} mt={-2}>
+                          2021.12
+                        </Typography>
+                        <Box
+                          mt={1}
+                          p={4}
+                          borderRadius={3}
+                          sx={{
+                            background: 'linear-gradient(360deg, #181818 0%, #0B1425 0.01%, #29395A 100%)',
+                          }}
+                        >
+                          <Typography variant='h6' mb={1}>
+                            联盟跨链自治
+                          </Typography>
+                          <Typography variant='body2'>
+                            支持统一的身份管理，跨链权限控制，节点管理服务及数据审计追溯等模块
+                          </Typography>
+                        </Box>
+                      </Grid>
+                    </Grid>
+                  </Box>
+                </Box>
               </Container>
             </Box>
             <Box py={20}>

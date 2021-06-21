@@ -2,7 +2,7 @@ import {StaticImage} from 'gatsby-plugin-image'
 import React, {useEffect, useRef, useState} from 'react'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
-import {Box, Button, Container, Divider, Drawer, Grid, Typography} from '@material-ui/core'
+import {Box, Button, Container, Divider, Drawer, Grid, SwipeableDrawer, Typography} from '@material-ui/core'
 import {ColorText, ReadMore} from '../components/style'
 import CaseBG from '../images/index_case_bg.png'
 import DataBG from '../images/index_data_bg.png'
@@ -18,7 +18,7 @@ import IndexBG1 from '../images/index_bg_1.png'
 import CardBG1 from '../images/01.png'
 import CardBG2 from '../images/02.png'
 import CardBG3 from '../images/03.png'
-import {usePrevious, useWindowScroll} from 'react-use'
+import {usePrevious, useScroll, useWindowScroll, useWindowSize} from 'react-use'
 import {Link} from 'gatsby'
 
 let firstUpFlag = false
@@ -26,7 +26,8 @@ let firstDownFlag = false
 let secondUpFlag = false
 let secondDownFlag = false
 let secondFinish = false
-let scrolled = false
+let caseDown = false
+let caseUp = false
 
 const fadeInUp = 'animate__fadeInUp'
 const fadeOutDown = 'animate__fadeOutDown'
@@ -44,6 +45,34 @@ const IndexPage = () => {
   const {y} = useWindowScroll()
   const prevY = usePrevious(y)
   const isUp = prevY > y
+  const {height} = useWindowSize()
+
+  // Hook
+  function useOnScreen(ref, rootMargin = '0px') {
+    // State and setter for storing whether element is visible
+    const [isIntersecting, setIntersecting] = useState(false)
+    useEffect(() => {
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          // Update our state when observer callback fires
+          setIntersecting(entry.isIntersecting)
+        },
+        {
+          rootMargin,
+        }
+      )
+      if (ref.current) {
+        observer.observe(ref.current)
+      }
+      return () => {
+        observer.unobserve(ref.current)
+      }
+    }, []) // Empty array ensures that effect is only run on mount and unmount
+    return isIntersecting
+  }
+
+  const ref = useRef()
+  const onScreen = useOnScreen(ref, '20px')
 
   const [active, setActive] = useState({
     1: false,
@@ -63,20 +92,7 @@ const IndexPage = () => {
     }
   }
 
-  // useEffect(() => {
-  //   console.log('set')
-  //   const onScroll = e => {
-  //     console.log(e.target.documentElement.scrollTop)
-  //     setScrollTop(e.target.documentElement.scrollTop)
-  //   }
-  //   window.addEventListener('scroll', onScroll)
-  //
-  //   return () => window.removeEventListener('scroll', onScroll)
-  // }, [setScrollTop, window])
-
-  const sleep = milliseconds => {
-    return new Promise(resolve => setTimeout(resolve, milliseconds))
-  }
+  const sleep = milliseconds => new Promise(resolve => setTimeout(resolve, milliseconds))
 
   const handleFirstUp = async () => {
     if (firstUpFlag) return
@@ -103,7 +119,7 @@ const IndexPage = () => {
   }
 
   const handle = async () => {
-    if (firstDownFlag) return
+    if (firstDownFlag) return false
     firstDownFlag = true
     console.log('Handle first down')
     document.body.style.overflow = 'hidden'
@@ -125,10 +141,11 @@ const IndexPage = () => {
     window.scrollTo(0, 1500)
     animation.playSegments([700, 2000], true)
     firstUpFlag = false
+    return true
   }
 
   const handleSecond = async () => {
-    if (secondDownFlag) return
+    if (secondDownFlag) return false
     secondDownFlag = true
     console.log('Handle second down animation')
     document.body.style.overflow = 'hidden'
@@ -142,6 +159,7 @@ const IndexPage = () => {
     window.scrollTo(0, 3000)
     secondFinish = true
     secondUpFlag = false
+    return true
   }
 
   const handleSecondUp = async () => {
@@ -183,8 +201,11 @@ const IndexPage = () => {
         }
       }
 
-      if (y > 1500 && y < 3500) {
-        handle()
+      if (y > 1500) {
+        if (!firstDownFlag) {
+          const finish = handle()
+          if (finish) return
+        }
       }
 
       if (y > 1500 && y < 3000) {
@@ -195,8 +216,11 @@ const IndexPage = () => {
         }
       }
 
-      if (y > 3000 && y < 5500) {
-        handleSecond()
+      if (y > 3000) {
+        if (!secondDownFlag) {
+          const finish = handleSecond()
+          if (finish) return
+        }
       }
 
       if (isUp) {
@@ -207,26 +231,40 @@ const IndexPage = () => {
         }
       }
 
-      if (y > 3200 && y < 5500 && secondFinish) {
-        if (scrolled) return
-        scrolled = true
-        console.log('Auto scroll')
-        // window.scrollTo(0, 4200)
-        window.scrollTo({
-          top: 4000,
-          left: 0,
-          behavior: 'smooth',
-        })
-        setThirdName('animate__fadeOutUp')
-        animation.goToAndStop(2000000)
-      }
-      if (y < 4000 && y > 3000 && secondFinish) {
-        if (isUp) {
+      const caseY = ref.current.offsetTop
+      if (onScreen && secondFinish) {
+        if (!caseDown && !isUp) {
+          console.log('Handle case down')
           window.scrollTo({
-            top: 3200,
+            top: caseY,
             left: 0,
             behavior: 'smooth',
           })
+          document.body.style.overflow = 'hidden'
+          caseUp = false
+          caseDown = true
+          setThirdName(fadeOutDown)
+          animation.goToAndStop(2000000)
+          document.body.style.overflow = ''
+          // window.scrollTo(0, caseY)
+        }
+      }
+
+      console.log(y)
+      if (y < caseY && y > caseY - height && secondFinish) {
+        if (isUp && !caseUp) {
+          console.log('Handle case up')
+          document.body.style.overflow = 'hidden'
+          window.scrollTo({
+            top: caseY - height,
+            left: 0,
+            behavior: 'smooth',
+          })
+          caseUp = true
+          caseDown = false
+          setThirdName(fadeInUp)
+          animation.goToAndStop(1500, true)
+          document.body.style.overflow = ''
         }
       }
     }
@@ -272,6 +310,7 @@ const IndexPage = () => {
     <Layout>
       <SEO title='Home' />
       <Box
+        // display='none'
         sx={{
           backgroundImage: `url(${IndexBG1})`,
           backgroundPosition: 'center top',
@@ -487,6 +526,7 @@ const IndexPage = () => {
         </Container>
       </Box>
       <Box
+        ref={ref}
         pt={20}
         sx={{
           background: `url(${CaseBG})`,
@@ -546,18 +586,25 @@ const IndexPage = () => {
                   <ReadMore to='/' onClick={() => setOpen(true)} />
                 </Box>
               </Box>
-              <Drawer anchor={'right'} open={open} onClose={() => setOpen(false)}>
+              <SwipeableDrawer anchor={'right'} open={open} onClose={() => setOpen(false)}>
                 <Box
+                  py={10}
                   style={{
+                    color: '#fff',
                     borderRadius: '10px',
-                    maxWidth: '400px',
-                    width: '400px',
+                    width: '600px',
                     background: 'linear-gradient(360deg, #181818 0%, #05070B 0.01%, #1D2735 100%);',
                   }}
                 >
-                  2222222222
+                  <Typography variant='h5' mb={4}>
+                    资产互换
+                  </Typography>
+                  <Typography variant='body1' mb={4}>
+                    针对不同区块链的数字资产模型，中继链会采取不同的资产跨链方案，每种方案的侧重点不同，旨在为用户提供完备、安全、稳定、高效的跨链数字资产交换体验。中继跨链平台提供三种跨链数字资产交换的方式：中继节点多签方案、基于安全多方计算和门限签名方案和去中心化用户自主控制托管方案。
+                  </Typography>
+                  <img src='http://cdn.yourtheme.cn/asset_exchange.png' alt='exchange' width='100%' />
                 </Box>
-              </Drawer>
+              </SwipeableDrawer>
               <Box
                 ml={4}
                 sx={{
@@ -604,6 +651,25 @@ const IndexPage = () => {
                   <ReadMore to='/' onClick={() => setOpen(true)} />
                 </Box>
               </Box>
+              <SwipeableDrawer anchor={'right'} open={open} onClose={() => setOpen(false)}>
+                <Box
+                  py={10}
+                  style={{
+                    color: '#fff',
+                    borderRadius: '10px',
+                    width: '600px',
+                    background: 'linear-gradient(360deg, #181818 0%, #05070B 0.01%, #1D2735 100%);',
+                  }}
+                >
+                  <Typography variant='h5' mb={4}>
+                    数据互通
+                  </Typography>
+                  <Typography variant='body1' mb={4}>
+                    在异构多层级体系架构中，底层的省级和市级的数据治理网络和上层具体业务服务层，通过跨链服务实现各个省级和市级的治理链与骨干链网络的数据互通及治理审计。
+                  </Typography>
+                  <img src='http://cdn.yourtheme.cn/data_exchange.png' alt='exchange' width='100%' />
+                </Box>
+              </SwipeableDrawer>
               <Box
                 ml={4}
                 sx={{
@@ -650,32 +716,66 @@ const IndexPage = () => {
                   <ReadMore to='/' onClick={() => setOpen(true)} />
                 </Box>
               </Box>
+              <SwipeableDrawer anchor={'right'} open={open} onClose={() => setOpen(false)}>
+                <Box
+                  py={10}
+                  style={{
+                    color: '#fff',
+                    borderRadius: '10px',
+                    width: '600px',
+                    background: 'linear-gradient(360deg, #181818 0%, #05070B 0.01%, #1D2735 100%);',
+                  }}
+                >
+                  <Typography variant='h5' mb={4}>
+                    业务互补
+                  </Typography>
+                  <Typography variant='body1' mb={4}>
+                    通过跨链服务实现电子存证链与法院专网链业务数据互信，并统一在司法链上存证和在线核验，为智慧法院建设提供有力支撑，全面提升多部门异构链间的业务协同和审判质效。
+                  </Typography>
+                  <img src='http://cdn.yourtheme.cn/bussiness_exchange.png' alt='exchange' width='100%' />
+                </Box>
+              </SwipeableDrawer>
             </Box>
           </Container>
         </Box>
         <Box
           pb={20}
           sx={{
-            zIndex: 99999999,
+            zIndex: 999,
             position: 'relative',
             '& .roadmap_desc': {
               display: 'none',
               position: 'absolute',
-              bottom: '-160px',
+              bottom: '-150px',
               width: '260px',
               zIndex: -1,
               textAlign: 'left',
               background: 'linear-gradient(360deg, #000000 0%, #040E22 0.01%, #1D2A45 100%)',
               boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
               borderRadius: '16px',
-              border: '4px solid',
-              borderImageSource:
-                'linear-gradient(162.14deg, #162B75 -3.32%, rgba(28, 67, 102, 0.83) 19.27%, rgba(100, 143, 255, 0) 77%)',
+              border: '3px solid rgba(28, 67, 102, 0.83)',
+              // borderImageSource:
+              //   'linear-gradient(162.14deg, #162B75 -3.32%, rgba(28, 67, 102, 0.83) 19.27%, rgba(100, 143, 255, 0) 77%)',
               left: '50%',
               transform: 'translateX(-50%)',
+              marginLeft: '-130px',
               '& ul': {
                 color: 'rgba(255, 255, 255, 0.6)',
                 paddingLeft: '20px',
+              },
+              '&:after': {
+                content: '" "',
+                display: 'none',
+                width: '164px',
+                height: '82px',
+                borderBottomLeftRadius: '160px',
+                borderBottomRightRadius: '160px',
+                borderTop: '0',
+                border: '3px solid rgba(28, 67, 102, 0.83)',
+                position: 'absolute',
+                top: '-3px',
+                left: '50px',
+                background: '#000',
               },
             },
             '& .active': {
@@ -723,18 +823,27 @@ const IndexPage = () => {
                 mr={20}
                 onClick={() => handleActive(1)}
               >
-                <Typography variant='subtitle2' className='title'>
+                <Typography variant='subtitle2' className={`animate__animated animate__fadeInUp animate__faster title`}>
                   DID组件开源
                 </Typography>
                 <img src={RoadmapBall} className='roadmap_ball' alt='ball' height={36} />
                 <Typography variant='body2' className='date'>
                   2021.04
                 </Typography>
-                <Box className='roadmap_desc' px={6} pb={2} pt={8}>
+                <Box
+                  className={`animate__animated animate__fadeInUp animate__faster roadmap_desc`}
+                  px={6}
+                  pb={2}
+                  pt={8}
+                >
                   <Typography variant='subtitle2' mb={2}>
                     2021.06
                   </Typography>
-                  <Divider />
+                  <Divider
+                    sx={{
+                      background: '#405584',
+                    }}
+                  />
                   <ul>
                     <li>实时交易数据查询</li>
                     <li>应用链管理</li>
@@ -757,11 +866,20 @@ const IndexPage = () => {
                 <Typography variant='body2' className='date'>
                   2021.06
                 </Typography>
-                <Box className='roadmap_desc' px={6} pb={2} pt={8}>
+                <Box
+                  className={`animate__animated animate__fadeInUp animate__faster roadmap_desc`}
+                  px={6}
+                  pb={2}
+                  pt={8}
+                >
                   <Typography variant='subtitle2' mb={2}>
                     2021.06
                   </Typography>
-                  <Divider />
+                  <Divider
+                    sx={{
+                      background: '#405584',
+                    }}
+                  />
                   <ul>
                     <li>实时交易数据查询</li>
                     <li>应用链管理</li>
@@ -784,11 +902,20 @@ const IndexPage = () => {
                 <Typography variant='body2' className='date'>
                   2021.08
                 </Typography>
-                <Box className='roadmap_desc' px={6} pb={2} pt={8}>
+                <Box
+                  className={`animate__animated animate__fadeInUp animate__faster roadmap_desc`}
+                  px={6}
+                  pb={2}
+                  pt={8}
+                >
                   <Typography variant='subtitle2' mb={2}>
                     2021.06
                   </Typography>
-                  <Divider />
+                  <Divider
+                    sx={{
+                      background: '#405584',
+                    }}
+                  />
                   <ul>
                     <li>实时交易数据查询</li>
                     <li>应用链管理</li>
@@ -804,18 +931,27 @@ const IndexPage = () => {
                 mr={20}
                 onClick={() => handleActive(4)}
               >
-                <Typography variant='subtitle2' className='title'>
+                <Typography variant='subtitle2' className={`title animate__animated animate__fadeInUp animate__faster`}>
                   联盟链跨链治理
                 </Typography>
                 <img src={RoadmapBall} className='roadmap_ball' alt='ball' height={36} />
                 <Typography variant='body2' className='date'>
                   2021.10
                 </Typography>
-                <Box className='roadmap_desc' px={6} pb={2} pt={8}>
+                <Box
+                  className={`animate__animated animate__fadeInUp animate__faster roadmap_desc`}
+                  px={6}
+                  pb={2}
+                  pt={8}
+                >
                   <Typography variant='subtitle2' mb={2}>
                     2021.06
                   </Typography>
-                  <Divider />
+                  <Divider
+                    sx={{
+                      background: '#405584',
+                    }}
+                  />
                   <ul>
                     <li>实时交易数据查询</li>
                     <li>应用链管理</li>
@@ -828,7 +964,7 @@ const IndexPage = () => {
           </Container>
         </Box>
         <Box
-          py={50}
+          py={55}
           sx={{
             background: `url(${DataBG})`,
             backgroundPosition: 'center -180px',
@@ -837,14 +973,7 @@ const IndexPage = () => {
           }}
         >
           <Container maxWidth='lg'>
-            <Box
-              sx={{
-                // background: `url(${RightBall})`,
-                backgroundPosition: '80% 50%',
-                backgroundRepeat: 'no-repeat',
-                backgroundSize: '76%',
-              }}
-            >
+            <Box>
               <Grid container alignItems='stretch'>
                 <Grid item md={4} display='flex' alignItems='center'>
                   <Box>
@@ -856,7 +985,7 @@ const IndexPage = () => {
                 </Grid>
                 <Grid item md={8}>
                   <Box>
-                    <Box position='relative' mb={10} ml={12}>
+                    <Box position='relative' mb={10} ml={12} display='flex' alignItems='center'>
                       <img src={Datum1} alt='datum' height={139} />
                       <Box position='absolute' top='44px' left='44px'>
                         <Typography variant='h3' display='inline-block'>
@@ -866,8 +995,12 @@ const IndexPage = () => {
                           项
                         </Typography>
                       </Box>
+                      <Box pl={2}>
+                        <Typography variant='h6'>参与测评</Typography>
+                        <Typography variant='body2'>首批通过国家金融科技测评中心的跨链服务功能测试</Typography>
+                      </Box>
                     </Box>
-                    <Box position='relative' ml={2}>
+                    <Box position='relative' ml={2} display='flex' alignItems='center'>
                       <img src={Datum2} alt='datum' height={139} />
                       <Box position='absolute' top='44px' left='44px'>
                         <Typography variant='h3' display='inline-block'>
@@ -877,8 +1010,14 @@ const IndexPage = () => {
                           项
                         </Typography>
                       </Box>
+                      <Box pl={2}>
+                        <Typography variant='h6'>专利&论文</Typography>
+                        <Typography variant='body2'>
+                          在跨链事务一致性保障、数据有效性验证、跨链协议等相关领域具有23篇
+                        </Typography>
+                      </Box>
                     </Box>
-                    <Box position='relative' mt={10} ml={12}>
+                    <Box position='relative' mt={10} ml={12} display='flex' alignItems='center'>
                       <img src={Datum3} alt='datum' height={139} />
                       <Box position='absolute' top='44px' left='44px'>
                         <Typography variant='h3' display='inline-block'>
@@ -886,6 +1025,12 @@ const IndexPage = () => {
                         </Typography>
                         <Typography variant='body1' display='inline-block'>
                           篇
+                        </Typography>
+                      </Box>
+                      <Box pl={2}>
+                        <Typography variant='h6'>专利&论文</Typography>
+                        <Typography variant='body2'>
+                          在跨链事务一致性保障、数据有效性验证、跨链协议等相关领域具有23篇
                         </Typography>
                       </Box>
                     </Box>

@@ -35,7 +35,9 @@
     "react-lottie": "^1.2.3",
     "react-markdown": "^6.0.2",
     "react-moment": "^1.1.1",
-    "react-use": "^17.2.4"
+    "react-use": "^17.2.4",
+    "typewriter-effect": "^2.18.0",
+    "typing-effect-reactjs": "^1.4.1"
   },
   "devDependencies": {
     "prettier": "2.2.1"

@@ -17,7 +17,7 @@ const Header = ({siteTitle}) => {
       right={0}
       fontSize='14px'
       py={{xs: 3, sm: 5}}
-      zIndex={999999}
+      zIndex={999}
       top={0}
       position='fixed'
     >
