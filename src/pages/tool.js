@@ -123,7 +123,7 @@ const AboutPage = ({data}) => {
                       pl={20}
                       pt={12}
                       height={480}
-                      fontSize={11}
+                      fontSize={10}
                       fontFamily='menlo'
                       sx={{
                         backgroundImage: `url(${Screen})`,

@@ -10,9 +10,11 @@ import BG from '../images/tech_bg.png'
 import BG2 from '../images/tech_bg_2.png'
 import {ColorText} from '../components/style'
 import {AnimationOnScroll} from 'react-animation-on-scroll'
-import {useInterval, usePrevious} from 'react-use'
+import {useInterval, usePrevious, useWindowSize} from 'react-use'
 import TX from '../images/tx.svg'
 import TXDemo from '../images/tx_demo.svg'
+import GovDemo from '../images/gov_demo.png'
+import DIDDemo from '../images/did_demo.png'
 import DID from '../images/did.svg'
 import Mng from '../images/mng.svg'
 import PierGif from '../images/pier.gif'
@@ -33,6 +35,38 @@ const TechPage = ({data}) => {
   const [status3, setStatus3] = useState(false)
 
   const [counter, setCounter] = useState(1)
+  const {width} = useWindowSize()
+
+  function useOnScreen(ref, rootMargin = '0px') {
+    // State and setter for storing whether element is visible
+    const [isIntersecting, setIntersecting] = useState(false)
+    useEffect(() => {
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          // Update our state when observer callback fires
+          setIntersecting(entry.isIntersecting)
+        },
+        {
+          rootMargin,
+        }
+      )
+      if (ref.current) {
+        observer.observe(ref.current)
+      }
+      return () => {
+        observer.unobserve(ref.current)
+      }
+    }, []) // Empty array ensures that effect is only run on mount and unmount
+    return isIntersecting
+  }
+
+  const ref = useRef()
+  const onScreen = useOnScreen(ref, '20px')
+
+  console.log(onScreen)
+  if (onScreen) {
+    // document.body.style.overflow = 'hidden'
+  }
 
   useInterval(() => {
     counter % 3 === 0 && setStep(0)
@@ -68,6 +102,23 @@ const TechPage = ({data}) => {
     }
   }, [step, animation, prevStep])
 
+  // window.scrollTo(0, 0)
+  useEffect(() => {
+    document.addEventListener('wheel', e => {
+      // console.log(e.target.documentElement.scrollTop)
+      console.log(window.scrollY)
+      if (window.scrollY > 600) {
+        // document.body.style.overflow = 'hidden'
+        // window.scrollTo(0, 600)
+      }
+
+      // document.body.style.overflow = ''
+    })
+    document.addEventListener('scroll', e => {
+      console.log('fuck', e.target.documentElement.scrollTop)
+    })
+  })
+
   if (typeof window !== 'undefined') {
     return (
       <Box
@@ -87,8 +138,10 @@ const TechPage = ({data}) => {
                 <Box pt={40}>
                   <AnimationOnScroll animateIn='animate__fadeInUp' duration={0.8}>
                     <Typography variant='h3' mb={3}>
-                      BitXHub技术强大
+                      核心功能特性
                     </Typography>
+                  </AnimationOnScroll>
+                  <AnimationOnScroll animateIn='animate__fadeInUp' duration={0.8}>
                     <Typography variant='subtitle1' mb={8}>
                       BiTXHub1.6.0更新首次提出区块链原生支持的数字身份机制，更加方便地实现以身份为中心的数字资产在不同链间的可信流转。
                     </Typography>
@@ -106,12 +159,12 @@ const TechPage = ({data}) => {
                   <Box>
                     <AnimationOnScroll animateIn='animate__fadeInUp' duration={0.6}>
                       <Typography variant='h3'>
-                        <ColorText>链</ColorText>有定论
-                      </Typography>
-                      <Typography variant='h3' mb={4}>
-                        <ColorText>跨</ColorText>无常形
+                        <ColorText>灵活适配</ColorText>
                       </Typography>
                     </AnimationOnScroll>
+                    <Typography variant='h3' mb={4}>
+                      的积木架构
+                    </Typography>
                     <Typography variant='body1' mb={6}>
                       为了适用不同的业务应用场景，我们的跨链组件可以通过灵活组合形成不同的架构，我们称之为“积木架构”。
                     </Typography>
@@ -224,6 +277,7 @@ const TechPage = ({data}) => {
                   <Box>
                     <AnimationOnScroll animateIn='animate__fadeInUp' duration={0.4}>
                       <Typography variant='h3'>
+                        <Box ref={ref} />
                         <ColorText>万链如一</ColorText>
                       </Typography>
                     </AnimationOnScroll>
@@ -249,7 +303,7 @@ const TechPage = ({data}) => {
                   <Box>
                     <AnimationOnScroll animateIn='animate__fadeInUp animate__faster' duration={0.6}>
                       <Typography variant='h3'>
-                        <ColorText>左右逢源</ColorText>
+                        <ColorText>易于接入</ColorText>
                       </Typography>
                     </AnimationOnScroll>
                     <Typography variant='h3'>的跨链网关</Typography>
@@ -279,9 +333,10 @@ const TechPage = ({data}) => {
                   <Box>
                     <AnimationOnScroll animateIn='animate__fadeInUp' duration={0.6}>
                       <Typography variant='h3'>
-                        <ColorText>因链制宜</ColorText>的异构验证引擎
+                        <ColorText>因链制宜</ColorText>
                       </Typography>
                     </AnimationOnScroll>
+                    <Typography variant='h3'>的异构验证引擎</Typography>
                     <Typography variant='body2' mt={8}>
                       通过交易解析，自动调用不同验证规则验证不同异构链的交易，进而到达高效验证
                     </Typography>
@@ -337,7 +392,7 @@ const TechPage = ({data}) => {
                       跨链事务
                     </Typography>
                     <Typography variant='body2'>
-                      BitXHub平台的中继链提供了完善有效的跨链治理机制。中继链自身节点的构成是联盟自治的基础，通过丰富的治理服务实现全方位的治理管控。
+                      跨链需要保证跨链交易的原子性和一致性，即来源链和目的链上的交易要么都成功，要么都失败回滚。为此，中继链提供了事务管理机制，通过内置的事务管理合约，来保证不同业务场景下跨链交易的事务性。
                     </Typography>
                   </Box>
                   <SwipeableDrawer
@@ -348,6 +403,9 @@ const TechPage = ({data}) => {
                     open={status1}
                     onOpen={() => setStatus1(true)}
                     onClose={() => setStatus1(false)}
+                    sx={{
+                      '& .MuiDrawer-paper': {boxSizing: 'border-box', width: width / 2},
+                    }}
                   >
                     <Box
                       p={10}
@@ -357,7 +415,6 @@ const TechPage = ({data}) => {
                       justifyContent='center'
                       style={{
                         borderRadius: '10px',
-                        width: '600px',
                         background: `linear-gradient(360deg, #181818 0%, #05070B 0.01%, #1D2735 100%)`,
                       }}
                     >
@@ -366,7 +423,7 @@ const TechPage = ({data}) => {
                         跨链事务
                       </Typography>
                       <Typography variant='body1' mb={4} color='#fafafa'>
-                        BitXHub平台的中继链提供了完善有效的跨链治理机制。中继链自身节点的构成是联盟自治的基础，通过丰富的治理服务实现全方位的治理管控。
+                        跨链需要保证跨链交易的原子性和一致性，即来源链和目的链上的交易要么都成功，要么都失败回滚。为此，中继链提供了事务管理机制，通过内置的事务管理合约，来保证不同业务场景下跨链交易的事务性。
                       </Typography>
                       <img src={TXDemo} alt='demo' width='100%' />
                     </Box>
@@ -421,6 +478,9 @@ const TechPage = ({data}) => {
                     open={status2}
                     onOpen={() => setStatus2(true)}
                     onClose={() => setStatus2(false)}
+                    sx={{
+                      '& .MuiDrawer-paper': {boxSizing: 'border-box', width: width / 2},
+                    }}
                   >
                     <Box
                       p={10}
@@ -430,7 +490,6 @@ const TechPage = ({data}) => {
                       justifyContent='center'
                       style={{
                         borderRadius: '10px',
-                        width: '600px',
                         background: 'linear-gradient(360deg, #181818 0%, #05070B 0.01%, #1D2735 100%)',
                       }}
                     >
@@ -441,7 +500,7 @@ const TechPage = ({data}) => {
                       <Typography variant='body1' color='#fafafa' mb={4}>
                         BitXHub平台的中继链提供了完善有效的跨链治理机制。中继链自身节点的构成是联盟自治的基础，通过丰富的治理服务实现全方位的治理管控。
                       </Typography>
-                      <img src={TXDemo} alt='demo' width='100%' />
+                      <img src={GovDemo} alt='demo' width='100%' />
                     </Box>
                   </SwipeableDrawer>
                 </Grid>
@@ -495,6 +554,9 @@ const TechPage = ({data}) => {
                     open={status3}
                     onOpen={() => setStatus3(true)}
                     onClose={() => setStatus3(false)}
+                    sx={{
+                      '& .MuiDrawer-paper': {boxSizing: 'border-box', width: width / 2},
+                    }}
                   >
                     <Box
                       p={10}
@@ -505,7 +567,6 @@ const TechPage = ({data}) => {
                       style={{
                         borderRadius: '10px',
                         background: 'linear-gradient(360deg, #181818 0%, #05070B 0.01%, #1D2735 100%)',
-                        width: '600px',
                       }}
                     >
                       <img src={Mng} alt='tx' height={40} width={40} />
@@ -515,7 +576,7 @@ const TechPage = ({data}) => {
                       <Typography variant='body1' color='#fafafa' mb={4}>
                         BitXHub跨链平台首次提出的区块链原生支持的数字身份机制，能够实现身份在多条链间的互通互认，可以更加方便地实现以身份为中心的数字资产在不同链间的可信流转。
                       </Typography>
-                      <img src={TXDemo} alt='demo' width='100%' />
+                      <img src={DIDDemo} alt='demo' width='100%' />
                     </Box>
                   </SwipeableDrawer>
                 </Grid>

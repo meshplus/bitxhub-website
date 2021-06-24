@@ -56,13 +56,7 @@ export const HoverColorText = ({children, className, ...other}) => {
 
 export const Hero = ({children, className, ...other}) => {
   return (
-    <Box
-      className={clsx(className)}
-      {...other}
-      sx={{
-        minHeight: '100vh',
-      }}
-    >
+    <Box className={clsx(className)} {...other} minHeight='100vh'>
       {children}
     </Box>
   )
@@ -132,6 +126,42 @@ export const Divider = ({children, className, ...other}) => {
         height: '1px',
         background: 'rgba(71, 71, 71, 0.5)',
         border: 'none',
+      }}
+    />
+  )
+}
+
+export const IndexBar = ({children, className, title, desc, ...other}) => {
+  return (
+    <Box
+      className={className}
+      {...other}
+      p={4}
+      sx={{
+        borderRadius: '16px',
+        background:
+          'linear-gradient(89.86deg, rgba(11, 33, 77, 0.6) -5.78%, rgba(1, 3, 10, 0.6) 52.27%, rgba(0, 0, 0, 0.6) 52.28%)',
+      }}
+    >
+      <Typography variant='subtitle1' mb={2} display='flex' alignItems='center'>
+        {title}
+      </Typography>
+      <Typography variant='body1'>{desc}</Typography>
+    </Box>
+  )
+}
+
+export const IndexDottedLine = () => {
+  return (
+    <hr
+      style={{
+        margin: '0',
+        backgroundImage:
+          'linear-gradient(90deg, transparent, transparent 50%, #000 50%, #000 100%), ' +
+          'linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(255,255,255,1) 84%)',
+        border: 'none',
+        backgroundSize: '12px 1px, 100% 1px',
+        height: '1px',
       }}
     />
   )

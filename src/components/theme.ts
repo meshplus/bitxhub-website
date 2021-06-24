@@ -35,8 +35,8 @@ export const theme = createTheme({
         root: {},
         paper: {
           background: 'linear-gradient(360deg, #181818 0%, #05070B 0.01%, #1D2735 100%);',
-          borderTopLeftRadius: '10px',
-          borderBottomLeftRadius: '10px',
+          borderTopLeftRadius: '40px',
+          borderBottomLeftRadius: '40px',
           padding: '30px',
         },
       },
@@ -239,7 +239,7 @@ export const theme = createTheme({
           WebkitFontSmoothing: 'auto',
         },
         body: {
-          backgroundColor: '#000000',
+          backgroundColor: '#050505',
           color: '#ffffff',
           minHeight: '100vh',
           fontFamily: '"AlibabaPuHui", "Roboto", "Helvetica", "Arial", sans-serif !important',

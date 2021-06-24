@@ -10,12 +10,9 @@ import PropTypes from 'prop-types'
 import * as React from 'react'
 import Header from './header'
 import {theme} from './theme'
-import {Box, CssBaseline, StyledEngineProvider, ThemeProvider, Typography} from '@material-ui/core'
+import {Box, CssBaseline, ThemeProvider, Typography} from '@material-ui/core'
 import './style.css'
 import {StaticImage} from 'gatsby-plugin-image'
-import {createGenerateId, JssProvider} from 'react-jss'
-
-const generateId = createGenerateId()
 
 const Layout = ({children}) => {
   const data = useStaticQuery(graphql`
@@ -29,8 +26,6 @@ const Layout = ({children}) => {
   `)
 
   return (
-    // <JssProvider generateId={generateId}>
-    //   <StyledEngineProvider injectFirst={false}>
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
@@ -73,8 +68,6 @@ const Layout = ({children}) => {
         </Box>
       </footer>
     </ThemeProvider>
-    // </StyledEngineProvider>
-    // </JssProvider>
   )
 }
 
