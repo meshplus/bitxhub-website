@@ -8,58 +8,8 @@ import BG2 from '../images/tool_bg_2.png'
 import Tool1 from '../images/tool_1.png'
 import Screen from '../images/screen.png'
 import {Link} from 'gatsby'
-import {TypingStep} from 'typing-effect-reactjs'
 import Typewriter from 'typewriter-effect'
 import {ChevronRight} from '@material-ui/icons'
-
-const sequence = [
-  {
-    content: 'bitxhub@meshplus:~$ ',
-    config: {
-      styleClass: 'correct',
-    },
-  },
-  {
-    content: 'goduck playground start\n',
-    config: {
-      styleClass: 'typing',
-      typeSpeed: 0,
-    },
-  },
-  {
-    content: '===> Start the demo service... \n',
-    config: {
-      typeSpeed: 20,
-    },
-  },
-  {
-    content: 'foo@bar:~$ ',
-    config: {
-      typeSpeed: 0,
-    },
-  },
-  {
-    content: 'cd typing-effect/\n',
-  },
-  {
-    content: 'foo@bar:~$ ',
-    config: {
-      typeSpeed: 0,
-    },
-  },
-  {
-    content: 'npm install\n',
-  },
-  {
-    content: 'foo@bar:~$ ',
-    config: {
-      typeSpeed: 0,
-    },
-  },
-  {
-    content: 'npm start',
-  },
-]
 
 const AboutPage = ({data}) => {
   return (

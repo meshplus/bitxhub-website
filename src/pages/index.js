@@ -7,8 +7,6 @@ import {ColorText, Hero, IndexBar, IndexDottedLine, ReadMore} from '../component
 import CaseBG from '../images/index_case_bg.png'
 import DataBG from '../images/index_data_bg.png'
 import lottie from 'lottie-web'
-import data from './data.json'
-import Animate2 from './2.json'
 import RoadmapBall from '../images/roadmap_ball.svg'
 import Datum1 from '../images/datum_1.svg'
 import Datum2 from '../images/datum_2.svg'
@@ -19,17 +17,19 @@ import CardBG2 from '../images/02.png'
 import CardBG3 from '../images/03.png'
 import {Link} from 'gatsby'
 import {StaticImage} from 'gatsby-plugin-image'
+import RoadmapCard from '../images/roadmap_card.png'
 
 const IndexPage = () => {
   const ref1 = useRef()
   const ref2 = useRef()
   const bgRef = useRef()
 
-  const [open1, setOpen1] = useState()
-  const [open2, setOpen2] = useState()
-  const [open3, setOpen3] = useState()
-
+  const [open1, setOpen1] = useState(false)
+  const [open2, setOpen2] = useState(false)
+  const [open3, setOpen3] = useState(false)
+  console.log('Initializing......')
   useEffect(() => {
+    console.log(`Fetching animation......`)
     fetch('http://cdn.yourtheme.cn/index_bg.json')
       .then(async res => {
         const result = await res.json()
@@ -49,19 +49,25 @@ const IndexPage = () => {
 
   const ref = useRef()
 
-  const [active, setActive] = useState({1: false, 2: true, 3: false, 4: false})
+  const [active, setActive] = useState({1: '', 2: '', 3: '', 4: ''})
+  const [inactive, setInactive] = useState({1: '', 2: '', 3: '', 4: ''})
+  const init = {1: '', 2: '', 3: '', 4: ''}
 
-  const handleActive = p => {
-    const init = {1: false, 2: false, 3: false, 4: false}
-    setActive({...init, [p]: true})
+  const handleActive = i => {
+    setActive({...init, [i]: 'active'})
+    setInactive({...inactive, [i]: ''})
+  }
+  const handleInactive = i => {
+    setInactive({...init, [i]: 'inactive'})
+    setActive({...active, [i]: ''})
   }
 
   useEffect(() => {
     console.log(`Loading animation......`)
-    const animation = lottie.loadAnimation({animationData: data, container: ref1.current})
-    const animation2 = lottie.loadAnimation({animationData: Animate2, container: ref2.current})
-    animation.goToAndPlay(0, true)
-    animation2.goToAndPlay(0, true)
+    // const animation = lottie.loadAnimation({animationData: data, container: ref1.current})
+    // const animation2 = lottie.loadAnimation({animationData: Animate2, container: ref2.current})
+    // animation.goToAndPlay(0, true)
+    // animation2.goToAndPlay(0, true)
   }, [])
 
   if (typeof window !== 'undefined') {
@@ -94,17 +100,26 @@ const IndexPage = () => {
                 </Typography>
               </AnimationOnScroll>
               <AnimationOnScroll animateIn='animate__fadeInUp' duration={0.5}>
-                <Typography variant='subtitle1' mb={6} maxWidth='72%'>
+                <Typography variant='subtitle1' mb={6}>
                   打造新一代跨链服务基础设施，实现区块链互联网链间价值传递
                 </Typography>
               </AnimationOnScroll>
               <AnimationOnScroll animateIn='animate__fadeInUp' duration={0.5}>
-                <Link to='/quick'>
+                <Link to='/quick' style={{marginRight: '20px'}}>
                   <Button variant='outlined' size='large'>
-                    快速开始
+                    <Box mr={2}>快速开始</Box>
                     <i className='icon icon-chevron-right' />
                   </Button>
                 </Link>
+                <a href='https://github.com/meshplus/bitxhub' target='_blank' rel='noreferrer'>
+                  <Button variant='outlined' size='large'>
+                    <i className='icon icon-github' style={{fontSize: '22px'}} />
+                    <Box ml={2} mr={2}>
+                      Github
+                    </Box>
+                    <i className='icon icon-chevron-right' />
+                  </Button>
+                </a>
               </AnimationOnScroll>
             </Grid>
           </Container>
@@ -119,67 +134,73 @@ const IndexPage = () => {
             style={{top: '50%', transform: 'translateY(-50%)', right: '0px'}}
           />
           <Container maxWidth='lg' style={{display: 'flex', alignItems: 'center'}}>
-            <Grid item md={7} />
-            <Grid item md={5}>
-              <AnimationOnScroll animateIn='animate__fadeInUp' duration={0.5}>
-                <Typography variant='h3' mb={10}>
-                  <ColorText mr={2}>万链如一</ColorText>一可链万
-                </Typography>
-              </AnimationOnScroll>
-              <Grid container spacing={4}>
-                <Grid item md={6}>
-                  <AnimationOnScroll animateIn='animate__fadeInUp' duration={0.5}>
-                    <IndexBar
-                      title={
-                        <>
-                          <StaticImage src='../images/1.svg' height={30} alt='icon' />
-                          <Box ml={3}>异构适配</Box>
-                        </>
-                      }
-                      desc='异构区块链协议适配，同时支持同构和异构应用链的适配'
-                    />
-                  </AnimationOnScroll>
+            <Grid item md={6} />
+            <Grid item md={6}>
+              <Box ml={8}>
+                <AnimationOnScroll animateIn='animate__fadeInUp' duration={0.5}>
+                  <Typography variant='h3' mb={10}>
+                    <ColorText mr={2}>万链如一</ColorText>一可链万
+                  </Typography>
+                </AnimationOnScroll>
+                <Grid container spacing={4}>
+                  <Grid item md={6}>
+                    <AnimationOnScroll animateIn='animate__fadeInUp' duration={0.5}>
+                      <IndexBar
+                        p={5}
+                        title={
+                          <>
+                            <StaticImage src='../images/index_2_1.png' height={40} alt='icon' />
+                            <Box ml={3}>异构适配</Box>
+                          </>
+                        }
+                        desc='异构区块链协议适配，同时支持同构和异构应用链的适配'
+                      />
+                    </AnimationOnScroll>
+                  </Grid>
+                  <Grid item md={6}>
+                    <AnimationOnScroll animateIn='animate__fadeInUp' duration={0.5}>
+                      <IndexBar
+                        p={5}
+                        title={
+                          <>
+                            <StaticImage src='../images/index_2_2.png' height={40} alt='icon' />
+                            <Box ml={3}>异构适配</Box>
+                          </>
+                        }
+                        desc='异构区块链协议适配，同时支持同构和异构应用链的适配'
+                      />
+                    </AnimationOnScroll>
+                  </Grid>
+                  <Grid item md={6}>
+                    <AnimationOnScroll animateIn='animate__fadeInUp' duration={0.5}>
+                      <IndexBar
+                        p={5}
+                        title={
+                          <>
+                            <StaticImage src='../images/index_2_3.png' height={40} alt='icon' />
+                            <Box ml={3}>异构适配</Box>
+                          </>
+                        }
+                        desc='异构区块链协议适配，同时支持同构和异构应用链的适配'
+                      />
+                    </AnimationOnScroll>
+                  </Grid>
+                  <Grid item md={6}>
+                    <AnimationOnScroll animateIn='animate__fadeInUp' duration={0.5}>
+                      <IndexBar
+                        p={5}
+                        title={
+                          <>
+                            <StaticImage src='../images/index_2_4.png' height={40} alt='icon' />
+                            <Box ml={3}>异构适配</Box>
+                          </>
+                        }
+                        desc='异构区块链协议适配，同时支持同构和异构应用链的适配'
+                      />
+                    </AnimationOnScroll>
+                  </Grid>
                 </Grid>
-                <Grid item md={6}>
-                  <AnimationOnScroll animateIn='animate__fadeInUp' duration={0.5}>
-                    <IndexBar
-                      title={
-                        <>
-                          <StaticImage src='../images/2.svg' height={30} alt='icon' />
-                          <Box ml={3}>异构适配</Box>
-                        </>
-                      }
-                      desc='异构区块链协议适配，同时支持同构和异构应用链的适配'
-                    />
-                  </AnimationOnScroll>
-                </Grid>
-                <Grid item md={6}>
-                  <AnimationOnScroll animateIn='animate__fadeInUp' duration={0.5}>
-                    <IndexBar
-                      title={
-                        <>
-                          <StaticImage src='../images/2.svg' height={30} alt='icon' />
-                          <Box ml={3}>异构适配</Box>
-                        </>
-                      }
-                      desc='异构区块链协议适配，同时支持同构和异构应用链的适配'
-                    />
-                  </AnimationOnScroll>
-                </Grid>
-                <Grid item md={6}>
-                  <AnimationOnScroll animateIn='animate__fadeInUp' duration={0.5}>
-                    <IndexBar
-                      title={
-                        <>
-                          <StaticImage src='../images/2.svg' height={30} alt='icon' />
-                          <Box ml={3}>异构适配</Box>
-                        </>
-                      }
-                      desc='异构区块链协议适配，同时支持同构和异构应用链的适配'
-                    />
-                  </AnimationOnScroll>
-                </Grid>
-              </Grid>
+              </Box>
             </Grid>
           </Container>
         </Box>
@@ -200,13 +221,13 @@ const IndexPage = () => {
           <Container maxWidth='lg' style={{display: 'flex', alignItems: 'center'}}>
             <Grid item md={7}>
               <AnimationOnScroll animateIn='animate__fadeInUp' duration={0.5}>
-                <Typography variant='h3' mb={10}>
+                <Typography variant='h3' mb={13}>
                   <ColorText>核心组件</ColorText>
                 </Typography>
               </AnimationOnScroll>
               <AnimationOnScroll animateIn='animate__fadeInUp' duration={0.5}>
                 <Box display='flex' alignItems='center' mb={8} position='relative'>
-                  <Box mr={3} position='relative'>
+                  <Box mr={5} position='relative'>
                     <StaticImage src='../images/ball.svg' alt='ball' />
                     <StaticImage
                       src='../images/5.svg'
@@ -218,6 +239,8 @@ const IndexPage = () => {
                     <IndexDottedLine />
                   </Box>
                   <IndexBar
+                    px={6}
+                    py={3}
                     width='100%'
                     title='中继链'
                     desc='是一种实现通用跨链协议的开放许可链，用于数字身份管理、应用链管理、跨链交易的可信验证与可靠路由'
@@ -226,7 +249,7 @@ const IndexPage = () => {
               </AnimationOnScroll>
               <AnimationOnScroll animateIn='animate__fadeInUp' duration={0.5}>
                 <Box display='flex' alignItems='center' position='relative' mb={8}>
-                  <Box mr={3} position='relative'>
+                  <Box mr={5} position='relative'>
                     <StaticImage src='../images/ball.svg' alt='ball' />
                     <StaticImage
                       src='../images/6.svg'
@@ -238,6 +261,8 @@ const IndexPage = () => {
                     <IndexDottedLine />
                   </Box>
                   <IndexBar
+                    px={6}
+                    py={3}
                     width='100%'
                     title='跨链网关'
                     desc='支持不同区块链间跨链消息的交互，担任收集和传播跨链交易的角色'
@@ -246,7 +271,7 @@ const IndexPage = () => {
               </AnimationOnScroll>
               <AnimationOnScroll animateIn='animate__fadeInUp' duration={0.5}>
                 <Box display='flex' alignItems='center' position='relative'>
-                  <Box mr={3} position='relative'>
+                  <Box mr={5} position='relative'>
                     <StaticImage src='../images/ball.svg' alt='ball' />
                     <StaticImage
                       src='../images/7.svg'
@@ -258,6 +283,8 @@ const IndexPage = () => {
                     <IndexDottedLine />
                   </Box>
                   <IndexBar
+                    px={6}
+                    py={3}
                     width='100%'
                     title='应用链'
                     desc='承载具体应用业务逻辑，根据是否支持跨链协议分为同构应用链与异构应用链'
@@ -280,7 +307,7 @@ const IndexPage = () => {
             backgroundSize: '2000px 1233px',
           }}
         >
-          <Box pt={24} pb={70} id='fuck'>
+          <Box pt={24} pb={70}>
             <Container maxWidth='lg'>
               <Typography variant='h3' mb={14}>
                 <ColorText mr={1}>BitXHub</ColorText>构建解决方案
@@ -359,7 +386,7 @@ const IndexPage = () => {
                           color: '#fff',
                           borderRadius: '10px',
                           width: '600px',
-                          background: 'linear-gradient(360deg, #181818 0%, #05070B 0.01%, #1D2735 100%);',
+                          background: 'linear-gradient(360deg, #181818 0%, #05070B 0.01%, #1D2735 100%)',
                         }}
                       >
                         <Typography variant='h5' mb={4}>
@@ -437,6 +464,7 @@ const IndexPage = () => {
                   }}
                   anchor={'right'}
                   open={open2}
+                  onOpen={() => setOpen2(true)}
                   onClose={() => setOpen2(false)}
                 >
                   <Box
@@ -449,7 +477,7 @@ const IndexPage = () => {
                       color: '#fff',
                       borderRadius: '10px',
                       width: '600px',
-                      background: 'linear-gradient(360deg, #181818 0%, #05070B 0.01%, #1D2735 100%);',
+                      background: 'linear-gradient(360deg, #181818 0%, #05070B 0.01%, #1D2735 100%)',
                     }}
                   >
                     <Typography variant='h5' mb={4}>
@@ -524,6 +552,7 @@ const IndexPage = () => {
                   }}
                   anchor={'right'}
                   open={open3}
+                  onOpen={() => setOpen3(true)}
                   onClose={() => setOpen3(false)}
                 >
                   <Box
@@ -536,7 +565,7 @@ const IndexPage = () => {
                       color: '#fff',
                       borderRadius: '10px',
                       width: '600px',
-                      background: 'linear-gradient(360deg, #181818 0%, #05070B 0.01%, #1D2735 100%);',
+                      background: 'linear-gradient(360deg, #181818 0%, #05070B 0.01%, #1D2735 100%)',
                     }}
                   >
                     <Typography variant='h5' mb={4}>
@@ -554,62 +583,60 @@ const IndexPage = () => {
           <Box
             pb={20}
             sx={{
-              zIndex: 999,
+              zIndex: 1,
               position: 'relative',
+              '@keyframes scaleB': {
+                '0%': {transform: 'scale(1)'},
+                '50%': {transform: 'scale(6)'},
+                '100%': {transform: 'scale(5.6)'},
+              },
+              '@keyframes scaleS': {
+                from: {transform: 'scale(5.6)'},
+                to: {transform: 'scale(1)'},
+              },
+              '& .roadmap_item': {
+                margin: '0 10px',
+                padding: '50px 30px',
+                cursor: 'pointer',
+                width: '200px',
+                '&.active': {
+                  '& .roadmap_desc': {
+                    display: 'block',
+                  },
+                  '& .date': {
+                    display: 'none',
+                  },
+                  '& .roadmap_ball': {
+                    animation: 'scaleB 0.6s ease-in-out forwards',
+                  },
+                },
+                '&.inactive': {
+                  '& .roadmap_ball': {
+                    animation: 'scaleS 0.4s ease-in-out forwards',
+                  },
+                },
+              },
+              '& .roadmap_ball': {
+                display: 'inline-block',
+              },
               '& .roadmap_desc': {
                 display: 'none',
                 position: 'absolute',
-                bottom: '-150px',
-                width: '260px',
-                zIndex: -1,
+                top: '130px',
+                width: '300px',
                 textAlign: 'left',
-                background: 'linear-gradient(360deg, #000000 0%, #040E22 0.01%, #1D2A45 100%)',
-                boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
-                borderRadius: '16px',
-                border: '3px solid rgba(28, 67, 102, 0.83)',
-                // borderImageSource:
-                //   'linear-gradient(162.14deg, #162B75 -3.32%, rgba(28, 67, 102, 0.83) 19.27%, rgba(100, 143, 255, 0) 77%)',
+                backgroundImage: `url(${RoadmapCard})`,
+                backgroundSize: '300px 241px',
+                backgroundRepeat: 'no-repeat',
                 left: '50%',
                 transform: 'translateX(-50%)',
-                marginLeft: '-130px',
+                marginLeft: '-150px',
+                '& .roadmap_desc.active': {
+                  display: 'block',
+                },
                 '& ul': {
                   color: 'rgba(255, 255, 255, 0.6)',
                   paddingLeft: '20px',
-                },
-                '&:after': {
-                  content: '" "',
-                  display: 'none',
-                  width: '164px',
-                  height: '82px',
-                  borderBottomLeftRadius: '160px',
-                  borderBottomRightRadius: '160px',
-                  borderTop: '0',
-                  border: '3px solid rgba(28, 67, 102, 0.83)',
-                  position: 'absolute',
-                  top: '-3px',
-                  left: '50px',
-                  background: '#000',
-                },
-              },
-              '& .active': {
-                position: 'relative',
-                '& .roadmap_desc': {
-                  display: 'block',
-                },
-                '& .title': {
-                  position: 'absolute',
-                  top: '76px',
-                  textAlign: 'center',
-                  width: '100%',
-                },
-                '& .date': {
-                  display: 'none',
-                },
-                '& .roadmap_ball': {
-                  cursor: 'pointer',
-                  transition: 'all .3s ease',
-                  display: 'inline-block',
-                  height: '160px',
                 },
               },
             }}
@@ -618,23 +645,32 @@ const IndexPage = () => {
               <Typography variant='h3' mb={14}>
                 <ColorText mr={1}>BitXHub</ColorText>开源规划
               </Typography>
-              <Box display='flex' alignItems='center' justifyContent='center' position='relative' height='250px'>
-                <Box
-                  sx={{
-                    zIndex: -1,
-                    width: '100%',
+              <Box
+                display='flex'
+                alignItems='center'
+                justifyContent='center'
+                position='relative'
+                height='250px'
+                sx={{
+                  '&:after': {
+                    content: '" "',
+                    display: 'block',
                     position: 'absolute',
-                    height: '1px',
-                    background: '#52AEF1',
                     top: '50%',
-                  }}
-                />
+                    width: '100%',
+                    height: '1px',
+                    zIndex: -1,
+                    background:
+                      'linear-gradient(90deg, rgba(51,51,51,1) 0%, rgba(78,155,226,1) 17%, rgba(78,155,226,1) 75%, rgba(51,51,51,1) 100%)',
+                  },
+                }}
+              >
                 <Box
+                  position='relative'
                   textAlign='center'
-                  sx={{width: '160px', cursor: 'pointer'}}
-                  className={`${active[1] ? 'active' : ''}`}
-                  mr={20}
-                  onClick={() => handleActive(1)}
+                  className={`roadmap_item ${active[1]} ${inactive[1]}`}
+                  onMouseEnter={() => handleActive(1)}
+                  onMouseLeave={() => handleInactive(1)}
                 >
                   <Typography
                     variant='subtitle2'
@@ -642,15 +678,15 @@ const IndexPage = () => {
                   >
                     DID组件开源
                   </Typography>
-                  <img src={RoadmapBall} className='roadmap_ball' alt='ball' height={36} />
+                  <img src={RoadmapBall} className={`roadmap_ball`} alt='ball' height={36} />
                   <Typography variant='body2' className='date'>
                     2021.04
                   </Typography>
                   <Box
                     className={`animate__animated animate__fadeInUp animate__faster roadmap_desc`}
-                    px={6}
+                    px={10}
                     pb={2}
-                    pt={8}
+                    pt={16}
                   >
                     <Typography variant='subtitle2' mb={2}>
                       2021.06
@@ -668,25 +704,26 @@ const IndexPage = () => {
                     </ul>
                   </Box>
                 </Box>
+
                 <Box
                   textAlign='center'
-                  sx={{width: '160px', cursor: 'pointer'}}
-                  className={`${active[2] ? 'active' : ''}`}
-                  mr={20}
-                  onClick={() => handleActive(2)}
+                  position='relative'
+                  className={`roadmap_item ${active[2]} ${inactive[2]}`}
+                  onMouseEnter={() => handleActive(2)}
+                  onMouseLeave={() => handleInactive(2)}
                 >
                   <Typography variant='subtitle2' className='title'>
                     跨链浏览器
                   </Typography>
-                  <img src={RoadmapBall} className='roadmap_ball' alt='ball' height={36} />
+                  <img src={RoadmapBall} className={`roadmap_ball`} alt='ball' height={36} />
                   <Typography variant='body2' className='date'>
                     2021.06
                   </Typography>
                   <Box
                     className={`animate__animated animate__fadeInUp animate__faster roadmap_desc`}
-                    px={6}
+                    px={10}
                     pb={2}
-                    pt={8}
+                    pt={16}
                   >
                     <Typography variant='subtitle2' mb={2}>
                       2021.06
@@ -706,23 +743,28 @@ const IndexPage = () => {
                 </Box>
                 <Box
                   textAlign='center'
-                  sx={{width: '160px', cursor: 'pointer'}}
-                  className={`${active[3] ? 'active' : ''}`}
-                  mr={20}
-                  onClick={() => handleActive(3)}
+                  position='relative'
+                  className={`roadmap_item ${active[3]} ${inactive[3]}`}
+                  onMouseEnter={() => handleActive(3)}
+                  onMouseLeave={() => handleInactive(3)}
                 >
                   <Typography variant='subtitle2' className='title'>
                     开放测试网
                   </Typography>
-                  <img src={RoadmapBall} className='roadmap_ball' alt='ball' height={36} />
+                  <img
+                    src={RoadmapBall}
+                    className={`roadmap_ball ${active[3]} ${inactive[3]}`}
+                    alt='ball'
+                    height={36}
+                  />
                   <Typography variant='body2' className='date'>
                     2021.08
                   </Typography>
                   <Box
                     className={`animate__animated animate__fadeInUp animate__faster roadmap_desc`}
-                    px={6}
+                    px={10}
                     pb={2}
-                    pt={8}
+                    pt={16}
                   >
                     <Typography variant='subtitle2' mb={2}>
                       2021.06
@@ -742,10 +784,10 @@ const IndexPage = () => {
                 </Box>
                 <Box
                   textAlign='center'
-                  sx={{width: '160px', cursor: 'pointer'}}
-                  className={`${active[4] ? 'active' : ''}`}
-                  mr={20}
-                  onClick={() => handleActive(4)}
+                  position='relative'
+                  className={`roadmap_item ${active[4]} ${inactive[4]}`}
+                  onMouseEnter={() => handleActive(4)}
+                  onMouseLeave={() => handleInactive(4)}
                 >
                   <Typography
                     variant='subtitle2'
@@ -753,15 +795,15 @@ const IndexPage = () => {
                   >
                     联盟链跨链治理
                   </Typography>
-                  <img src={RoadmapBall} className='roadmap_ball' alt='ball' height={36} />
+                  <img src={RoadmapBall} className={`roadmap_ball`} alt='ball' height={36} />
                   <Typography variant='body2' className='date'>
                     2021.10
                   </Typography>
                   <Box
                     className={`animate__animated animate__fadeInUp animate__faster roadmap_desc`}
-                    px={6}
+                    px={10}
                     pb={2}
-                    pt={8}
+                    pt={16}
                   >
                     <Typography variant='subtitle2' mb={2}>
                       2021.06

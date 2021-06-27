@@ -17,7 +17,7 @@
 
 @font-face {
     font-family: AlibabaPuHui;
-    src: url("../fonts/AlibabaPuHuiTi-2-85-Bold.ttf") format("truetype");
+    src: url("../fonts/AlibabaPuHuiTi-2-95-ExtraBold.ttf") format("truetype");
     font-weight: bold;
 }
 
@@ -31,3 +31,9 @@
 /*    url('//at.alicdn.com/t/webfont_no5wpyz9xfe.ttf') format('truetype'), !* chrome、firefox、opera、Safari, Android, iOS 4.2+*!*/
 /*    url('//at.alicdn.com/t/webfont_no5wpyz9xfe.svg#Alibaba-PuHuiTi-Bold') format('svg'); !* iOS 4.1- *!*/
 /*}*/
+
+@keyframes bounce {
+    0%   { transform: scale(1); }
+    50%  { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}

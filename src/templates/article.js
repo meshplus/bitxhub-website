@@ -7,7 +7,6 @@ import SEO from '../components/seo'
 import {ColorText} from '../components/style'
 import BlogBG from '../images/community_bg.png'
 import Dot from '../images/dot.png'
-import Layer from '../images/layer.png'
 import Moment from 'react-moment'
 
 export const query = graphql`

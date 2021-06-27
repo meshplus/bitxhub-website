@@ -37,36 +37,7 @@ const TechPage = ({data}) => {
   const [counter, setCounter] = useState(1)
   const {width} = useWindowSize()
 
-  function useOnScreen(ref, rootMargin = '0px') {
-    // State and setter for storing whether element is visible
-    const [isIntersecting, setIntersecting] = useState(false)
-    useEffect(() => {
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          // Update our state when observer callback fires
-          setIntersecting(entry.isIntersecting)
-        },
-        {
-          rootMargin,
-        }
-      )
-      if (ref.current) {
-        observer.observe(ref.current)
-      }
-      return () => {
-        observer.unobserve(ref.current)
-      }
-    }, []) // Empty array ensures that effect is only run on mount and unmount
-    return isIntersecting
-  }
-
   const ref = useRef()
-  const onScreen = useOnScreen(ref, '20px')
-
-  console.log(onScreen)
-  if (onScreen) {
-    // document.body.style.overflow = 'hidden'
-  }
 
   useInterval(() => {
     counter % 3 === 0 && setStep(0)
@@ -269,9 +240,7 @@ const TechPage = ({data}) => {
             <Container maxWidth='lg'>
               <Grid container>
                 <Grid item md={7}>
-                  {/*<AnimationOnScroll animateIn='animate__animated animate__fadeInUp animate__faster'>*/}
                   <img src={IBTP} alt='img' width={720} />
-                  {/*</AnimationOnScroll>*/}
                 </Grid>
                 <Grid item md={5} display='flex' alignItems='center'>
                   <Box>

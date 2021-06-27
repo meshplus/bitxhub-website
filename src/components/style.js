@@ -136,7 +136,6 @@ export const IndexBar = ({children, className, title, desc, ...other}) => {
     <Box
       className={className}
       {...other}
-      p={4}
       sx={{
         borderRadius: '16px',
         background:
