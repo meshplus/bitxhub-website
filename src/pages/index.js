@@ -18,6 +18,8 @@ import CardBG3 from '../images/03.png'
 import {Link} from 'gatsby'
 import {StaticImage} from 'gatsby-plugin-image'
 import RoadmapCard from '../images/roadmap_card.png'
+import DataCard from '../images/data_card.png'
+import data from './data.json'
 
 const IndexPage = () => {
   const ref1 = useRef()
@@ -64,9 +66,10 @@ const IndexPage = () => {
 
   useEffect(() => {
     console.log(`Loading animation......`)
-    // const animation = lottie.loadAnimation({animationData: data, container: ref1.current})
+    lottie.setQuality('low')
+    const animation = lottie.loadAnimation({animationData: data, container: ref1.current})
     // const animation2 = lottie.loadAnimation({animationData: Animate2, container: ref2.current})
-    // animation.goToAndPlay(0, true)
+    animation.goToAndPlay(0, true)
     // animation2.goToAndPlay(0, true)
   }, [])
 
@@ -585,6 +588,14 @@ const IndexPage = () => {
             sx={{
               zIndex: 1,
               position: 'relative',
+              '& .hover_title': {
+                display: 'none',
+                position: 'absolute',
+                top: '70px',
+                left: 0,
+                width: '100%',
+                textAlign: 'center',
+              },
               '@keyframes scaleB': {
                 '0%': {transform: 'scale(1)'},
                 '50%': {transform: 'scale(6)'},
@@ -600,6 +611,9 @@ const IndexPage = () => {
                 cursor: 'pointer',
                 width: '200px',
                 '&.active': {
+                  '& .hover_title': {
+                    display: 'block',
+                  },
                   '& .roadmap_desc': {
                     display: 'block',
                   },
@@ -612,7 +626,7 @@ const IndexPage = () => {
                 },
                 '&.inactive': {
                   '& .roadmap_ball': {
-                    animation: 'scaleS 0.4s ease-in-out forwards',
+                    animation: 'scaleS 0.5s ease forwards',
                   },
                 },
               },
@@ -679,6 +693,12 @@ const IndexPage = () => {
                     DID组件开源
                   </Typography>
                   <img src={RoadmapBall} className={`roadmap_ball`} alt='ball' height={36} />
+                  <Typography
+                    variant='subtitle2'
+                    className={`animate__animated animate__fadeInUp animate__faster hover_title`}
+                  >
+                    DID组件开源
+                  </Typography>
                   <Typography variant='body2' className='date'>
                     2021.04
                   </Typography>
@@ -716,6 +736,12 @@ const IndexPage = () => {
                     跨链浏览器
                   </Typography>
                   <img src={RoadmapBall} className={`roadmap_ball`} alt='ball' height={36} />
+                  <Typography
+                    variant='subtitle2'
+                    className={`animate__animated animate__fadeInUp animate__faster hover_title`}
+                  >
+                    跨链浏览器
+                  </Typography>
                   <Typography variant='body2' className='date'>
                     2021.06
                   </Typography>
@@ -757,6 +783,12 @@ const IndexPage = () => {
                     alt='ball'
                     height={36}
                   />
+                  <Typography
+                    variant='subtitle2'
+                    className={`animate__animated animate__fadeInUp animate__faster hover_title`}
+                  >
+                    开放测试网
+                  </Typography>
                   <Typography variant='body2' className='date'>
                     2021.08
                   </Typography>
@@ -796,6 +828,12 @@ const IndexPage = () => {
                     联盟链跨链治理
                   </Typography>
                   <img src={RoadmapBall} className={`roadmap_ball`} alt='ball' height={36} />
+                  <Typography
+                    variant='subtitle2'
+                    className={`animate__animated animate__fadeInUp animate__faster hover_title`}
+                  >
+                    联盟链跨链治理
+                  </Typography>
                   <Typography variant='body2' className='date'>
                     2021.10
                   </Typography>
@@ -825,10 +863,11 @@ const IndexPage = () => {
             </Container>
           </Box>
           <Box
-            py={55}
+            pt={40}
+            pb={55}
             sx={{
               background: `url(${DataBG})`,
-              backgroundPosition: 'center -180px',
+              backgroundPosition: 'center -120px',
               backgroundRepeat: 'no-repeat',
               backgroundSize: '2000px',
             }}
@@ -839,56 +878,90 @@ const IndexPage = () => {
                   <Grid item md={4} display='flex' alignItems='center'>
                     <Box>
                       <Typography variant='h2'>
-                        <ColorText display='block'>跨链</ColorText>
-                        行业领导者
+                        <ColorText>跨链</ColorText>
+                        <Box>行业领导者</Box>
                       </Typography>
                     </Box>
                   </Grid>
                   <Grid item md={8}>
-                    <Box>
-                      <Box position='relative' mb={10} ml={12} display='flex' alignItems='center'>
-                        <img src={Datum1} alt='datum' height={139} />
-                        <Box position='absolute' top='44px' left='44px'>
-                          <Typography variant='h3' display='inline-block'>
-                            3
-                          </Typography>
-                          <Typography variant='body1' display='inline-block'>
-                            项
-                          </Typography>
+                    <Box
+                      sx={{
+                        '& .datum_num': {
+                          display: 'flex',
+                          alignItems: 'flex-end',
+                          position: 'absolute',
+                          top: '50%',
+                          transform: 'translateY(-50%)',
+                          justifyContent: 'center',
+                          width: '138px',
+                          '& h3': {
+                            lineHeight: 1,
+                          },
+                        },
+                        '& .datum_meta': {display: 'block'},
+                        '& .datum_meta_list': {display: 'none'},
+                        '& .datum_item': {
+                          display: 'flex',
+                          alignItems: 'center',
+                          padding: '35px 0',
+                          transition: 'background 0.2s ease',
+                          '&:hover': {
+                            backgroundImage: `url(${DataCard})`,
+                            backgroundRepeat: 'no-repeat',
+                            backgroundSize: '632px 215px',
+                            backgroundPosition: 'top 0 left 70px',
+                            '& .datum_meta': {
+                              display: 'none',
+                            },
+                            '& .datum_meta_list': {
+                              display: 'block',
+                            },
+                          },
+                        },
+                      }}
+                    >
+                      <Box position='relative' ml={15} mt={10} className={`datum_item`}>
+                        <img src={Datum1} alt='datum' height={136} />
+                        <Box position='absolute' className='datum_num'>
+                          <Typography variant='h3'>3</Typography>
+                          <Typography variant='body1'>项</Typography>
                         </Box>
-                        <Box pl={2}>
-                          <Typography variant='h6'>参与测评</Typography>
-                          <Typography variant='body2'>首批通过国家金融科技测评中心的跨链服务功能测试</Typography>
+                        <Box pl={6}>
+                          <Box className='datum_meta'>
+                            <Typography variant='h6'>参与测评</Typography>
+                            <Typography variant='body2'>首批通过国家金融科技测评中心的跨链服务功能测试</Typography>
+                          </Box>
+                          <Box className='datum_meta_list'>
+                            <Typography variant='subtitle2'>
+                              参与中国信通院——可信推进计划《区块链互操作白皮书》编写工作；
+                            </Typography>
+                            <Typography variant='subtitle2'>
+                              参与国际电联电信标准化部门（ITU-T） 中国通信标准化协会（CCSA）
+                            </Typography>
+                            <Typography variant='subtitle2'>信通院跨链互操作相关标准的制定工作；</Typography>
+                          </Box>
                         </Box>
                       </Box>
-                      <Box position='relative' ml={2} display='flex' alignItems='center'>
+                      <Box position='relative' ml={6} className={'datum_item'}>
                         <img src={Datum2} alt='datum' height={139} />
-                        <Box position='absolute' top='44px' left='44px'>
-                          <Typography variant='h3' display='inline-block'>
-                            4
-                          </Typography>
-                          <Typography variant='body1' display='inline-block'>
-                            项
-                          </Typography>
+                        <Box position='absolute' className={'datum_num'}>
+                          <Typography variant='h3'>4</Typography>
+                          <Typography variant='body1'>项</Typography>
                         </Box>
-                        <Box pl={2}>
+                        <Box pl={6}>
                           <Typography variant='h6'>专利&论文</Typography>
                           <Typography variant='body2'>
                             在跨链事务一致性保障、数据有效性验证、跨链协议等相关领域具有23篇
                           </Typography>
                         </Box>
                       </Box>
-                      <Box position='relative' mt={10} ml={12} display='flex' alignItems='center'>
+                      <Box position='relative' ml={12} className={'datum_item'}>
                         <img src={Datum3} alt='datum' height={139} />
-                        <Box position='absolute' top='44px' left='44px'>
-                          <Typography variant='h3' display='inline-block'>
-                            23
-                          </Typography>
-                          <Typography variant='body1' display='inline-block'>
-                            篇
-                          </Typography>
+                        <Box position='absolute' className={'datum_num'}>
+                          <Typography variant='h3'>23</Typography>
+                          <Typography variant='body1'>篇</Typography>
                         </Box>
-                        <Box pl={2}>
+                        <Box pl={6}>
                           <Typography variant='h6'>专利&论文</Typography>
                           <Typography variant='body2'>
                             在跨链事务一致性保障、数据有效性验证、跨链协议等相关领域具有23篇
