@@ -17,7 +17,8 @@ module.exports = {
     {
       resolve: 'gatsby-source-strapi',
       options: {
-        apiURL: 'http://localhost:1337',
+        // apiURL: 'http://localhost:1337',
+        apiURL: 'http://121.41.216.119:1337',
         contentTypes: [
           // List of the Content Types you want to be able to request from Gatsby.
           'article',
@@ -38,7 +39,7 @@ module.exports = {
         background_color: `#663399`,
         theme_color: `#663399`,
         display: `minimal-ui`,
-        icon: `src/images/logo.svg`, // This path is relative to the root of the site.
+        icon: `src/images/favicon.png`, // This path is relative to the root of the site.
       },
     },
     `gatsby-plugin-gatsby-cloud`,

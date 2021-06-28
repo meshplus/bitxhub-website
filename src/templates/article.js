@@ -45,7 +45,7 @@ const Article = ({data}) => {
         mt={17}
         sx={{
           // backgroundImage: `url(http://localhost:1337${article.cover.formats.small.url}), url(${Layer})`,
-          backgroundImage: `linear-gradient(180deg , rgb(26 33 39 / 69%) 0%, #000 100%), url(http://localhost:1337${article.cover.formats.small.url})`,
+          backgroundImage: `linear-gradient(180deg , rgb(26 33 39 / 69%) 0%, #000 100%), url(http://121.41.216.119:1337/${article.cover.formats.small.url})`,
           backgroundPosition: 'center top, center top',
           backgroundRepeat: 'no-repeat',
           backgroundSize: '100% 100%, 100%',

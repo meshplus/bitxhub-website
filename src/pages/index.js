@@ -67,9 +67,9 @@ const IndexPage = () => {
   useEffect(() => {
     console.log(`Loading animation......`)
     lottie.setQuality('low')
-    const animation = lottie.loadAnimation({animationData: data, container: ref1.current})
+    // const animation = lottie.loadAnimation({animationData: data, container: ref1.current})
     // const animation2 = lottie.loadAnimation({animationData: Animate2, container: ref2.current})
-    animation.goToAndPlay(0, true)
+    // animation.goToAndPlay(0, true)
     // animation2.goToAndPlay(0, true)
   }, [])
 
@@ -456,7 +456,7 @@ const IndexPage = () => {
                       数据互通
                     </Typography>
                     <Typography variant='body2' mb={7}>
-                      为链上的资产、数据、服务开拓价值互通的渠道，助力区块链技术从“链孤岛”到形成“链网络”的发展
+                      为不同业务链上数据提供数据更新和同步服务，打破异构区块链间的信息壁垒，有效地进行链上数据的安全共享
                     </Typography>
                     <ReadMore to='/' onClick={() => setOpen2(true)} />
                   </Box>
@@ -544,7 +544,7 @@ const IndexPage = () => {
                       业务互补
                     </Typography>
                     <Typography variant='body2' mb={7}>
-                      为链上的资产、数据、服务开拓价值互通的渠道，助力区块链技术从“链孤岛”到形成“链网络”的发展
+                      针对已有区块链基础设施的情况下，通过跨链服务实现业务耦合高、流程复杂的异构区块链间的横向打通，扩大业务规模，实现互利共赢。
                     </Typography>
                     <ReadMore to='/' onClick={() => setOpen3(true)} />
                   </Box>
@@ -589,12 +589,14 @@ const IndexPage = () => {
               zIndex: 1,
               position: 'relative',
               '& .hover_title': {
-                display: 'none',
+                visibility: 'none',
+                opacity: 0,
                 position: 'absolute',
                 top: '70px',
                 left: 0,
                 width: '100%',
                 textAlign: 'center',
+                transition: 'all 0.5s ease',
               },
               '@keyframes scaleB': {
                 '0%': {transform: 'scale(1)'},
@@ -611,8 +613,12 @@ const IndexPage = () => {
                 cursor: 'pointer',
                 width: '200px',
                 '&.active': {
+                  '& .title': {
+                    opacity: 0,
+                  },
                   '& .hover_title': {
-                    display: 'block',
+                    visibility: 'visible',
+                    opacity: 1,
                   },
                   '& .roadmap_desc': {
                     display: 'block',
@@ -638,6 +644,7 @@ const IndexPage = () => {
                 position: 'absolute',
                 top: '130px',
                 width: '300px',
+                minHeight: '240px',
                 textAlign: 'left',
                 backgroundImage: `url(${RoadmapCard})`,
                 backgroundSize: '300px 241px',
@@ -651,6 +658,10 @@ const IndexPage = () => {
                 '& ul': {
                   color: 'rgba(255, 255, 255, 0.6)',
                   paddingLeft: '20px',
+                  fontSize: '14px',
+                  '& li': {
+                    marginBottom: '5px',
+                  },
                 },
               },
             }}
@@ -686,17 +697,11 @@ const IndexPage = () => {
                   onMouseEnter={() => handleActive(1)}
                   onMouseLeave={() => handleInactive(1)}
                 >
-                  <Typography
-                    variant='subtitle2'
-                    className={`animate__animated animate__fadeInUp animate__faster title`}
-                  >
+                  <Typography variant='subtitle2' className={`title`}>
                     DID组件开源
                   </Typography>
                   <img src={RoadmapBall} className={`roadmap_ball`} alt='ball' height={36} />
-                  <Typography
-                    variant='subtitle2'
-                    className={`animate__animated animate__fadeInUp animate__faster hover_title`}
-                  >
+                  <Typography variant='subtitle2' className={`hover_title`}>
                     DID组件开源
                   </Typography>
                   <Typography variant='body2' className='date'>
@@ -711,16 +716,10 @@ const IndexPage = () => {
                     <Typography variant='subtitle2' mb={2}>
                       2021.06
                     </Typography>
-                    <Divider
-                      sx={{
-                        background: '#405584',
-                      }}
-                    />
+                    <Divider sx={{background: '#405584'}} />
                     <ul>
-                      <li>实时交易数据查询</li>
-                      <li>应用链管理</li>
-                      <li>中继链自治</li>
-                      <li>Dapp的聚合生态管理</li>
+                      <li>分布式数字身份组件库开源</li>
+                      <li>打造基于数字身份的互通机制</li>
                     </ul>
                   </Box>
                 </Box>
@@ -736,10 +735,7 @@ const IndexPage = () => {
                     跨链浏览器
                   </Typography>
                   <img src={RoadmapBall} className={`roadmap_ball`} alt='ball' height={36} />
-                  <Typography
-                    variant='subtitle2'
-                    className={`animate__animated animate__fadeInUp animate__faster hover_title`}
-                  >
+                  <Typography variant='subtitle2' className={`hover_title`}>
                     跨链浏览器
                   </Typography>
                   <Typography variant='body2' className='date'>
@@ -754,16 +750,12 @@ const IndexPage = () => {
                     <Typography variant='subtitle2' mb={2}>
                       2021.06
                     </Typography>
-                    <Divider
-                      sx={{
-                        background: '#405584',
-                      }}
-                    />
+                    <Divider sx={{background: '#405584'}} />
                     <ul>
                       <li>实时交易数据查询</li>
                       <li>应用链管理</li>
                       <li>中继链自治</li>
-                      <li>Dapp的聚合生态管理</li>
+                      <li>DApp的聚合生态管理</li>
                     </ul>
                   </Box>
                 </Box>
@@ -783,10 +775,7 @@ const IndexPage = () => {
                     alt='ball'
                     height={36}
                   />
-                  <Typography
-                    variant='subtitle2'
-                    className={`animate__animated animate__fadeInUp animate__faster hover_title`}
-                  >
+                  <Typography variant='subtitle2' className={`hover_title`}>
                     开放测试网
                   </Typography>
                   <Typography variant='body2' className='date'>
@@ -801,16 +790,10 @@ const IndexPage = () => {
                     <Typography variant='subtitle2' mb={2}>
                       2021.06
                     </Typography>
-                    <Divider
-                      sx={{
-                        background: '#405584',
-                      }}
-                    />
+                    <Divider sx={{background: '#405584'}} />
                     <ul>
-                      <li>实时交易数据查询</li>
-                      <li>应用链管理</li>
-                      <li>中继链自治</li>
-                      <li>Dapp的聚合生态管理</li>
+                      <li>为用户提供资产/数据交换服务</li>
+                      <li>DApp跨链服务体验</li>
                     </ul>
                   </Box>
                 </Box>
@@ -821,17 +804,11 @@ const IndexPage = () => {
                   onMouseEnter={() => handleActive(4)}
                   onMouseLeave={() => handleInactive(4)}
                 >
-                  <Typography
-                    variant='subtitle2'
-                    className={`title animate__animated animate__fadeInUp animate__faster`}
-                  >
+                  <Typography variant='subtitle2' className={`title`}>
                     联盟链跨链治理
                   </Typography>
                   <img src={RoadmapBall} className={`roadmap_ball`} alt='ball' height={36} />
-                  <Typography
-                    variant='subtitle2'
-                    className={`animate__animated animate__fadeInUp animate__faster hover_title`}
-                  >
+                  <Typography variant='subtitle2' className={`hover_title`}>
                     联盟链跨链治理
                   </Typography>
                   <Typography variant='body2' className='date'>
@@ -846,16 +823,10 @@ const IndexPage = () => {
                     <Typography variant='subtitle2' mb={2}>
                       2021.06
                     </Typography>
-                    <Divider
-                      sx={{
-                        background: '#405584',
-                      }}
-                    />
+                    <Divider sx={{background: '#405584'}} />
                     <ul>
-                      <li>实时交易数据查询</li>
-                      <li>应用链管理</li>
-                      <li>中继链自治</li>
-                      <li>Dapp的聚合生态管理</li>
+                      <li>支持统一的身份管理，跨链权限控制</li>
+                      <li>节点管理服务及数据审计追溯等模块</li>
                     </ul>
                   </Box>
                 </Box>
@@ -899,7 +870,7 @@ const IndexPage = () => {
                           },
                         },
                         '& .datum_meta': {display: 'block'},
-                        '& .datum_meta_list': {display: 'none'},
+                        '& .datum_meta_list': {display: 'none', '& h6': {lineHeight: 1.8}},
                         '& .datum_item': {
                           display: 'flex',
                           alignItems: 'center',
@@ -932,13 +903,13 @@ const IndexPage = () => {
                             <Typography variant='body2'>首批通过国家金融科技测评中心的跨链服务功能测试</Typography>
                           </Box>
                           <Box className='datum_meta_list'>
+                            <Typography variant='subtitle2'>首批通过国家金融科技测评中心的跨链服务功能测试</Typography>
                             <Typography variant='subtitle2'>
-                              参与中国信通院——可信推进计划《区块链互操作白皮书》编写工作；
+                              首批通过中国信息通信研究院的可信区块链的跨链服务功能测评
                             </Typography>
                             <Typography variant='subtitle2'>
-                              参与国际电联电信标准化部门（ITU-T） 中国通信标准化协会（CCSA）
+                              通过浙江省电子信息产品检验研究院的跨链服务功能测试
                             </Typography>
-                            <Typography variant='subtitle2'>信通院跨链互操作相关标准的制定工作；</Typography>
                           </Box>
                         </Box>
                       </Box>
@@ -949,10 +920,26 @@ const IndexPage = () => {
                           <Typography variant='body1'>项</Typography>
                         </Box>
                         <Box pl={6}>
-                          <Typography variant='h6'>专利&论文</Typography>
-                          <Typography variant='body2'>
-                            在跨链事务一致性保障、数据有效性验证、跨链协议等相关领域具有23篇
-                          </Typography>
+                          <Box className='datum_meta'>
+                            <Typography variant='h6'>专利&论文</Typography>
+                            <Typography variant='body2'>
+                              在跨链事务一致性保障、数据有效性验证、跨链协议等相关领域具有23篇
+                            </Typography>
+                          </Box>
+                          <Box className='datum_meta_list'>
+                            <Typography variant='subtitle2'>
+                              参与中国信通院——可信推进计划《区块链互操作白皮书》编写工作
+                            </Typography>
+                            <Typography variant='subtitle2'>
+                              参与国际电联电信标准化部门（ITU-T）2项DLT互操作框架标准制定
+                            </Typography>
+                            <Typography variant='subtitle2'>
+                              参与中国通信标准化协会（CCSA）《区块链链间互操作》团体标准制定
+                            </Typography>
+                            <Typography variant='subtitle2'>
+                              参与计算机协会区块链和分布式记账委员会（IEEE C/BDL)区块链互操作3项标准制定；
+                            </Typography>
+                          </Box>
                         </Box>
                       </Box>
                       <Box position='relative' ml={12} className={'datum_item'}>
@@ -962,10 +949,17 @@ const IndexPage = () => {
                           <Typography variant='body1'>篇</Typography>
                         </Box>
                         <Box pl={6}>
-                          <Typography variant='h6'>专利&论文</Typography>
-                          <Typography variant='body2'>
-                            在跨链事务一致性保障、数据有效性验证、跨链协议等相关领域具有23篇
-                          </Typography>
+                          <Box className='datum_meta'>
+                            <Typography variant='h6'>专利&论文</Typography>
+                            <Typography variant='body2'>
+                              在跨链事务一致性保障、数据有效性验证、跨链协议等相关领域具有23篇
+                            </Typography>
+                          </Box>
+                          <Box className='datum_meta_list'>
+                            <Typography variant='subtitle2'>
+                              在跨链事务一致性保障、数据有效性验证、跨链协议等相关领域具有23篇
+                            </Typography>
+                          </Box>
                         </Box>
                       </Box>
                     </Box>

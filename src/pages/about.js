@@ -115,7 +115,9 @@ const AboutPage = ({data}) => {
                       position: 'absolute',
                       width: '2px',
                       height: '110%',
-                      background: '#4266ad',
+                      // background: '#4266ad',
+                      background:
+                        'linear-gradient(180deg, rgba(51,51,51,1) 0%, rgba(78,155,226,1) 0%, rgba(78,155,226,1) 70%, rgba(51,51,51,1) 100%);',
                       left: '50%',
                       top: '0',
                     },
