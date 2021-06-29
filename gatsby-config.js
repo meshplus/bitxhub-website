@@ -1,3 +1,7 @@
+require('dotenv').config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
+
 module.exports = {
   siteMetadata: {
     title: `BitXHub`,
@@ -17,8 +21,7 @@ module.exports = {
     {
       resolve: 'gatsby-source-strapi',
       options: {
-        // apiURL: 'http://localhost:1337',
-        apiURL: 'http://121.41.216.119:1337',
+        apiURL: process.env.STRAPI_API_URL,
         contentTypes: [
           // List of the Content Types you want to be able to request from Gatsby.
           'article',

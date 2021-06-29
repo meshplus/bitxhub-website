@@ -186,8 +186,16 @@ const CommunityPage = ({data}) => {
                 可以提供的开发人物
               </Typography>
               <Grid container spacing={10}>
-                {users?.slice(0, 6).map(user => (
-                  <Grid item md={2} sm={4} xs={6} textAlign='center'>
+                {users?.slice(0, 14).map(user => (
+                  <Grid
+                    item
+                    md={2}
+                    sm={4}
+                    xs={6}
+                    sx={{
+                      textAlign: {md: 'left', xs: 'left'},
+                    }}
+                  >
                     <a href={user.html_url} target='_blank' rel='noopener noreferrer'>
                       <img src={user.avatar_url} width='120' alt='' style={{borderRadius: '16px'}} />
                       <Typography variant='subtitle2' mt={4}>

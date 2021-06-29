@@ -84,7 +84,7 @@ const BlogPage = ({data}) => {
                 <Grid item md={4}>
                   <Box ml={{md: 5, xs: 0}} mb={4}>
                     <img
-                      src={`http://localhost:1337${article.node.cover.formats.small.url}`}
+                      src={`${process.env.STRAPI_API_URL}/${article.node.cover.formats.small.url}`}
                       height={160}
                       alt='thumbnail'
                       style={{display: 'block', width: '100%', objectFit: 'cover'}}

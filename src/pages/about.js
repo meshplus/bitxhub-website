@@ -92,7 +92,7 @@ const AboutPage = ({data}) => {
                 </Grid>
               </Grid>
             </Box>
-            <Box pt={20} pb={30}>
+            <Box pt={20} pb={30} id='roadmap'>
               <Container maxWidth='lg'>
                 <Grid container>
                   <Grid item md={6}>

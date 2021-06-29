@@ -2,8 +2,8 @@ import React, {useEffect, useRef, useState} from 'react'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
 import {Box, Container, Grid, SwipeableDrawer, Typography} from '@material-ui/core'
-import Relaychain from '../images/relaychain.svg'
-import Hyperchain from '../images/hyperchain.svg'
+import Relaychain from '../images/relaychain.png'
+import Hyperchain from '../images/hyperchain.png'
 import lottie from 'lottie-web'
 import tech from './tech.json'
 import BG from '../images/tech_bg.png'
@@ -12,13 +12,13 @@ import {ColorText} from '../components/style'
 import {AnimationOnScroll} from 'react-animation-on-scroll'
 import {useInterval, usePrevious, useWindowSize} from 'react-use'
 import TX from '../images/tx.svg'
-import TXDemo from '../images/tx_demo.svg'
-import GovDemo from '../images/gov_demo.png'
-import DIDDemo from '../images/did_demo.png'
+import TXDemo from '../images/drawer_1.png'
+import GovDemo from '../images/drawer_2.png'
+import DIDDemo from '../images/drawer_3.png'
 import DID from '../images/did.svg'
 import Mng from '../images/mng.svg'
 import PierGif from '../images/pier.gif'
-import Pier from '../images/pier.svg'
+import Pier from '../images/pier.png'
 import Wasm from '../images/wasm.gif'
 import CardBG1 from '../images/tech_card_bg_1.png'
 import CardBG2 from '../images/tech_card_bg_2.png'
@@ -26,6 +26,7 @@ import CardBG3 from '../images/tech_card_bg_3.png'
 import IBTP from '../images/ibtp.gif'
 
 const TechPage = ({data}) => {
+  const ref = useRef()
   const divRef = useRef()
   const [animation, setAnimation] = useState()
   const [step, setStep] = useState(0)
@@ -36,8 +37,6 @@ const TechPage = ({data}) => {
 
   const [counter, setCounter] = useState(1)
   const {width} = useWindowSize()
-
-  const ref = useRef()
 
   useInterval(() => {
     counter % 3 === 0 && setStep(0)
@@ -72,23 +71,6 @@ const TechPage = ({data}) => {
       }
     }
   }, [step, animation, prevStep])
-
-  // window.scrollTo(0, 0)
-  useEffect(() => {
-    document.addEventListener('wheel', e => {
-      // console.log(e.target.documentElement.scrollTop)
-      console.log(window.scrollY)
-      if (window.scrollY > 600) {
-        // document.body.style.overflow = 'hidden'
-        // window.scrollTo(0, 600)
-      }
-
-      // document.body.style.overflow = ''
-    })
-    document.addEventListener('scroll', e => {
-      console.log('fuck', e.target.documentElement.scrollTop)
-    })
-  })
 
   if (typeof window !== 'undefined') {
     return (
@@ -142,15 +124,15 @@ const TechPage = ({data}) => {
                     <Box>
                       <Grid container>
                         <Grid item xs={3}>
-                          <img src={Relaychain} alt='relaychain' />
+                          <img src={Relaychain} alt='relaychain' width={44} />
                           <Typography variant='subtitle1'>中继链</Typography>
                         </Grid>
                         <Grid item xs={3} textAlign='center'>
-                          <img src={Pier} alt='pier' />
+                          <img src={Pier} alt='pier' width={44} />
                           <Typography variant='subtitle1'>跨链网关</Typography>
                         </Grid>
                         <Grid item xs={4} textAlign='center'>
-                          <img src={Hyperchain} alt='hyperchain' height={48} />
+                          <img src={Hyperchain} alt='hyperchain' height={44} />
                           <Typography variant='subtitle1'>应用链</Typography>
                         </Grid>
                       </Grid>
@@ -253,11 +235,11 @@ const TechPage = ({data}) => {
                     <Typography variant='h3' mb={4}>
                       的链间传输协议
                     </Typography>
-                    <Typography variant='subtitle1' mb={2}>
+                    <Typography variant='body1' mb={4} mt={8}>
                       是所有跨链消息的格式化工厂，将异构链的跨链消息格式统一。
                       让中继链更方便地进行跨链消息的验证和路由以及跨链网关更一致地进行跨链消息处理
                     </Typography>
-                    <Typography variant='subtitle1'>
+                    <Typography variant='body1'>
                       所有异构链的跨链消息都可以封装成统一格式 (调用信息Payload+证明信息Proof)字段可以适配所有异构链
                     </Typography>
                   </Box>
@@ -276,7 +258,7 @@ const TechPage = ({data}) => {
                       </Typography>
                     </AnimationOnScroll>
                     <Typography variant='h3'>的跨链网关</Typography>
-                    <Typography variant='subtitle1' mt={8}>
+                    <Typography variant='body1' mt={8}>
                       通过动态加载插件的形式适配应用链，并可随时进行热更新，对应用链的零侵入.
                       插件机制的设计将Pier中和应用链交互的模块与跨链网关自身核心功能模块进行解耦，从而方便更多的应用链加入跨链系统。
                     </Typography>
@@ -306,7 +288,7 @@ const TechPage = ({data}) => {
                       </Typography>
                     </AnimationOnScroll>
                     <Typography variant='h3'>的异构验证引擎</Typography>
-                    <Typography variant='body2' mt={8}>
+                    <Typography variant='body1' mt={8} mb={2}>
                       通过交易解析，自动调用不同验证规则验证不同异构链的交易，进而到达高效验证
                     </Typography>
                     <Typography variant='body1'>
@@ -391,7 +373,7 @@ const TechPage = ({data}) => {
                       <Typography variant='h5' mb={5} mt={2} color='#fafafa'>
                         跨链事务
                       </Typography>
-                      <Typography variant='body1' mb={4} color='#fafafa'>
+                      <Typography variant='body1' mb={4}>
                         跨链需要保证跨链交易的原子性和一致性，即来源链和目的链上的交易要么都成功，要么都失败回滚。为此，中继链提供了事务管理机制，通过内置的事务管理合约，来保证不同业务场景下跨链交易的事务性。
                       </Typography>
                       <img src={TXDemo} alt='demo' width='100%' />
@@ -466,7 +448,7 @@ const TechPage = ({data}) => {
                       <Typography variant='h5' mb={5} mt={2} color='#fafafa'>
                         联盟治理
                       </Typography>
-                      <Typography variant='body1' color='#fafafa' mb={4}>
+                      <Typography variant='body1' mb={4}>
                         BitXHub平台的中继链提供了完善有效的跨链治理机制。中继链自身节点的构成是联盟自治的基础，通过丰富的治理服务实现全方位的治理管控。
                       </Typography>
                       <img src={GovDemo} alt='demo' width='100%' />
@@ -542,7 +524,7 @@ const TechPage = ({data}) => {
                       <Typography variant='h5' mb={5} mt={2} color='#fafafa'>
                         DID数字身份
                       </Typography>
-                      <Typography variant='body1' color='#fafafa' mb={4}>
+                      <Typography variant='body1' mb={4}>
                         BitXHub跨链平台首次提出的区块链原生支持的数字身份机制，能够实现身份在多条链间的互通互认，可以更加方便地实现以身份为中心的数字资产在不同链间的可信流转。
                       </Typography>
                       <img src={DIDDemo} alt='demo' width='100%' />

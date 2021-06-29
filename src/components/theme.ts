@@ -35,8 +35,8 @@ export const theme = createTheme({
         root: {},
         paper: {
           background: 'linear-gradient(360deg, #181818 0%, #05070B 0.01%, #1D2735 100%);',
-          borderTopLeftRadius: '40px',
-          borderBottomLeftRadius: '40px',
+          borderTopLeftRadius: '15px',
+          borderBottomLeftRadius: '15px',
           padding: '30px',
         },
       },

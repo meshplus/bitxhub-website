@@ -17,6 +17,28 @@ export const ReadMore = ({to, ...other}) => {
   )
 }
 
+export const ReadMoreNoHref = ({...other}) => {
+  return (
+    <Box {...other} sx={{cursor: 'pointer'}}>
+      <HoverColorText display='inline-flex' alignItems='center'>
+        <Box mr={2}>查看更多</Box>
+        <i className='icon icon-right' style={{fontSize: '22px'}} />
+      </HoverColorText>
+    </Box>
+  )
+}
+
+export const ReadMoreNoHrefWithoutStyle = ({...other}) => {
+  return (
+    <Box {...other} sx={{cursor: 'pointer'}} display='inline-block'>
+      <Box display='inline-flex' alignItems='center'>
+        <Box mr={2}>查看更多</Box>
+        <i className='icon icon-right' style={{fontSize: '22px'}} />
+      </Box>
+    </Box>
+  )
+}
+
 export const ColorText = ({children, ...other}) => {
   return (
     <Box
