@@ -45,14 +45,19 @@ const Article = ({data}) => {
         mt={17}
         sx={{
           // backgroundImage: `url(http://localhost:1337${article.cover.formats.small.url}), url(${Layer})`,
-          backgroundImage: `linear-gradient(180deg , rgb(26 33 39 / 69%) 0%, #000 100%), url(${process.env.STRAPI_API_URL}/${article.cover.formats.small.url})`,
+          backgroundImage: `linear-gradient(180deg , rgb(26 33 39 / 69%) 0%, #000 100%), url(${process.env.STRAPI_API_URL}${article.cover.formats.small.url})`,
           backgroundPosition: 'center top, center top',
           backgroundRepeat: 'no-repeat',
           backgroundSize: '100% 100%, 100%',
         }}
       >
         <Container maxWidth='md'>
-          <Typography variant='h4' mb={4} color='primary'>
+          <Typography
+            variant='h4'
+            mb={4}
+            color='primary'
+            fontFamily='"Roboto","Helvetica","Arial",sans-serif !important'
+          >
             {article.title}
           </Typography>
           <Box my={6}>
@@ -81,6 +86,7 @@ const Article = ({data}) => {
       </Box>
       <Box
         pt={10}
+        pb={10}
         px={{md: 10, xs: 0}}
         sx={{
           backgroundImage: `url(${BlogBG}), url(${Dot})`,
@@ -104,16 +110,31 @@ const Article = ({data}) => {
               sx={{
                 color: 'rgba(255, 255, 255, 0.8)',
                 lineHeight: '26px',
+                '& strong': {color: '#fff'},
+                '& h1, h2, h3, h4, h5, h6': {
+                  fontFamily: '"Roboto","Helvetica","Arial",sans-serif !important',
+                  margin: '35px 0 20px',
+                  color: '#fff',
+                },
+                '& pre': {
+                  whiteSpace: 'pre-wrap',
+                },
+                '& blockquote': {
+                  margin: '30px 0 30px 0',
+                  paddingLeft: '15px',
+                  color: 'rgba(255, 255, 255, 0.6)',
+                  borderLeft: '4px solid #002C51',
+                },
                 '& img': {
                   display: 'block',
                   maxWidth: '100%',
-                  margin: '25px 0',
+                  margin: '25px auto',
                 },
               }}
             >
               <ReactMarkdown
                 children={article.content}
-                transformImageUri={uri => (uri.startsWith('http') ? uri : `http://localhost:1337${uri}`)}
+                transformImageUri={uri => (uri.startsWith('http') ? uri : `${process.env.STRAPI_API_URL}${uri}`)}
               />
             </Box>
           </Box>

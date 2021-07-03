@@ -7,7 +7,7 @@ import {ColorText, Hero, IndexBar, IndexDottedLine, ReadMore, ReadMoreNoHrefWith
 import CaseBG from '../images/index_case_bg.png'
 import DataBG from '../images/index_data_bg.png'
 import lottie from 'lottie-web'
-import RoadmapBall from '../images/roadmap_ball.png'
+import RoadmapBall from '../images/index_roadmap_ball.png'
 import Datum1 from '../images/datum_1.png'
 import Datum2 from '../images/datum_2.png'
 import IndexBG3 from '../images/index_bg_3.png'
@@ -61,12 +61,21 @@ const IndexPage = () => {
 
   const handleActive = i => {
     setActive({...init, [i]: 'active'})
-    setInactive({...inactive, [i]: ''})
+    if (i === 2) {
+      // setInactive({...inactive, [i]: '', [2]: ''})
+    } else {
+      setInactive({...inactive, [i]: '', [2]: 'inactive'})
+    }
   }
 
   const handleInactive = i => {
-    setInactive({...init, [i]: 'inactive', [2]: ''})
-    setActive({...active, [i]: '', [2]: 'active'})
+    if (i !== 2) {
+      setInactive({...init, [i]: 'inactive', [2]: ''})
+      setActive({...active, [i]: '', [2]: 'active'})
+    } else {
+      // setInactive({...init, [i]: 'inactive'})
+      // setActive({...active, [i]: ''})
+    }
   }
 
   useEffect(() => {
@@ -141,12 +150,12 @@ const IndexPage = () => {
         <Box
           position='relative'
           pt={40}
-          pb={25}
+          pb={45}
           sx={{
-            backgroundImage: `url(${IndexBG2})`,
-            backgroundSize: '2000px',
+            backgroundImage: `url(${IndexBG2}), url(${IndexBG3})`,
+            backgroundSize: '2000px, 2000px',
             backgroundRepeat: 'no-repeat',
-            backgroundPosition: 'top',
+            backgroundPosition: 'center top, center 500px',
           }}
         >
           <Container maxWidth='lg' style={{display: 'flex', alignItems: 'center'}}>
@@ -163,13 +172,14 @@ const IndexPage = () => {
                     <AnimationOnScroll animateIn='animate__fadeInUp' duration={0.5}>
                       <IndexBar
                         p={5}
+                        titleMb={3}
                         title={
                           <>
                             <StaticImage src='../images/index_2_1.png' height={40} alt='icon' />
-                            <Box ml={3}>异构适配</Box>
+                            <Box ml={3}>异构链适配</Box>
                           </>
                         }
-                        desc='异构区块链协议适配，同时支持同构和异构应用链的适配'
+                        desc='采用通用跨链传输协议，实现对异构/同构应用链的协议适配'
                       />
                     </AnimationOnScroll>
                   </Grid>
@@ -177,13 +187,14 @@ const IndexPage = () => {
                     <AnimationOnScroll animateIn='animate__fadeInUp' duration={0.5}>
                       <IndexBar
                         p={5}
+                        titleMb={3}
                         title={
                           <>
                             <StaticImage src='../images/index_2_2.png' height={40} alt='icon' />
-                            <Box ml={3}>异构适配</Box>
+                            <Box ml={3}>交易验证</Box>
                           </>
                         }
-                        desc='异构区块链协议适配，同时支持同构和异构应用链的适配'
+                        desc='验证跨链交易的来源及交易证明是否满足指定的跨链验证规则'
                       />
                     </AnimationOnScroll>
                   </Grid>
@@ -191,13 +202,14 @@ const IndexPage = () => {
                     <AnimationOnScroll animateIn='animate__fadeInUp' duration={0.5}>
                       <IndexBar
                         p={5}
+                        titleMb={3}
                         title={
                           <>
                             <StaticImage src='../images/index_2_3.png' height={40} alt='icon' />
-                            <Box ml={3}>异构适配</Box>
+                            <Box ml={3}>跨链事务</Box>
                           </>
                         }
-                        desc='异构区块链协议适配，同时支持同构和异构应用链的适配'
+                        desc='内置事务管理合约，保证不同业务场景下跨链交易的事务性'
                       />
                     </AnimationOnScroll>
                   </Grid>
@@ -205,13 +217,14 @@ const IndexPage = () => {
                     <AnimationOnScroll animateIn='animate__fadeInUp' duration={0.5}>
                       <IndexBar
                         p={5}
+                        titleMb={3}
                         title={
                           <>
                             <StaticImage src='../images/index_2_4.png' height={40} alt='icon' />
-                            <Box ml={3}>异构适配</Box>
+                            <Box ml={3}>隐私保护</Box>
                           </>
                         }
-                        desc='异构区块链协议适配，同时支持同构和异构应用链的适配'
+                        desc='针对用户需要对托管数字资产全方位保护的解决方案'
                       />
                     </AnimationOnScroll>
                   </Grid>
@@ -219,91 +232,83 @@ const IndexPage = () => {
               </Box>
             </Grid>
           </Container>
-        </Box>
-
-        {/* 3 */}
-        <Box
-          pt={40}
-          pb={45}
-          position='relative'
-          sx={{
-            backgroundImage: `url(${IndexBG3})`,
-            backgroundPosition: 'center -120px',
-            backgroundRepeat: 'no-repeat',
-            backgroundSize: '2000px',
-          }}
-        >
-          <Box />
-          <Container maxWidth='lg' style={{display: 'flex', alignItems: 'center'}}>
-            <Grid item md={7}>
-              <AnimationOnScroll animateIn='animate__fadeInUp' duration={0.5}>
-                <Typography variant='h3' mb={13}>
-                  <ColorText>核心组件</ColorText>
-                </Typography>
-              </AnimationOnScroll>
-              <AnimationOnScroll animateIn='animate__fadeInUp' duration={0.5}>
-                <Box display='flex' alignItems='center' mb={8} position='relative'>
-                  <Box mr={5}>
-                    <StaticImage src='../images/index_3_1.png' width={80} alt='ball' />
+          {/* 3 */}
+          <Box pt={60} position='relative'>
+            <Box />
+            <Container maxWidth='lg' style={{display: 'flex', alignItems: 'center'}}>
+              <Grid item md={7}>
+                <AnimationOnScroll animateIn='animate__fadeInUp' duration={0.5}>
+                  <Typography variant='h3' mb={13}>
+                    <ColorText>核心组件</ColorText>
+                  </Typography>
+                </AnimationOnScroll>
+                <AnimationOnScroll animateIn='animate__fadeInUp' duration={0.5}>
+                  <Box display='flex' alignItems='center' mb={8} position='relative'>
+                    <Box mr={5}>
+                      <StaticImage src='../images/index_3_1.png' width={80} alt='ball' />
+                    </Box>
+                    <Box position='absolute' top='50%' left={-45} zIndex={-1} width={140}>
+                      <IndexDottedLine />
+                    </Box>
+                    <IndexBar
+                      lighterBG={true}
+                      px={6}
+                      py={3}
+                      width='100%'
+                      title='中继链'
+                      desc='实现通用跨链协议的开放许可链，提供应用链管理、跨链交易验证与路由等服务'
+                    />
                   </Box>
-                  <Box position='absolute' top='50%' left={-45} zIndex={-1} width={140}>
-                    <IndexDottedLine />
+                </AnimationOnScroll>
+                <AnimationOnScroll animateIn='animate__fadeInUp' duration={0.5}>
+                  <Box display='flex' alignItems='center' position='relative' mb={8}>
+                    <Box mr={5}>
+                      <StaticImage src='../images/index_3_2.png' width={80} alt='ball' />
+                    </Box>
+                    <Box position='absolute' top='50%' left={-45} zIndex={-1} width={140}>
+                      <IndexDottedLine />
+                    </Box>
+                    <IndexBar
+                      lighterBG={true}
+                      px={6}
+                      py={3}
+                      width='100%'
+                      title='跨链网关'
+                      desc='支持不同区块链间跨链消息的交互，担任收集和传播跨链交易的角色'
+                    />
                   </Box>
-                  <IndexBar
-                    px={6}
-                    py={3}
-                    width='100%'
-                    title='中继链'
-                    desc='是一种实现通用跨链协议的开放许可链，用于数字身份管理、应用链管理、跨链交易的可信验证与可靠路由'
-                  />
-                </Box>
-              </AnimationOnScroll>
-              <AnimationOnScroll animateIn='animate__fadeInUp' duration={0.5}>
-                <Box display='flex' alignItems='center' position='relative' mb={8}>
-                  <Box mr={5}>
-                    <StaticImage src='../images/index_3_2.png' width={80} alt='ball' />
+                </AnimationOnScroll>
+                <AnimationOnScroll animateIn='animate__fadeInUp' duration={0.5}>
+                  <Box display='flex' alignItems='center' position='relative'>
+                    <Box mr={5}>
+                      <StaticImage src='../images/index_3_3.png' width={80} alt='ball' />
+                    </Box>
+                    <Box position='absolute' top='50%' left={-45} zIndex={-1} width={140}>
+                      <IndexDottedLine />
+                    </Box>
+                    <IndexBar
+                      lighterBG={true}
+                      px={6}
+                      py={3}
+                      width='100%'
+                      title='应用链'
+                      desc='承载具体应用业务逻辑，根据是否支持跨链协议分为同构应用链与异构应用链'
+                    />
                   </Box>
-                  <Box position='absolute' top='50%' left={-45} zIndex={-1} width={140}>
-                    <IndexDottedLine />
-                  </Box>
-                  <IndexBar
-                    px={6}
-                    py={3}
-                    width='100%'
-                    title='跨链网关'
-                    desc='支持不同区块链间跨链消息的交互，担任收集和传播跨链交易的角色'
-                  />
-                </Box>
-              </AnimationOnScroll>
-              <AnimationOnScroll animateIn='animate__fadeInUp' duration={0.5}>
-                <Box display='flex' alignItems='center' position='relative'>
-                  <Box mr={5}>
-                    <StaticImage src='../images/index_3_3.png' width={80} alt='ball' />
-                  </Box>
-                  <Box position='absolute' top='50%' left={-45} zIndex={-1} width={140}>
-                    <IndexDottedLine />
-                  </Box>
-                  <IndexBar
-                    px={6}
-                    py={3}
-                    width='100%'
-                    title='应用链'
-                    desc='承载具体应用业务逻辑，根据是否支持跨链协议分为同构应用链与异构应用链'
-                  />
-                </Box>
-              </AnimationOnScroll>
-            </Grid>
-            <Grid item md={5} />
-          </Container>
+                </AnimationOnScroll>
+              </Grid>
+              <Grid item md={5} />
+            </Container>
+          </Box>
         </Box>
 
         {/* case */}
         <Box
           ref={ref}
-          pt={20}
+          pt={10}
           sx={{
             background: `url(${CaseBG})`,
-            backgroundPosition: 'center top',
+            backgroundPosition: 'center -100px',
             backgroundRepeat: 'no-repeat',
             backgroundSize: '2000px 1233px',
           }}
@@ -322,11 +327,17 @@ const IndexPage = () => {
                     flexDirection: 'column',
                     justifyContent: 'center',
                     boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
-                    padding: '50px',
+                    padding: '60px',
                     width: '320px',
                     height: '380px',
                     position: 'relative',
                     cursor: 'pointer',
+                    '& h5': {
+                      fontFamily: '"Roboto","Helvetica","Arial",sans-serif !important',
+                    },
+                    '& .MuiTypography-body1': {
+                      lineHeight: '26px',
+                    },
                     '&:hover': {
                       '& .read-more': {
                         background: '-webkit-linear-gradient(left, #7DBCFC, #2E7CFE, #01E1FF)',
@@ -362,19 +373,19 @@ const IndexPage = () => {
                       left: 0,
                       zIndex: 3,
                       backgroundSize: '200px 142px',
-                      backgroundPosition: '20px 20px',
+                      backgroundPosition: '15px 20px',
                       backgroundRepeat: 'no-repeat',
                     },
                   },
                 }}
               >
                 <Box className='case_item' sx={{'&:after': {backgroundImage: `url(${CardBG1})`}}}>
-                  <Box zIndex={4}>
+                  <Box zIndex={4} mt={15}>
                     <Typography variant='h5' mb={5}>
                       资产互换
                     </Typography>
-                    <Typography variant='body2' mb={7}>
-                      为链上的资产、数据、服务开拓价值互通的渠道，助力区块链技术从“链孤岛”到形成“链网络”的发展
+                    <Typography variant='body1' mb={7}>
+                      为用户提供不同链上资产转移服务，资产可以包括通证或凭证如：积分、证件、收藏品等。
                     </Typography>
                     <ReadMoreNoHrefWithoutStyle onClick={() => setOpen1(true)} className='read-more' />
                     <SwipeableDrawer
@@ -385,9 +396,7 @@ const IndexPage = () => {
                       open={open1}
                       onOpen={() => setOpen1(true)}
                       onClose={() => setOpen1(false)}
-                      sx={{
-                        '& .MuiDrawer-paper': {boxSizing: 'border-box', width: width / 2},
-                      }}
+                      sx={{'& .MuiDrawer-paper': {boxSizing: 'border-box', width: width / 2}}}
                     >
                       <Box
                         p={10}
@@ -413,12 +422,12 @@ const IndexPage = () => {
                   </Box>
                 </Box>
                 <Box className='case_item' ml={4} sx={{'&:after': {backgroundImage: `url(${CardBG2})`}}}>
-                  <Box zIndex={4}>
+                  <Box zIndex={4} mt={15}>
                     <Typography variant='h5' mb={5}>
                       数据互通
                     </Typography>
-                    <Typography variant='body2' mb={7}>
-                      为不同业务链上数据提供数据更新和同步服务，打破异构区块链间的信息壁垒，有效地进行链上数据的安全共享
+                    <Typography variant='body1' mb={7}>
+                      提供跨链数据更新和同步服务，打破异构区块链间的信息壁垒，有效地进行链上数据的安全共享
                     </Typography>
                     <ReadMoreNoHrefWithoutStyle onClick={() => setOpen2(true)} className='read-more' />
                   </Box>
@@ -458,12 +467,12 @@ const IndexPage = () => {
                 </Box>
 
                 <Box className='case_item' ml={4} sx={{'&:after': {backgroundImage: `url(${CardBG3})`}}}>
-                  <Box zIndex={4}>
+                  <Box zIndex={4} mt={15}>
                     <Typography variant='h5' mb={5}>
                       业务互补
                     </Typography>
-                    <Typography variant='body2' mb={7}>
-                      针对已有区块链基础设施的情况下，通过跨链服务实现业务耦合高、流程复杂的异构区块链间的横向打通，扩大业务规模，实现互利共赢。
+                    <Typography variant='body1' mb={7}>
+                      实现业务耦合高、流程复杂的异构区块链间的横向打通服务，扩大业务规模，实现互利共赢。
                     </Typography>
                     <ReadMoreNoHrefWithoutStyle onClick={() => setOpen3(true)} className='read-more' />
                   </Box>
@@ -518,7 +527,7 @@ const IndexPage = () => {
                 visibility: 'none',
                 opacity: 0,
                 position: 'absolute',
-                top: '90px',
+                top: '95px',
                 left: 0,
                 width: '100%',
                 textAlign: 'center',
@@ -534,20 +543,25 @@ const IndexPage = () => {
                 to: {transform: 'scale(1)'},
               },
               '& .roadmap_item': {
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
                 margin: '0 10px',
-                padding: '70px 30px',
                 cursor: 'pointer',
-                width: '220px',
+                width: '240px',
+                height: '214px',
                 backgroundImage: `url(${RoadmapShine})`,
                 backgroundSize: '0 0',
                 backgroundRepeat: 'no-repeat',
                 backgroundPosition: '140px 140px',
-                transition: 'background .3s ease',
+                transition: 'background .5s ease',
                 '&.active': {
-                  backgroundSize: '200px 200px',
-                  backgroundPosition: '-40px -40px',
+                  backgroundSize: '230px 230px',
+                  backgroundPosition: '-47px -47px',
                   '& .title': {
                     opacity: 0,
+                    display: 'none',
                   },
                   '& .hover_title': {
                     visibility: 'visible',
@@ -560,12 +574,12 @@ const IndexPage = () => {
                     display: 'none',
                   },
                   '& .roadmap_ball': {
-                    animation: 'scaleB 0.6s ease-in-out forwards',
+                    animation: 'scaleB 0.8s ease-in-out forwards',
                   },
                 },
                 '&.inactive': {
                   '& .roadmap_ball': {
-                    animation: 'scaleS 0.5s ease forwards',
+                    animation: 'scaleS 0.8s ease forwards',
                   },
                 },
               },
@@ -575,7 +589,7 @@ const IndexPage = () => {
               '& .roadmap_desc': {
                 display: 'none',
                 position: 'absolute',
-                top: '150px',
+                top: '148px',
                 width: '300px',
                 minHeight: '240px',
                 textAlign: 'left',
@@ -650,12 +664,11 @@ const IndexPage = () => {
                     pt={16}
                   >
                     <Typography variant='subtitle2' mb={2}>
-                      2021.06
+                      2021.04
                     </Typography>
                     <Divider sx={{background: '#405584'}} />
                     <ul>
-                      <li>分布式数字身份组件库开源</li>
-                      <li>打造基于数字身份的互通机制</li>
+                      <li>提供链原生的应用链、网关和用户的统一身份标识</li>
                     </ul>
                   </Box>
                 </Box>
@@ -688,9 +701,8 @@ const IndexPage = () => {
                     </Typography>
                     <Divider sx={{background: '#405584'}} />
                     <ul>
-                      <li>实时交易数据查询</li>
-                      <li>应用链管理</li>
-                      <li>中继链自治</li>
+                      <li>区块和交易的实时展示</li>
+                      <li>应用链和验证规则管理</li>
                       <li>DApp的聚合生态管理</li>
                     </ul>
                   </Box>
@@ -724,11 +736,11 @@ const IndexPage = () => {
                     pt={16}
                   >
                     <Typography variant='subtitle2' mb={2}>
-                      2021.06
+                      2021.08
                     </Typography>
                     <Divider sx={{background: '#405584'}} />
                     <ul>
-                      <li>为用户提供资产/数据交换服务</li>
+                      <li>提供资产/数据交换服务</li>
                       <li>DApp跨链服务体验</li>
                     </ul>
                   </Box>
@@ -741,11 +753,11 @@ const IndexPage = () => {
                   onMouseLeave={() => handleInactive(4)}
                 >
                   <Typography variant='body1' className={`title`}>
-                    联盟链跨链治理
+                    跨链治理框架
                   </Typography>
                   <img src={RoadmapBall} className={`roadmap_ball`} alt='ball' height={36} />
                   <Typography variant='subtitle2' className={`hover_title`}>
-                    联盟链跨链治理
+                    跨链治理框架
                   </Typography>
                   <Typography variant='body2' className='date'>
                     2021.10
@@ -757,12 +769,12 @@ const IndexPage = () => {
                     pt={16}
                   >
                     <Typography variant='subtitle2' mb={2}>
-                      2021.06
+                      2021.10
                     </Typography>
                     <Divider sx={{background: '#405584'}} />
                     <ul>
-                      <li>支持统一的身份管理，跨链权限控制</li>
-                      <li>节点管理服务及数据审计追溯等模块</li>
+                      <li>统一身份管理和权限控制</li>
+                      <li>节点管理及数据审计服务</li>
                     </ul>
                   </Box>
                 </Box>
@@ -805,13 +817,33 @@ const IndexPage = () => {
                             lineHeight: 1,
                           },
                         },
-                        '& .datum_meta': {display: 'block'},
-                        '& .datum_meta_list': {display: 'none', '& h6': {lineHeight: 1.8}},
+                        '& .datum_meta': {
+                          display: 'block',
+                          marginLeft: '20px',
+                          '& h5': {
+                            color: 'rgba(255, 255, 255, 0.5)',
+                            marginBottom: '12px',
+                            position: 'relative',
+                            '&:before': {
+                              content: '" "',
+                              display: 'block',
+                              width: '8px',
+                              height: '8px',
+                              borderRadius: '2px',
+                              background: 'rgba(255, 255, 255, 0.5)',
+                              position: 'absolute',
+                              left: '-20px',
+                              top: '50%',
+                              transform: 'translateY(-50%)',
+                            },
+                          },
+                        },
+                        '& .datum_meta_list': {display: 'none', '& h6': {lineHeight: '26px', fontWeight: 400}},
                         '& .datum_item': {
                           display: 'flex',
                           alignItems: 'center',
                           padding: '35px 0',
-                          transition: 'background 0.2s ease',
+                          transition: 'background 0.4s ease',
                           backgroundRepeat: 'no-repeat',
                           backgroundImage: `url(${DataCard})`,
                           backgroundPosition: 'top 1px left 70px',
@@ -853,8 +885,8 @@ const IndexPage = () => {
                         </Box>
                         <Box pl={6}>
                           <Box className='datum_meta'>
-                            <Typography variant='h6'>参与测评</Typography>
-                            <Typography variant='body2'>首批通过国家金融科技测评中心的跨链服务功能测试</Typography>
+                            <Typography variant='h5'>参与测评</Typography>
+                            <Typography variant='body1'>首批通过国家金融科技测评中心的跨链服务功能测试</Typography>
                           </Box>
                           <Box className='datum_meta_list'>
                             <Typography variant='subtitle2'>首批通过国家金融科技测评中心的跨链服务功能测试</Typography>
@@ -882,7 +914,7 @@ const IndexPage = () => {
                         </Box>
                         <Box pl={6}>
                           <Box className='datum_meta'>
-                            <Typography variant='h6'>专利&论文</Typography>
+                            <Typography variant='h5'>专利&论文</Typography>
                             <Typography variant='body2'>
                               在跨链事务一致性保障、数据有效性验证、跨链协议等相关领域具有23篇
                             </Typography>
@@ -918,7 +950,7 @@ const IndexPage = () => {
                         </Box>
                         <Box pl={6}>
                           <Box className='datum_meta'>
-                            <Typography variant='h6'>专利&论文</Typography>
+                            <Typography variant='h5'>专利&论文</Typography>
                             <Typography variant='body2'>
                               在跨链事务一致性保障、数据有效性验证、跨链协议等相关领域具有23篇
                             </Typography>

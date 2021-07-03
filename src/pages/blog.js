@@ -40,6 +40,7 @@ export const pageQuery = graphql`
 `
 
 const BlogPage = ({data}) => {
+  if (typeof window === undefined) return null
   return (
     <Layout>
       <SEO title='Blog' />
@@ -63,7 +64,7 @@ const BlogPage = ({data}) => {
               博观而约取，厚积而薄发
             </Box>
             <Box
-              mb={{md: 30, xs: 15}}
+              // mb={{md: 30, xs: 15}}
               fontSize={12}
               sx={{
                 '& button': {
@@ -71,47 +72,55 @@ const BlogPage = ({data}) => {
                 },
               }}
             >
-              {data.allStrapiCategory.edges.map(category => (
-                <Button variant='contained' color='inherit'>
-                  {category.node.name}
-                </Button>
-              ))}
+              {/*{data.allStrapiCategory.edges.map(category => (*/}
+              {/*  <Button variant='contained' color='inherit'>*/}
+              {/*    {category.node.name}*/}
+              {/*  </Button>*/}
+              {/*))}*/}
             </Box>
           </Box>
-          {data.allStrapiArticle.edges.map(article => (
-            <Box mb={16}>
-              <Grid container flexDirection={{xs: 'row', md: 'row-reverse'}}>
-                <Grid item md={4}>
-                  <Box ml={{md: 5, xs: 0}} mb={4}>
-                    <img
-                      src={`${process.env.STRAPI_API_URL}/${article.node.cover.formats.small.url}`}
-                      height={160}
-                      alt='thumbnail'
-                      style={{display: 'block', width: '100%', objectFit: 'cover'}}
-                    />
-                  </Box>
+          <Box
+            sx={{
+              '& .article:not(:last-child)': {
+                borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
+              },
+            }}
+          >
+            {data.allStrapiArticle.edges.map(article => (
+              <Box mb={8} pb={8} className='article'>
+                <Grid container flexDirection={{xs: 'row', md: 'row-reverse'}}>
+                  <Grid item md={4}>
+                    <Box ml={{md: 5, xs: 0}} mb={4}>
+                      <img
+                        src={`${process.env.STRAPI_API_URL}${article.node.cover.formats.small.url}`}
+                        height={160}
+                        alt='thumbnail'
+                        style={{display: 'block', width: '100%', objectFit: 'cover'}}
+                      />
+                    </Box>
+                  </Grid>
+                  <Grid item md={8}>
+                    <Typography
+                      variant='h5'
+                      fontSize='24px'
+                      mb={3}
+                      component='a'
+                      display='block'
+                      href={`/article/${article.node.strapiId}`}
+                    >
+                      {article.node.title}
+                    </Typography>
+                    <Typography variant='body1' fontSize='16px' color='rgba(255, 255, 255, 0.8)'>
+                      {article.node.content.slice(0, 80)}
+                    </Typography>
+                    <Typography variant='body1' mt={5}>
+                      <Moment date={article.node.published_at} format='YYYY.MM.DD' />
+                    </Typography>
+                  </Grid>
                 </Grid>
-                <Grid item md={8}>
-                  <Typography
-                    variant='h5'
-                    fontSize='24px'
-                    mb={3}
-                    component='a'
-                    display='block'
-                    href={`/article/${article.node.strapiId}`}
-                  >
-                    {article.node.title}
-                  </Typography>
-                  <Typography variant='body1' fontSize='16px' color='rgba(255, 255, 255, 0.8)'>
-                    {article.node.content.slice(0, 80)}
-                  </Typography>
-                  <Typography variant='body1' mt={5}>
-                    <Moment date={article.node.published_at} format='YYYY.MM.DD' />
-                  </Typography>
-                </Grid>
-              </Grid>
-            </Box>
-          ))}
+              </Box>
+            ))}
+          </Box>
         </Container>
       </Box>
     </Layout>

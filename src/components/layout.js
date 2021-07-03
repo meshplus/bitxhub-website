@@ -69,7 +69,7 @@ const Layout = ({children}) => {
               marginLeft: '30px',
               display: 'inline-block',
               marginBottom: '5px',
-              '&:hover, &.active': {
+              '&:hover': {
                 background: '-webkit-linear-gradient(left, #7DBCFC, #2E7CFE, #01E1FF)',
                 color: 'transparent',
                 WebkitBackgroundClip: 'text',

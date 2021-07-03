@@ -39,6 +39,32 @@ export const ReadMoreNoHrefWithoutStyle = ({...other}) => {
   )
 }
 
+export const ReadMoreWithoutStyle = ({to, ...other}) => {
+  return (
+    <Box {...other} sx={{cursor: 'pointer'}}>
+      <Link to={to}>
+        <Box display='inline-flex' alignItems='center'>
+          <Box mr={2}>查看更多</Box>
+          <i className='icon icon-right' style={{fontSize: '22px'}} />
+        </Box>
+      </Link>
+    </Box>
+  )
+}
+
+export const ReadMoreWithoutStyleRedirect = ({to, ...other}) => {
+  return (
+    <Box {...other} sx={{cursor: 'pointer'}}>
+      <a href={to} target='_blank'>
+        <Box display='inline-flex' alignItems='center'>
+          <Box mr={2}>查看更多</Box>
+          <i className='icon icon-right' style={{fontSize: '22px'}} />
+        </Box>
+      </a>
+    </Box>
+  )
+}
+
 export const ColorText = ({children, ...other}) => {
   return (
     <Box
@@ -97,26 +123,30 @@ export const Card = ({children, className, title, singleTitle, img, desc, date, 
         borderRadius: '12px',
         display: 'block',
         paddingTop: '50%',
+        backgroundImage: `url(${img})`,
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: '100%',
+        transition: 'all .6s',
+        transform: 'translateY(0)',
         '&:hover': {
           cursor: 'pointer',
-          transition: 'all .6s',
           transform: 'translateY(-4px)',
         },
       }}
     >
-      <img
-        src={img}
-        alt='cover'
-        style={{
-          position: 'absolute',
-          display: 'block',
-          top: 0,
-          width: '100%',
-          objectFit: 'cover',
-          borderTopLeftRadius: '12px',
-          borderTopRightRadius: '12px',
-        }}
-      />
+      {/*<img*/}
+      {/*  src={img}*/}
+      {/*  alt='cover'*/}
+      {/*  style={{*/}
+      {/*    position: 'absolute',*/}
+      {/*    display: 'block',*/}
+      {/*    top: 0,*/}
+      {/*    width: '100%',*/}
+      {/*    objectFit: 'cover',*/}
+      {/*    borderTopLeftRadius: '12px',*/}
+      {/*    borderTopRightRadius: '12px',*/}
+      {/*  }}*/}
+      {/*/>*/}
       <Box
         p={6}
         sx={{
@@ -153,18 +183,19 @@ export const Divider = ({children, className, ...other}) => {
   )
 }
 
-export const IndexBar = ({children, className, title, desc, ...other}) => {
+export const IndexBar = ({children, className, title, desc, titleMb, lighterBG, ...other}) => {
   return (
     <Box
       className={className}
       {...other}
       sx={{
         borderRadius: '16px',
-        background:
-          'linear-gradient(89.86deg, rgba(11, 33, 77, 0.6) -5.78%, rgba(1, 3, 10, 0.6) 52.27%, rgba(0, 0, 0, 0.6) 52.28%)',
+        background: lighterBG
+          ? 'linear-gradient(270deg, #050707 0%, #121B30 100%)'
+          : 'linear-gradient(89.86deg, rgba(11, 33, 77, 0.6) -5.78%, rgba(1, 3, 10, 0.6) 52.27%, rgba(0, 0, 0, 0.6) 52.28%)',
       }}
     >
-      <Typography variant='subtitle1' mb={2} display='flex' alignItems='center'>
+      <Typography variant='subtitle1' mb={titleMb ? titleMb : 2} display='flex' alignItems='center'>
         {title}
       </Typography>
       <Typography variant='body1'>{desc}</Typography>

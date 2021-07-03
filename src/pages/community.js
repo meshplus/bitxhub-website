@@ -5,15 +5,24 @@ import {Box, Button, Container, Grid, Typography} from '@material-ui/core'
 import CommunityBanner from '../images/community_bg.png'
 import CommunityBG2 from '../images/community_bg_2.png'
 import CommunityBG3 from '../images/community_bg_3.png'
-import First from '../images/1.png'
-import {Card, Divider, HoverColorText, ReadMore} from '../components/style'
-import {graphql} from 'gatsby'
+import {
+  Card,
+  ColorText,
+  Divider,
+  HoverColorText,
+  ReadMore,
+  ReadMoreWithoutStyle,
+  ReadMoreWithoutStyleRedirect,
+} from '../components/style'
+import {graphql, Link} from 'gatsby'
 import Union from '../images/union.svg'
 import Right from '../images/right.svg'
 import Smile from '../images/smile.svg'
 import BG from '../images/community_bg.svg'
 import {Octokit} from '@octokit/rest'
 import Moment from 'react-moment'
+import CommunityCard from '../images/community_card.png'
+import CommunityCardHover from '../images/community_card_hover.png'
 
 export const pageQuery = graphql`
   query {
@@ -32,6 +41,29 @@ export const pageQuery = graphql`
               }
             }
             url
+          }
+        }
+      }
+    }
+    allStrapiArticle(filter: {strapiId: {in: [1, 2, 5]}}) {
+      edges {
+        node {
+          strapiId
+          title
+          content
+          published_at
+          authors {
+            username
+          }
+          cover {
+            formats {
+              small {
+                url
+              }
+            }
+          }
+          categories {
+            name
           }
         }
       }
@@ -56,6 +88,7 @@ const CommunityPage = ({data}) => {
       .catch(e => console.error(e))
   }, [])
 
+  if (typeof window === undefined) return null
   return (
     <Box
       sx={{
@@ -76,7 +109,12 @@ const CommunityPage = ({data}) => {
               BitXHub的核心技术完全开源，加入我们一起构建区块链跨链世界
             </Typography>
             <Button variant='outlined' size='large'>
-              成为贡献者
+              <Link to='/article/4'>
+                成为贡献者
+                <ColorText ml={2}>
+                  <i className='icon icon-chevron-right' />
+                </ColorText>
+              </Link>
             </Button>
             <Box mt={20}>
               <Typography variant='h4' mb={3}>
@@ -111,7 +149,9 @@ const CommunityPage = ({data}) => {
                             <Moment date={activity.node.published_at} format='YYYY.MM.DD' />
                           </Typography>
                           <Typography variant='subtitle1' component='a' href={activity.node.link} target='_blank'>
-                            <HoverColorText>{activity.node.title}</HoverColorText>
+                            <HoverColorText maxHeight='28px' overflow='hidden'>
+                              {activity.node.title}
+                            </HoverColorText>
                           </Typography>
                           <Divider my={4} />
                         </>
@@ -125,68 +165,104 @@ const CommunityPage = ({data}) => {
                 新手任务
               </Typography>
               <Typography variant='subtitle1' mb={8}>
-                可以提供的开发人物
+                可以提供的开发任务
               </Typography>
-              <Box style={{background: `url(${BG})`}}>
+              <Box
+                style={{background: `url(${BG})`}}
+                sx={{
+                  '& .item': {
+                    zIndex: 4,
+                    padding: '25px',
+                    position: 'relative',
+                    background: `url(${CommunityCardHover})`,
+                    backgroundSize: '100% 100%',
+                    backgroundRepeat: 'no-repeat',
+                    '&:after': {
+                      content: '" "',
+                      display: 'block',
+                      position: 'absolute',
+                      left: 0,
+                      top: 0,
+                      width: '100%',
+                      height: '100%',
+                      zIndex: 1,
+                      backgroundRepeat: 'no-repeat',
+                      backgroundPosition: 'right 25px bottom 25px',
+                    },
+                    '&:hover': {
+                      backgroundImage: `url(${CommunityCard})`,
+                      '& .read-more': {
+                        background: '-webkit-linear-gradient(left, #7DBCFC, #2E7CFE, #01E1FF)',
+                        color: 'transparent',
+                        WebkitBackgroundClip: 'text',
+                        WebkitTextFillColor: 'transparent',
+                      },
+                    },
+                  },
+                }}
+              >
                 <Grid container spacing={4}>
                   <Grid item md={4} xs={12}>
-                    <Box
-                      borderRadius='16px'
-                      p={4}
-                      style={{
-                        background: `url(${Union}) right 20px bottom 20px, linear-gradient(360deg, #000000 0%, #040E22 0.01%, #121B30 100%)`,
-                        backgroundRepeat: 'no-repeat, repeat',
-                      }}
-                    >
-                      <Typography variant='subtitle1'>提交漏洞</Typography>
-                      <Typography variant='body2' mb={6}>
-                        提交你发现的漏洞，保护bitxhub的安全
-                      </Typography>
-                      <ReadMore to='/' />
+                    <Box className='item' borderRadius='16px' sx={{'&:after': {backgroundImage: `url(${Union})`}}}>
+                      <Box zIndex={4} position='relative'>
+                        <Typography variant='subtitle1'>贡献指南</Typography>
+                        <Typography variant='body2' mb={6}>
+                          按照指南，提交你的Issue和PR
+                        </Typography>
+                        <ReadMoreWithoutStyle to='/article/4' className='read-more' />
+                      </Box>
                     </Box>
                   </Grid>
                   <Grid item md={4} xs={12}>
                     <Box
+                      className='item'
                       borderRadius='16px'
                       p={4}
-                      style={{
-                        background: `url(${Right}) right 20px bottom 20px, linear-gradient(360deg, #000000 0%, #040E22 0.01%, #121B30 100%)`,
-                        backgroundRepeat: 'no-repeat, repeat',
-                      }}
+                      sx={{'&:after': {backgroundImage: `url(${Right})`}}}
                     >
-                      <Typography variant='subtitle1'>提交漏洞</Typography>
-                      <Typography variant='body2' mb={6}>
-                        提交你发现的漏洞，保护bitxhub的安全
-                      </Typography>
-                      <ReadMore to='/' />
+                      <Box zIndex={4} position='relative'>
+                        <Typography variant='subtitle1'>修复BUG</Typography>
+                        <Typography variant='body2' mb={6}>
+                          解决已发现的BUG，保护BitXHub的安全
+                        </Typography>
+                        <ReadMoreWithoutStyleRedirect
+                          to='https://github.com/meshplus/bitxhub/issues?q=is%3Aissue+is%3Aopen+label%3Abug'
+                          target='_blank'
+                          className='read-more'
+                        />
+                      </Box>
                     </Box>
                   </Grid>
                   <Grid item md={4} xs={12}>
                     <Box
+                      className='item'
                       borderRadius='16px'
                       p={4}
-                      style={{
-                        background: `url(${Smile}) right 20px bottom 20px, linear-gradient(360deg, #000000 0%, #040E22 0.01%, #121B30 100%)`,
-                        backgroundRepeat: 'no-repeat, repeat',
-                      }}
+                      sx={{'&:after': {backgroundImage: `url(${Smile})`}}}
                     >
-                      <Typography variant='subtitle1'>提供协助</Typography>
-                      <Typography variant='body2' mb={6}>
-                        提交你发现的漏洞，保护bitxhub的安全
-                      </Typography>
-                      <ReadMore to='/' />
+                      <Box zIndex={4} position='relative'>
+                        <Typography variant='subtitle1'>产品优化</Typography>
+                        <Typography variant='body2' mb={6}>
+                          完成新功能，不断优化产品
+                        </Typography>
+                        <ReadMoreWithoutStyleRedirect
+                          to='https://github.com/meshplus/bitxhub/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22'
+                          target='_blank'
+                          className='read-more'
+                        />
+                      </Box>
                     </Box>
                   </Grid>
                 </Grid>
               </Box>
               <Typography variant='h4' mt={20} mb={3}>
-                新手任务
+                社区之星
               </Typography>
               <Typography variant='subtitle1' mb={8}>
-                可以提供的开发人物
+                这里展示最新参与开源和持续参与开源的开发者
               </Typography>
               <Grid container spacing={10}>
-                {users?.slice(0, 14).map(user => (
+                {users?.slice(0, 12).map(user => (
                   <Grid
                     item
                     md={2}
@@ -197,8 +273,8 @@ const CommunityPage = ({data}) => {
                     }}
                   >
                     <a href={user.html_url} target='_blank' rel='noopener noreferrer'>
-                      <img src={user.avatar_url} width='120' alt='' style={{borderRadius: '16px'}} />
-                      <Typography variant='subtitle2' mt={4}>
+                      <img src={user.avatar_url} width='100' alt='' style={{borderRadius: '16px'}} />
+                      <Typography variant='subtitle1' mt={4}>
                         {user.login}
                       </Typography>
                     </a>
@@ -209,15 +285,16 @@ const CommunityPage = ({data}) => {
                 学习资料
               </Typography>
               <Grid container spacing={10}>
-                <Grid item md={4}>
-                  <Card title='关于跨链技术的分析和思考' date='2020.02.01' img={First} />
-                </Grid>
-                <Grid item md={4}>
-                  <Card title='IPFS存储一致性难题？IPFS -Cluster帮你解决' date='2020.02.01' img={First} />
-                </Grid>
-                <Grid item md={4}>
-                  <Card title='关于跨链技术的分析和思考' date='2020.02.01' img={First} />
-                </Grid>
+                {data.allStrapiArticle.edges.map(article => (
+                  <Grid item md={4}>
+                    <Card
+                      title={article.node.title}
+                      link={`/article/${article.node.strapiId}`}
+                      date={article.node.published_at}
+                      img={`${process.env.STRAPI_API_URL}${article.node.cover.formats.small.url}`}
+                    />
+                  </Grid>
+                ))}
               </Grid>
             </Box>
           </Box>

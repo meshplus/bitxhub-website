@@ -242,7 +242,6 @@ export const theme = createTheme({
           backgroundColor: '#050505',
           color: '#ffffff',
           minHeight: '100vh',
-          fontFamily: '"AlibabaPuHui", "Roboto", "Helvetica", "Arial", sans-serif !important',
           lineHeight: 1.2,
         },
         button: {
