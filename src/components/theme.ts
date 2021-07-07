@@ -37,7 +37,6 @@ export const theme = createTheme({
           background: 'linear-gradient(360deg, #181818 0%, #05070B 0.01%, #1D2735 100%);',
           borderTopLeftRadius: '15px',
           borderBottomLeftRadius: '15px',
-          padding: '30px',
         },
       },
     },
@@ -71,7 +70,7 @@ export const theme = createTheme({
           padding: '4px 5px',
         },
         sizeLarge: {
-          width: '150px',
+          minWidth: '150px',
           height: '50px',
         },
         containedSecondary: {
@@ -110,13 +109,6 @@ export const theme = createTheme({
             background:
               'radial-gradient(95.45% 255.77% at 95.45% 50.51%, #01E1FF 0%, #2E7CFE 66.23%, rgba(125, 188, 252, 0.92) 100%)',
           },
-        },
-      },
-    },
-    MuiTabs: {
-      styleOverrides: {
-        indicator: {
-          display: 'none',
         },
       },
     },
@@ -160,23 +152,6 @@ export const theme = createTheme({
         },
       },
     },
-    MuiTab: {
-      styleOverrides: {
-        root: {
-          color: '#A1A8C7',
-          minWidth: '60px !important',
-          '&:hover': {
-            color: '#444C65',
-          },
-          '&$selected': {
-            color: '#444C65',
-          },
-          '&:focus': {
-            color: '#444C65',
-          },
-        },
-      },
-    },
     MuiCard: {
       styleOverrides: {
         root: {
@@ -188,22 +163,27 @@ export const theme = createTheme({
     MuiTypography: {
       styleOverrides: {
         root: {
-          // fontFamily: 'Bahnschrift, "Roboto", "Helvetica", "Arial", sans-serif !important'
           fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif !important',
         },
         h1: {
           fontFamily: '"AlibabaPuHui", "Roboto", "Helvetica", "Arial", sans-serif !important',
           fontWeight: 'bold',
+          [breakpoints.down('sm')]: {
+            fontSize: '48px',
+          },
         },
         h2: {
           fontFamily: '"AlibabaPuHui", "Roboto", "Helvetica", "Arial", sans-serif !important',
           fontWeight: 'bold',
+          [breakpoints.down('sm')]: {
+            fontSize: '36px',
+          },
         },
         h3: {
           fontFamily: '"AlibabaPuHui", "Roboto", "Helvetica", "Arial", sans-serif !important',
           fontWeight: 'bold',
           [breakpoints.down('sm')]: {
-            fontSize: '36px',
+            fontSize: '32px',
           },
         },
         h4: {
@@ -213,6 +193,9 @@ export const theme = createTheme({
         h5: {
           fontFamily: '"AlibabaPuHui", "Roboto", "Helvetica", "Arial", sans-serif !important',
           fontWeight: 'bold',
+          [breakpoints.down('sm')]: {
+            fontSize: '20px',
+          },
         },
         h6: {
           fontFamily: '"AlibabaPuHui", "Roboto", "Helvetica", "Arial", sans-serif !important',
@@ -227,9 +210,16 @@ export const theme = createTheme({
         },
         body1: {
           color: 'rgba(255, 255, 255, 0.5)',
+          lineHeight: '20px',
+          [breakpoints.down('md')]: {
+            fontSize: '12px',
+          },
         },
         body2: {
           color: 'rgba(255, 255, 255, 0.5)',
+          [breakpoints.down('md')]: {
+            fontSize: '12px',
+          },
         },
       },
     },

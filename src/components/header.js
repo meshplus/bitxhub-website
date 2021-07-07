@@ -1,4 +1,4 @@
-import {Box, Container, SwipeableDrawer} from '@material-ui/core'
+import {Box, Container, Grid, SwipeableDrawer} from '@material-ui/core'
 import {Link} from 'gatsby'
 import PropTypes from 'prop-types'
 import * as React from 'react'
@@ -6,24 +6,92 @@ import {useState} from 'react'
 import MenuIcon from '@material-ui/icons/Menu'
 import Logo from '../images/logo.png'
 
+const menu = [
+  {
+    href: '/tech',
+    title: '技术',
+    icon: 'icon icon-jishu',
+  },
+  {
+    href: 'https://upload.hyperchain.cn/BitXHub%E7%99%BD%E7%9A%AE%E4%B9%A6.pdf',
+    title: '白皮书',
+    isExternal: true,
+    icon: 'icon icon-baipishu',
+  },
+  {
+    href: 'https://meshplus.github.io/bitxhub/bitxhub/quick_start.html',
+    title: '文档',
+    isExternal: true,
+    icon: 'icon icon-wendang',
+  },
+  {
+    href: '/community',
+    title: '社区',
+    icon: 'icon icon-shequ',
+  },
+  {
+    href: '/blog',
+    title: '博客',
+    icon: 'icon icon-boke',
+  },
+  {
+    href: '/tool',
+    title: '工具',
+    icon: 'icon icon-gongju',
+  },
+  {
+    href: '/about',
+    title: '关于我们',
+    icon: 'icon icon-guanyuwomen',
+  },
+]
+
 const Header = ({siteTitle}) => {
   const [open, setOpen] = useState(false)
   const toggleDrawer = s => () => setOpen(s)
 
   return (
-    <Box bgcolor='rgba(0, 0, 0, .6)' left={0} right={0} py={{xs: 2, sm: 2}} zIndex={999} top={0} position='fixed'>
+    <Box bgcolor='rgba(0, 0, 0, .6)' left={0} right={0} py={{xs: 2, sm: 2}} zIndex={99999} top={0} position='fixed'>
       <Container maxWidth='lg'>
         <SwipeableDrawer
-          anchor='left'
+          anchor='top'
           open={open}
           onClose={toggleDrawer(false)}
           onOpen={toggleDrawer(true)}
           disableSwipeToOpen={false}
         >
-          2222222222222222222222222
+          <Box
+            p={10}
+            pt={30}
+            sx={{
+              '& i': {
+                marginRight: '10px',
+                fontSize: '18px',
+              },
+            }}
+          >
+            <Grid container>
+              {menu.map(m => (
+                <Grid item xs={6}>
+                  <Box mb={6} color='rgba(255, 255, 255, 0.8)'>
+                    <i className={m.icon} />
+                    {m.isExternal && (
+                      <a href={m.href} target='_blank' rel='noreferrer'>
+                        {m.title}
+                      </a>
+                    )}
+                    {!m.isExternal && (
+                      <Link to={m.href} activeClassName='active' partiallyActive={true}>
+                        {m.title}
+                      </Link>
+                    )}
+                  </Box>
+                </Grid>
+              ))}
+            </Grid>
+          </Box>
         </SwipeableDrawer>
-        <Box display='flex' alignItems='center' justifyContent={{xs: 'space-between', md: ''}}>
-          <MenuIcon sx={{display: {sm: 'block', md: 'none'}}} onClick={() => setOpen(true)} />
+        <Box display='flex' alignItems='center'>
           <Link to='/'>
             <Box display='flex'>
               <Box mr={2}>
@@ -31,6 +99,7 @@ const Header = ({siteTitle}) => {
               </Box>
             </Box>
           </Link>
+          <MenuIcon sx={{marginLeft: 'auto', display: {sm: 'block', md: 'none'}}} onClick={() => setOpen(true)} />
           <Box
             alignItems='center'
             ml='auto'

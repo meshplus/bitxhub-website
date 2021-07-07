@@ -84,13 +84,26 @@ const BlogPage = ({data}) => {
               '& .article:not(:last-child)': {
                 borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
               },
+              '& .MuiTypography-h5': {
+                fontFamily: '"Roboto","Helvetica","Arial",sans-serif !important',
+              },
+              '& .title': {
+                fontWeight: 500,
+              },
+              '& .content': {
+                height: '20px',
+                overflow: 'hidden',
+              },
+              '& .date': {
+                fontFamily: '"Titillium Web","Roboto","Helvetica","Arial",sans-serif !important',
+              },
             }}
           >
             {data.allStrapiArticle.edges.map(article => (
               <Box mb={8} pb={8} className='article'>
                 <Grid container flexDirection={{xs: 'row', md: 'row-reverse'}}>
                   <Grid item md={4}>
-                    <Box ml={{md: 5, xs: 0}} mb={4}>
+                    <Box ml={{md: 5, xs: 0}} mb={{md: 0, xs: 4}}>
                       <img
                         src={`${process.env.STRAPI_API_URL}${article.node.cover.formats.small.url}`}
                         height={160}
@@ -101,6 +114,7 @@ const BlogPage = ({data}) => {
                   </Grid>
                   <Grid item md={8}>
                     <Typography
+                      className='title'
                       variant='h5'
                       fontSize='24px'
                       mb={3}
@@ -110,10 +124,10 @@ const BlogPage = ({data}) => {
                     >
                       {article.node.title}
                     </Typography>
-                    <Typography variant='body1' fontSize='16px' color='rgba(255, 255, 255, 0.8)'>
+                    <Typography variant='body1' fontSize='16px' color='rgba(255, 255, 255, 0.8)' className='content'>
                       {article.node.content.slice(0, 80)}
                     </Typography>
-                    <Typography variant='body1' mt={5}>
+                    <Typography variant='body1' mt={6} className='date'>
                       <Moment date={article.node.published_at} format='YYYY.MM.DD' />
                     </Typography>
                   </Grid>

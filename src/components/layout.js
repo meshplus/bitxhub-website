@@ -13,6 +13,7 @@ import {theme} from './theme'
 import {Box, Container, CssBaseline, ThemeProvider, Typography} from '@material-ui/core'
 import './style.css'
 import {StaticImage} from 'gatsby-plugin-image'
+import 'swiper/swiper-bundle.css'
 
 const Layout = ({children}) => {
   const data = useStaticQuery(graphql`

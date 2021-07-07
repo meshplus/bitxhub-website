@@ -10,7 +10,7 @@ import {Link} from 'gatsby'
 import Typewriter from 'typewriter-effect'
 import {ChevronRight} from '@material-ui/icons'
 import {AnimationOnScroll} from 'react-animation-on-scroll'
-import Browser from '../images/tool_browser.gif'
+import Browser1 from '../images/tool_1.webm'
 
 const ToolPage = ({data}) => {
   const [y, setY] = useState(0)
@@ -27,6 +27,13 @@ const ToolPage = ({data}) => {
               backgroundSize: '1991px 681px, 2000px 900px',
               backgroundRepeat: 'no-repeat',
               backgroundPosition: 'center top, center 500px',
+              '& .btn': {
+                display: {md: 'block', xs: 'none'},
+              },
+              '& .mobile-btn': {
+                display: {md: 'none', xs: 'block'},
+                m: '20px auto',
+              },
             }}
           >
             <Container maxWidth='lg'>
@@ -40,19 +47,24 @@ const ToolPage = ({data}) => {
                         </AnimationOnScroll>
                         , 尽在掌握之中
                       </Typography>
-                      <Typography variant='subtitle1' pr={25} mb={20}>
+                      <Typography variant='subtitle1' pr={{md: 25, xs: 0}} mb={{md: 20, xs: 10}}>
                         通过可视化方式进行应用链管理和中继链自治管理, 实时查看跨链数据; 即将在2021年的更新中上线。
                       </Typography>
-                      <Button variant='outlined' color='primary' size='large' disabled>
+                      <Button variant='outlined' color='primary' size='large' disabled className='btn'>
                         敬请期待
                         <ChevronRight />
                       </Button>
                     </Box>
                   </Grid>
-                  <Grid item md={7} textAlign='center'>
-                    <img src={Browser} alt='tool' height={384} />
+                  <Grid item md={7} textAlign='center' sx={{'& video': {display: 'block', width: '100%'}}}>
+                    {/*<img src={Browser} alt='tool' />*/}
+                    <video src={Browser1} autoPlay={true} />
                   </Grid>
                 </Grid>
+                <Button variant='outlined' color='primary' size='large' disabled className='mobile-btn'>
+                  敬请期待
+                  <ChevronRight />
+                </Button>
               </Box>
               <Box pt={25} pb={10}>
                 <Container maxWidth='lg'>
@@ -65,10 +77,10 @@ const ToolPage = ({data}) => {
                           </AnimationOnScroll>
                           启动跨链系统
                         </Typography>
-                        <Typography variant='subtitle1' pr={20} mb={20}>
+                        <Typography variant='subtitle1' pr={{md: 20, xs: 0}} mb={{md: 20, xs: 5}}>
                           Goduck 跨链运维工具可以一键启动任一跨链组件; 一键生成组件配置; 一键启动整套跨链系统
                         </Typography>
-                        <Button variant='outlined' color='primary' size='large'>
+                        <Button variant='outlined' color='primary' size='large' className='btn'>
                           <Link to='/quick'>
                             立即使用
                             <ColorText ml={2}>
@@ -78,20 +90,20 @@ const ToolPage = ({data}) => {
                         </Button>
                       </Box>
                     </Grid>
-                    <Grid item md={7}>
+                    <Grid item md={7} width='100%'>
                       <Box
                         mb={15}
-                        pl={20}
-                        mt={12}
-                        height={480}
-                        fontSize={10}
+                        pl={{md: 20, xs: 5}}
+                        mt={{md: 12, xs: 5}}
+                        height={{md: 480, xs: 260}}
+                        fontSize={{md: 10, xs: 8}}
                         fontFamily='menlo'
                         sx={{
                           overflow: 'hidden',
                           color: '#c0c0c0',
                           backgroundImage: `url(${Screen})`,
                           backgroundRepeat: 'no-repeat',
-                          backgroundSize: '120%',
+                          backgroundSize: {md: '120%', xs: '137%'},
                           backgroundPosition: '-50px top',
                           zIndex: 20,
                           '& .color': {
@@ -103,9 +115,10 @@ const ToolPage = ({data}) => {
                           },
                         }}
                       >
-                        <Box overflow='hidden' mt={12}>
+                        <Box overflow='hidden' mt={{md: 12, xs: 5}}>
                           <Box
                             sx={{
+                              mt: {md: 0, xs: 6},
                               transform: `translateY(-${y}px)`,
                             }}
                           >
@@ -232,6 +245,14 @@ const ToolPage = ({data}) => {
                       </Box>
                     </Grid>
                   </Grid>
+                  <Button variant='outlined' color='primary' size='large' className='mobile-btn'>
+                    <Link to='/quick'>
+                      立即使用
+                      <ColorText ml={2}>
+                        <i className='icon icon-chevron-right' />
+                      </ColorText>
+                    </Link>
+                  </Button>
                 </Container>
               </Box>
             </Container>

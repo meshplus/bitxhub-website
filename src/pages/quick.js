@@ -47,9 +47,9 @@ const QuickPage = ({data}) => {
           pb={30}
           sx={{
             backgroundImage: `url(${BG1}), url(${BG2})`,
-            backgroundSize: '2000px, 2000px',
+            backgroundSize: {md: '2000px, 2000px', xs: '1000px, 800px 500px'},
             backgroundRepeat: 'no-repeat',
-            backgroundPosition: 'center -50px, center 1210px',
+            backgroundPosition: {md: 'center -50px, center 1415px', xs: 'center -50px, center 1188px'},
           }}
         >
           <Container maxWidth='lg'>
@@ -62,7 +62,24 @@ const QuickPage = ({data}) => {
                 想深入了解BitXHub跨链技术的小伙伴也可以通过快速开始文档分步搭建。
               </Typography>
             </Box>
-            <Box mt={{xs: 5, md: 10}}>
+            <Box
+              mt={{xs: 5, md: 10}}
+              sx={{
+                '& .btn': {
+                  display: {
+                    md: 'inline-block',
+                    xs: 'none',
+                  },
+                },
+                '& .mobile-btn': {
+                  display: {
+                    md: 'none',
+                    xs: 'inline-block',
+                    margin: '0 auto',
+                  },
+                },
+              }}
+            >
               <Grid container>
                 <Grid item md={5} display='flex' alignItems='center'>
                   <Box>
@@ -73,6 +90,7 @@ const QuickPage = ({data}) => {
                       通过Goduck运维小工具来快速体验跨链流程。
                     </Typography>
                     <Button
+                      className='btn'
                       variant='outlined'
                       color='primary'
                       size='large'
@@ -87,87 +105,104 @@ const QuickPage = ({data}) => {
                     </Button>
                   </Box>
                 </Grid>
-                <Grid item md={7} textAlign='center'>
-                  <img src={Quick1} alt='tool' height={540} />
+                <Grid item md={7} textAlign='center' sx={{'& img': {display: 'block', width: '100%'}}}>
+                  <img src={Quick1} alt='tool' />
                 </Grid>
               </Grid>
+              <Box textAlign='center' mt={4}>
+                <Button
+                  className='mobile-btn'
+                  variant='outlined'
+                  color='primary'
+                  size='large'
+                  component='a'
+                  href='https://meshplus.github.io/bitxhub/bitxhub/quick_start.html'
+                  target='_blank'
+                >
+                  立即使用
+                  <ColorText ml={2}>
+                    <i className='icon icon-chevron-right' />
+                  </ColorText>
+                </Button>
+              </Box>
             </Box>
-            <Box pt={50} pb={10}>
+            <Box
+              pt={{md: 50, xs: 20}}
+              pb={10}
+              sx={{
+                '& .item': {
+                  display: 'flex',
+                  alignItems: 'center',
+                  width: {md: '320px', xs: '204px'},
+                  height: {md: '320px', xs: '204px'},
+                  borderRadius: '320px',
+                  background: `url(${One}), linear-gradient(360deg, #000000 0%, #040E22 0.01%, #1D2A45 100%)`,
+                  backgroundPosition: '20px 20px, top left',
+                  backgroundSize: {md: '200px 140px, 100% 100%', xs: '130px 85px, 100% 100%'},
+                  backgroundRepeat: 'no-repeat',
+                },
+                '& .arrow': {
+                  width: {md: '100px', xs: '64px'},
+                  height: {md: '80px', xs: '50px'},
+                },
+              }}
+            >
               <Typography variant='h3' textAlign='center' mb={2}>
                 系统搭建
               </Typography>
               <Typography variant='subtitle1' textAlign='center' mb={11}>
                 通过单独搭建bitxhub各个组件, 以深入了解BitXHub
               </Typography>
-              <Box display='flex' alignItems='center' justifyContent='center'>
-                <Box
-                  p={10}
-                  sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    width: '320px',
-                    height: '320px',
-                    borderRadius: '320px',
-                    background: `url(${One}), linear-gradient(360deg, #000000 0%, #040E22 0.01%, #1D2A45 100%)`,
-                    backgroundPosition: '20px 20px, top left',
-                    backgroundSize: '200px 140px, 100% 100%',
-                    backgroundRepeat: 'no-repeat',
-                  }}
-                >
-                  <Box>
-                    <Typography variant='h6' mb={2}>
-                      环境准备
-                    </Typography>
-                    <Typography variant='body2'>在开始之前配置硬件、操作系统和软件环境</Typography>
+              <Box overflow={{md: '', xs: 'scroll'}}>
+                <Box display='flex' alignItems='center' justifyContent='center' width={{md: '100%', xs: '820px'}}>
+                  <Box
+                    p={10}
+                    className='item'
+                    sx={{
+                      background: `url(${One}), linear-gradient(360deg, #000000 0%, #040E22 0.01%, #1D2A45 100%)`,
+                    }}
+                  >
+                    <Box>
+                      <Typography variant='h6' mb={2}>
+                        环境准备
+                      </Typography>
+                      <Typography variant='body2'>在开始之前配置硬件、操作系统和软件环境</Typography>
+                    </Box>
                   </Box>
-                </Box>
-                <Box ml={-1} zIndex={-1}>
-                  <img src={Arrow} alt='arrow' height={80} width={100} />
-                </Box>
-                <Box
-                  p={10}
-                  sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    width: '320px',
-                    height: '320px',
-                    borderRadius: '320px',
-                    background: `url(${Two}), linear-gradient(360deg, #000000 0%, #040E22 0.01%, #1D2A45 100%)`,
-                    backgroundPosition: '20px 20px, top left',
-                    backgroundSize: '200px 140px, 100% 100%',
-                    backgroundRepeat: 'no-repeat',
-                  }}
-                >
-                  <Box>
-                    <Typography variant='h6' mb={2}>
-                      组件启动
-                    </Typography>
-                    <Typography variant='body2'>基于文档分别部署好中继链、跨链网关、应用链</Typography>
+                  <Box ml={-1} zIndex={-1}>
+                    <img src={Arrow} alt='arrow' className='arrow' />
                   </Box>
-                </Box>
+                  <Box
+                    p={10}
+                    className='item'
+                    sx={{
+                      background: `url(${Two}), linear-gradient(360deg, #000000 0%, #040E22 0.01%, #1D2A45 100%)`,
+                    }}
+                  >
+                    <Box>
+                      <Typography variant='h6' mb={2}>
+                        组件启动
+                      </Typography>
+                      <Typography variant='body2'>基于文档分别部署好中继链、跨链网关、应用链</Typography>
+                    </Box>
+                  </Box>
 
-                <Box ml={-1} zIndex={-1}>
-                  <img src={Arrow} alt='arrow' height={80} width={100} />
-                </Box>
-                <Box
-                  p={10}
-                  sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    width: '320px',
-                    height: '320px',
-                    borderRadius: '320px',
-                    background: `url(${Third}), linear-gradient(360deg, #000000 0%, #040E22 0.01%, #1D2A45 100%)`,
-                    backgroundPosition: '20px 20px, top left',
-                    backgroundSize: '200px 140px, 100% 100%',
-                    backgroundRepeat: 'no-repeat',
-                  }}
-                >
-                  <Box>
-                    <Typography variant='h6' mb={2}>
-                      跨链发起
-                    </Typography>
-                    <Typography variant='body2'>组件部署完毕后, 可以发起跨链交易</Typography>
+                  <Box ml={-1} zIndex={-1}>
+                    <img src={Arrow} alt='arrow' className='arrow' />
+                  </Box>
+                  <Box
+                    p={10}
+                    className='item'
+                    sx={{
+                      background: `url(${Third}), linear-gradient(360deg, #000000 0%, #040E22 0.01%, #1D2A45 100%)`,
+                    }}
+                  >
+                    <Box>
+                      <Typography variant='h6' mb={2}>
+                        跨链发起
+                      </Typography>
+                      <Typography variant='body2'>组件部署完毕后, 可以发起跨链交易</Typography>
+                    </Box>
                   </Box>
                 </Box>
               </Box>

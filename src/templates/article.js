@@ -5,7 +5,7 @@ import Layout from '../components/layout'
 import {Box, Button, Container, Typography} from '@material-ui/core'
 import SEO from '../components/seo'
 import {ColorText} from '../components/style'
-import BlogBG from '../images/community_bg.png'
+import BlogBG from '../images/article_bg.png'
 import Dot from '../images/dot.png'
 import Moment from 'react-moment'
 
@@ -49,6 +49,10 @@ const Article = ({data}) => {
           backgroundPosition: 'center top, center top',
           backgroundRepeat: 'no-repeat',
           backgroundSize: '100% 100%, 100%',
+          '& .date': {
+            fontFamily: '"Titillium Web","Roboto","Helvetica","Arial",sans-serif !important',
+            color: 'rgba(255, 255, 255, 0.7)',
+          },
         }}
       >
         <Container maxWidth='md'>
@@ -76,7 +80,7 @@ const Article = ({data}) => {
                 <Typography variant='body2' mr={2}>
                   发表于
                 </Typography>
-                <Typography variant='subtitle1'>
+                <Typography variant='subtitle1' className='date'>
                   <Moment date={article.published_at} format='YYYY.MM.DD' />
                 </Typography>
               </Box>
@@ -115,9 +119,13 @@ const Article = ({data}) => {
                   fontFamily: '"Roboto","Helvetica","Arial",sans-serif !important',
                   margin: '35px 0 20px',
                   color: '#fff',
+                  fontWeight: 500,
                 },
                 '& pre': {
                   whiteSpace: 'pre-wrap',
+                  background: 'rgba(255, 255, 255, 0.09)',
+                  padding: '16px 24px',
+                  overflowX: 'scroll',
                 },
                 '& blockquote': {
                   margin: '30px 0 30px 0',
@@ -129,6 +137,13 @@ const Article = ({data}) => {
                   display: 'block',
                   maxWidth: '100%',
                   margin: '25px auto',
+                },
+                '& ul, & ol': {
+                  lineHeight: '26px',
+                  color: 'rgba(255, 255, 255, 0.6)',
+                  '& p': {
+                    margin: '0 0 8px',
+                  },
                 },
               }}
             >

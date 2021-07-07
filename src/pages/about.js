@@ -14,6 +14,7 @@ import Star from '../images/about_star.png'
 import DataCard from '../images/data_card.png'
 import Datum1 from '../images/datum_1.png'
 import Datum2 from '../images/datum_2.png'
+import DatumRight from '../components/common/datum_right'
 
 const AboutPage = ({data}) => {
   const [datumActive, setDatumActive] = useState('active')
@@ -24,12 +25,15 @@ const AboutPage = ({data}) => {
       <SEO title='关于我们' />
       <Layout>
         <Box
-          pt={50}
+          pt={{md: 50, xs: 35}}
           sx={{
             backgroundImage: `url(${BG}), url(${GrowBG}), url(${ContactBG})`,
-            backgroundSize: '1991px 681px, 2000px 1500px, 2000px 1630px',
+            backgroundSize: {md: '2000px, 2000px, 2000px', xs: '1000px, 1000px, 1000px'},
             backgroundRepeat: 'no-repeat',
-            backgroundPosition: 'center -60px, center 860px, center bottom -70px',
+            backgroundPosition: {
+              md: 'center -60px, center 860px, center bottom -70px',
+              xs: 'center 20px, center 860px, center bottom -70px',
+            },
           }}
         >
           <Container maxWidth='lg'>
@@ -39,7 +43,7 @@ const AboutPage = ({data}) => {
             <Typography variant='body2' textAlign='center' px={{xs: 3, md: 20}}>
               依托区块链技术和多行业业务积累，为用户提供完备的数据和资产跨链解决方案，致力于安全高可用和通用易扩展的异构跨链服务，拥抱开源，与广大开发者共建万链互联、价值互通的区块链"互联网"。
             </Typography>
-            <Box mt={{xs: 10, md: 40}} mb={10}>
+            <Box mt={{xs: 30, md: 40}} mb={10}>
               <Grid container>
                 <Grid item md={5} display='flex' alignItems='center'>
                   <Typography variant='h2'>
@@ -48,170 +52,11 @@ const AboutPage = ({data}) => {
                   </Typography>
                 </Grid>
                 <Grid item md={7}>
-                  <Box
-                    sx={{
-                      '& .datum_num': {
-                        display: 'flex',
-                        alignItems: 'flex-end',
-                        position: 'absolute',
-                        top: '50%',
-                        transform: 'translateY(-50%)',
-                        justifyContent: 'center',
-                        width: '138px',
-                        '& h3': {
-                          lineHeight: 1,
-                        },
-                      },
-                      '& .datum_meta': {
-                        display: 'block',
-                        marginLeft: '20px',
-                        '& h5': {
-                          color: 'rgba(255, 255, 255, 0.5)',
-                          marginBottom: '12px',
-                          position: 'relative',
-                          '&:before': {
-                            content: '" "',
-                            display: 'block',
-                            width: '8px',
-                            height: '8px',
-                            borderRadius: '2px',
-                            background: 'rgba(255, 255, 255, 0.5)',
-                            position: 'absolute',
-                            left: '-20px',
-                            top: '50%',
-                            transform: 'translateY(-50%)',
-                          },
-                        },
-                      },
-                      '& .datum_meta_list': {display: 'none', '& h6': {lineHeight: 1.8}},
-                      '& .datum_item': {
-                        display: 'flex',
-                        alignItems: 'center',
-                        padding: '35px 0',
-                        transition: 'background 0.2s ease',
-                        backgroundRepeat: 'no-repeat',
-                        backgroundImage: `url(${DataCard})`,
-                        backgroundPosition: 'top 1px left 70px',
-                        backgroundSize: '0 215px',
-                        '& .datum_ball_active': {
-                          display: 'none',
-                        },
-                        '&:hover, &.active': {
-                          backgroundSize: '632px 215px',
-                          '& .datum_meta': {
-                            display: 'none',
-                          },
-                          '& .datum_ball_active': {
-                            display: 'block',
-                          },
-                          '& .datum_ball': {
-                            display: 'none',
-                          },
-                          '& .datum_meta_list': {
-                            display: 'block',
-                          },
-                        },
-                      },
-                    }}
-                  >
-                    <Box
-                      position='relative'
-                      ml={15}
-                      mt={10}
-                      className={`datum_item`}
-                      onMouseEnter={() => setDatumActive('')}
-                      onMouseLeave={() => setDatumActive('active')}
-                    >
-                      <img src={Datum1} alt='datum' height={139} className={'datum_ball'} />
-                      <img src={Datum2} alt='datum' height={139} className={'datum_ball_active'} />
-                      <Box position='absolute' className='datum_num'>
-                        <Typography variant='h3'>3</Typography>
-                        <Typography variant='body1'>项</Typography>
-                      </Box>
-                      <Box pl={6}>
-                        <Box className='datum_meta'>
-                          <Typography variant='h5'>参与测评</Typography>
-                          <Typography variant='body1'>首批通过国家金融科技测评中心的跨链服务功能测试</Typography>
-                        </Box>
-                        <Box className='datum_meta_list'>
-                          <Typography variant='subtitle2'>首批通过国家金融科技测评中心的跨链服务功能测试</Typography>
-                          <Typography variant='subtitle2'>
-                            首批通过中国信息通信研究院的可信区块链的跨链服务功能测评
-                          </Typography>
-                          <Typography variant='subtitle2'>
-                            通过浙江省电子信息产品检验研究院的跨链服务功能测试
-                          </Typography>
-                        </Box>
-                      </Box>
-                    </Box>
-                    <Box
-                      position='relative'
-                      ml={6}
-                      className={`datum_item ${datumActive}`}
-                      onMouseEnter={() => setDatumActive('')}
-                      onMouseLeave={() => setDatumActive('active')}
-                    >
-                      <img src={Datum1} alt='datum' height={139} className={'datum_ball'} />
-                      <img src={Datum2} alt='datum' height={139} className={'datum_ball_active'} />
-                      <Box position='absolute' className={'datum_num'}>
-                        <Typography variant='h3'>4</Typography>
-                        <Typography variant='body1'>项</Typography>
-                      </Box>
-                      <Box pl={6}>
-                        <Box className='datum_meta'>
-                          <Typography variant='h5'>专利&论文</Typography>
-                          <Typography variant='body1'>
-                            在跨链事务一致性保障、数据有效性验证、跨链协议等相关领域具有23篇
-                          </Typography>
-                        </Box>
-                        <Box className='datum_meta_list'>
-                          <Typography variant='subtitle2'>
-                            参与中国信通院——可信推进计划《区块链互操作白皮书》编写工作
-                          </Typography>
-                          <Typography variant='subtitle2'>
-                            参与国际电联电信标准化部门（ITU-T）2项DLT互操作框架标准制定
-                          </Typography>
-                          <Typography variant='subtitle2'>
-                            参与中国通信标准化协会（CCSA）《区块链链间互操作》团体标准制定
-                          </Typography>
-                          <Typography variant='subtitle2'>
-                            参与计算机协会区块链和分布式记账委员会（IEEE C/BDL)区块链互操作3项标准制定；
-                          </Typography>
-                        </Box>
-                      </Box>
-                    </Box>
-                    <Box
-                      position='relative'
-                      ml={14}
-                      className={'datum_item'}
-                      onMouseEnter={() => setDatumActive('')}
-                      onMouseLeave={() => setDatumActive('active')}
-                    >
-                      <img src={Datum1} alt='datum' height={139} className={'datum_ball'} />
-                      <img src={Datum2} alt='datum' height={139} className={'datum_ball_active'} />
-                      <Box position='absolute' className={'datum_num'}>
-                        <Typography variant='h3'>23</Typography>
-                        <Typography variant='body1'>篇</Typography>
-                      </Box>
-                      <Box pl={6}>
-                        <Box className='datum_meta'>
-                          <Typography variant='h5'>专利&论文</Typography>
-                          <Typography variant='body1'>
-                            在跨链事务一致性保障、数据有效性验证、跨链协议等相关领域具有23篇
-                          </Typography>
-                        </Box>
-                        <Box className='datum_meta_list'>
-                          <Typography variant='subtitle2'>
-                            在跨链事务一致性保障、数据有效性验证、跨链协议等相关领域具有23篇
-                          </Typography>
-                        </Box>
-                      </Box>
-                    </Box>
-                  </Box>
+                  <DatumRight />
                 </Grid>
               </Grid>
             </Box>
-            <Box pt={20} pb={50} id='roadmap'>
+            <Box pt={20} pb={{md: 50, xs: 20}} id='roadmap'>
               <Container maxWidth='lg'>
                 <Grid container>
                   <Grid item md={6}>
@@ -220,11 +65,21 @@ const AboutPage = ({data}) => {
                 </Grid>
                 <Box
                   mt={30}
-                  px={15}
+                  px={{md: 15, xs: 0}}
                   position='relative'
                   sx={{
+                    '& .MuiGrid-item': {
+                      width: {xs: '100%', md: 'auto'},
+                    },
+                    '& .MuiTypography-h1': {
+                      marginBottom: '30px',
+                      pl: {xs: 4, md: 0},
+                      textAlign: {xs: 'left', md: 'right'},
+                    },
                     '& .MuiTypography-subtitle2': {
+                      paddingLeft: 4,
                       fontWeight: 'normal',
+                      textAlign: {xs: 'left', md: ''},
                     },
                     '& h5': {
                       fontWeight: 'normal',
@@ -234,28 +89,35 @@ const AboutPage = ({data}) => {
                       display: 'block',
                       position: 'absolute',
                       width: '2px',
-                      height: '120%',
+                      height: {md: '120%', xs: '105%'},
                       // background: '#4266ad',
                       background:
                         'linear-gradient(180deg, rgba(51,51,51,1) 0%, rgba(78,155,226,1) 0%, rgba(78,155,226,1) 70%, rgba(51,51,51,1) 100%);',
-                      left: '50%',
-                      top: '0',
+                      left: {md: '50%', xs: 0},
+                      top: {md: '0', xs: '40px'},
                     },
                     '& .item': {
                       position: 'relative',
                     },
                     '& .roadmap-item': {
-                      padding: '20px 40px',
+                      padding: {md: '20px 40px', xs: '15px'},
+                      ml: {md: 0, xs: 4},
+                      width: '100%',
+                    },
+                    '& .first_ball': {
+                      top: {xs: '40px !important', md: '0'},
                     },
                     '& .ball': {
+                      top: {xs: '-8px', md: '0'},
                       position: 'absolute',
-                      left: '50%',
+                      left: {md: '50%', xs: '8px'},
                       transform: 'translateX(-16px)',
                       zIndex: 6,
+                      width: {md: '32px', xs: '16px'},
                     },
                     '& .star': {
                       position: 'absolute',
-                      left: '50%',
+                      left: {md: '50%', xs: 0},
                       transform: 'translate(-80px, -24px)',
                       zIndex: 0,
                     },
@@ -270,7 +132,7 @@ const AboutPage = ({data}) => {
                         </Typography>
                       </Grid>
                       <Grid item md={6}>
-                        <img src={Ball} alt='ball' width={32} className='ball' />
+                        <img src={Ball} alt='ball' width={32} className='ball first_ball' />
                         <Typography variant='subtitle2' pl={4} mt={-2}>
                           2021.12
                         </Typography>
@@ -388,7 +250,7 @@ const AboutPage = ({data}) => {
                         </Typography>
                       </Grid>
                       <Grid item md={6}>
-                        <img src={Ball} alt='ball' width={32} className='ball' />
+                        <img src={Ball} alt='ball' width={32} className='ball first_ball' />
                         <Typography variant='subtitle2' pl={4} mt={-2}>
                           2020.09
                         </Typography>
@@ -469,7 +331,7 @@ const AboutPage = ({data}) => {
                         </Typography>
                       </Grid>
                       <Grid item md={6}>
-                        <img src={Ball} alt='ball' width={32} className='ball' />
+                        <img src={Ball} alt='ball' width={32} className='ball first_ball' />
                         <Typography variant='subtitle2' pl={4} mt={-2}>
                           2019.10
                         </Typography>
@@ -503,7 +365,7 @@ const AboutPage = ({data}) => {
             >
               <Grid container>
                 <Grid item md={6} sx={{display: 'flex', alignItems: 'center'}}>
-                  <Typography variant='h3'>
+                  <Typography variant='h3' mb={{md: 0, xs: 9}}>
                     <Box>有任何问题</Box>
                     欢迎联系我们
                   </Typography>
@@ -523,7 +385,7 @@ const AboutPage = ({data}) => {
                   <Typography variant='h5' mt={12} mb={4}>
                     微信公众号
                   </Typography>
-                  <Grid container>
+                  <Grid container spacing={4}>
                     <Grid item md={4}>
                       <Typography variant='subtitle1' mb={2}>
                         趣链科技公众号

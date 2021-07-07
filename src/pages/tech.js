@@ -24,6 +24,7 @@ import CardBG1 from '../images/tech_card_bg_1.png'
 import CardBG2 from '../images/tech_card_bg_2.png'
 import CardBG3 from '../images/tech_card_bg_3.png'
 import IBTP from '../images/ibtp.gif'
+import {Swiper, SwiperSlide} from 'swiper/react'
 
 const TechPage = ({data}) => {
   const ref = useRef()
@@ -77,9 +78,9 @@ const TechPage = ({data}) => {
       <Box
         sx={{
           backgroundImage: `url(${BG}), url(${BG2})`,
-          backgroundPosition: 'center -50px, center 900px',
+          backgroundPosition: {md: 'center -50px, center 900px', xs: 'center 320px, center 900px'},
           backgroundRepeat: 'no-repeat',
-          backgroundSize: '2000px, 2000px',
+          backgroundSize: {md: '2000px, 2000px', xs: '120%, 2000px'},
         }}
         pt={10}
       >
@@ -88,14 +89,14 @@ const TechPage = ({data}) => {
           <Box my={20}>
             <Container maxWidth='lg'>
               <Grid item md={5}>
-                <Box pt={40}>
+                <Box pt={{md: 40, xs: 0}}>
                   <AnimationOnScroll animateIn='animate__fadeInUp' duration={0.8}>
-                    <Typography variant='h3' mb={3}>
+                    <Typography variant='h3' mb={3} textAlign={{md: 'left', xs: 'center'}}>
                       核心功能特性
                     </Typography>
                   </AnimationOnScroll>
                   <AnimationOnScroll animateIn='animate__fadeInUp' duration={0.8}>
-                    <Typography variant='body1' mb={8}>
+                    <Typography variant='body1' mb={8} textAlign={{md: 'left', xs: 'center'}}>
                       致力于构建一个高可扩展、强鲁棒性、易升级的区块链跨链服务平台，为去中心化应用提供通信枢纽，支撑链上可信数据/资产高效流动，服务区块链业务安全治理，为区块链互联网的形成提供可靠的底层技术支撑。
                     </Typography>
                   </AnimationOnScroll>
@@ -105,7 +106,7 @@ const TechPage = ({data}) => {
           </Box>
 
           {/* 2 */}
-          <Box mt={80} mb={30}>
+          <Box mt={{md: 80, xs: 60}} mb={30}>
             <Container maxWidth='lg'>
               <Grid container>
                 <Grid item md={5} display='flex' alignItems='center'>
@@ -118,16 +119,16 @@ const TechPage = ({data}) => {
                     <Typography variant='h3' mb={4}>
                       的积木架构
                     </Typography>
-                    <Typography variant='body1' mb={6}>
+                    <Typography variant='body1' mb={{md: 6, xs: 2}}>
                       通过灵活组合跨链组件形成不同架构，实现多业务场景的高效适配
                     </Typography>
-                    <Box>
-                      <Grid container>
-                        <Grid item xs={3}>
+                    <Box display={{md: 'block', xs: 'none'}}>
+                      <Grid container textAlign='center'>
+                        <Grid item xs={4}>
                           <img src={Relaychain} alt='relaychain' width={44} />
                           <Typography variant='subtitle1'>中继链</Typography>
                         </Grid>
-                        <Grid item xs={3} textAlign='center'>
+                        <Grid item xs={4} textAlign='center'>
                           <img src={Pier} alt='pier' width={44} />
                           <Typography variant='subtitle1'>跨链网关</Typography>
                         </Grid>
@@ -141,89 +142,79 @@ const TechPage = ({data}) => {
                 </Grid>
                 <Grid item md={7} textAlign='left'>
                   <div ref={divRef} />
-                  <Box display='flex' fontSize='16px' alignItems='center' justifyContent='center'>
-                    <Box
-                      className={`${step === 0 && 'active'}`}
-                      sx={{
+                  <Box
+                    display='flex'
+                    fontSize='16px'
+                    alignItems='center'
+                    justifyContent='center'
+                    sx={{
+                      '& .item': {
                         background: 'linear-gradient(360deg, #181818 0%, #1D2735 0.01%, #1D2735 100%)',
-                        fontSize: 0,
                         padding: '3px',
                         borderRadius: '56px',
                         fontWeight: 300,
                         height: 16,
                         width: 16,
                         cursor: 'pointer',
-                        '&.active': {
+                        transition: 'all .3s ease',
+                        '@keyframes in': {
+                          '0%': {opacity: 0, visibility: 'none'},
+                          '100%': {opacity: 1, visibility: 'visible'},
+                        },
+                        '@keyframes out': {
+                          '0%': {opacity: 1, visibility: 'visible'},
+                          '100%': {opacity: 0, visibility: 'none'},
+                        },
+                        '& .font': {
+                          opacity: 0,
+                          visibility: 'none',
+                        },
+                        '&.active, &:hover': {
+                          '& .font': {
+                            animation: 'in .3s ease forwards',
+                          },
                           background: 'linear-gradient(360deg, #181818 0%, #05070B 0.01%, #1D2735 100%)',
                           padding: '10px 20px',
                           fontSize: '14px',
                           height: 'auto',
                           width: 'auto',
                         },
-                      }}
-                      onClick={() => setStep(0)}
-                      mr={2}
-                    >
-                      中继链架构
+                      },
+                    }}
+                  >
+                    <Box className={`${step === 0 && 'active'} item`} onClick={() => setStep(0)} mr={2}>
+                      <Box className='font'>中继链架构</Box>
                     </Box>
-                    <Box
-                      className={`${step === 1 && 'active'}`}
-                      sx={{
-                        background: 'linear-gradient(360deg, #181818 0%, #1D2735 0.01%, #1D2735 100%)',
-                        fontSize: 0,
-                        padding: '3px',
-                        borderRadius: '56px',
-                        fontWeight: 300,
-                        height: 16,
-                        width: 16,
-                        cursor: 'pointer',
-                        '&.active': {
-                          background: 'linear-gradient(360deg, #181818 0%, #05070B 0.01%, #1D2735 100%)',
-                          padding: '10px 20px',
-                          fontSize: '14px',
-                          height: 'auto',
-                          width: 'auto',
-                        },
-                      }}
-                      onClick={() => setStep(1)}
-                      mr={2}
-                    >
-                      直连架构
+                    <Box className={`${step === 1 && 'active'} item`} onClick={() => setStep(1)} mr={2}>
+                      <Box className='font'>直连架构</Box>
                     </Box>
-                    <Box
-                      className={`${step === 2 && 'active'}`}
-                      sx={{
-                        background: 'linear-gradient(360deg, #181818 0%, #1D2735 0.01%, #1D2735 100%)',
-                        fontSize: 0,
-                        padding: '3px',
-                        borderRadius: '56px',
-                        fontWeight: 300,
-                        height: 16,
-                        width: 16,
-                        cursor: 'pointer',
-                        '&.active': {
-                          background: 'linear-gradient(360deg, #181818 0%, #05070B 0.01%, #1D2735 100%)',
-                          padding: '10px 20px',
-                          fontSize: '14px',
-                          height: 'auto',
-                          width: 'auto',
-                        },
-                      }}
-                      onClick={() => setStep(2)}
-                    >
-                      主从架构
+                    <Box className={`${step === 2 && 'active'} item`} onClick={() => setStep(2)}>
+                      <Box className='font'>主从架构</Box>
                     </Box>
+                  </Box>
+                  <Box display={{md: 'none', xs: 'block'}} mt={8}>
+                    <Grid container textAlign='center'>
+                      <Grid item xs={4}>
+                        <img src={Relaychain} alt='relaychain' width={44} />
+                        <Typography variant='subtitle1'>中继链</Typography>
+                      </Grid>
+                      <Grid item xs={4} textAlign='center'>
+                        <img src={Pier} alt='pier' width={44} />
+                        <Typography variant='subtitle1'>跨链网关</Typography>
+                      </Grid>
+                      <Grid item xs={4} textAlign='center'>
+                        <img src={Hyperchain} alt='hyperchain' height={44} />
+                        <Typography variant='subtitle1'>应用链</Typography>
+                      </Grid>
+                    </Grid>
                   </Box>
                 </Grid>
               </Grid>
             </Container>
           </Box>
-          <Box my={20}>
+          <Box my={20} sx={{'& img': {display: 'block', width: '100%'}}}>
             <Container maxWidth='lg'>
-              <Grid container>
-                <Grid item md={7}>
-                  <img src={IBTP} alt='img' width={720} />
-                </Grid>
+              <Grid container flexDirection={{xs: 'row', md: 'row-reverse'}}>
                 <Grid item md={5} display='flex' alignItems='center'>
                   <Box>
                     <AnimationOnScroll animateIn='animate__fadeInUp' duration={0.4}>
@@ -240,10 +231,13 @@ const TechPage = ({data}) => {
                     </Typography>
                   </Box>
                 </Grid>
+                <Grid item md={7}>
+                  <img src={IBTP} alt='img' width={720} />
+                </Grid>
               </Grid>
             </Container>
           </Box>
-          <Box my={30}>
+          <Box my={{md: 30, xs: 10}} sx={{'& img': {display: 'block', width: '100%'}}}>
             <Container maxWidth='lg'>
               <Grid container>
                 <Grid item md={5} display='flex' alignItems='center'>
@@ -265,12 +259,9 @@ const TechPage = ({data}) => {
               </Grid>
             </Container>
           </Box>
-          <Box my={30}>
+          <Box my={{md: 30, xs: 10}} sx={{'& img': {display: 'block', width: '100%'}}}>
             <Container maxWidth='lg'>
-              <Grid container>
-                <Grid item md={7}>
-                  <img src={Wasm} alt='pier' width={720} />
-                </Grid>
+              <Grid container flexDirection={{xs: 'row', md: 'row-reverse'}}>
                 <Grid item md={5} display='flex' alignItems='center'>
                   <Box>
                     <AnimationOnScroll animateIn='animate__fadeInUp' duration={0.6}>
@@ -284,6 +275,9 @@ const TechPage = ({data}) => {
                     </Typography>
                   </Box>
                 </Grid>
+                <Grid item md={7}>
+                  <img src={Wasm} alt='pier' width={720} />
+                </Grid>
               </Grid>
             </Container>
           </Box>
@@ -292,8 +286,8 @@ const TechPage = ({data}) => {
               <ColorText>更多特性</ColorText>
             </AnimationOnScroll>
           </Typography>
-          <Container maxWidth='md'>
-            <Grid
+          <Container maxWidth='lg'>
+            <Box
               container
               spacing={8}
               mt={6}
@@ -301,11 +295,18 @@ const TechPage = ({data}) => {
                 '& h5': {
                   fontFamily: '"Roboto","Helvetica","Arial",sans-serif !important',
                 },
+                '& .swiper-slide': {
+                  display: 'flex',
+                  alignItems: 'center',
+                  height: {md: '420px', xs: '330px'},
+                  width: {md: '320px', xs: '270px'},
+                },
                 '& .feat-item': {
                   textAlign: 'left',
                   boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
-                  padding: '50px',
-                  height: '380px',
+                  padding: {md: '50px', xs: '30px'},
+                  width: {md: '320px', xs: '270px'},
+                  height: {md: '380px', xs: '290px'},
                   position: 'relative',
                   cursor: 'pointer',
                   '&:before': {
@@ -349,166 +350,178 @@ const TechPage = ({data}) => {
                 },
               }}
             >
-              <Grid item md={4}>
-                <Box className='feat-item' sx={{'&:after': {backgroundImage: `url(${CardBG1})`}}}>
-                  <Box zIndex={8} position='relative'>
-                    <img src={TX} alt='tx' height={40} width={40} />
-                    <Typography variant='h5' mb={5} mt={2} className='font-normal'>
-                      跨链事务
-                    </Typography>
-                    <Typography variant='body2' mb={4}>
-                      跨链需要保证交易的原子性和一致性，中继链提供事务管理机制，通过内置的事务管理合约，来保证不同业务场景下跨链交易的事务性。
-                    </Typography>
-                    <ReadMoreNoHrefWithoutStyle onClick={() => setStatus1(true)} className='read-more' />
+              <Swiper
+                slidesPerView='auto'
+                initialSlide={0}
+                spaceBetween={20}
+                centeredSlides={true}
+                breakpoints={{
+                  1280: {
+                    initialSlide: 1,
+                  },
+                }}
+              >
+                <SwiperSlide>
+                  <Box className='feat-item' sx={{'&:after': {backgroundImage: `url(${CardBG1})`}}}>
+                    <Box zIndex={8} position='relative'>
+                      <img src={TX} alt='tx' height={40} width={40} />
+                      <Typography variant='h5' mb={5} mt={2} className='font-normal'>
+                        跨链事务
+                      </Typography>
+                      <Typography variant='body2' mb={4}>
+                        跨链需要保证交易的原子性和一致性，中继链提供事务管理机制，通过内置的事务管理合约，来保证不同业务场景下跨链交易的事务性。
+                      </Typography>
+                      <ReadMoreNoHrefWithoutStyle onClick={() => setStatus1(true)} className='read-more' />
+                    </Box>
+                    <SwipeableDrawer
+                      ModalProps={{keepMounted: true}}
+                      anchor={'right'}
+                      open={status1}
+                      onOpen={() => setStatus1(true)}
+                      onClose={() => setStatus1(false)}
+                      sx={{
+                        '& .MuiDrawer-paper': {
+                          boxSizing: 'border-box',
+                          width: {md: width / 2, xs: '100%'},
+                        },
+                        '& h5': {
+                          fontFamily: '"Roboto","Helvetica","Arial",sans-serif !important',
+                        },
+                      }}
+                    >
+                      <Box
+                        p={{xs: 4, md: 10}}
+                        minHeight='100%'
+                        display='flex'
+                        flexDirection='column'
+                        justifyContent='center'
+                        style={{
+                          borderRadius: '10px',
+                          background: `linear-gradient(360deg, #181818 0%, #05070B 0.01%, #1D2735 100%)`,
+                        }}
+                      >
+                        <img src={TX} alt='tx' height={40} width={40} />
+                        <Typography variant='h5' mb={5} mt={2} color='#fafafa' className='font-normal'>
+                          跨链事务
+                        </Typography>
+                        <Typography variant='body1' mb={4}>
+                          针对非资产交换类业务场景，中继链提供了基于多链消息表事务管理方案；针对资产交换类业务的事务管理采用中继多签方案。
+                        </Typography>
+                        <img src={TXDemo} alt='demo' width='100%' />
+                      </Box>
+                    </SwipeableDrawer>
                   </Box>
-                </Box>
-                <SwipeableDrawer
-                  ModalProps={{keepMounted: true}}
-                  anchor={'right'}
-                  open={status1}
-                  onOpen={() => setStatus1(true)}
-                  onClose={() => setStatus1(false)}
-                  sx={{
-                    '& .MuiDrawer-paper': {
-                      boxSizing: 'border-box',
-                      width: width / 2,
-                    },
-                    '& h5': {
-                      fontFamily: '"Roboto","Helvetica","Arial",sans-serif !important',
-                    },
-                  }}
-                >
-                  <Box
-                    p={10}
-                    minHeight='100%'
-                    display='flex'
-                    flexDirection='column'
-                    justifyContent='center'
-                    style={{
-                      borderRadius: '10px',
-                      background: `linear-gradient(360deg, #181818 0%, #05070B 0.01%, #1D2735 100%)`,
-                    }}
-                  >
-                    <img src={TX} alt='tx' height={40} width={40} />
-                    <Typography variant='h5' mb={5} mt={2} color='#fafafa' className='font-normal'>
-                      跨链事务
-                    </Typography>
-                    <Typography variant='body1' mb={4}>
-                      针对非资产交换类业务场景，中继链提供了基于多链消息表事务管理方案；针对资产交换类业务的事务管理采用中继多签方案。
-                    </Typography>
-                    <img src={TXDemo} alt='demo' width='100%' />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <Box className='feat-item' sx={{'&:after': {backgroundImage: `url(${CardBG2})`}}}>
+                    <Box zIndex={8} position='relative'>
+                      <img src={Mng} alt='tx' height={40} width={40} />
+                      <Typography variant='h5' mb={5} mt={2} className='font-normal'>
+                        联盟治理
+                      </Typography>
+                      <Typography variant='body2' mb={4}>
+                        基于中继链提供完善的跨链治理框架，中继链节点构成联盟自治的基础，通过丰富的治理服务实现全方位的治理管控。
+                      </Typography>
+                      <ReadMoreNoHrefWithoutStyle onClick={() => setStatus2(true)} className='read-more' />
+                    </Box>
+                    <SwipeableDrawer
+                      ModalProps={{keepMounted: true}}
+                      anchor={'right'}
+                      open={status2}
+                      onOpen={() => setStatus2(true)}
+                      onClose={() => setStatus2(false)}
+                      sx={{
+                        '& .MuiDrawer-paper': {
+                          boxSizing: 'border-box',
+                          width: {md: width / 2, xs: '100%'},
+                          '& h5': {
+                            fontFamily: '"Roboto","Helvetica","Arial",sans-serif !important',
+                          },
+                        },
+                      }}
+                    >
+                      <Box
+                        p={{xs: 4, md: 10}}
+                        minHeight='100%'
+                        display='flex'
+                        flexDirection='column'
+                        justifyContent='center'
+                        style={{
+                          borderRadius: '10px',
+                          background: 'linear-gradient(360deg, #181818 0%, #05070B 0.01%, #1D2735 100%)',
+                        }}
+                      >
+                        <img src={Mng} alt='tx' height={40} width={40} />
+                        <Typography variant='h5' mb={5} mt={2} color='#fafafa' className='font-normal'>
+                          联盟治理
+                        </Typography>
+                        <Typography variant='body1' mb={4}>
+                          中继链节点构成联盟自治的基础，通过丰富的治理服务实现全方位的治理管控，此外，中
+                          继链还提供规范的提案模型、灵活的投票策略和科学的评价体系，充分保证成员
+                          规范工作、系统健康升级、联盟稳态发展。
+                        </Typography>
+                        <img src={GovDemo} alt='demo' width='100%' />
+                      </Box>
+                    </SwipeableDrawer>
                   </Box>
-                </SwipeableDrawer>
-              </Grid>
-              <Grid item md={4}>
-                <Box className='feat-item' sx={{'&:after': {backgroundImage: `url(${CardBG2})`}}}>
-                  <Box zIndex={8} position='relative'>
-                    <img src={Mng} alt='tx' height={40} width={40} />
-                    <Typography variant='h5' mb={5} mt={2} className='font-normal'>
-                      联盟治理
-                    </Typography>
-                    <Typography variant='body2' mb={4}>
-                      基于中继链提供完善的跨链治理框架，中继链节点构成联盟自治的基础，通过丰富的治理服务实现全方位的治理管控。
-                    </Typography>
-                    <ReadMoreNoHrefWithoutStyle onClick={() => setStatus2(true)} className='read-more' />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <Box className='feat-item' sx={{'&:after': {backgroundImage: `url(${CardBG3})`}}}>
+                    <Box zIndex={8} position='relative'>
+                      <img src={DID} alt='tx' height={40} width={40} />
+                      <Typography variant='h5' mb={5} mt={2} className='font-normal'>
+                        DID数字身份
+                      </Typography>
+                      <Typography variant='body2' mb={4}>
+                        首次提出链原生数字身份机制，能够实现身份在多条链间的互通互认，可以更方便地实现以身份为中心的数字资产跨链可信流转。
+                      </Typography>
+                      <ReadMoreNoHrefWithoutStyle onClick={() => setStatus3(true)} className='read-more' />
+                    </Box>
+                    <SwipeableDrawer
+                      ModalProps={{
+                        keepMounted: true, // Better open performance on mobile.
+                      }}
+                      anchor={'right'}
+                      open={status3}
+                      onOpen={() => setStatus3(true)}
+                      onClose={() => setStatus3(false)}
+                      sx={{
+                        '& .MuiDrawer-paper': {
+                          boxSizing: 'border-box',
+                          width: {md: width / 2, xs: '100%'},
+                          '& h5': {
+                            fontFamily: '"Roboto","Helvetica","Arial",sans-serif !important',
+                          },
+                        },
+                      }}
+                    >
+                      <Box
+                        p={{xs: 4, md: 10}}
+                        minHeight='100%'
+                        display='flex'
+                        flexDirection='column'
+                        justifyContent='center'
+                        style={{
+                          borderRadius: '10px',
+                          background: 'linear-gradient(360deg, #181818 0%, #05070B 0.01%, #1D2735 100%)',
+                        }}
+                      >
+                        <img src={Mng} alt='tx' height={40} width={40} />
+                        <Typography variant='h5' mb={5} mt={2} color='#fafafa' className='font-normal'>
+                          DID数字身份
+                        </Typography>
+                        <Typography variant='body1' mb={4}>
+                          数字身份系统的网络拓扑示意图如下所示。其中， 所有中继链都会实现链数字身份(Chain
+                          DID)管理功能及账户数字身份管理功能，而应用链将会实现账户数字身份(Account
+                          DID)管理功能。除此之外，考虑到整个网络面临的账户扩展需求，BitXHub提供了文档链下存储功能。
+                        </Typography>
+                        <img src={DIDDemo} alt='demo' width='100%' />
+                      </Box>
+                    </SwipeableDrawer>
                   </Box>
-                </Box>
-                <SwipeableDrawer
-                  ModalProps={{keepMounted: true}}
-                  anchor={'right'}
-                  open={status2}
-                  onOpen={() => setStatus2(true)}
-                  onClose={() => setStatus2(false)}
-                  sx={{
-                    '& .MuiDrawer-paper': {
-                      boxSizing: 'border-box',
-                      width: width / 2,
-                      '& h5': {
-                        fontFamily: '"Roboto","Helvetica","Arial",sans-serif !important',
-                      },
-                    },
-                  }}
-                >
-                  <Box
-                    p={10}
-                    minHeight='100%'
-                    display='flex'
-                    flexDirection='column'
-                    justifyContent='center'
-                    style={{
-                      borderRadius: '10px',
-                      background: 'linear-gradient(360deg, #181818 0%, #05070B 0.01%, #1D2735 100%)',
-                    }}
-                  >
-                    <img src={Mng} alt='tx' height={40} width={40} />
-                    <Typography variant='h5' mb={5} mt={2} color='#fafafa' className='font-normal'>
-                      联盟治理
-                    </Typography>
-                    <Typography variant='body1' mb={4}>
-                      中继链节点构成联盟自治的基础，通过丰富的治理服务实现全方位的治理管控，此外，中
-                      继链还提供规范的提案模型、灵活的投票策略和科学的评价体系，充分保证成员
-                      规范工作、系统健康升级、联盟稳态发展。
-                    </Typography>
-                    <img src={GovDemo} alt='demo' width='100%' />
-                  </Box>
-                </SwipeableDrawer>
-              </Grid>
-              <Grid item md={4}>
-                <Box className='feat-item' sx={{'&:after': {backgroundImage: `url(${CardBG3})`}}}>
-                  <Box zIndex={8} position='relative'>
-                    <img src={DID} alt='tx' height={40} width={40} />
-                    <Typography variant='h5' mb={5} mt={2} className='font-normal'>
-                      DID数字身份
-                    </Typography>
-                    <Typography variant='body2' mb={4}>
-                      首次提出链原生数字身份机制，能够实现身份在多条链间的互通互认，可以更方便地实现以身份为中心的数字资产跨链可信流转。
-                    </Typography>
-                    <ReadMoreNoHrefWithoutStyle onClick={() => setStatus3(true)} className='read-more' />
-                  </Box>
-                </Box>
-                <SwipeableDrawer
-                  ModalProps={{
-                    keepMounted: true, // Better open performance on mobile.
-                  }}
-                  anchor={'right'}
-                  open={status3}
-                  onOpen={() => setStatus3(true)}
-                  onClose={() => setStatus3(false)}
-                  sx={{
-                    '& .MuiDrawer-paper': {
-                      boxSizing: 'border-box',
-                      width: width / 2,
-                      '& h5': {
-                        fontFamily: '"Roboto","Helvetica","Arial",sans-serif !important',
-                      },
-                    },
-                  }}
-                >
-                  <Box
-                    p={10}
-                    minHeight='100%'
-                    display='flex'
-                    flexDirection='column'
-                    justifyContent='center'
-                    style={{
-                      borderRadius: '10px',
-                      background: 'linear-gradient(360deg, #181818 0%, #05070B 0.01%, #1D2735 100%)',
-                    }}
-                  >
-                    <img src={Mng} alt='tx' height={40} width={40} />
-                    <Typography variant='h5' mb={5} mt={2} color='#fafafa' className='font-normal'>
-                      DID数字身份
-                    </Typography>
-                    <Typography variant='body1' mb={4}>
-                      数字身份系统的网络拓扑示意图如下所示。其中， 所有中继链都会实现链数字身份(Chain
-                      DID)管理功能及账户数字身份管理功能，而应用链将会实现账户数字身份(Account
-                      DID)管理功能。除此之外，考虑到整个网络面临的账户扩展需求，BitXHub提供了文档链下存储功能。
-                    </Typography>
-                    <img src={DIDDemo} alt='demo' width='100%' />
-                  </Box>
-                </SwipeableDrawer>
-              </Grid>
-            </Grid>
+                </SwiperSlide>
+              </Swiper>
+            </Box>
           </Container>
         </Layout>
       </Box>
