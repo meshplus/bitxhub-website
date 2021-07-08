@@ -21,7 +21,15 @@ const Banner = () => {
     // animation2.goToAndPlay(0, true)
   }, [])
   return (
-    <Hero position='relative'>
+    <Hero
+      position='relative'
+      sx={{
+        backgroundImage: `url(${IndexWebp})`,
+        backgroundSize: '250%',
+        backgroundPosition: 'center 140px',
+        backgroundRepeat: 'no-repeat',
+      }}
+    >
       {!isMobile && (
         <Box
           position='absolute'
@@ -44,14 +52,16 @@ const Banner = () => {
           </AnimationOnScroll>
           <AnimationOnScroll animateIn='animate__fadeInUp' duration={0.5}>
             <Typography variant='subtitle1' mb={6}>
-              打造新一代跨链服务基础设施，实现区块链互联网链间价值传递
+              {isMobile && (
+                <>
+                  <Box>打造新一代跨链服务基础设施</Box>
+                  <Box>实现区块链互联网链间价值传递</Box>
+                </>
+              )}
+              {!isMobile && <>打造新一代跨链服务基础设施，实现区块链互联网链间价值传递</>}
             </Typography>
           </AnimationOnScroll>
-          {isMobile && (
-            <Box mx={-3}>
-              <img src={IndexWebp} alt='index' style={{display: 'block', width: '100%'}} />
-            </Box>
-          )}
+          {isMobile && <Box mx={-3} height={260} />}
           <AnimationOnScroll animateIn='animate__fadeInUp' duration={0.5}>
             <Link to='/quick' style={{marginRight: '20px'}}>
               <Button variant='outlined' size='large'>

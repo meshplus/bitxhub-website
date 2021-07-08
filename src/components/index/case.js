@@ -84,6 +84,12 @@ const Case = () => {
                 backgroundPosition: '15px 20px',
                 backgroundRepeat: 'no-repeat',
               },
+              '& .close': {
+                position: 'absolute',
+                right: 0,
+                top: 0,
+                fontSize: '20px',
+              },
             },
           }}
         >
@@ -114,12 +120,16 @@ const Case = () => {
                       display='flex'
                       flexDirection='column'
                       justifyContent='center'
+                      position='relative'
                       style={{
                         color: '#fff',
                         borderRadius: '10px',
                         background: 'linear-gradient(360deg, #181818 0%, #05070B 0.01%, #1D2735 100%)',
                       }}
                     >
+                      <Box sx={{'& i': {fontSize: '30px', position: 'absolute', top: '30px', right: '30px'}}}>
+                        <i className='icon icon-a-11' onClick={() => setOpen1(false)} />
+                      </Box>
                       <Typography variant='h5' mb={4}>
                         资产互换
                       </Typography>
@@ -160,12 +170,16 @@ const Case = () => {
                     display='flex'
                     flexDirection='column'
                     justifyContent='center'
+                    position='relative'
                     style={{
                       color: '#fff',
                       borderRadius: '10px',
                       background: 'linear-gradient(360deg, #181818 0%, #05070B 0.01%, #1D2735 100%)',
                     }}
                   >
+                    <Box sx={{'& i': {fontSize: '30px', position: 'absolute', top: '30px', right: '30px'}}}>
+                      <i className='icon icon-a-11' onClick={() => setOpen2(false)} />
+                    </Box>
                     <Typography variant='h5' mb={4}>
                       数据互通
                     </Typography>
@@ -205,12 +219,16 @@ const Case = () => {
                     display='flex'
                     flexDirection='column'
                     justifyContent='center'
+                    position='relative'
                     style={{
                       color: '#fff',
                       borderRadius: '10px',
                       background: 'linear-gradient(360deg, #181818 0%, #05070B 0.01%, #1D2735 100%)',
                     }}
                   >
+                    <Box sx={{'& i': {fontSize: '30px', position: 'absolute', top: '30px', right: '30px'}}}>
+                      <i className='icon icon-a-11' onClick={() => setOpen3(false)} />
+                    </Box>
                     <Typography variant='h5' mb={4}>
                       业务互补
                     </Typography>

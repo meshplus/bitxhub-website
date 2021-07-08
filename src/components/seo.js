@@ -78,7 +78,7 @@ function SEO({description, lang, meta, title}) {
         type='font/woff2'
         crossOrigin='anonymous'
       />
-      <link rel='stylesheet' href='//at.alicdn.com/t/font_2644702_9tlu574cokt.css' />
+      <link rel='stylesheet' href='//at.alicdn.com/t/font_2644702_mwmiedh0bz.css' />
       <link
         rel='stylesheet'
         type='text/css'

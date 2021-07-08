@@ -51,9 +51,18 @@ const Header = ({siteTitle}) => {
   const toggleDrawer = s => () => setOpen(s)
 
   return (
-    <Box bgcolor='rgba(0, 0, 0, .6)' left={0} right={0} py={{xs: 2, sm: 2}} zIndex={99999} top={0} position='fixed'>
+    <Box
+      bgcolor={open ? 'rgba(0, 0, 0, 0)' : 'rgba(0, 0, 0, .8)'}
+      left={0}
+      right={0}
+      py={{xs: 2, sm: 2}}
+      zIndex={999}
+      top={0}
+      position='fixed'
+    >
       <Container maxWidth='lg'>
         <SwipeableDrawer
+          sx={{zIndex: 10}}
           anchor='top'
           open={open}
           onClose={toggleDrawer(false)}
@@ -62,7 +71,7 @@ const Header = ({siteTitle}) => {
         >
           <Box
             p={10}
-            pt={30}
+            pt={25}
             sx={{
               '& i': {
                 marginRight: '10px',
@@ -99,7 +108,11 @@ const Header = ({siteTitle}) => {
               </Box>
             </Box>
           </Link>
-          <MenuIcon sx={{marginLeft: 'auto', display: {sm: 'block', md: 'none'}}} onClick={() => setOpen(true)} />
+          <Box ml='auto' display={{xs: 'block', md: 'none'}} sx={{'& i': {fontSize: '26px'}}}>
+            {!open && <i className='icon icon-hanbaocaidan' onClick={() => setOpen(true)} />}
+            {open && <i className='icon icon-a-11' onClick={() => setOpen(false)} />}
+          </Box>
+          {/*<MenuIcon sx={{marginLeft: 'auto', display: {sm: 'block', md: 'none'}}} onClick={() => setOpen(true)} />*/}
           <Box
             alignItems='center'
             ml='auto'
