@@ -10,7 +10,7 @@ import {Link} from 'gatsby'
 import Typewriter from 'typewriter-effect'
 import {ChevronRight} from '@material-ui/icons'
 import {AnimationOnScroll} from 'react-animation-on-scroll'
-import Browser1 from '../images/tool_1.webm'
+import Browser1 from '../images/tool_1.png'
 
 const ToolPage = ({data}) => {
   const [y, setY] = useState(0)
@@ -56,9 +56,9 @@ const ToolPage = ({data}) => {
                       </Button>
                     </Box>
                   </Grid>
-                  <Grid item md={7} textAlign='center' sx={{'& video': {display: 'block', width: '100%'}}}>
+                  <Grid item md={7} textAlign='center' sx={{'& img': {display: 'block', width: '100%'}}}>
                     {/*<img src={Browser} alt='tool' />*/}
-                    <video src={Browser1} autoPlay={true} />
+                    <img src={Browser1} alt='browser' />
                   </Grid>
                 </Grid>
                 <Button variant='outlined' color='primary' size='large' disabled className='mobile-btn'>

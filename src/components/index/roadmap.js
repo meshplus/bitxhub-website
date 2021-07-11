@@ -6,28 +6,17 @@ import {ColorText, ReadMore} from '../style'
 import RoadmapBall from '../../images/index_roadmap_ball.png'
 
 const Roadmap = () => {
+  const ina = {1: 'inactive', 2: '', 3: 'inactive', 4: 'inactive'}
   const [active, setActive] = useState({1: '', 2: 'active', 3: '', 4: ''})
-  const [inactive, setInactive] = useState({1: '', 2: '', 3: '', 4: ''})
+  const [inactive, setInactive] = useState(ina)
   const init = {1: '', 2: '', 3: '', 4: ''}
 
   const handleActive = i => {
+    const iii = {1: 'inactive', 2: 'inactive', 3: 'inactive', 4: 'inactive'}
     setActive({...init, [i]: 'active'})
-    if (i === 2) {
-      // setInactive({...inactive, [i]: '', [2]: ''})
-    } else {
-      setInactive({...inactive, [i]: '', [2]: 'inactive'})
-    }
+    setInactive({...iii, [i]: ''})
   }
 
-  const handleInactive = i => {
-    if (i !== 2) {
-      setInactive({...init, [i]: 'inactive', [2]: ''})
-      setActive({...active, [i]: '', [2]: 'active'})
-    } else {
-      // setInactive({...init, [i]: 'inactive'})
-      // setActive({...active, [i]: ''})
-    }
-  }
   return (
     <Box
       pb={10}
@@ -72,18 +61,17 @@ const Roadmap = () => {
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          margin: '0 10px',
           cursor: 'pointer',
-          width: {md: '240px', xs: '170px'},
-          height: '214px',
+          width: {md: '300px', xs: '170px'},
+          height: {md: '250px', xs: '214px'},
           backgroundImage: `url(${RoadmapShine})`,
           backgroundSize: '0 0',
           backgroundRepeat: 'no-repeat',
           backgroundPosition: '140px 140px',
           transition: 'background .5s ease',
           '&.active': {
-            backgroundSize: {md: '230px 230px', xs: '190px 190px'},
-            backgroundPosition: {md: '-47px -47px', xs: '-33px -14px'},
+            backgroundSize: {md: '250px 250px', xs: '170px 170px'},
+            backgroundPosition: {md: '-15px -15px', xs: '-11px 11px'},
             '& .title': {
               opacity: 0,
               display: 'none',
@@ -114,8 +102,8 @@ const Roadmap = () => {
         '& .roadmap_desc': {
           display: 'none',
           position: 'absolute',
-          top: {md: '148px', xs: '133px'},
-          width: {md: '300px', xs: '190px'},
+          top: {md: '162px', xs: '133px'},
+          width: {xs: '190px', md: '280px'},
           minHeight: '240px',
           textAlign: 'left',
           backgroundImage: `url(${RoadmapCard})`,
@@ -175,7 +163,6 @@ const Roadmap = () => {
               textAlign='center'
               className={`roadmap_item ${active[1]} ${inactive[1]}`}
               onMouseEnter={() => handleActive(1)}
-              onMouseLeave={() => handleInactive(1)}
             >
               <Typography variant='body1' className={`title`}>
                 DID组件开源
@@ -203,7 +190,6 @@ const Roadmap = () => {
               position='relative'
               className={`roadmap_item ${active[2]} ${inactive[2]}`}
               onMouseEnter={() => handleActive(2)}
-              onMouseLeave={() => handleInactive(2)}
             >
               <Typography variant='body1' className='title'>
                 跨链浏览器
@@ -233,7 +219,6 @@ const Roadmap = () => {
               position='relative'
               className={`roadmap_item ${active[3]} ${inactive[3]}`}
               onMouseEnter={() => handleActive(3)}
-              onMouseLeave={() => handleInactive(3)}
             >
               <Typography variant='body1' className='title'>
                 开放测试网
@@ -262,7 +247,6 @@ const Roadmap = () => {
               position='relative'
               className={`roadmap_item ${active[4]} ${inactive[4]}`}
               onMouseEnter={() => handleActive(4)}
-              onMouseLeave={() => handleInactive(4)}
             >
               <Typography variant='body1' className={`title`}>
                 跨链治理框架

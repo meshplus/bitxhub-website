@@ -24,7 +24,7 @@ const Banner = () => {
     <Hero
       position='relative'
       sx={{
-        backgroundImage: `url(${IndexWebp})`,
+        backgroundImage: {xs: `url(${IndexWebp})`, md: `url()`},
         backgroundSize: '250%',
         backgroundPosition: 'center 140px',
         backgroundRepeat: 'no-repeat',
