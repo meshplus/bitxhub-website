@@ -41,7 +41,7 @@ const Article = ({data}) => {
       <SEO title={article.title} />
       <Box
         pt={30}
-        pb={10}
+        pb={{md: 20, xs: 10}}
         mt={17}
         sx={{
           // backgroundImage: `url(http://localhost:1337${article.cover.formats.small.url}), url(${Layer})`,
@@ -89,7 +89,6 @@ const Article = ({data}) => {
         </Container>
       </Box>
       <Box
-        pt={10}
         pb={10}
         px={{md: 10, xs: 0}}
         sx={{
@@ -103,7 +102,7 @@ const Article = ({data}) => {
         <Container maxWidth='md'>
           <Box
             mb={20}
-            p={{md: 15}}
+            p={{md: 15, xs: 3}}
             sx={{
               border: '2px solid #262D3D',
               borderRadius: '16px',

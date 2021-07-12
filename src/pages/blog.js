@@ -97,6 +97,8 @@ const BlogPage = ({data}) => {
               '& .content': {
                 height: '20px',
                 overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                whiteSpace: 'nowrap',
               },
               '& .date': {
                 fontFamily: '"Titillium Web","Roboto","Helvetica","Arial",sans-serif !important',

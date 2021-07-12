@@ -20,10 +20,11 @@ const Banner = () => {
     animation.goToAndPlay(0, true)
     // animation2.goToAndPlay(0, true)
   }, [])
+
   return (
     <Box
       position='relative'
-      pt={{md: 100, xs: 23}}
+      pt={{md: 60, xs: 23}}
       pb={{md: 100, xs: 0}}
       sx={{
         backgroundImage: {xs: `url(${IndexWebp})`, md: `url()`},

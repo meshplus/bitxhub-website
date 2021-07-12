@@ -67,7 +67,7 @@ const Roadmap = () => {
           backgroundImage: `url(${RoadmapShine})`,
           backgroundSize: '0 0',
           backgroundRepeat: 'no-repeat',
-          backgroundPosition: '140px 140px',
+          backgroundPosition: {md: '140px 140px', xs: '100px 100px'},
           transition: 'background .5s ease',
           '&.active': {
             backgroundSize: {md: '220px 220px', xs: '170px 170px'},

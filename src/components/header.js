@@ -81,7 +81,7 @@ const Header = ({siteTitle}) => {
           >
             <Grid container>
               {menu.map(m => (
-                <Grid item xs={6}>
+                <Grid item xs={6} key={m.title}>
                   <Box mb={6} color='rgba(255, 255, 255, 0.8)'>
                     <i className={m.icon} />
                     {m.isExternal && (

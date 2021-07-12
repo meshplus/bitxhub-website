@@ -1,15 +1,11 @@
 import {Box, Container, Grid, Typography} from '@material-ui/core'
-import DataBG from '../../images/index_data_bg.png'
 import {ColorText} from '../style'
-import React, {useState} from 'react'
+import React from 'react'
 import DatumRight from '../common/datum_right'
 
 const Datum = () => {
   return (
-    <Box
-      pt={{md: 40, xs: 0}}
-      pb={55}
-    >
+    <Box pt={{md: 40, xs: 0}} pb={{md: 55, xs: 40}}>
       <Container maxWidth='lg'>
         <Box>
           <Grid container alignItems='stretch'>

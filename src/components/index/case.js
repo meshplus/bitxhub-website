@@ -1,4 +1,4 @@
-import {Box, Container, SwipeableDrawer, Typography} from '@material-ui/core'
+import {Box, Container, SwipeableDrawer, Typography, useMediaQuery} from '@material-ui/core'
 import {ColorText, ReadMoreNoHrefWithoutStyle} from '../style'
 import {Swiper, SwiperSlide} from 'swiper/react'
 import CardBG1 from '../../images/01.png'
@@ -7,12 +7,14 @@ import DataExchange from '../../images/data_exchange.png'
 import CardBG3 from '../../images/03.png'
 import React, {useState} from 'react'
 import {useWindowSize} from 'react-use'
+import {theme} from '../theme'
 
 const Case = () => {
   const [open1, setOpen1] = useState(false)
   const [open2, setOpen2] = useState(false)
   const [open3, setOpen3] = useState(false)
   const {width} = useWindowSize()
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
 
   return (
     <Box pt={{md: 60, xs: 30}} pb={{md: 70, xs: 24}}>
@@ -30,6 +32,17 @@ const Case = () => {
               height: {md: '420px', xs: '330px'},
               width: {md: '320px', xs: '270px'},
             },
+            '& .mobile .swiper-slide-active .case_item, & .case_item:hover': {
+              '& .read-more': {
+                background: {md: '-webkit-linear-gradient(left, #7DBCFC, #2E7CFE, #01E1FF)', xs: ''},
+                color: {md: 'transparent', xs: '#4f96ff'},
+                WebkitBackgroundClip: {md: 'text !important', xs: ''},
+                WebkitTextFillColor: {md: 'transparent', xs: ''},
+              },
+              '&:before': {
+                transform: 'scaleY(1.1)',
+              },
+            },
             '& .case_item': {
               display: 'flex',
               flexDirection: 'column',
@@ -45,17 +58,6 @@ const Case = () => {
               },
               '& .MuiTypography-body1': {
                 lineHeight: '26px',
-              },
-              '&:hover': {
-                '& .read-more': {
-                  background: '-webkit-linear-gradient(left, #7DBCFC, #2E7CFE, #01E1FF)',
-                  color: 'transparent',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                },
-                '&:before': {
-                  transform: 'scaleY(1.1)',
-                },
               },
               '&:before': {
                 backgroundImage: `linear-gradient(360deg, #000000 0%, #040E22 0.01%, #1D2A45 100%)`,
@@ -93,7 +95,7 @@ const Case = () => {
             },
           }}
         >
-          <Swiper slidesPerView='auto' spaceBetween={20}>
+          <Swiper slidesPerView='auto' spaceBetween={20} className={isMobile ? 'mobile' : ''}>
             <SwiperSlide>
               <Box className='case_item' sx={{'&:after': {backgroundImage: `url(${CardBG1})`}}}>
                 <Box zIndex={4} mt={15}>

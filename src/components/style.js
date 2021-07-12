@@ -153,7 +153,14 @@ export const Card = ({children, className, title, singleTitle, img, desc, date, 
           background: 'linear-gradient(360deg, #000000 0%, #040E22 0.01%, #121B30 100%)',
         }}
       >
-        <Typography mb={4} className='title' variant='h5' height={singleTitle ? '32px' : '64px'} display='inline-block'>
+        <Typography
+          mb={4}
+          className='title'
+          variant='h5'
+          height={{md: singleTitle ? '32px' : '64px', xs: singleTitle ? '30px' : '60px'}}
+          display='inline-block'
+          overflow='hidden'
+        >
           {title}
         </Typography>
         <Typography variant='subtitle1' maxHeight='60px' overflow='hidden'>

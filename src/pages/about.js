@@ -116,7 +116,8 @@ const AboutPage = ({data}) => {
                     },
                     '& .star': {
                       position: 'absolute',
-                      left: {md: '50%', xs: 0},
+                      left: {md: '50%', xs: '14px'},
+                      top: {md: 0, xs: '-10px'},
                       transform: 'translate(-80px, -24px)',
                       zIndex: 0,
                     },
@@ -357,13 +358,13 @@ const AboutPage = ({data}) => {
             </Box>
             <Box pt={20} pb={15}>
               <Grid container>
-                <Grid item md={6} sx={{display: 'flex', alignItems: 'center'}}>
+                <Grid item md={6} xs={12} sx={{display: 'flex', alignItems: 'center'}}>
                   <Typography variant='h3' mb={{md: 0, xs: 9}}>
                     <Box>有任何问题</Box>
                     欢迎联系我们
                   </Typography>
                 </Grid>
-                <Grid item md={6}>
+                <Grid item md={6} xs={12}>
                   <Typography variant='h5' mb={4}>
                     公司总部
                   </Typography>
@@ -379,13 +380,13 @@ const AboutPage = ({data}) => {
                     微信公众号
                   </Typography>
                   <Grid container spacing={4}>
-                    <Grid item md={4}>
+                    <Grid item md={4} xs={6}>
                       <Typography variant='body1' mb={2}>
                         趣链科技公众号
                       </Typography>
                       <img src={Group} alt='group' width={145} />
                     </Grid>
-                    <Grid item md={4}>
+                    <Grid item md={4} xs={6}>
                       <Typography variant='body1' mb={2}>
                         进入开源技术交流群
                       </Typography>

@@ -1,18 +1,11 @@
 import React, {useEffect, useState} from 'react'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
-import {Box, Button, Container, Grid, Typography} from '@material-ui/core'
+import {Box, Button, Container, Grid, Typography, useMediaQuery} from '@material-ui/core'
 import CommunityBanner from '../images/community_bg.png'
 import CommunityBG2 from '../images/community_bg_2.png'
 import CommunityBG3 from '../images/community_bg_3.png'
-import {
-  Card,
-  ColorText,
-  Divider,
-  HoverColorText,
-  ReadMoreWithoutStyle,
-  ReadMoreWithoutStyleRedirect,
-} from '../components/style'
+import {Card, ColorText, HoverColorText, ReadMoreWithoutStyle, ReadMoreWithoutStyleRedirect} from '../components/style'
 import {graphql, Link} from 'gatsby'
 import Union from '../images/union.svg'
 import Right from '../images/right.svg'
@@ -22,6 +15,7 @@ import {Octokit} from '@octokit/rest'
 import Moment from 'react-moment'
 import CommunityCard from '../images/community_card.png'
 import CommunityCardHover from '../images/community_card_hover.png'
+import {theme} from '../components/theme'
 
 export const pageQuery = graphql`
   query {
@@ -143,9 +137,10 @@ const CommunityPage = ({data}) => {
                         border: '1px solid rgba(255, 255, 255, 0.5)',
                         borderRadius: '12px',
                         '& .title': {
-                          // whiteSpace: 'nowrap',
-                          // overflow: 'hidden',
-                          // textOverflow: 'ellipsis',
+                          display: 'block',
+                          whiteSpace: 'nowrap',
+                          overflow: 'hidden',
+                          textOverflow: 'ellipsis',
                         },
                         '& .item': {
                           '&:not(:last-child)': {
@@ -202,11 +197,11 @@ const CommunityPage = ({data}) => {
                     },
                     '&:hover': {
                       backgroundImage: `url(${CommunityCard})`,
-                      '& .read-more': {
-                        background: '-webkit-linear-gradient(left, #7DBCFC, #2E7CFE, #01E1FF)',
-                        color: 'transparent',
-                        WebkitBackgroundClip: 'text',
-                        WebkitTextFillColor: 'transparent',
+                      '& .read-more, & .read-more a': {
+                        background: {md: '-webkit-linear-gradient(left, #7DBCFC, #2E7CFE, #01E1FF)', xs: ''},
+                        color: {md: 'transparent', xs: '#4f96ff'},
+                        WebkitBackgroundClip: {md: 'text !important', xs: ''},
+                        WebkitTextFillColor: {md: 'transparent', xs: ''},
                       },
                     },
                   },
@@ -297,7 +292,7 @@ const CommunityPage = ({data}) => {
               </Typography>
               <Grid container spacing={10}>
                 {data.allStrapiArticle.edges.map(article => (
-                  <Grid item md={4}>
+                  <Grid item md={4} xs={12}>
                     <Card
                       title={article.node.title}
                       link={`/article/${article.node.strapiId}`}

@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
-import {Box, Container, Grid, SwipeableDrawer, Typography} from '@material-ui/core'
+import {Box, Container, Grid, SwipeableDrawer, Typography, useMediaQuery} from '@material-ui/core'
 import Relaychain from '../images/relaychain.png'
 import Hyperchain from '../images/hyperchain.png'
 import lottie from 'lottie-web'
@@ -25,6 +25,7 @@ import CardBG2 from '../images/tech_card_bg_2.png'
 import CardBG3 from '../images/tech_card_bg_3.png'
 import IBTP from '../images/ibtp.gif'
 import {Swiper, SwiperSlide} from 'swiper/react'
+import {theme} from '../components/theme'
 
 const TechPage = ({data}) => {
   const ref = useRef()
@@ -38,6 +39,7 @@ const TechPage = ({data}) => {
 
   const [counter, setCounter] = useState(1)
   const {width} = useWindowSize()
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
 
   useInterval(() => {
     counter % 3 === 0 && setStep(0)
@@ -351,6 +353,17 @@ const TechPage = ({data}) => {
                   height: {md: '420px', xs: '330px'},
                   width: {md: '320px', xs: '270px'},
                 },
+                '& .mobile .swiper-slide-active .feat-item, & .feat-item:hover': {
+                  '& .read-more': {
+                    background: {md: '-webkit-linear-gradient(left, #7DBCFC, #2E7CFE, #01E1FF)', xs: ''},
+                    color: {md: 'transparent', xs: '#4f96ff'},
+                    WebkitBackgroundClip: {md: 'text !important', xs: ''},
+                    WebkitTextFillColor: {md: 'transparent', xs: ''},
+                  },
+                  '&:before': {
+                    transform: 'scaleY(1.1)',
+                  },
+                },
                 '& .feat-item': {
                   textAlign: 'left',
                   boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
@@ -388,23 +401,15 @@ const TechPage = ({data}) => {
                     transition: 'all .7s ease',
                   },
                   '&:hover': {
-                    '&:before': {
-                      transform: 'scaleY(1.1)',
-                    },
                     '&:after': {
                       backgroundPosition: 'right 0 top 0px',
-                    },
-                    '& .read-more': {
-                      background: '-webkit-linear-gradient(left, #7DBCFC, #2E7CFE, #01E1FF)',
-                      color: 'transparent',
-                      WebkitBackgroundClip: 'text',
-                      WebkitTextFillColor: 'transparent',
                     },
                   },
                 },
               }}
             >
               <Swiper
+                className={isMobile ? 'mobile' : ''}
                 slidesPerView='auto'
                 initialSlide={0}
                 spaceBetween={20}
