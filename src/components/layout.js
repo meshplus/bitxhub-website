@@ -10,7 +10,7 @@ import PropTypes from 'prop-types'
 import * as React from 'react'
 import Header from './header'
 import {theme} from './theme'
-import {Box, Container, CssBaseline, ThemeProvider, Typography} from '@material-ui/core'
+import {Box, Container, CssBaseline, Grid, ThemeProvider, Typography} from '@material-ui/core'
 import './style.css'
 import {StaticImage} from 'gatsby-plugin-image'
 import 'swiper/swiper-bundle.css'
@@ -38,7 +38,8 @@ const Layout = ({children}) => {
       >
         <Container maxWidth='lg'>
           <Box
-            my={10}
+            mt={10}
+            mb={6}
             position='relative'
             textAlign='center'
             sx={{
@@ -50,11 +51,12 @@ const Layout = ({children}) => {
                 display: 'block',
                 width: '100%',
                 height: '1px',
-                background: 'rgba(255, 255, 255, 0.2)',
+                background:
+                  'linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(255,255,255,1) 30%, rgba(255,255,255,1) 70%, rgba(0,0,0,1) 100%)',
               },
             }}
           >
-            <Box display='inline-block' bgcolor='#050505' fontSize='30px' px={10}>
+            <Box display='inline-block' bgcolor='#050505' fontSize='30px' px={{md: 10, xs: 3}}>
               <a href='https://github.com/meshplus/bitxhub' rel='noreferrer' target='_blank'>
                 <i className='icon icon-github' style={{fontSize: '26px'}} />
               </a>
@@ -62,14 +64,18 @@ const Layout = ({children}) => {
           </Box>
         </Container>
         <Box
-          textAlign='center'
           mb={5}
           sx={{
             '& a': {
+              '& i': {
+                fontSize: '20px',
+                mr: 2,
+                display: {md: 'none'},
+              },
               color: '#fff',
               marginLeft: '30px',
               display: 'inline-block',
-              marginBottom: '5px',
+              marginBottom: {md: '5px', xs: '30px'},
               '&:hover': {
                 background: '-webkit-linear-gradient(left, #7DBCFC, #2E7CFE, #01E1FF)',
                 color: 'transparent',
@@ -79,23 +85,51 @@ const Layout = ({children}) => {
             },
           }}
         >
-          <Link to='/tech' activeClassName='active' partiallyActive={true}>
-            技术
-          </Link>
-          <a href='https://upload.hyperchain.cn/BitXHub%E7%99%BD%E7%9A%AE%E4%B9%A6.pdf'>白皮书</a>
-          <a href='https://meshplus.github.io/bitxhub/bitxhub/quick_start/'>文档</a>
-          <Link to='/community' activeClassName='active' partiallyActive={true}>
-            社区
-          </Link>
-          <Link to='/blog' activeClassName='active' partiallyActive={true}>
-            博客
-          </Link>
-          <Link to='/tool' activeClassName='active' partiallyActive={true}>
-            工具
-          </Link>
-          <Link to='/about' activeClassName='active' partiallyActive={true}>
-            关于我们
-          </Link>
+          <Grid container display='flex' justifyContent='center'>
+            <Grid item xs={6} md='auto'>
+              <Link to='/tech' activeClassName='active' partiallyActive={true}>
+                <i className='icon icon-jishu' />
+                技术
+              </Link>
+            </Grid>
+            <Grid item xs={6} md='auto'>
+              <a href='https://upload.hyperchain.cn/BitXHub%E7%99%BD%E7%9A%AE%E4%B9%A6.pdf'>
+                <i className='icon icon-baipishu' />
+                白皮书
+              </a>
+            </Grid>
+            <Grid item xs={6} md='auto'>
+              <a href='https://meshplus.github.io/bitxhub/bitxhub/quick_start/'>
+                <i className='icon icon-wendang' />
+                文档
+              </a>
+            </Grid>
+            <Grid item xs={6} md='auto'>
+              <Link to='/community' activeClassName='active' partiallyActive={true}>
+                <i className='icon icon-shequ' />
+                社区
+              </Link>
+            </Grid>
+            <Grid item xs={6} md='auto'>
+              <Link to='/blog' activeClassName='active' partiallyActive={true}>
+                <i className='icon icon-boke' />
+                博客
+              </Link>
+            </Grid>
+            <Grid item xs={6} md='auto'>
+              <Link to='/tool' activeClassName='active' partiallyActive={true}>
+                <i className='icon icon-gongju' />
+                工具
+              </Link>
+            </Grid>
+            <Grid item xs={6} md='auto'>
+              <Link to='/about' activeClassName='active' partiallyActive={true}>
+                <i className='icon icon-guanyuwomen' />
+                关于我们
+              </Link>
+            </Grid>
+            <Grid item xs={6} md='auto' />
+          </Grid>
         </Box>
         <Box textAlign='center'>
           <Typography variant='body2' mb={2}>

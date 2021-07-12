@@ -3,6 +3,7 @@ import {theme} from '../theme'
 import {ColorText} from '../style'
 import {Link} from 'gatsby'
 import React from 'react'
+import {AnimationOnScroll} from 'react-animation-on-scroll'
 
 const More = () => {
   return (
@@ -27,9 +28,11 @@ const More = () => {
         },
       }}
     >
-      <Typography variant='h3' mb={8}>
-        <ColorText>了解更多</ColorText>
-      </Typography>
+      <AnimationOnScroll animateIn='animate__fadeInUp' duration={0.5}>
+        <Typography variant='h3' mb={8}>
+          <ColorText>了解更多</ColorText>
+        </Typography>
+      </AnimationOnScroll>
       <Container maxWidth='md'>
         <Grid container>
           <Grid item md={4} mb={4} xs={12}>

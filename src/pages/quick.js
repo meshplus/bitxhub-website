@@ -49,7 +49,7 @@ const QuickPage = ({data}) => {
             backgroundImage: `url(${BG1}), url(${BG2})`,
             backgroundSize: {md: '2000px, 2000px', xs: '1000px, 800px 500px'},
             backgroundRepeat: 'no-repeat',
-            backgroundPosition: {md: 'center -50px, center 1415px', xs: 'center -50px, center 1188px'},
+            backgroundPosition: {md: 'center -30px, center 1290px', xs: 'center -50px, center 1110px'},
           }}
         >
           <Container maxWidth='lg'>
@@ -78,6 +78,11 @@ const QuickPage = ({data}) => {
                     margin: '0 auto',
                   },
                 },
+                '& img': {
+                  display: 'block',
+                  width: '80%',
+                  margin: '0 auto',
+                },
               }}
             >
               <Grid container>
@@ -105,7 +110,7 @@ const QuickPage = ({data}) => {
                     </Button>
                   </Box>
                 </Grid>
-                <Grid item md={7} textAlign='center' sx={{'& img': {display: 'block', width: '100%'}}}>
+                <Grid item md={7} textAlign='center'>
                   <img src={Quick1} alt='tool' />
                 </Grid>
               </Grid>
@@ -131,11 +136,17 @@ const QuickPage = ({data}) => {
               pb={10}
               sx={{
                 '& .item': {
+                  p: 10,
+                  border: '4px solid #0b172c',
+                  transition: 'all .3s ease',
+                  '&:hover': {
+                    borderColor: '#213961',
+                  },
                   display: 'flex',
                   alignItems: 'center',
                   width: {md: '320px', xs: '204px'},
                   height: {md: '320px', xs: '204px'},
-                  borderRadius: '320px',
+                  borderRadius: '100%',
                   background: `url(${One}), linear-gradient(360deg, #000000 0%, #040E22 0.01%, #1D2A45 100%)`,
                   backgroundPosition: '20px 20px, top left',
                   backgroundSize: {md: '200px 140px, 100% 100%', xs: '130px 85px, 100% 100%'},
@@ -156,7 +167,9 @@ const QuickPage = ({data}) => {
               <Box overflow={{md: '', xs: 'scroll'}}>
                 <Box display='flex' alignItems='center' justifyContent='center' width={{md: '100%', xs: '820px'}}>
                   <Box
-                    p={10}
+                    component='a'
+                    href='https://meshplus.github.io/bitxhub/bitxhub/usage/env.html'
+                    target='_blank'
                     className='item'
                     sx={{
                       background: `url(${One}), linear-gradient(360deg, #000000 0%, #040E22 0.01%, #1D2A45 100%)`,
@@ -173,7 +186,9 @@ const QuickPage = ({data}) => {
                     <img src={Arrow} alt='arrow' className='arrow' />
                   </Box>
                   <Box
-                    p={10}
+                    component='a'
+                    href='https://meshplus.github.io/bitxhub/bitxhub/usage/deploy_bitxhub.html'
+                    target='_blank'
                     className='item'
                     sx={{
                       background: `url(${Two}), linear-gradient(360deg, #000000 0%, #040E22 0.01%, #1D2A45 100%)`,
@@ -191,7 +206,9 @@ const QuickPage = ({data}) => {
                     <img src={Arrow} alt='arrow' className='arrow' />
                   </Box>
                   <Box
-                    p={10}
+                    component='a'
+                    href='https://meshplus.github.io/bitxhub/bitxhub/usage/env.html'
+                    target='_blank'
                     className='item'
                     sx={{
                       background: `url(${Third}), linear-gradient(360deg, #000000 0%, #040E22 0.01%, #1D2A45 100%)`,

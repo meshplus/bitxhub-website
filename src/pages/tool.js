@@ -8,7 +8,6 @@ import BG2 from '../images/tool_bg_2.png'
 import Screen from '../images/screen.png'
 import {Link} from 'gatsby'
 import Typewriter from 'typewriter-effect'
-import {ChevronRight} from '@material-ui/icons'
 import {AnimationOnScroll} from 'react-animation-on-scroll'
 import Browser1 from '../images/tool_1.png'
 
@@ -27,6 +26,9 @@ const ToolPage = ({data}) => {
               backgroundSize: '1991px 681px, 2000px 900px',
               backgroundRepeat: 'no-repeat',
               backgroundPosition: 'center top, center 500px',
+              '& i': {
+                ml: 2,
+              },
               '& .btn': {
                 display: {md: 'block', xs: 'none'},
               },
@@ -52,18 +54,17 @@ const ToolPage = ({data}) => {
                       </Typography>
                       <Button variant='outlined' color='primary' size='large' disabled className='btn'>
                         敬请期待
-                        <ChevronRight />
+                        <i className='icon icon-chevron-right' />
                       </Button>
                     </Box>
                   </Grid>
                   <Grid item md={7} textAlign='center' sx={{'& img': {display: 'block', width: '100%'}}}>
-                    {/*<img src={Browser} alt='tool' />*/}
                     <img src={Browser1} alt='browser' />
                   </Grid>
                 </Grid>
                 <Button variant='outlined' color='primary' size='large' disabled className='mobile-btn'>
                   敬请期待
-                  <ChevronRight />
+                  <i className='icon icon-chevron-right' />
                 </Button>
               </Box>
               <Box pt={25} pb={10}>
@@ -83,14 +84,14 @@ const ToolPage = ({data}) => {
                         <Button variant='outlined' color='primary' size='large' className='btn'>
                           <Link to='/quick'>
                             立即使用
-                            <ColorText ml={2}>
+                            <ColorText>
                               <i className='icon icon-chevron-right' />
                             </ColorText>
                           </Link>
                         </Button>
                       </Box>
                     </Grid>
-                    <Grid item md={7} width='100%'>
+                    <Grid item md={7} xs={12} width='100%'>
                       <Box
                         mb={15}
                         pl={{md: 20, xs: 5}}
@@ -115,13 +116,14 @@ const ToolPage = ({data}) => {
                           },
                         }}
                       >
-                        <Box overflow='hidden' mt={{md: 12, xs: 5}}>
-                          <Box
-                            sx={{
-                              mt: {md: 0, xs: 6},
-                              transform: `translateY(-${y}px)`,
-                            }}
-                          >
+                        <Box
+                          overflow='hidden'
+                          mt={{md: 12, xs: 7}}
+                          sx={{
+                            height: {xs: 172, md: 480},
+                          }}
+                        >
+                          <Box sx={{transform: `translateY(-${y}px)`}}>
                             <Typewriter
                               options={{
                                 loop: true,
@@ -214,27 +216,27 @@ const ToolPage = ({data}) => {
                                   .pasteString(
                                     '<pre><span style="color: #52cbd2">bitxhub-solo |</span> msg="Gateway service started" port=9091 </pre>'
                                   )
-                                  .callFunction(() => setY(70))
+                                  .callFunction(() => setY(80))
                                   .pasteString(
                                     '<pre><span style="color: #52cbd2">bitxhub-solo |</span> msg="Order is ready" plugin=plugins/solo.so </pre>'
                                   )
-                                  .callFunction(() => setY(100))
+                                  .callFunction(() => setY(110))
                                   .pasteString('<pre><span style="color: #52cbd2">bitxhub-solo |</span></pre>')
                                   .changeDelay(10)
                                   .pasteString(`<pre>=======================================================</pre>`)
-                                  .callFunction(() => setY(110))
+                                  .callFunction(() => setY(135))
                                   .pasteString(`<pre>    ____     _    __    _  __    __  __            __<pre>`)
-                                  .callFunction(() => setY(120))
+                                  .callFunction(() => setY(145))
                                   .pasteString(`<pre>   / __ )   (_)  / /_  | |/ /   / / / /  __  __   / /_<pre>`)
-                                  .callFunction(() => setY(130))
+                                  .callFunction(() => setY(155))
                                   .pasteString(`<pre>  / __  |  / /  / __/  |   /   / /_/ /  / / / /  / __ \\<pre>`)
-                                  .callFunction(() => setY(140))
+                                  .callFunction(() => setY(165))
                                   .pasteString(`<pre> / /_/ /  / /  / /_   /   |   / __  /  / /_/ /  / /_/ /<pre>`)
-                                  .callFunction(() => setY(150))
+                                  .callFunction(() => setY(175))
                                   .pasteString(`<pre>/_____/  /_/   \\__/  /_/|_|  /_/ /_/   \\__,_/  /_.___/<pre>`)
-                                  .callFunction(() => setY(160))
+                                  .callFunction(() => setY(185))
                                   .pasteString(`<pre>=======================================================<pre>`)
-                                  .callFunction(() => setY(170))
+                                  .callFunction(() => setY(195))
                                   .pauseFor(3000)
                                   .deleteAll(1)
                                   .start()

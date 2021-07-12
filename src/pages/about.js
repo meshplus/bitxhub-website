@@ -11,14 +11,9 @@ import ContactBG from '../images/about_contact_bg.png'
 import Ball from '../images/roadmap_ball.png'
 import BallActive from '../images/roadmap_ball_active.png'
 import Star from '../images/about_star.png'
-import DataCard from '../images/data_card.png'
-import Datum1 from '../images/datum_1.png'
-import Datum2 from '../images/datum_2.png'
 import DatumRight from '../components/common/datum_right'
 
 const AboutPage = ({data}) => {
-  const [datumActive, setDatumActive] = useState('active')
-
   if (typeof window === undefined) return null
   return (
     <Box>
@@ -76,6 +71,10 @@ const AboutPage = ({data}) => {
                       pl: {xs: 4, md: 0},
                       textAlign: {xs: 'left', md: 'right'},
                     },
+                    '& .MuiTypography-h5': {
+                      fontWeight: 800,
+                      fontFamily: '"Roboto","Helvetica","Arial",sans-serif !important',
+                    },
                     '& .MuiTypography-subtitle2': {
                       paddingLeft: 4,
                       fontWeight: 'normal',
@@ -104,8 +103,8 @@ const AboutPage = ({data}) => {
                       ml: {md: 0, xs: 4},
                       width: '100%',
                     },
-                    '& .first_ball': {
-                      top: {xs: '40px !important', md: '0'},
+                    '& .ball.first_ball': {
+                      top: {xs: '40px', md: '0'},
                     },
                     '& .ball': {
                       top: {xs: '-8px', md: '0'},
@@ -199,7 +198,7 @@ const AboutPage = ({data}) => {
                           sx={{
                             marginLeft: '5px',
                             background: 'linear-gradient(360deg, #000000 0%, #0B1425 0.01%, #182B5C 100%)',
-                            border: '3px solid #7d6ca9',
+                            border: '3px solid #41407B',
                           }}
                         >
                           <Typography variant='h5' mb={3}>

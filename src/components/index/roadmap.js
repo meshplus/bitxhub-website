@@ -1,5 +1,5 @@
-import React, {useRef, useState} from 'react'
-import {Box, Container, Divider, Typography, useMediaQuery} from '@material-ui/core'
+import React, {useState} from 'react'
+import {Box, Container, Divider, Typography} from '@material-ui/core'
 import RoadmapShine from '../../images/roadmap_shine.png'
 import RoadmapCard from '../../images/roadmap_card.png'
 import {ColorText, ReadMore} from '../style'
@@ -32,7 +32,7 @@ const Roadmap = () => {
           visibility: 'none',
           opacity: 0,
           position: 'absolute',
-          top: '95px',
+          top: {md: '110px', xs: '95px'},
           left: 0,
           width: '100%',
           textAlign: 'center',
@@ -70,8 +70,8 @@ const Roadmap = () => {
           backgroundPosition: '140px 140px',
           transition: 'background .5s ease',
           '&.active': {
-            backgroundSize: {md: '250px 250px', xs: '170px 170px'},
-            backgroundPosition: {md: '-15px -15px', xs: '-11px 11px'},
+            backgroundSize: {md: '220px 220px', xs: '170px 170px'},
+            backgroundPosition: {md: '15px -10px', xs: '-11px 11px'},
             '& .title': {
               opacity: 0,
               display: 'none',
@@ -103,7 +103,7 @@ const Roadmap = () => {
           display: 'none',
           position: 'absolute',
           top: {md: '162px', xs: '133px'},
-          width: {xs: '190px', md: '280px'},
+          width: {xs: '190px', md: '300px'},
           minHeight: '240px',
           textAlign: 'left',
           backgroundImage: `url(${RoadmapCard})`,

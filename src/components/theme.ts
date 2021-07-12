@@ -50,9 +50,11 @@ export const theme = createTheme({
     MuiButton: {
       styleOverrides: {
         root: {
+          textAlign: 'center',
           textTransform: 'capitalize',
           borderRadius: '2em',
           color: '#ffffff',
+          transition: 'all .2s ease !important',
           '&.Mui-disabled': {
             border: '1px solid #828282',
             color: '#828282',
@@ -87,10 +89,11 @@ export const theme = createTheme({
           border: '1px solid #6c9ae6',
           '&:hover': {
             border: '1px solid #6c9ae6',
-            background: '-webkit-linear-gradient(left, #7DBCFC, #2E7CFE, #01E1FF)',
-            color: 'transparent',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
+            color: '#2E7CFE',
+            // background: '-webkit-linear-gradient(left, #7DBCFC, #2E7CFE, #01E1FF)',
+            // color: 'transparent',
+            // WebkitBackgroundClip: 'text',
+            // WebkitTextFillColor: 'transparent',
           },
         },
         containedPrimary: {
@@ -229,7 +232,7 @@ export const theme = createTheme({
           WebkitFontSmoothing: 'auto',
         },
         body: {
-          backgroundColor: '#050505',
+          backgroundColor: '#050707',
           color: '#ffffff',
           minHeight: '100vh',
           lineHeight: 1.2,

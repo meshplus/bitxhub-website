@@ -5,7 +5,10 @@ import Datum2 from '../../images/datum_2.png'
 import React, {useState} from 'react'
 
 const DatumRight = () => {
-  const [datumActive, setDatumActive] = useState('active')
+  const [active, setActive] = useState({1: '', 2: 'active', 3: ''})
+  const init = {1: '', 2: '', 3: ''}
+
+  const handleActive = i => setActive({...init, [i]: 'active'})
 
   return (
     <Box
@@ -50,12 +53,20 @@ const DatumRight = () => {
             fontWeight: 400,
           },
         },
+        '@keyframes A': {
+          from: {backgroundSize: '0 215px'},
+          to: {backgroundSize: '590px 215px'},
+        },
+        '@keyframes sA': {
+          from: {backgroundSize: '0 109px'},
+          to: {backgroundSize: '320px 109px'},
+        },
         '& .datum_item': {
           display: 'flex',
           alignItems: 'center',
           height: {xs: '118px', md: ''},
           padding: {xs: '25px 0', md: '35px 0'},
-          transition: 'background 0.4s ease',
+          transition: 'background 0.3s ease',
           backgroundRepeat: 'no-repeat',
           backgroundImage: `url(${DataCard})`,
           backgroundPosition: {xs: 'top 6px left 34px', md: 'top 1px left 70px'},
@@ -67,8 +78,8 @@ const DatumRight = () => {
           '& .datum_ball': {
             height: {xs: '70px', md: '139px'},
           },
-          '&:hover, &.active': {
-            backgroundSize: {xs: '320px 109px', md: '632px 215px'},
+          '&.active': {
+            animation: {md: 'A 0.4s ease-in-out forwards', xs: 'sA 0.4s ease-in-out forwards'},
             '& .datum_meta': {
               display: 'none',
             },
@@ -89,9 +100,8 @@ const DatumRight = () => {
         position='relative'
         ml={{xs: 8, md: 15}}
         mt={10}
-        className={`datum_item`}
-        onMouseEnter={() => setDatumActive('')}
-        onMouseLeave={() => setDatumActive('active')}
+        className={`datum_item ${active[1]}`}
+        onMouseEnter={() => handleActive(1)}
       >
         <img src={Datum1} alt='datum' className={'datum_ball'} />
         <img src={Datum2} alt='datum' className={'datum_ball_active'} />
@@ -118,9 +128,8 @@ const DatumRight = () => {
       <Box
         position='relative'
         ml={{xs: 2, md: 6}}
-        className={`datum_item ${datumActive}`}
-        onMouseEnter={() => setDatumActive('')}
-        onMouseLeave={() => setDatumActive('active')}
+        className={`datum_item ${active[2]}`}
+        onMouseEnter={() => handleActive(2)}
       >
         <img src={Datum1} alt='datum' className={'datum_ball'} />
         <img src={Datum2} alt='datum' className={'datum_ball_active'} />
@@ -148,9 +157,8 @@ const DatumRight = () => {
       <Box
         position='relative'
         ml={{xs: 8, md: 12}}
-        className={'datum_item'}
-        onMouseEnter={() => setDatumActive('')}
-        onMouseLeave={() => setDatumActive('active')}
+        className={`datum_item ${active[3]}`}
+        onMouseEnter={() => handleActive(3)}
       >
         <img src={Datum1} alt='datum' className={'datum_ball'} />
         <img src={Datum2} alt='datum' className={'datum_ball_active'} />

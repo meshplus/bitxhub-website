@@ -4,7 +4,7 @@ import Layout from '../components/layout'
 import SEO from '../components/seo'
 import {Box, Button, Container, Grid, Typography} from '@material-ui/core'
 import BlogBanner from '../images/blog_bg.png'
-import {ColorText} from '../components/style'
+import {ColorText, Divider} from '../components/style'
 import Moment from 'react-moment'
 
 export const pageQuery = graphql`
@@ -45,11 +45,11 @@ const BlogPage = ({data}) => {
     <Layout>
       <SEO title='Blog' />
       <Box
-        pt={38}
+        pt={{md: 38, xs: 28}}
         sx={{
           backgroundImage: `url(${BlogBanner})`,
           backgroundPosition: 'top 50px center',
-          backgroundSize: '2000px',
+          backgroundSize: {md: '2000px', xs: '1000px'},
           backgroundRepeat: 'no-repeat',
         }}
       >
@@ -62,6 +62,9 @@ const BlogPage = ({data}) => {
             </Box>
             <Box textAlign='center' mb={{md: 30, xs: 15}}>
               博观而约取，厚积而薄发
+            </Box>
+            <Box my={20}>
+              <Divider />
             </Box>
             <Box
               // mb={{md: 30, xs: 15}}

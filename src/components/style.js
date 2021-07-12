@@ -131,22 +131,16 @@ export const Card = ({children, className, title, singleTitle, img, desc, date, 
         '&:hover': {
           cursor: 'pointer',
           transform: 'translateY(-4px)',
+          '& .title': {
+            transition: 'all .6s ease',
+            background: '-webkit-linear-gradient(left, #7DBCFC, #2E7CFE, #01E1FF)',
+            color: 'transparent',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+          },
         },
       }}
     >
-      {/*<img*/}
-      {/*  src={img}*/}
-      {/*  alt='cover'*/}
-      {/*  style={{*/}
-      {/*    position: 'absolute',*/}
-      {/*    display: 'block',*/}
-      {/*    top: 0,*/}
-      {/*    width: '100%',*/}
-      {/*    objectFit: 'cover',*/}
-      {/*    borderTopLeftRadius: '12px',*/}
-      {/*    borderTopRightRadius: '12px',*/}
-      {/*  }}*/}
-      {/*/>*/}
       <Box
         p={6}
         sx={{
@@ -155,7 +149,7 @@ export const Card = ({children, className, title, singleTitle, img, desc, date, 
           background: 'linear-gradient(360deg, #000000 0%, #040E22 0.01%, #121B30 100%)',
         }}
       >
-        <Typography mb={4} variant='h5' height={singleTitle ? '32px' : '64px'}>
+        <Typography mb={4} className='title' variant='h5' height={singleTitle ? '32px' : '64px'} display='inline-block'>
           {title}
         </Typography>
         <Typography variant='subtitle1' maxHeight='60px' overflow='hidden'>

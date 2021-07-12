@@ -39,7 +39,7 @@ const Banner = () => {
         />
       )}
       <Container maxWidth='lg' style={{height: '100vh', display: 'flex', alignItems: 'center'}}>
-        <Grid item md={6} textAlign={{xs: 'center', md: 'left'}}>
+        <Grid item md={6} xs={12} textAlign={{xs: 'center', md: 'left'}}>
           <AnimationOnScroll animateIn='animate__fadeInUp' duration={0.5}>
             <Typography variant='h2'>
               <ColorText>万链互连</ColorText>

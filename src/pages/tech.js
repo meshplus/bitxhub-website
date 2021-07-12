@@ -335,10 +335,14 @@ const TechPage = ({data}) => {
                     backgroundSize: '240px',
                     backgroundPosition: 'right 0 top 0',
                     backgroundRepeat: 'no-repeat',
+                    transition: 'all .7s ease'
                   },
                   '&:hover': {
                     '&:before': {
                       transform: 'scaleY(1.1)',
+                    },
+                    '&:after': {
+                      backgroundPosition: 'right 0 top 0px',
                     },
                     '& .read-more': {
                       background: '-webkit-linear-gradient(left, #7DBCFC, #2E7CFE, #01E1FF)',

@@ -15,13 +15,14 @@ import Banner from '../components/index/banner'
 import Case from '../components/index/case'
 import Datum from '../components/index/datum'
 import More from '../components/index/more'
+import DataBG from '../images/index_data_bg.png'
 
 const IndexPage = () => {
-  const ref1 = useRef()
   const bgRef = useRef()
 
   console.log('Initializing......')
   useEffect(() => {
+    return
     console.log(`Fetching animation......`)
     fetch('http://cdn.yourtheme.cn/index_bg.json')
       .then(async res => {
@@ -38,17 +39,6 @@ const IndexPage = () => {
       .catch(e => {
         console.error(e)
       })
-  }, [])
-
-  const ref = useRef()
-
-  useEffect(() => {
-    console.log(`Loading animation......`)
-    lottie.setQuality('low')
-    const animation = lottie.loadAnimation({animationData: data, container: ref1.current})
-    // const animation2 = lottie.loadAnimation({animationData: Animate2, container: ref2.current})
-    animation.goToAndPlay(0, true)
-    // animation2.goToAndPlay(0, true)
   }, [])
 
   if (typeof window !== 'undefined') {
@@ -68,12 +58,12 @@ const IndexPage = () => {
           pt={{xs: 0, md: 40}}
           pb={{xs: 0, md: 45}}
           sx={{
-            backgroundImage: `url(${IndexBG2}), url(${IndexBG3})`,
-            backgroundSize: {md: '2000px, 2000px', xs: '2000px, 1000px'},
+            backgroundImage: `url(${IndexBG2}), url(${IndexBG3}), url(${CaseBG}), url(${DataBG})`,
+            backgroundSize: {md: '2000px', xs: '2000px, 1000px, 1000px, 800px'},
             backgroundRepeat: 'no-repeat',
             backgroundPosition: {
-              xs: 'center -300px, -490px 200px',
-              md: 'center top, center 500px',
+              xs: 'center -300px, -490px 200px, center 1160px, -300px 2420px',
+              md: 'center top, center 500px, center 1450px, center 3050px',
             },
           }}
         >
@@ -86,8 +76,8 @@ const IndexPage = () => {
                     <ColorText mr={2}>万链如一</ColorText>一可链万
                   </Typography>
                 </AnimationOnScroll>
-                <Grid container spacing={{xs: 3, md: 4}}>
-                  <Grid item md={6} xs={6}>
+                <Grid container spacing={3}>
+                  <Grid item xs={6}>
                     <AnimationOnScroll animateIn='animate__fadeInUp' duration={0.5}>
                       <IndexBar
                         p={{xs: 3, md: 5}}
@@ -102,7 +92,7 @@ const IndexPage = () => {
                       />
                     </AnimationOnScroll>
                   </Grid>
-                  <Grid item md={6} xs={6}>
+                  <Grid item xs={6}>
                     <AnimationOnScroll animateIn='animate__fadeInUp' duration={0.5}>
                       <IndexBar
                         p={{xs: 3, md: 5}}
@@ -117,7 +107,7 @@ const IndexPage = () => {
                       />
                     </AnimationOnScroll>
                   </Grid>
-                  <Grid item md={6} xs={6}>
+                  <Grid item xs={6}>
                     <AnimationOnScroll animateIn='animate__fadeInUp' duration={0.5}>
                       <IndexBar
                         p={{xs: 3, md: 5}}
@@ -132,7 +122,7 @@ const IndexPage = () => {
                       />
                     </AnimationOnScroll>
                   </Grid>
-                  <Grid item md={6} xs={6}>
+                  <Grid item xs={6}>
                     <AnimationOnScroll animateIn='animate__fadeInUp' duration={0.5}>
                       <IndexBar
                         p={{xs: 3, md: 5}}
@@ -152,8 +142,16 @@ const IndexPage = () => {
             </Grid>
           </Container>
           {/* 3 */}
-          <Box pt={{xs: 30, md: 60}} position='relative'>
-            <Box />
+          <Box
+            pt={{xs: 30, md: 60}}
+            position='relative'
+            sx={{
+              '& .ball': {
+                width: {md: '80px', xs: '65px'},
+                mr: {md: 5, xs: 3},
+              },
+            }}
+          >
             <Container maxWidth='lg' style={{display: 'flex', alignItems: 'center'}}>
               <Grid item md={7}>
                 <AnimationOnScroll animateIn='animate__fadeInUp' duration={0.5}>
@@ -163,9 +161,7 @@ const IndexPage = () => {
                 </AnimationOnScroll>
                 <AnimationOnScroll animateIn='animate__fadeInUp' duration={0.5}>
                   <Box display='flex' alignItems='center' mb={{xs: 4, md: 8}} position='relative'>
-                    <Box mr={5}>
-                      <StaticImage src='../images/index_3_1.png' width={80} alt='ball' />
-                    </Box>
+                    <StaticImage src='../images/index_3_1.png' alt='ball' className='ball' />
                     <Box position='absolute' top='50%' left={-45} zIndex={-1} width={140}>
                       <IndexDottedLine />
                     </Box>
@@ -181,9 +177,7 @@ const IndexPage = () => {
                 </AnimationOnScroll>
                 <AnimationOnScroll animateIn='animate__fadeInUp' duration={0.5}>
                   <Box display='flex' alignItems='center' position='relative' mb={{xs: 4, md: 8}}>
-                    <Box mr={5}>
-                      <StaticImage src='../images/index_3_2.png' width={80} alt='ball' />
-                    </Box>
+                    <StaticImage src='../images/index_3_2.png' alt='ball' className='ball' />
                     <Box position='absolute' top='50%' left={-45} zIndex={-1} width={140}>
                       <IndexDottedLine />
                     </Box>
@@ -199,9 +193,7 @@ const IndexPage = () => {
                 </AnimationOnScroll>
                 <AnimationOnScroll animateIn='animate__fadeInUp' duration={0.5}>
                   <Box display='flex' alignItems='center' position='relative'>
-                    <Box mr={5}>
-                      <StaticImage src='../images/index_3_3.png' width={80} alt='ball' />
-                    </Box>
+                    <StaticImage src='../images/index_3_3.png' alt='ball' className='ball' />
                     <Box position='absolute' top='50%' left={-45} zIndex={-1} width={140}>
                       <IndexDottedLine />
                     </Box>
@@ -219,19 +211,6 @@ const IndexPage = () => {
               <Grid item md={5} />
             </Container>
           </Box>
-        </Box>
-
-        {/* case */}
-        <Box
-          ref={ref}
-          pt={10}
-          sx={{
-            background: `url(${CaseBG})`,
-            backgroundPosition: {xs: 'center 20px', md: 'center -100px'},
-            backgroundRepeat: 'no-repeat',
-            backgroundSize: {xs: '1000px', md: '2000px'},
-          }}
-        >
           <Case />
           <Roadmap />
           <Datum />
