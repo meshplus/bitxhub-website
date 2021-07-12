@@ -15,7 +15,7 @@ const Case = () => {
   const {width} = useWindowSize()
 
   return (
-    <Box pt={60} pb={{md: 70, xs: 24}}>
+    <Box pt={{md: 60, xs: 30}} pb={{md: 70, xs: 24}}>
       <Container maxWidth='lg'>
         <Typography variant='h3' mb={{md: 14, xs: 8}}>
           <ColorText mr={1}>BitXHub</ColorText>构建解决方案

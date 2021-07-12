@@ -41,7 +41,7 @@ export const ReadMoreNoHrefWithoutStyle = ({...other}) => {
 
 export const ReadMoreWithoutStyle = ({to, ...other}) => {
   return (
-    <Box {...other} sx={{cursor: 'pointer'}}>
+    <Box {...other} sx={{cursor: 'pointer', display: 'inline-block'}}>
       <Link to={to}>
         <Box display='inline-flex' alignItems='center'>
           <Box mr={2}>查看更多</Box>
@@ -54,7 +54,7 @@ export const ReadMoreWithoutStyle = ({to, ...other}) => {
 
 export const ReadMoreWithoutStyleRedirect = ({to, ...other}) => {
   return (
-    <Box {...other} sx={{cursor: 'pointer'}}>
+    <Box {...other} sx={{cursor: 'pointer', display: 'inline-block'}}>
       <a href={to} target='_blank'>
         <Box display='inline-flex' alignItems='center'>
           <Box mr={2}>查看更多</Box>
@@ -139,6 +139,10 @@ export const Card = ({children, className, title, singleTitle, img, desc, date, 
             WebkitTextFillColor: 'transparent',
           },
         },
+        '& .date': {
+          fontFamily: '"Titillium Web","Roboto","Helvetica","Arial",sans-serif !important',
+          fontWeight: 'bold',
+        },
       }}
     >
       <Box
@@ -155,7 +159,7 @@ export const Card = ({children, className, title, singleTitle, img, desc, date, 
         <Typography variant='subtitle1' maxHeight='60px' overflow='hidden'>
           {desc}
         </Typography>
-        <Typography mt={4} variant='body1'>
+        <Typography mt={4} variant='body1' className='date'>
           <Moment date={date} format='YYYY.MM.DD' />
         </Typography>
       </Box>
@@ -184,9 +188,12 @@ export const IndexBar = ({children, className, title, desc, titleMb, lighterBG, 
       {...other}
       sx={{
         borderRadius: '16px',
+        // background: lighterBG
+        //   ? 'linear-gradient(270deg, #050707 0%, #121B30 100%)'
+        //   : 'linear-gradient(89.86deg, rgba(11, 33, 77, 0.6) -5.78%, rgba(1, 3, 10, 0.6) 52.27%, rgba(0, 0, 0, 0.6) 52.28%)',
         background: lighterBG
           ? 'linear-gradient(270deg, #050707 0%, #121B30 100%)'
-          : 'linear-gradient(89.86deg, rgba(11, 33, 77, 0.6) -5.78%, rgba(1, 3, 10, 0.6) 52.27%, rgba(0, 0, 0, 0.6) 52.28%)',
+          : 'linear-gradient(130deg, rgba(11, 33, 77, 0.6) 4.35%, rgba(1, 3, 10, 0.6) 97.15%)',
       }}
     >
       <Typography variant='subtitle1' mb={titleMb ? titleMb : 2} display='flex' alignItems='center'>

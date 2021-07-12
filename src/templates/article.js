@@ -112,9 +112,10 @@ const Article = ({data}) => {
           >
             <Box
               sx={{
-                color: 'rgba(255, 255, 255, 0.8)',
-                lineHeight: '26px',
-                '& strong': {color: '#fff'},
+                color: 'rgba(255, 255, 255, 0.7)',
+                fontWeight: 300,
+                lineHeight: '30px',
+                '& strong': {color: 'rgba(255, 255, 255, 0.85)', fontWeight: 500},
                 '& h1, h2, h3, h4, h5, h6': {
                   fontFamily: '"Roboto","Helvetica","Arial",sans-serif !important',
                   margin: '35px 0 20px',
@@ -126,6 +127,9 @@ const Article = ({data}) => {
                   background: 'rgba(255, 255, 255, 0.09)',
                   padding: '16px 24px',
                   overflowX: 'scroll',
+                },
+                '& code': {
+                  fontFamily: 'Source Code Pro',
                 },
                 '& blockquote': {
                   margin: '30px 0 30px 0',
@@ -139,8 +143,12 @@ const Article = ({data}) => {
                   margin: '25px auto',
                 },
                 '& ul, & ol': {
+                  margin: '24px 0',
                   lineHeight: '26px',
-                  color: 'rgba(255, 255, 255, 0.6)',
+                  color: 'rgba(255, 255, 255, 0.45)',
+                  '& li': {
+                    paddingLeft: '12px',
+                  },
                   '& p': {
                     margin: '0 0 8px',
                   },

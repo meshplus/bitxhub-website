@@ -44,16 +44,16 @@ const QuickPage = ({data}) => {
         />
         <Box
           pt={20}
-          pb={30}
+          pb={20}
           sx={{
             backgroundImage: `url(${BG1}), url(${BG2})`,
             backgroundSize: {md: '2000px, 2000px', xs: '1000px, 800px 500px'},
             backgroundRepeat: 'no-repeat',
-            backgroundPosition: {md: 'center -30px, center 1290px', xs: 'center -50px, center 1110px'},
+            backgroundPosition: {md: 'center -30px, center 1200px', xs: 'center -50px, center 1110px'},
           }}
         >
           <Container maxWidth='lg'>
-            <Box pt={10} mb={40}>
+            <Box pt={10} mb={30}>
               <Typography variant='h3' mb={4}>
                 快速开始
               </Typography>
@@ -80,7 +80,7 @@ const QuickPage = ({data}) => {
                 },
                 '& img': {
                   display: 'block',
-                  width: '80%',
+                  width: '75%',
                   margin: '0 auto',
                 },
               }}
@@ -137,7 +137,7 @@ const QuickPage = ({data}) => {
               sx={{
                 '& .item': {
                   p: 10,
-                  border: '4px solid #0b172c',
+                  border: '4px solid #111f3a',
                   transition: 'all .3s ease',
                   '&:hover': {
                     borderColor: '#213961',

@@ -21,12 +21,14 @@ const Banner = () => {
     // animation2.goToAndPlay(0, true)
   }, [])
   return (
-    <Hero
+    <Box
       position='relative'
+      pt={{md: 100, xs: 23}}
+      pb={{md: 100, xs: 0}}
       sx={{
         backgroundImage: {xs: `url(${IndexWebp})`, md: `url()`},
         backgroundSize: '250%',
-        backgroundPosition: 'center 140px',
+        backgroundPosition: 'center 105px',
         backgroundRepeat: 'no-repeat',
       }}
     >
@@ -38,7 +40,7 @@ const Banner = () => {
           style={{top: '50%', transform: 'translateY(-50%)', right: '0px'}}
         />
       )}
-      <Container maxWidth='lg' style={{height: '100vh', display: 'flex', alignItems: 'center'}}>
+      <Container maxWidth='lg' style={{display: 'flex', alignItems: 'center'}}>
         <Grid item md={6} xs={12} textAlign={{xs: 'center', md: 'left'}}>
           <AnimationOnScroll animateIn='animate__fadeInUp' duration={0.5}>
             <Typography variant='h2'>
@@ -85,7 +87,7 @@ const Banner = () => {
           </AnimationOnScroll>
         </Grid>
       </Container>
-    </Hero>
+    </Box>
   )
 }
 

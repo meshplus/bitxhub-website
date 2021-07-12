@@ -25,7 +25,7 @@ const ToolPage = ({data}) => {
               backgroundImage: `url(${BG1}), url(${BG2})`,
               backgroundSize: '1991px 681px, 2000px 900px',
               backgroundRepeat: 'no-repeat',
-              backgroundPosition: 'center top, center 500px',
+              backgroundPosition: 'center top, center 625px',
               '& i': {
                 ml: 2,
               },
@@ -49,7 +49,7 @@ const ToolPage = ({data}) => {
                         </AnimationOnScroll>
                         , 尽在掌握之中
                       </Typography>
-                      <Typography variant='subtitle1' pr={{md: 25, xs: 0}} mb={{md: 20, xs: 10}}>
+                      <Typography variant='body1' pr={{md: 25, xs: 0}} mb={{md: 20, xs: 10}}>
                         通过可视化方式进行应用链管理和中继链自治管理, 实时查看跨链数据; 即将在2021年的更新中上线。
                       </Typography>
                       <Button variant='outlined' color='primary' size='large' disabled className='btn'>
@@ -62,7 +62,17 @@ const ToolPage = ({data}) => {
                     <img src={Browser1} alt='browser' />
                   </Grid>
                 </Grid>
-                <Button variant='outlined' color='primary' size='large' disabled className='mobile-btn'>
+                <Button
+                  variant='outlined'
+                  color='primary'
+                  size='large'
+                  disabled
+                  disableElevation={true}
+                  disableFocusRipple={true}
+                  disableTouchRipple={true}
+                  disableRipple={true}
+                  className='mobile-btn'
+                >
                   敬请期待
                   <i className='icon icon-chevron-right' />
                 </Button>
@@ -78,7 +88,7 @@ const ToolPage = ({data}) => {
                           </AnimationOnScroll>
                           启动跨链系统
                         </Typography>
-                        <Typography variant='subtitle1' pr={{md: 20, xs: 0}} mb={{md: 20, xs: 5}}>
+                        <Typography variant='body1' pr={{md: 20, xs: 0}} mb={{md: 20, xs: 5}}>
                           Goduck 跨链运维工具可以一键启动任一跨链组件; 一键生成组件配置; 一键启动整套跨链系统
                         </Typography>
                         <Button variant='outlined' color='primary' size='large' className='btn'>

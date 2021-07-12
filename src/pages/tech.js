@@ -81,6 +81,16 @@ const TechPage = ({data}) => {
           backgroundPosition: {md: 'center -50px, center 900px', xs: 'center 320px, center 900px'},
           backgroundRepeat: 'no-repeat',
           backgroundSize: {md: '2000px, 2000px', xs: '120%, 2000px'},
+          '& .desc': {
+            m: '0 auto',
+            p: 2,
+            transform: 'translate(-20px, -60px)',
+            background: 'rgba(0, 8, 18, 0.92)',
+            width: '220px',
+            fontSize: '12px',
+            color: 'rgba(255,255,255,0.5)',
+            textAlign: 'center',
+          },
         }}
         pt={10}
       >
@@ -106,7 +116,7 @@ const TechPage = ({data}) => {
           </Box>
 
           {/* 2 */}
-          <Box mt={{md: 80, xs: 60}} mb={30}>
+          <Box mt={{md: 80, xs: 60}} mb={15}>
             <Container maxWidth='lg'>
               <Grid container>
                 <Grid item md={5} display='flex' alignItems='center'>
@@ -119,20 +129,20 @@ const TechPage = ({data}) => {
                     <Typography variant='h3' mb={4}>
                       的积木架构
                     </Typography>
-                    <Typography variant='body1' mb={{md: 6, xs: 2}}>
+                    <Typography variant='body1' mb={{md: 14, xs: 2}}>
                       通过灵活组合跨链组件形成不同架构，实现多业务场景的高效适配
                     </Typography>
                     <Box display={{md: 'block', xs: 'none'}}>
-                      <Grid container textAlign='center'>
+                      <Grid container textAlign={{md: 'left', xs: 'center'}}>
                         <Grid item xs={4}>
                           <img src={Relaychain} alt='relaychain' width={44} />
                           <Typography variant='subtitle1'>中继链</Typography>
                         </Grid>
-                        <Grid item xs={4} textAlign='center'>
+                        <Grid item xs={4} textAlign={{md: 'left', xs: 'center'}}>
                           <img src={Pier} alt='pier' width={44} />
                           <Typography variant='subtitle1'>跨链网关</Typography>
                         </Grid>
-                        <Grid item xs={4} textAlign='center'>
+                        <Grid item xs={4} textAlign={{md: 'left', xs: 'center'}}>
                           <img src={Hyperchain} alt='hyperchain' height={44} />
                           <Typography variant='subtitle1'>应用链</Typography>
                         </Grid>
@@ -152,8 +162,8 @@ const TechPage = ({data}) => {
                         background: 'linear-gradient(360deg, #181818 0%, #1D2735 0.01%, #1D2735 100%)',
                         padding: '3px',
                         borderRadius: '56px',
-                        fontWeight: 300,
                         height: 16,
+                        fontWeight: 400,
                         width: 16,
                         cursor: 'pointer',
                         transition: 'all .3s ease',
@@ -169,13 +179,21 @@ const TechPage = ({data}) => {
                           opacity: 0,
                           visibility: 'none',
                         },
+                        '&:hover': {
+                          '& .font': {
+                            background: '-webkit-linear-gradient(left, #7DBCFC, #2E7CFE, #01E1FF)',
+                            color: 'transparent',
+                            WebkitBackgroundClip: 'text',
+                            WebkitTextFillColor: 'transparent',
+                          },
+                        },
                         '&.active, &:hover': {
                           '& .font': {
                             animation: 'in .3s ease forwards',
                           },
                           background: 'linear-gradient(360deg, #181818 0%, #05070B 0.01%, #1D2735 100%)',
                           padding: '10px 20px',
-                          fontSize: '14px',
+                          fontSize: '16px',
                           height: 'auto',
                           width: 'auto',
                         },
@@ -212,7 +230,7 @@ const TechPage = ({data}) => {
               </Grid>
             </Container>
           </Box>
-          <Box my={20} sx={{'& img': {display: 'block', width: '100%'}}}>
+          <Box my={15} sx={{'& img': {display: 'block', width: '100%'}}}>
             <Container maxWidth='lg'>
               <Grid container flexDirection={{xs: 'row', md: 'row-reverse'}}>
                 <Grid item md={5} display='flex' alignItems='center'>
@@ -233,11 +251,18 @@ const TechPage = ({data}) => {
                 </Grid>
                 <Grid item md={7}>
                   <img src={IBTP} alt='img' width={720} />
+                  <Box className='desc'>
+                    <Box>
+                      <Box sx={{background: 'rgba(46, 124, 254, 0.1)', padding: 2}}>
+                        所有经过BitXHub的交易都会被转换为统一的IBTP格式
+                      </Box>
+                    </Box>
+                  </Box>
                 </Grid>
               </Grid>
             </Container>
           </Box>
-          <Box my={{md: 30, xs: 10}} sx={{'& img': {display: 'block', width: '100%'}}}>
+          <Box my={{md: 15, xs: 10}} sx={{'& img': {display: 'block', width: '100%'}}}>
             <Container maxWidth='lg'>
               <Grid container>
                 <Grid item md={5} display='flex' alignItems='center'>
@@ -255,11 +280,18 @@ const TechPage = ({data}) => {
                 </Grid>
                 <Grid item md={7} textAlign='center'>
                   <img src={PierGif} alt='pier' width={720} />
+                  <Box className='desc'>
+                    <Box>
+                      <Box sx={{background: 'rgba(46, 124, 254, 0.1)', padding: 2}}>
+                        跨链网关通过将核心模块与应用链插件进行解耦, 方便更多的应用链加入跨链系统
+                      </Box>
+                    </Box>
+                  </Box>
                 </Grid>
               </Grid>
             </Container>
           </Box>
-          <Box my={{md: 30, xs: 10}} sx={{'& img': {display: 'block', width: '100%'}}}>
+          <Box my={{md: 15, xs: 10}} sx={{'& img': {display: 'block', width: '100%'}}}>
             <Container maxWidth='lg'>
               <Grid container flexDirection={{xs: 'row', md: 'row-reverse'}}>
                 <Grid item md={5} display='flex' alignItems='center'>
@@ -277,10 +309,28 @@ const TechPage = ({data}) => {
                 </Grid>
                 <Grid item md={7}>
                   <img src={Wasm} alt='pier' width={720} />
+                  <Box className='desc'>
+                    <Box>
+                      <Box sx={{background: 'rgba(46, 124, 254, 0.1)', padding: 2}}>
+                        验证引擎调用不同验证规则验证不同异构链的交易
+                      </Box>
+                    </Box>
+                  </Box>
                 </Grid>
               </Grid>
             </Container>
           </Box>
+          <Container maxWidth='lg'>
+            <Box
+              my={20}
+              sx={{
+                width: '100%',
+                height: '2.5px',
+                background:
+                  'linear-gradient(90deg, rgba(24,126,244,0) 0%, rgba(24,126,244,1) 10%, rgba(82,174,241,1) 90%, rgba(82,174,241,0) 100%)',
+              }}
+            />
+          </Container>
           <Typography variant='h2' textAlign='center'>
             <AnimationOnScroll animateIn='animate__fadeInUp' duration={0.6}>
               <ColorText>更多特性</ColorText>
@@ -335,7 +385,7 @@ const TechPage = ({data}) => {
                     backgroundSize: '240px',
                     backgroundPosition: 'right 0 top 0',
                     backgroundRepeat: 'no-repeat',
-                    transition: 'all .7s ease'
+                    transition: 'all .7s ease',
                   },
                   '&:hover': {
                     '&:before': {

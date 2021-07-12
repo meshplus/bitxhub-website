@@ -8,7 +8,6 @@ import CaseBG from '../images/index_case_bg.png'
 import lottie from 'lottie-web'
 import IndexBG3 from '../images/index_bg_3.png'
 import {StaticImage} from 'gatsby-plugin-image'
-import data from './data.json'
 import IndexBG2 from '../images/index_bg_2.png'
 import Roadmap from '../components/index/roadmap'
 import Banner from '../components/index/banner'
@@ -55,22 +54,30 @@ const IndexPage = () => {
         {/* 2 */}
         <Box
           position='relative'
-          pt={{xs: 0, md: 40}}
+          pt={{xs: 20, md: 40}}
           pb={{xs: 0, md: 45}}
           sx={{
             backgroundImage: `url(${IndexBG2}), url(${IndexBG3}), url(${CaseBG}), url(${DataBG})`,
             backgroundSize: {md: '2000px', xs: '2000px, 1000px, 1000px, 800px'},
             backgroundRepeat: 'no-repeat',
             backgroundPosition: {
-              xs: 'center -300px, -490px 200px, center 1160px, -300px 2420px',
+              xs: 'center -130px, -490px 310px, center 1160px, -300px 2420px',
               md: 'center top, center 500px, center 1450px, center 3050px',
             },
           }}
         >
-          <Container maxWidth='lg' style={{display: 'flex', alignItems: 'center'}}>
+          <Container maxWidth='lg' sx={{display: 'flex', alignItems: 'center'}}>
             <Grid item md={6} />
             <Grid item md={6}>
-              <Box ml={{md: 8}}>
+              <Box
+                ml={{md: 8}}
+                sx={{
+                  '& img': {
+                    width: {md: '40px', xs: '24px'},
+                    mr: {md: 3, xs: 2},
+                  },
+                }}
+              >
                 <AnimationOnScroll animateIn='animate__fadeInUp' duration={0.5}>
                   <Typography variant='h3' mb={10}>
                     <ColorText mr={2}>万链如一</ColorText>一可链万
@@ -84,8 +91,8 @@ const IndexPage = () => {
                         titleMb={3}
                         title={
                           <>
-                            <StaticImage src='../images/index_2_1.png' height={40} alt='icon' />
-                            <Box ml={3}>异构链适配</Box>
+                            <StaticImage src='../images/index_2_1.png' alt='icon' />
+                            <Box>异构链适配</Box>
                           </>
                         }
                         desc='采用通用跨链传输协议，实现对异构/同构应用链的协议适配'
@@ -99,8 +106,8 @@ const IndexPage = () => {
                         titleMb={3}
                         title={
                           <>
-                            <StaticImage src='../images/index_2_2.png' height={40} alt='icon' />
-                            <Box ml={3}>交易验证</Box>
+                            <StaticImage src='../images/index_2_2.png' alt='icon' />
+                            <Box>交易验证</Box>
                           </>
                         }
                         desc='验证跨链交易的来源及交易证明是否满足指定的跨链验证规则'
@@ -114,8 +121,8 @@ const IndexPage = () => {
                         titleMb={3}
                         title={
                           <>
-                            <StaticImage src='../images/index_2_3.png' height={40} alt='icon' />
-                            <Box ml={3}>跨链事务</Box>
+                            <StaticImage src='../images/index_2_3.png' alt='icon' />
+                            <Box>跨链事务</Box>
                           </>
                         }
                         desc='内置事务管理合约，保证不同业务场景下跨链交易的事务性'
@@ -129,8 +136,8 @@ const IndexPage = () => {
                         titleMb={3}
                         title={
                           <>
-                            <StaticImage src='../images/index_2_4.png' height={40} alt='icon' />
-                            <Box ml={3}>隐私保护</Box>
+                            <StaticImage src='../images/index_2_4.png' alt='icon' />
+                            <Box>隐私保护</Box>
                           </>
                         }
                         desc='针对用户需要对托管数字资产全方位保护的解决方案'
@@ -159,7 +166,7 @@ const IndexPage = () => {
                     <ColorText>核心组件</ColorText>
                   </Typography>
                 </AnimationOnScroll>
-                <AnimationOnScroll animateIn='animate__fadeInUp' duration={0.5}>
+                <AnimationOnScroll animateIn='animate__fadeInUp' duration={0.5} offset={-50}>
                   <Box display='flex' alignItems='center' mb={{xs: 4, md: 8}} position='relative'>
                     <StaticImage src='../images/index_3_1.png' alt='ball' className='ball' />
                     <Box position='absolute' top='50%' left={-45} zIndex={-1} width={140}>
@@ -175,7 +182,7 @@ const IndexPage = () => {
                     />
                   </Box>
                 </AnimationOnScroll>
-                <AnimationOnScroll animateIn='animate__fadeInUp' duration={0.5}>
+                <AnimationOnScroll animateIn='animate__fadeInUp' duration={0.5} offset={-50}>
                   <Box display='flex' alignItems='center' position='relative' mb={{xs: 4, md: 8}}>
                     <StaticImage src='../images/index_3_2.png' alt='ball' className='ball' />
                     <Box position='absolute' top='50%' left={-45} zIndex={-1} width={140}>
@@ -191,7 +198,7 @@ const IndexPage = () => {
                     />
                   </Box>
                 </AnimationOnScroll>
-                <AnimationOnScroll animateIn='animate__fadeInUp' duration={0.5}>
+                <AnimationOnScroll animateIn='animate__fadeInUp' duration={0.5} offset={-50}>
                   <Box display='flex' alignItems='center' position='relative'>
                     <StaticImage src='../images/index_3_3.png' alt='ball' className='ball' />
                     <Box position='absolute' top='50%' left={-45} zIndex={-1} width={140}>

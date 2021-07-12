@@ -10,7 +10,6 @@ import {
   ColorText,
   Divider,
   HoverColorText,
-  ReadMore,
   ReadMoreWithoutStyle,
   ReadMoreWithoutStyleRedirect,
 } from '../components/style'
@@ -137,26 +136,38 @@ const CommunityPage = ({data}) => {
                   </Grid>
                   <Grid item md={4} xs={12}>
                     <Box
-                      p={6}
+                      px={6}
+                      pt={8}
+                      pb='36px'
                       sx={{
                         border: '1px solid rgba(255, 255, 255, 0.5)',
                         borderRadius: '12px',
+                        '& .title': {
+                          // whiteSpace: 'nowrap',
+                          // overflow: 'hidden',
+                          // textOverflow: 'ellipsis',
+                        },
+                        '& .item': {
+                          '&:not(:last-child)': {
+                            borderBottom: '1px solid rgba(71, 71, 71, 0.5)',
+                            mb: 5,
+                            pb: 5,
+                          },
+                        },
                       }}
                     >
                       {data.allStrapiActivity.edges.slice(1).map(activity => (
-                        <>
+                        <Box className='item'>
                           <Typography variant='body1' mb={1}>
                             <Moment date={activity.node.published_at} format='YYYY.MM.DD' />
                           </Typography>
                           <Typography variant='subtitle1' component='a' href={activity.node.link} target='_blank'>
-                            <HoverColorText maxHeight='28px' overflow='hidden'>
+                            <HoverColorText maxHeight='28px' overflow='hidden' className='title'>
                               {activity.node.title}
                             </HoverColorText>
                           </Typography>
-                          <Divider my={4} />
-                        </>
+                        </Box>
                       ))}
-                      <ReadMore to='/' my={6} />
                     </Box>
                   </Grid>
                 </Grid>

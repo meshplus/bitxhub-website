@@ -56,9 +56,15 @@ export const theme = createTheme({
           color: '#ffffff',
           transition: 'all .2s ease !important',
           '&.Mui-disabled': {
-            border: '1px solid #828282',
-            color: '#828282',
+            border: '1px solid rgba(130, 130, 130, 0.5)',
+            color: 'rgba(130, 130, 130, 0.5)',
             cursor: 'not-allowed',
+            pointerEvents: 'all !important',
+            '&:hover': {
+              background: 'transparent',
+              border: '1px solid rgba(130, 130, 130, 0.5)',
+              color: 'rgba(130, 130, 130, 0.5)',
+            },
           },
         },
         contained: {
@@ -87,9 +93,14 @@ export const theme = createTheme({
         },
         outlinedPrimary: {
           border: '1px solid #6c9ae6',
+          padding: '7px 21px 7px 26px',
+          fontWeight: 400,
           '&:hover': {
+            '& a': {
+              color: '#4f96ff',
+            },
             border: '1px solid #6c9ae6',
-            color: '#2E7CFE',
+            color: '#4f96ff',
             // background: '-webkit-linear-gradient(left, #7DBCFC, #2E7CFE, #01E1FF)',
             // color: 'transparent',
             // WebkitBackgroundClip: 'text',
@@ -213,7 +224,7 @@ export const theme = createTheme({
         },
         body1: {
           color: 'rgba(255, 255, 255, 0.5)',
-          lineHeight: '20px',
+          lineHeight: '26px',
           [breakpoints.down('md')]: {
             fontSize: '12px',
           },

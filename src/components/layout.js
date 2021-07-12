@@ -52,7 +52,7 @@ const Layout = ({children}) => {
                 width: '100%',
                 height: '1px',
                 background:
-                  'linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(255,255,255,1) 30%, rgba(255,255,255,1) 70%, rgba(0,0,0,1) 100%)',
+                  'linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(255,255,255,.4) 30%, rgba(255,255,255,.4) 70%, rgba(0,0,0,1) 100%)',
               },
             }}
           >

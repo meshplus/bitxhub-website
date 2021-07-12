@@ -84,6 +84,7 @@ const BlogPage = ({data}) => {
           </Box>
           <Box
             sx={{
+              px: {md: 12, xs: 0},
               '& .article:not(:last-child)': {
                 borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
               },
@@ -91,7 +92,7 @@ const BlogPage = ({data}) => {
                 fontFamily: '"Roboto","Helvetica","Arial",sans-serif !important',
               },
               '& .title': {
-                fontWeight: 500,
+                fontWeight: 400,
               },
               '& .content': {
                 height: '20px',
@@ -115,7 +116,7 @@ const BlogPage = ({data}) => {
                       />
                     </Box>
                   </Grid>
-                  <Grid item md={8}>
+                  <Grid item md={8} display='flex' flexDirection='column' minHeight={{md: '160px', xs: '100px'}}>
                     <Typography
                       className='title'
                       variant='h5'
@@ -130,7 +131,7 @@ const BlogPage = ({data}) => {
                     <Typography variant='body1' fontSize='16px' color='rgba(255, 255, 255, 0.8)' className='content'>
                       {article.node.content.slice(0, 80)}
                     </Typography>
-                    <Typography variant='body1' mt={6} className='date'>
+                    <Typography variant='body1' mt={6} className='date' mt='auto'>
                       <Moment date={article.node.published_at} format='YYYY.MM.DD' />
                     </Typography>
                   </Grid>

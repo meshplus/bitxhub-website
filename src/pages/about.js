@@ -35,7 +35,7 @@ const AboutPage = ({data}) => {
             <Typography variant='h3' mb={8} textAlign='center'>
               关于我们
             </Typography>
-            <Typography variant='body2' textAlign='center' px={{xs: 3, md: 20}}>
+            <Typography variant='body1' textAlign='center' px={{xs: 3, md: 20}}>
               依托区块链技术和多行业业务积累，为用户提供完备的数据和资产跨链解决方案，致力于安全高可用和通用易扩展的异构跨链服务，拥抱开源，与广大开发者共建万链互联、价值互通的区块链"互联网"。
             </Typography>
             <Box mt={{xs: 30, md: 40}} mb={10}>
@@ -355,13 +355,7 @@ const AboutPage = ({data}) => {
                 </Box>
               </Container>
             </Box>
-            <Box
-              pt={20}
-              pb={15}
-              sx={{
-                '& h5': {fontWeight: 'normal !important'},
-              }}
-            >
+            <Box pt={20} pb={15}>
               <Grid container>
                 <Grid item md={6} sx={{display: 'flex', alignItems: 'center'}}>
                   <Typography variant='h3' mb={{md: 0, xs: 9}}>
@@ -373,26 +367,26 @@ const AboutPage = ({data}) => {
                   <Typography variant='h5' mb={4}>
                     公司总部
                   </Typography>
-                  <Typography variant='subtitle1' mb={2}>
+                  <Typography variant='body1' mb={2}>
                     杭州市滨江区丹枫路399号2号楼A楼2001室
                   </Typography>
-                  <Typography variant='subtitle1'>电话：0571-89995238</Typography>
+                  <Typography variant='body1'>电话：0571-89995238</Typography>
                   <Typography variant='h5' mt={12} mb={4}>
                     邮箱
                   </Typography>
-                  <Typography variant='subtitle1'>杭州市滨江区丹枫路399号2号楼A楼2001室</Typography>
+                  <Typography variant='body1'>杭州市滨江区丹枫路399号2号楼A楼2001室</Typography>
                   <Typography variant='h5' mt={12} mb={4}>
                     微信公众号
                   </Typography>
                   <Grid container spacing={4}>
                     <Grid item md={4}>
-                      <Typography variant='subtitle1' mb={2}>
+                      <Typography variant='body1' mb={2}>
                         趣链科技公众号
                       </Typography>
                       <img src={Group} alt='group' width={145} />
                     </Grid>
                     <Grid item md={4}>
-                      <Typography variant='subtitle1' mb={2}>
+                      <Typography variant='body1' mb={2}>
                         进入开源技术交流群
                       </Typography>
                       <img src={GZH} alt='gzh' width={145} />
