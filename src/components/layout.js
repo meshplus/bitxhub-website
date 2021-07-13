@@ -31,11 +31,7 @@ const Layout = ({children}) => {
       <CssBaseline />
       <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
       <main>{children}</main>
-      <footer
-        style={{
-          margin: `200px 0 40px`,
-        }}
-      >
+      <Box mt={{md: 40, xs: 20}} mb={8}>
         <Container maxWidth='lg'>
           <Box
             mt={10}
@@ -142,7 +138,7 @@ const Layout = ({children}) => {
             </Typography>
           </Box>
         </Box>
-      </footer>
+      </Box>
     </ThemeProvider>
   )
 }

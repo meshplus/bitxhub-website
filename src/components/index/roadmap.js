@@ -1,7 +1,5 @@
 import React, {useState} from 'react'
 import {Box, Container, Divider, Typography} from '@material-ui/core'
-import RoadmapShine from '../../images/roadmap_shine.png'
-import RoadmapCard from '../../images/roadmap_card.png'
 import {ColorText, ReadMore} from '../style'
 import RoadmapBall from '../../images/index_roadmap_ball.png'
 
@@ -64,7 +62,7 @@ const Roadmap = () => {
           cursor: 'pointer',
           width: {md: '300px', xs: '170px'},
           height: {md: '250px', xs: '214px'},
-          backgroundImage: `url(${RoadmapShine})`,
+          backgroundImage: `url(https://cdn.yourtheme.cn/roadmap_shine.png)`,
           backgroundSize: '0 0',
           backgroundRepeat: 'no-repeat',
           backgroundPosition: {md: '140px 140px', xs: '100px 100px'},
@@ -106,7 +104,7 @@ const Roadmap = () => {
           width: {xs: '190px', md: '300px'},
           minHeight: '240px',
           textAlign: 'left',
-          backgroundImage: `url(${RoadmapCard})`,
+          backgroundImage: `url(https://cdn.yourtheme.cn/roadmap_card.png)`,
           backgroundSize: {md: '300px 241px', xs: '190px'},
           backgroundRepeat: 'no-repeat',
           left: '50%',
@@ -167,7 +165,12 @@ const Roadmap = () => {
               <Typography variant='body1' className={`title`}>
                 DID组件开源
               </Typography>
-              <img src={RoadmapBall} className={`roadmap_ball`} alt='ball' height={36} />
+              <img
+                src='https://cdn.yourtheme.cn/index_roadmap_ball.png'
+                className={`roadmap_ball`}
+                alt='ball'
+                height={36}
+              />
               <Typography variant='subtitle2' className={`hover_title`}>
                 DID组件开源
               </Typography>
@@ -194,7 +197,12 @@ const Roadmap = () => {
               <Typography variant='body1' className='title'>
                 跨链浏览器
               </Typography>
-              <img src={RoadmapBall} className={`roadmap_ball`} alt='ball' height={36} />
+              <img
+                src='https://cdn.yourtheme.cn/index_roadmap_ball.png'
+                className={`roadmap_ball`}
+                alt='ball'
+                height={36}
+              />
               <Typography variant='subtitle2' className={`hover_title`}>
                 跨链浏览器
               </Typography>
@@ -223,7 +231,12 @@ const Roadmap = () => {
               <Typography variant='body1' className='title'>
                 开放测试网
               </Typography>
-              <img src={RoadmapBall} className={`roadmap_ball ${active[3]} ${inactive[3]}`} alt='ball' height={36} />
+              <img
+                src='https://cdn.yourtheme.cn/index_roadmap_ball.png'
+                className={`roadmap_ball ${active[3]} ${inactive[3]}`}
+                alt='ball'
+                height={36}
+              />
               <Typography variant='subtitle2' className={`hover_title`}>
                 开放测试网
               </Typography>

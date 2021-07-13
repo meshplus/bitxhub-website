@@ -46,7 +46,7 @@ const TechPage = ({data}) => {
     counter % 3 === 1 && setStep(1)
     counter % 3 === 2 && setStep(2)
     setCounter(counter + 1)
-  }, 6000)
+  }, 8000)
 
   useEffect(() => {
     const animation = lottie.loadAnimation({
@@ -454,11 +454,26 @@ const TechPage = ({data}) => {
                         display='flex'
                         flexDirection='column'
                         justifyContent='center'
+                        position='relative'
                         style={{
                           borderRadius: '10px',
                           background: `linear-gradient(360deg, #181818 0%, #05070B 0.01%, #1D2735 100%)`,
                         }}
                       >
+                        <Box
+                          sx={{
+                            '& i': {
+                              fontSize: '30px',
+                              position: 'absolute',
+                              top: '30px',
+                              right: '30px',
+                              color: '#fff',
+                              cursor: 'pointer',
+                            },
+                          }}
+                        >
+                          <i className='icon icon-a-11' onClick={() => setStatus1(false)} />
+                        </Box>
                         <img src={TX} alt='tx' height={40} width={40} />
                         <Typography variant='h5' mb={5} mt={2} color='#fafafa' className='font-normal'>
                           跨链事务
@@ -505,11 +520,26 @@ const TechPage = ({data}) => {
                         display='flex'
                         flexDirection='column'
                         justifyContent='center'
+                        position='relative'
                         style={{
                           borderRadius: '10px',
                           background: 'linear-gradient(360deg, #181818 0%, #05070B 0.01%, #1D2735 100%)',
                         }}
                       >
+                        <Box
+                          sx={{
+                            '& i': {
+                              fontSize: '30px',
+                              position: 'absolute',
+                              top: '30px',
+                              right: '30px',
+                              color: '#fff',
+                              cursor: 'pointer',
+                            },
+                          }}
+                        >
+                          <i className='icon icon-a-11' onClick={() => setStatus2(false)} />
+                        </Box>
                         <img src={Mng} alt='tx' height={40} width={40} />
                         <Typography variant='h5' mb={5} mt={2} color='#fafafa' className='font-normal'>
                           联盟治理
@@ -560,11 +590,26 @@ const TechPage = ({data}) => {
                         display='flex'
                         flexDirection='column'
                         justifyContent='center'
+                        position='relative'
                         style={{
                           borderRadius: '10px',
                           background: 'linear-gradient(360deg, #181818 0%, #05070B 0.01%, #1D2735 100%)',
                         }}
                       >
+                        <Box
+                          sx={{
+                            '& i': {
+                              fontSize: '30px',
+                              position: 'absolute',
+                              top: '30px',
+                              right: '30px',
+                              color: '#fff',
+                              cursor: 'pointer',
+                            },
+                          }}
+                        >
+                          <i className='icon icon-a-11' onClick={() => setStatus3(false)} />
+                        </Box>
                         <img src={Mng} alt='tx' height={40} width={40} />
                         <Typography variant='h5' mb={5} mt={2} color='#fafafa' className='font-normal'>
                           DID数字身份

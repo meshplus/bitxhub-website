@@ -118,7 +118,14 @@ const BlogPage = ({data}) => {
                       />
                     </Box>
                   </Grid>
-                  <Grid item md={8} display='flex' flexDirection='column' minHeight={{md: '160px', xs: '100px'}}>
+                  <Grid
+                    item
+                    md={8}
+                    display='flex'
+                    flexDirection='column'
+                    minHeight={{md: '160px', xs: '100px'}}
+                    width='100%'
+                  >
                     <Typography
                       className='title'
                       variant='h5'

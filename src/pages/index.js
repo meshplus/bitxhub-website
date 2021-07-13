@@ -1,23 +1,28 @@
 import {AnimationOnScroll} from 'react-animation-on-scroll'
-import React, {useEffect, useRef} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
 import {Box, Container, Grid, Typography} from '@material-ui/core'
 import {ColorText, IndexBar, IndexDottedLine} from '../components/style'
-import CaseBG from '../images/index_case_bg.png'
+import CaseBGT from '../images/index_case_bg_tn.png'
 import lottie from 'lottie-web'
-import IndexBG3 from '../images/index_bg_3.png'
+import IndexBG3T from '../images/index_bg_3_tn.png'
 import {StaticImage} from 'gatsby-plugin-image'
-import IndexBG2 from '../images/index_bg_2.png'
+import IndexBG2T from '../images/index_bg_2_tn.png'
 import Roadmap from '../components/index/roadmap'
 import Banner from '../components/index/banner'
 import Case from '../components/index/case'
 import Datum from '../components/index/datum'
 import More from '../components/index/more'
-import DataBG from '../images/index_data_bg.png'
+import DataBGT from '../images/index_data_bg_tn.png'
+import {useProgressiveImage} from '../hooks'
 
 const Index = () => {
   const bgRef = useRef()
+  const img2 = useProgressiveImage(IndexBG2T, 'https://cdn.yourtheme.cn/index_bg_2.png')
+  const img3 = useProgressiveImage(IndexBG3T, 'https://cdn.yourtheme.cn/index_bg_3.png')
+  const imgCase = useProgressiveImage(CaseBGT, 'https://cdn.yourtheme.cn/index_case_bg.png')
+  const imgData = useProgressiveImage(DataBGT, 'https://cdn.yourtheme.cn/index_data_bg.png')
 
   console.log('Initializing......')
   useEffect(() => {
@@ -52,7 +57,7 @@ const Index = () => {
         pt={{xs: 20, md: 40}}
         pb={{xs: 0, md: 45}}
         sx={{
-          backgroundImage: `url(${IndexBG2}), url(${IndexBG3}), url(${CaseBG}), url(${DataBG})`,
+          backgroundImage: `url(${img2}), url(${img3}), url(${imgCase}), url(${imgData})`,
           backgroundSize: {md: '2000px', xs: '2000px, 1000px, 1000px, 800px'},
           backgroundRepeat: 'no-repeat',
           backgroundPosition: {

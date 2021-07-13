@@ -2,11 +2,13 @@ import {ColorText, Hero} from '../style'
 import {Box, Button, Container, Grid, Typography, useMediaQuery} from '@material-ui/core'
 import {AnimationOnScroll} from 'react-animation-on-scroll'
 import IndexWebp from '../../images/index.png'
+import IndexT from '../../images/index-tn.png'
 import {Link} from 'gatsby'
-import React, {useEffect, useRef} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import lottie from 'lottie-web'
 import data from '../../pages/data.json'
 import {theme} from '../theme'
+import {useInterval} from 'react-use'
 
 const Banner = () => {
   const ref1 = useRef()
@@ -21,11 +23,32 @@ const Banner = () => {
     // animation2.goToAndPlay(0, true)
   }, [])
 
+  const useProgressiveImage = src => {
+    const [sourceLoaded, setSourceLoaded] = useState(null)
+
+    useEffect(() => {
+      const img = new Image()
+      img.src = src
+      img.onerror = e => {
+        console.log(e)
+      }
+      img.onload = () => setSourceLoaded(src)
+    }, [src])
+
+    return sourceLoaded
+  }
+
+  const loaded = useProgressiveImage('https://cdn.yourtheme.cn/index.png')
+
+  useInterval(() => {
+    console.log(loaded)
+  }, 1000)
+
   return (
     <Box
       position='relative'
-      pt={{md: 60, xs: 23}}
-      pb={{md: 100, xs: 0}}
+      pt={{md: 80, xs: 23}}
+      pb={{md: 80, xs: 0}}
       sx={{
         backgroundImage: {xs: `url(${IndexWebp})`, md: `url()`},
         backgroundSize: '250%',

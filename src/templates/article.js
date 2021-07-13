@@ -41,10 +41,9 @@ const Article = ({data}) => {
       <SEO title={article.title} />
       <Box
         pt={30}
-        pb={{md: 20, xs: 10}}
+        pb={{md: 10, xs: 5}}
         mt={17}
         sx={{
-          // backgroundImage: `url(http://localhost:1337${article.cover.formats.small.url}), url(${Layer})`,
           backgroundImage: `linear-gradient(180deg , rgb(26 33 39 / 69%) 0%, #000 100%), url(${process.env.STRAPI_API_URL}${article.cover.formats.small.url})`,
           backgroundPosition: 'center top, center top',
           backgroundRepeat: 'no-repeat',
@@ -89,6 +88,7 @@ const Article = ({data}) => {
         </Container>
       </Box>
       <Box
+        pt={8}
         pb={10}
         px={{md: 10, xs: 0}}
         sx={{
@@ -101,7 +101,6 @@ const Article = ({data}) => {
       >
         <Container maxWidth='md'>
           <Box
-            mb={20}
             p={{md: 15, xs: 3}}
             sx={{
               border: '2px solid #262D3D',

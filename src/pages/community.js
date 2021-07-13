@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
-import {Box, Button, Container, Grid, Typography, useMediaQuery} from '@material-ui/core'
+import {Box, Button, Container, Grid, Typography} from '@material-ui/core'
 import CommunityBanner from '../images/community_bg.png'
 import CommunityBG2 from '../images/community_bg_2.png'
 import CommunityBG3 from '../images/community_bg_3.png'
@@ -15,7 +15,6 @@ import {Octokit} from '@octokit/rest'
 import Moment from 'react-moment'
 import CommunityCard from '../images/community_card.png'
 import CommunityCardHover from '../images/community_card_hover.png'
-import {theme} from '../components/theme'
 
 export const pageQuery = graphql`
   query {
@@ -38,7 +37,7 @@ export const pageQuery = graphql`
         }
       }
     }
-    allStrapiArticle(filter: {strapiId: {in: [1, 2, 5]}}) {
+    allStrapiArticle(filter: {strapiId: {in: [1, 2, 7]}}) {
       edges {
         node {
           strapiId

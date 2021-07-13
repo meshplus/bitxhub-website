@@ -147,7 +147,6 @@ const QuickPage = ({data}) => {
                   width: {md: '320px', xs: '204px'},
                   height: {md: '320px', xs: '204px'},
                   borderRadius: '100%',
-                  background: `url(${One}), linear-gradient(360deg, #000000 0%, #040E22 0.01%, #1D2A45 100%)`,
                   backgroundPosition: '20px 20px, top left',
                   backgroundSize: {md: '200px 140px, 100% 100%', xs: '130px 85px, 100% 100%'},
                   backgroundRepeat: 'no-repeat',
