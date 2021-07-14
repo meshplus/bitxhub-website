@@ -36,7 +36,7 @@ const More = () => {
       <Container maxWidth='md'>
         <Grid container>
           <Grid item md={4} mb={4} xs={12}>
-            <Typography variant='body2' mb={4} className='title'>
+            <Typography variant='body1' mb={4} className='title'>
               关于技术实现
             </Typography>
             <Button
@@ -60,7 +60,7 @@ const More = () => {
             </Button>
           </Grid>
           <Grid item md={4} mb={4} xs={12}>
-            <Typography variant='body2' mb={4} className='title'>
+            <Typography variant='body1' mb={4} className='title'>
               关于技术指导
             </Typography>
             <Button
@@ -84,7 +84,7 @@ const More = () => {
             </Button>
           </Grid>
           <Grid item md={4} mb={4} xs={12}>
-            <Typography variant='body2' mb={4} className='title'>
+            <Typography variant='body1' mb={4} className='title'>
               快速体验跨链
             </Typography>
             <Link to='/quick'>

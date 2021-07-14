@@ -67,6 +67,7 @@ const Layout = ({children}) => {
                 fontSize: '20px',
                 mr: 2,
                 display: {md: 'none'},
+                color: 'rgba(255,255,255,0.8)',
               },
               color: '#fff',
               marginLeft: '30px',

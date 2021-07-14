@@ -37,6 +37,10 @@ export const theme = createTheme({
           background: 'linear-gradient(360deg, #181818 0%, #05070B 0.01%, #1D2735 100%);',
           borderTopLeftRadius: '15px',
           borderBottomLeftRadius: '15px',
+          [breakpoints.down('md')]: {
+            borderTopLeftRadius: 0,
+            borderBottomLeftRadius: 0,
+          },
         },
       },
     },

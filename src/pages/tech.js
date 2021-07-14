@@ -79,16 +79,14 @@ const TechPage = ({data}) => {
     return (
       <Box
         sx={{
-          backgroundImage: `url(${BG}), url(${BG2})`,
+          backgroundImage: `url(${BG}), url(${isMobile ? '' : BG2})`,
           backgroundPosition: {md: 'center -50px, center 900px', xs: 'center 320px, center 900px'},
           backgroundRepeat: 'no-repeat',
           backgroundSize: {md: '2000px, 2000px', xs: '120%, 2000px'},
           '& .desc': {
             m: '0 auto',
             p: 2,
-            transform: 'translate(-20px, -60px)',
             background: 'rgba(0, 8, 18, 0.92)',
-            width: '220px',
             fontSize: '12px',
             color: 'rgba(255,255,255,0.5)',
             textAlign: 'center',
@@ -108,7 +106,7 @@ const TechPage = ({data}) => {
                     </Typography>
                   </AnimationOnScroll>
                   <AnimationOnScroll animateIn='animate__fadeInUp' duration={0.8}>
-                    <Typography variant='body1' mb={8} textAlign={{md: 'left', xs: 'center'}}>
+                    <Typography variant='body1' mb={8} textAlign={{md: 'left', xs: 'center'}} className='description'>
                       致力于构建一个高可扩展、强鲁棒性、易升级的区块链跨链服务平台，为去中心化应用提供通信枢纽，支撑链上可信数据/资产高效流动，服务区块链业务安全治理，为区块链互联网的形成提供可靠的底层技术支撑。
                     </Typography>
                   </AnimationOnScroll>
@@ -253,7 +251,7 @@ const TechPage = ({data}) => {
                 </Grid>
                 <Grid item md={7}>
                   <img src={IBTP} alt='img' width={720} />
-                  <Box className='desc'>
+                  <Box className='desc' width={220} sx={{transform: 'translate(-20px, -60px)'}}>
                     <Box>
                       <Box sx={{background: 'rgba(46, 124, 254, 0.1)', padding: 2}}>
                         所有经过BitXHub的交易都会被转换为统一的IBTP格式
@@ -282,7 +280,7 @@ const TechPage = ({data}) => {
                 </Grid>
                 <Grid item md={7} textAlign='center'>
                   <img src={PierGif} alt='pier' width={720} />
-                  <Box className='desc'>
+                  <Box className='desc' width={277} sx={{transform: 'translate(0, -60px)'}}>
                     <Box>
                       <Box sx={{background: 'rgba(46, 124, 254, 0.1)', padding: 2}}>
                         跨链网关通过将核心模块与应用链插件进行解耦, 方便更多的应用链加入跨链系统
@@ -311,7 +309,7 @@ const TechPage = ({data}) => {
                 </Grid>
                 <Grid item md={7}>
                   <img src={Wasm} alt='pier' width={720} />
-                  <Box className='desc'>
+                  <Box className='desc' width={227} sx={{transform: 'translate(0, -60px)'}}>
                     <Box>
                       <Box sx={{background: 'rgba(46, 124, 254, 0.1)', padding: 2}}>
                         验证引擎调用不同验证规则验证不同异构链的交易

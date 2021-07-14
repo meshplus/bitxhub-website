@@ -46,6 +46,7 @@ const DatumRight = () => {
           },
         },
         '& .datum_meta_list': {
+          pl: {md: 0, xs: 2},
           display: 'none',
           '& h6': {
             lineHeight: {xs: '20px', md: '26px'},

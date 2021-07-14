@@ -12,6 +12,7 @@ import Ball from '../images/roadmap_ball.png'
 import BallActive from '../images/roadmap_ball_active.png'
 import Star from '../images/about_star.png'
 import DatumRight from '../components/common/datum_right'
+import {theme} from '../components/theme'
 
 const AboutPage = ({data}) => {
   if (typeof window === undefined) return null
@@ -35,7 +36,7 @@ const AboutPage = ({data}) => {
             <Typography variant='h3' mb={8} textAlign='center'>
               关于我们
             </Typography>
-            <Typography variant='body1' textAlign='center' px={{xs: 3, md: 20}}>
+            <Typography variant='body1' textAlign='center' px={{xs: 3, md: 20}} className='description'>
               依托区块链技术和多行业业务积累，为用户提供完备的数据和资产跨链解决方案，致力于安全高可用和通用易扩展的异构跨链服务，拥抱开源，与广大开发者共建万链互联、价值互通的区块链"互联网"。
             </Typography>
             <Box mt={{xs: 30, md: 40}} mb={10}>
@@ -79,6 +80,7 @@ const AboutPage = ({data}) => {
                       paddingLeft: 4,
                       fontWeight: 'normal',
                       textAlign: {xs: 'left', md: ''},
+                      fontFamily: '"Titillium Web","Roboto","Helvetica","Arial",sans-serif !important',
                     },
                     '& h5': {
                       fontWeight: 'normal',
@@ -356,7 +358,17 @@ const AboutPage = ({data}) => {
                 </Box>
               </Container>
             </Box>
-            <Box pt={20} pb={15}>
+            <Box
+              pt={20}
+              pb={15}
+              sx={{
+                '& .MuiTypography-body1': {
+                  [theme.breakpoints.down('md')]: {
+                    fontSize: '14px',
+                  },
+                },
+              }}
+            >
               <Grid container>
                 <Grid item md={6} xs={12} sx={{display: 'flex', alignItems: 'center'}}>
                   <Typography variant='h3' mb={{md: 0, xs: 9}}>

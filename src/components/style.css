@@ -80,3 +80,7 @@
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
 }
+
+.description {
+    font-size: 16px !important;
+}

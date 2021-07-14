@@ -76,6 +76,7 @@ const Header = ({siteTitle}) => {
               '& i': {
                 marginRight: '10px',
                 fontSize: '18px',
+                color: 'rgba(255,255,255,0.8)',
               },
             }}
           >
@@ -118,6 +119,9 @@ const Header = ({siteTitle}) => {
             ml='auto'
             sx={{
               display: {xs: 'none', md: 'flex'},
+              '& i': {
+                color: 'rgba(255,255,255,0.8)',
+              },
               '& a': {
                 ml: 8,
                 '&:hover, &.active': {

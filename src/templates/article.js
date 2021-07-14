@@ -60,6 +60,7 @@ const Article = ({data}) => {
             mb={4}
             color='primary'
             fontFamily='"Roboto","Helvetica","Arial",sans-serif !important'
+            fontSize={{md: '2.125rem', xs: '20px'}}
           >
             {article.title}
           </Typography>
@@ -76,7 +77,7 @@ const Article = ({data}) => {
                 <Typography display='inline' mr={2}>
                   <ColorText>{author.username}</ColorText>
                 </Typography>
-                <Typography variant='body2' mr={2}>
+                <Typography variant='body2' mr={1}>
                   发表于
                 </Typography>
                 <Typography variant='subtitle1' className='date'>
@@ -113,6 +114,7 @@ const Article = ({data}) => {
                 color: 'rgba(255, 255, 255, 0.7)',
                 fontWeight: 300,
                 lineHeight: '30px',
+                fontSize: {md: '16px', xs: '14px'},
                 '& strong': {color: 'rgba(255, 255, 255, 0.85)', fontWeight: 500},
                 '& h1, h2, h3, h4, h5, h6': {
                   fontFamily: '"Roboto","Helvetica","Arial",sans-serif !important',

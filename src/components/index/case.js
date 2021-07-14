@@ -32,6 +32,12 @@ const Case = () => {
               height: {md: '420px', xs: '330px'},
               width: {md: '320px', xs: '270px'},
             },
+
+            '& .case_item:hover': {
+              '&:before': {
+                transform: {md: 'scaleY(1.1)', xs: 'scaleY(1) !important'},
+              },
+            },
             '& .mobile .swiper-slide-active .case_item, & .case_item:hover': {
               '& .read-more': {
                 background: {md: '-webkit-linear-gradient(left, #7DBCFC, #2E7CFE, #01E1FF)', xs: ''},

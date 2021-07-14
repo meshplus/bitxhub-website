@@ -2,7 +2,7 @@ import {graphql} from 'gatsby'
 import React from 'react'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
-import {Box, Button, Container, Grid, Typography} from '@material-ui/core'
+import {Box, Container, Grid, Typography} from '@material-ui/core'
 import BlogBanner from '../images/blog_bg.png'
 import {ColorText, Divider} from '../components/style'
 import Moment from 'react-moment'
@@ -60,9 +60,9 @@ const BlogPage = ({data}) => {
                 <ColorText fontWeight='bold'>博客</ColorText>
               </Box>
             </Box>
-            <Box textAlign='center' mb={{md: 30, xs: 15}}>
+            <Typography variant='body1' textAlign='center' md={{md: 30, xs: 15}}>
               博观而约取，厚积而薄发
-            </Box>
+            </Typography>
             <Box my={20}>
               <Divider />
             </Box>
@@ -137,7 +137,7 @@ const BlogPage = ({data}) => {
                     >
                       {article.node.title}
                     </Typography>
-                    <Typography variant='body1' fontSize='16px' color='rgba(255, 255, 255, 0.8)' className='content'>
+                    <Typography variant='body1' fontSize='16px' className='content'>
                       {article.node.content.slice(0, 80)}
                     </Typography>
                     <Typography variant='body1' mt={6} className='date' mt='auto'>
@@ -147,6 +147,32 @@ const BlogPage = ({data}) => {
                 </Grid>
               </Box>
             ))}
+            <Box mt={10} position='relative'>
+              <Box
+                sx={{
+                  width: '172px',
+                  margin: '0 auto',
+                  position: 'relative',
+                  color: 'rgba(255, 255, 255, 0.7)',
+                  textAlign: 'center',
+                  '&:after': {
+                    content: '" "',
+                    display: 'block',
+                    position: 'absolute',
+                    zIndex: -1,
+                    top: '50%',
+                    left: 0,
+                    width: '100%',
+                    height: '1px',
+                    background: 'rgba(255, 255, 255, 0.2)',
+                  },
+                }}
+              >
+                <Box display='inline-block' textAlign='center' px={3} bgcolor='#050707'>
+                  没有更多了
+                </Box>
+              </Box>
+            </Box>
           </Box>
         </Container>
       </Box>

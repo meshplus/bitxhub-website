@@ -77,7 +77,7 @@ const Banner = () => {
             </Typography>
           </AnimationOnScroll>
           <AnimationOnScroll animateIn='animate__fadeInUp' duration={0.5}>
-            <Typography variant='subtitle1' mb={6}>
+            <Typography variant='body1' mb={6} className='description'>
               {isMobile && (
                 <>
                   <Box>打造新一代跨链服务基础设施</Box>

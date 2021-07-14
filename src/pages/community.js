@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
-import {Box, Button, Container, Grid, Typography} from '@material-ui/core'
+import {Box, Button, Container, Grid, Typography, useMediaQuery} from '@material-ui/core'
 import CommunityBanner from '../images/community_bg.png'
 import CommunityBG2 from '../images/community_bg_2.png'
 import CommunityBG3 from '../images/community_bg_3.png'
@@ -15,6 +15,7 @@ import {Octokit} from '@octokit/rest'
 import Moment from 'react-moment'
 import CommunityCard from '../images/community_card.png'
 import CommunityCardHover from '../images/community_card_hover.png'
+import {theme} from '../components/theme'
 
 export const pageQuery = graphql`
   query {
@@ -65,6 +66,7 @@ export const pageQuery = graphql`
 
 const CommunityPage = ({data}) => {
   const [users, setUsers] = useState()
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'))
 
   useEffect(() => {
     const octokit = new Octokit()
@@ -94,25 +96,38 @@ const CommunityPage = ({data}) => {
         <Container maxWidth='lg'>
           <SEO title='Community' />
           <Box pt={35}>
-            <Typography variant='h3' mb={3}>
-              打通价值孤岛 ，从开源开始
-            </Typography>
-            <Typography variant='subtitle1' mb={8}>
+            {isMobile ? (
+              <>
+                <Typography variant='h3' mb={3} textAlign='center'>
+                  打通价值孤岛
+                </Typography>
+                <Typography variant='h3' mb={3} textAlign='center'>
+                  从开源开始
+                </Typography>
+              </>
+            ) : (
+              <Typography variant='h3' mb={3}>
+                打通价值孤岛 ，从开源开始
+              </Typography>
+            )}
+            <Typography variant='body1' mb={8} mt={{md: 0, xs: 4}} className='description' textAlign='center'>
               BitXHub的核心技术完全开源，加入我们一起构建区块链跨链世界
             </Typography>
-            <Button variant='outlined' size='large'>
-              <Link to='/article/4'>
-                成为贡献者
-                <ColorText ml={2}>
-                  <i className='icon icon-chevron-right' />
-                </ColorText>
-              </Link>
-            </Button>
+            <Box textAlign={{md: 'left', xs: 'center'}}>
+              <Button variant='outlined' size='large'>
+                <Link to='/article/4'>
+                  成为贡献者
+                  <ColorText ml={2}>
+                    <i className='icon icon-chevron-right' />
+                  </ColorText>
+                </Link>
+              </Button>
+            </Box>
             <Box mt={20}>
               <Typography variant='h4' mb={3}>
                 丰富的社区活动
               </Typography>
-              <Typography variant='subtitle1'>查看最新的活动</Typography>
+              <Typography variant='body1'>查看最新的活动</Typography>
               <Box mt={8}>
                 <Grid container spacing={4}>
                   <Grid item md={8} xs={12}>
@@ -148,12 +163,16 @@ const CommunityPage = ({data}) => {
                             pb: 5,
                           },
                         },
+                        '& .date': {
+                          fontFamily: '"Titillium Web","Roboto","Helvetica","Arial",sans-serif !important',
+                          fontWeight: 700,
+                        },
                       }}
                     >
                       {data.allStrapiActivity.edges.slice(1).map(activity => (
                         <Box className='item'>
                           <Typography variant='body1' mb={1}>
-                            <Moment date={activity.node.published_at} format='YYYY.MM.DD' />
+                            <Moment date={activity.node.published_at} format='YYYY.MM.DD' className='date' />
                           </Typography>
                           <Typography variant='subtitle1' component='a' href={activity.node.link} target='_blank'>
                             <HoverColorText maxHeight='28px' overflow='hidden' className='title'>
@@ -169,7 +188,7 @@ const CommunityPage = ({data}) => {
               <Typography variant='h4' mt={20} mb={3}>
                 新手任务
               </Typography>
-              <Typography variant='subtitle1' mb={8}>
+              <Typography variant='body1' mb={8}>
                 可以提供的开发任务
               </Typography>
               <Box
@@ -263,22 +282,30 @@ const CommunityPage = ({data}) => {
               <Typography variant='h4' mt={20} mb={3}>
                 社区之星
               </Typography>
-              <Typography variant='subtitle1' mb={8}>
+              <Typography variant='body1' mb={8}>
                 这里展示最新参与开源和持续参与开源的开发者
               </Typography>
               <Grid container spacing={10}>
                 {users?.slice(0, 12).map(user => (
                   <Grid
+                    key={user.html_url}
                     item
                     md={2}
                     sm={4}
-                    xs={6}
+                    xs={4}
                     sx={{
                       textAlign: {md: 'left', xs: 'left'},
+                      '& img': {
+                        width: {md: '100px', xs: '80px'},
+                      },
+                      '& .MuiTypography-subtitle1': {
+                        fontSize: {md: '16px', xs: '14px'},
+                        color: '#fff',
+                      },
                     }}
                   >
                     <a href={user.html_url} target='_blank' rel='noopener noreferrer'>
-                      <img src={user.avatar_url} width='100' alt='' style={{borderRadius: '16px'}} />
+                      <img src={user.avatar_url} alt='user' style={{borderRadius: '16px'}} />
                       <Typography variant='subtitle1' mt={4}>
                         {user.login}
                       </Typography>

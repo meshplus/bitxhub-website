@@ -21,6 +21,9 @@ const Roadmap = () => {
       sx={{
         zIndex: 1,
         position: 'relative',
+        '& .date, & .date2': {
+          fontFamily: '"Titillium Web","Roboto","Helvetica","Arial",sans-serif !important',
+        },
         '& .title': {
           color: 'rgba(255, 255, 255, 0.6)',
         },
@@ -55,6 +58,7 @@ const Roadmap = () => {
           to: {transform: 'scale(1)'},
         },
         '& .roadmap_item': {
+          position: 'relative',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
@@ -107,9 +111,9 @@ const Roadmap = () => {
           backgroundImage: `url(https://cdn.yourtheme.cn/roadmap_card.png)`,
           backgroundSize: {md: '300px 241px', xs: '190px'},
           backgroundRepeat: 'no-repeat',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          marginLeft: {md: '-150px', xs: '-95px'},
+          // left: '50%',
+          // transform: 'translateX(-50%)',
+          // marginLeft: {md: '-150px', xs: '-95px'},
           px: {md: 10, xs: 4},
           pb: 2,
           pt: {md: 16, xs: 9},
@@ -178,7 +182,7 @@ const Roadmap = () => {
                 2021.04
               </Typography>
               <Box className={`animate__animated animate__fadeInUp animate__faster roadmap_desc`}>
-                <Typography variant='subtitle2' mb={{md: 2, xs: 1}}>
+                <Typography variant='subtitle2' mb={{md: 2, xs: 1}} className='date2'>
                   2021.04
                 </Typography>
                 <Divider sx={{background: '#405584'}} />
@@ -210,7 +214,7 @@ const Roadmap = () => {
                 2021.06
               </Typography>
               <Box className={`animate__animated animate__fadeInUp animate__faster roadmap_desc`}>
-                <Typography variant='subtitle2' mb={2}>
+                <Typography variant='subtitle2' mb={2} className='date2'>
                   2021.06
                 </Typography>
                 <Divider sx={{background: '#405584'}} />
@@ -244,7 +248,7 @@ const Roadmap = () => {
                 2021.08
               </Typography>
               <Box className={`animate__animated animate__fadeInUp animate__faster roadmap_desc`}>
-                <Typography variant='subtitle2' mb={2}>
+                <Typography variant='subtitle2' mb={2} className='date2'>
                   2021.08
                 </Typography>
                 <Divider sx={{background: '#405584'}} />
@@ -272,7 +276,7 @@ const Roadmap = () => {
                 2021.10
               </Typography>
               <Box className={`animate__animated animate__fadeInUp animate__faster roadmap_desc`}>
-                <Typography variant='subtitle2' mb={2}>
+                <Typography variant='subtitle2' mb={2} className='date2'>
                   2021.10
                 </Typography>
                 <Divider sx={{background: '#405584'}} />
