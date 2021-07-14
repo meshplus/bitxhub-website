@@ -49,7 +49,7 @@ const QuickPage = ({data}) => {
             backgroundImage: `url(${BG1}), url(${BG2})`,
             backgroundSize: {md: '2000px, 2000px', xs: '1000px, 800px 500px'},
             backgroundRepeat: 'no-repeat',
-            backgroundPosition: {md: 'center -30px, center 1200px', xs: 'center -50px, center 1110px'},
+            backgroundPosition: {md: 'center -30px, center 1200px', xs: 'center -50px, center 1046px'},
           }}
         >
           <Container maxWidth='lg'>

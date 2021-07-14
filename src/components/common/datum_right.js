@@ -111,7 +111,7 @@ const DatumRight = () => {
         <Box pl={{xs: 1, md: 6}}>
           <Box className='datum_meta'>
             <Typography variant='h5'>参与测评</Typography>
-            <Typography variant='body1'>首批通过国家金融科技测评中心的跨链服务功能测试</Typography>
+            <Typography variant='body2'>首批通过国家金融科技测评中心的跨链服务功能测试</Typography>
           </Box>
           <Box className='datum_meta_list'>
             {isMobile ? (
@@ -144,8 +144,8 @@ const DatumRight = () => {
         </Box>
         <Box pl={{xs: 1, md: 6}}>
           <Box className='datum_meta'>
-            <Typography variant='h5'>专利&论文</Typography>
-            <Typography variant='body2'>在跨链事务一致性保障、数据有效性验证、跨链协议等相关领域具有23篇</Typography>
+            <Typography variant='h5'>标准制定</Typography>
+            <Typography variant='body2'>参与多项国际和国内区块链互操作标准制定</Typography>
           </Box>
           <Box className='datum_meta_list'>
             {isMobile ? (
@@ -157,12 +157,12 @@ const DatumRight = () => {
             ) : (
               <>
                 <Typography variant='subtitle2'>参与中国信通院——可信推进计划《区块链互操作白皮书》编写工作</Typography>
-                <Typography variant='subtitle2'>参与国际电联电信标准化部门（ITU-T）2项DLT互操作框架标准制定</Typography>
+                <Typography variant='subtitle2'>参与国际电联电信标准化部门(ITU-T)2项DLT互操作框架标准制定</Typography>
                 <Typography variant='subtitle2'>
-                  参与中国通信标准化协会（CCSA）《区块链链间互操作》团体标准制定
+                  参与中国通信标准化协会(CCSA)《区块链链间互操作》团体标准制定
                 </Typography>
                 <Typography variant='subtitle2'>
-                  参与计算机协会区块链和分布式记账委员会（IEEE C/BDL)区块链互操作3项标准制定；
+                  参与计算机协会区块链和分布式记账委员会(IEEE C/BDL)区块链互操作3项标准制定
                 </Typography>
               </>
             )}
