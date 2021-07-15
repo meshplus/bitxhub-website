@@ -2,10 +2,14 @@ import React, {useEffect, useState} from 'react'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
 import {Box, Button, Container, Grid, Typography, useMediaQuery} from '@material-ui/core'
-import CommunityBanner from '../images/community_bg.png'
-import CommunityBG2 from '../images/community_bg_2.png'
-import CommunityBG3 from '../images/community_bg_3.png'
-import {Card, ColorText, HoverColorText, ReadMoreWithoutStyle, ReadMoreWithoutStyleRedirect} from '../components/style'
+import {
+  AnimateIn,
+  Card,
+  ColorText,
+  HoverColorText,
+  ReadMoreWithoutStyle,
+  ReadMoreWithoutStyleRedirect,
+} from '../components/style'
 import {graphql, Link} from 'gatsby'
 import Union from '../images/union.svg'
 import Right from '../images/right.svg'
@@ -16,10 +20,15 @@ import Moment from 'react-moment'
 import CommunityCard from '../images/community_card.png'
 import CommunityCardHover from '../images/community_card_hover.png'
 import {theme} from '../components/theme'
+import {useProgressiveImage} from '../hooks'
+import BG1T from '../images/community_bg_tn.png'
+import BG2T from '../images/community_bg_2_tn.png'
+import BG3T from '../images/community_bg_3_tn.png'
+import {getStaticUrl} from '../helpers'
 
 export const pageQuery = graphql`
   query {
-    allStrapiActivity {
+    allStrapiActivity(sort: {fields: [date], order: DESC}) {
       edges {
         node {
           id
@@ -27,6 +36,7 @@ export const pageQuery = graphql`
           content
           published_at
           link
+          date
           cover {
             formats {
               thumbnail {
@@ -38,7 +48,7 @@ export const pageQuery = graphql`
         }
       }
     }
-    allStrapiArticle(filter: {strapiId: {in: [1, 2, 7]}}) {
+    allStrapiArticle(filter: {strapiId: {in: [7, 2, 1]}}) {
       edges {
         node {
           strapiId
@@ -68,6 +78,10 @@ const CommunityPage = ({data}) => {
   const [users, setUsers] = useState()
   const isMobile = useMediaQuery(theme.breakpoints.down('md'))
 
+  const bg1 = useProgressiveImage(BG1T, getStaticUrl('community_bg.png'))
+  const bg2 = useProgressiveImage(BG2T, getStaticUrl('community_bg_2.png'))
+  const bg3 = useProgressiveImage(BG3T, getStaticUrl('community_bg_3.png'))
+
   useEffect(() => {
     const octokit = new Octokit()
     octokit.rest.repos
@@ -82,11 +96,10 @@ const CommunityPage = ({data}) => {
       .catch(e => console.error(e))
   }, [])
 
-  if (typeof window === undefined) return null
   return (
     <Box
       sx={{
-        backgroundImage: `url(${CommunityBanner}), url(${CommunityBG2}), url(${CommunityBG3})`,
+        backgroundImage: `url(${bg1}), url(${bg2}), url(${bg3})`,
         backgroundPosition: 'center top, center 1200px, center 1500px',
         backgroundRepeat: 'no-repeat',
         backgroundSize: '1837px 610px, 2000px 500px, 2000px 1011px',
@@ -97,37 +110,50 @@ const CommunityPage = ({data}) => {
           <SEO title='Community' />
           <Box pt={35}>
             {isMobile ? (
-              <>
+              <AnimateIn>
                 <Typography variant='h3' mb={3} textAlign='center'>
                   打通价值孤岛
                 </Typography>
                 <Typography variant='h3' mb={3} textAlign='center'>
                   从开源开始
                 </Typography>
-              </>
+              </AnimateIn>
             ) : (
-              <Typography variant='h3' mb={3}>
-                打通价值孤岛 ，从开源开始
-              </Typography>
+              <AnimateIn>
+                <Typography variant='h3' mb={3}>
+                  打通价值孤岛 ，从开源开始
+                </Typography>
+              </AnimateIn>
             )}
-            <Typography variant='body1' mb={8} mt={{md: 0, xs: 4}} className='description' textAlign='center'>
-              BitXHub的核心技术完全开源，加入我们一起构建区块链跨链世界
-            </Typography>
-            <Box textAlign={{md: 'left', xs: 'center'}}>
-              <Button variant='outlined' size='large'>
-                <Link to='/article/4'>
-                  成为贡献者
-                  <ColorText ml={2}>
-                    <i className='icon icon-chevron-right' />
-                  </ColorText>
-                </Link>
-              </Button>
-            </Box>
-            <Box mt={20}>
-              <Typography variant='h4' mb={3}>
-                丰富的社区活动
+            <AnimateIn>
+              <Typography
+                variant='body1'
+                mb={8}
+                mt={{md: 0, xs: 4}}
+                className='description'
+                textAlign={{md: 'left', xs: 'center'}}
+              >
+                BitXHub的核心技术完全开源，加入我们一起构建区块链跨链世界
               </Typography>
-              <Typography variant='body1'>查看最新的活动</Typography>
+            </AnimateIn>
+            <AnimateIn>
+              <Box textAlign={{md: 'left', xs: 'center'}}>
+                <Button variant='outlined' size='large'>
+                  <Link to='/article/4'>
+                    成为贡献者
+                    <ColorText ml={2}>
+                      <i className='icon icon-chevron-right' />
+                    </ColorText>
+                  </Link>
+                </Button>
+              </Box>
+            </AnimateIn>
+            <Box mt={20}>
+              <AnimateIn>
+                <Typography variant='h4' mb={3}>
+                  社区活动
+                </Typography>
+              </AnimateIn>
               <Box mt={8}>
                 <Grid container spacing={4}>
                   <Grid item md={8} xs={12}>
@@ -137,16 +163,16 @@ const CommunityPage = ({data}) => {
                         singleTitle={true}
                         title={activity.node.title}
                         desc={activity.node.content.slice(0, 80)}
-                        date={activity.node.published_at}
-                        img={`http://localhost:1337${activity.node.cover.url}`}
+                        date={activity.node.date}
+                        img={`${process.env.STRAPI_API_URL}${activity.node.cover.url}`}
                       />
                     ))}
                   </Grid>
                   <Grid item md={4} xs={12}>
                     <Box
                       px={6}
-                      pt={8}
-                      pb='36px'
+                      pt={10}
+                      pb='45px'
                       sx={{
                         border: '1px solid rgba(255, 255, 255, 0.5)',
                         borderRadius: '12px',
@@ -172,7 +198,7 @@ const CommunityPage = ({data}) => {
                       {data.allStrapiActivity.edges.slice(1).map(activity => (
                         <Box className='item'>
                           <Typography variant='body1' mb={1}>
-                            <Moment date={activity.node.published_at} format='YYYY.MM.DD' className='date' />
+                            <Moment date={activity.node.date} format='YYYY.MM.DD' className='date' />
                           </Typography>
                           <Typography variant='subtitle1' component='a' href={activity.node.link} target='_blank'>
                             <HoverColorText maxHeight='28px' overflow='hidden' className='title'>
@@ -185,11 +211,13 @@ const CommunityPage = ({data}) => {
                   </Grid>
                 </Grid>
               </Box>
-              <Typography variant='h4' mt={20} mb={3}>
-                新手任务
-              </Typography>
+              <AnimateIn>
+                <Typography variant='h4' mt={20} mb={3}>
+                  新手任务
+                </Typography>
+              </AnimateIn>
               <Typography variant='body1' mb={8}>
-                可以提供的开发任务
+                加入我们，贡献你的力量
               </Typography>
               <Box
                 style={{background: `url(${BG})`}}
@@ -247,7 +275,7 @@ const CommunityPage = ({data}) => {
                       <Box zIndex={4} position='relative'>
                         <Typography variant='subtitle1'>修复BUG</Typography>
                         <Typography variant='body2' mb={6}>
-                          解决已发现的BUG，保护BitXHub的安全
+                          解决已发现的Bug，保护BitXHub的安全
                         </Typography>
                         <ReadMoreWithoutStyleRedirect
                           to='https://github.com/meshplus/bitxhub/issues?q=is%3Aissue+is%3Aopen+label%3Abug'
@@ -279,13 +307,15 @@ const CommunityPage = ({data}) => {
                   </Grid>
                 </Grid>
               </Box>
-              <Typography variant='h4' mt={20} mb={3}>
-                社区之星
-              </Typography>
+              <AnimateIn>
+                <Typography variant='h4' mt={20} mb={3}>
+                  社区之星
+                </Typography>
+              </AnimateIn>
               <Typography variant='body1' mb={8}>
-                这里展示最新参与开源和持续参与开源的开发者
+                感谢杰出的社区贡献者
               </Typography>
-              <Grid container spacing={10}>
+              <Grid container>
                 {users?.slice(0, 12).map(user => (
                   <Grid
                     key={user.html_url}
@@ -295,6 +325,11 @@ const CommunityPage = ({data}) => {
                     xs={4}
                     sx={{
                       textAlign: {md: 'left', xs: 'left'},
+                      '& a': {
+                        display: 'block',
+                        mb: 10,
+                        textAlign: {md: 'left', xs: 'center'},
+                      },
                       '& img': {
                         width: {md: '100px', xs: '80px'},
                       },
@@ -306,16 +341,18 @@ const CommunityPage = ({data}) => {
                   >
                     <a href={user.html_url} target='_blank' rel='noopener noreferrer'>
                       <img src={user.avatar_url} alt='user' style={{borderRadius: '16px'}} />
-                      <Typography variant='subtitle1' mt={4}>
+                      <Typography variant='subtitle1' mt={2}>
                         {user.login}
                       </Typography>
                     </a>
                   </Grid>
                 ))}
               </Grid>
-              <Typography variant='h4' mt={20} mb={8}>
-                学习资料
-              </Typography>
+              <AnimateIn>
+                <Typography variant='h4' mt={20} mb={8}>
+                  社区学习库
+                </Typography>
+              </AnimateIn>
               <Grid container spacing={10}>
                 {data.allStrapiArticle.edges.map(article => (
                   <Grid item md={4} xs={12}>

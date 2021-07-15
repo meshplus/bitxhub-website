@@ -3,9 +3,11 @@ import React from 'react'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
 import {Box, Container, Grid, Typography} from '@material-ui/core'
-import BlogBanner from '../images/blog_bg.png'
 import {ColorText, Divider} from '../components/style'
 import Moment from 'react-moment'
+import BGT from '../images/blog_bg_tn.png'
+import {useProgressiveImage} from '../hooks'
+import {getStaticUrl} from '../helpers'
 
 export const pageQuery = graphql`
   query {
@@ -40,6 +42,8 @@ export const pageQuery = graphql`
 `
 
 const BlogPage = ({data}) => {
+  const bg = useProgressiveImage(BGT, getStaticUrl('blog_bg.png'))
+
   if (typeof window === undefined) return null
   return (
     <Layout>
@@ -47,7 +51,7 @@ const BlogPage = ({data}) => {
       <Box
         pt={{md: 38, xs: 28}}
         sx={{
-          backgroundImage: `url(${BlogBanner})`,
+          backgroundImage: `url(${bg})`,
           backgroundPosition: 'top 50px center',
           backgroundSize: {md: '2000px', xs: '1000px'},
           backgroundRepeat: 'no-repeat',
@@ -55,15 +59,15 @@ const BlogPage = ({data}) => {
       >
         <Container maxWidth='md'>
           <Box>
-            <Box textAlign='center' mb={1}>
+            <Box textAlign='center' mb={3}>
               <Box fontSize='48px'>
                 <ColorText fontWeight='bold'>博客</ColorText>
               </Box>
             </Box>
-            <Typography variant='body1' textAlign='center' md={{md: 30, xs: 15}}>
+            <Typography variant='body1' textAlign='center' md={{md: 30, xs: 15}} className='description'>
               博观而约取，厚积而薄发
             </Typography>
-            <Box my={20}>
+            <Box my={20} px={{md: 12, xs: 0}}>
               <Divider />
             </Box>
             <Box
@@ -147,30 +151,30 @@ const BlogPage = ({data}) => {
                 </Grid>
               </Box>
             ))}
-            <Box mt={10} position='relative'>
-              <Box
-                sx={{
-                  width: '172px',
-                  margin: '0 auto',
-                  position: 'relative',
-                  color: 'rgba(255, 255, 255, 0.7)',
-                  textAlign: 'center',
-                  '&:after': {
-                    content: '" "',
-                    display: 'block',
-                    position: 'absolute',
-                    zIndex: -1,
-                    top: '50%',
-                    left: 0,
-                    width: '100%',
-                    height: '1px',
-                    background: 'rgba(255, 255, 255, 0.2)',
-                  },
-                }}
-              >
-                <Box display='inline-block' textAlign='center' px={3} bgcolor='#050707'>
-                  没有更多了
-                </Box>
+          </Box>
+          <Box mt={10} position='relative'>
+            <Box
+              sx={{
+                width: '172px',
+                margin: '0 auto',
+                position: 'relative',
+                color: 'rgba(255, 255, 255, 0.4)',
+                textAlign: 'center',
+                '&:after': {
+                  content: '" "',
+                  display: 'block',
+                  position: 'absolute',
+                  zIndex: -1,
+                  top: '50%',
+                  left: 0,
+                  width: '100%',
+                  height: '1px',
+                  background: 'rgba(255, 255, 255, 0.2)',
+                },
+              }}
+            >
+              <Box display='inline-block' textAlign='center' px={3} bgcolor='#050707'>
+                没有更多了
               </Box>
             </Box>
           </Box>

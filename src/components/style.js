@@ -3,6 +3,7 @@ import * as React from 'react'
 import clsx from 'clsx'
 import Moment from 'react-moment'
 import Link from 'gatsby-link'
+import {useInView} from 'react-intersection-observer'
 
 export const ReadMore = ({to, ...other}) => {
   return (
@@ -125,9 +126,14 @@ export const Card = ({children, className, title, singleTitle, img, desc, date, 
         paddingTop: '50%',
         backgroundImage: `url(${img})`,
         backgroundRepeat: 'no-repeat',
-        backgroundSize: '100%',
+        backgroundSize: 'cover',
         transition: 'all .6s',
         transform: 'translateY(0)',
+        backgroundPosition: 'left center',
+        '& .title': {
+          fontFamily: '"Roboto","Helvetica","Arial",sans-serif !important',
+          fontWeight: 500,
+        },
         '&:hover': {
           cursor: 'pointer',
           transform: 'translateY(-4px)',
@@ -157,7 +163,7 @@ export const Card = ({children, className, title, singleTitle, img, desc, date, 
           mb={4}
           className='title'
           variant='h5'
-          height={{md: singleTitle ? '32px' : '64px', xs: singleTitle ? '30px' : '60px'}}
+          height={{md: singleTitle ? '32px' : '64px', xs: singleTitle ? '28px' : '60px'}}
           display='inline-block'
           overflow='hidden'
         >
@@ -203,7 +209,13 @@ export const IndexBar = ({children, className, title, desc, titleMb, lighterBG, 
           : 'linear-gradient(130deg, rgba(11, 33, 77, 0.6) 4.35%, rgba(1, 3, 10, 0.6) 97.15%)',
       }}
     >
-      <Typography variant='subtitle1' mb={titleMb ? titleMb : 2} display='flex' alignItems='center'>
+      <Typography
+        variant='subtitle1'
+        mb={titleMb ? titleMb : 2}
+        display='flex'
+        alignItems='center'
+        fontSize={{md: '20px', xs: '16px'}}
+      >
         {title}
       </Typography>
       <Typography variant='body1'>{desc}</Typography>
@@ -223,6 +235,23 @@ export const IndexDottedLine = () => {
         backgroundSize: '12px 1px, 100% 1px',
         height: '1px',
       }}
+    />
+  )
+}
+
+export const AnimateIn = ({threshold = 0, triggerOnce = false, ...remainingProps}) => {
+  const [ref, inView] = useInView({threshold, triggerOnce})
+
+  return (
+    <div
+      ref={ref}
+      style={{
+        // adjust these as desired
+        transition: 'opacity 500ms, transform 500ms',
+        opacity: inView ? 1 : 0,
+        transform: `translateY(${inView ? 0 : 100}px)`,
+      }}
+      {...remainingProps}
     />
   )
 }

@@ -69,7 +69,7 @@ const Layout = ({children}) => {
                 display: {md: 'none'},
                 color: 'rgba(255,255,255,0.8)',
               },
-              color: '#fff',
+              color: 'rgba(255, 255, 255, 0.8)',
               marginLeft: '30px',
               display: 'inline-block',
               marginBottom: {md: '5px', xs: '30px'},

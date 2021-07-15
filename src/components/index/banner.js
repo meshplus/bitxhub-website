@@ -1,48 +1,29 @@
-import {ColorText, Hero} from '../style'
+import {AnimateIn, ColorText} from '../style'
 import {Box, Button, Container, Grid, Typography, useMediaQuery} from '@material-ui/core'
-import {AnimationOnScroll} from 'react-animation-on-scroll'
-import IndexWebp from '../../images/index.png'
-import IndexT from '../../images/index-tn.png'
 import {Link} from 'gatsby'
-import React, {useEffect, useRef, useState} from 'react'
+import React, {useEffect, useRef} from 'react'
 import lottie from 'lottie-web'
-import data from '../../pages/data.json'
 import {theme} from '../theme'
-import {useInterval} from 'react-use'
+import {getStaticUrl} from '../../helpers'
 
 const Banner = () => {
   const ref1 = useRef()
   const isMobile = useMediaQuery(theme.breakpoints.down('md'))
 
   useEffect(() => {
-    console.log(`Loading animation......`)
-    lottie.setQuality('low')
-    const animation = lottie.loadAnimation({animationData: data, container: ref1.current})
-    // const animation2 = lottie.loadAnimation({animationData: Animate2, container: ref2.current})
-    animation.goToAndPlay(0, true)
-    // animation2.goToAndPlay(0, true)
+    fetch('https://upload.hyperchain.cn/data.json')
+      .then(async res => {
+        const result = await res.json()
+        const animation = lottie.loadAnimation({
+          animationData: result,
+          container: ref1.current,
+          loop: true,
+        })
+
+        animation.play()
+      })
+      .catch(e => console.error(e))
   }, [])
-
-  const useProgressiveImage = src => {
-    const [sourceLoaded, setSourceLoaded] = useState(null)
-
-    useEffect(() => {
-      const img = new Image()
-      img.src = src
-      img.onerror = e => {
-        console.log(e)
-      }
-      img.onload = () => setSourceLoaded(src)
-    }, [src])
-
-    return sourceLoaded
-  }
-
-  const loaded = useProgressiveImage('https://cdn.yourtheme.cn/index.png')
-
-  useInterval(() => {
-    console.log(loaded)
-  }, 1000)
 
   return (
     <Box
@@ -50,7 +31,7 @@ const Banner = () => {
       pt={{md: 80, xs: 23}}
       pb={{md: 80, xs: 0}}
       sx={{
-        backgroundImage: {xs: `url(${IndexWebp})`, md: `url()`},
+        backgroundImage: {xs: `url(${getStaticUrl('index.png')})`, md: `url()`},
         backgroundSize: '250%',
         backgroundPosition: 'center 105px',
         backgroundRepeat: 'no-repeat',
@@ -66,17 +47,17 @@ const Banner = () => {
       )}
       <Container maxWidth='lg' style={{display: 'flex', alignItems: 'center'}}>
         <Grid item md={6} xs={12} textAlign={{xs: 'center', md: 'left'}}>
-          <AnimationOnScroll animateIn='animate__fadeInUp' duration={0.5}>
+          <AnimateIn>
             <Typography variant='h2'>
               <ColorText>万链互连</ColorText>
             </Typography>
-          </AnimationOnScroll>
-          <AnimationOnScroll animateIn='animate__fadeInUp' duration={0.5}>
+          </AnimateIn>
+          <AnimateIn>
             <Typography variant='h2' mb={6}>
               共建生态
             </Typography>
-          </AnimationOnScroll>
-          <AnimationOnScroll animateIn='animate__fadeInUp' duration={0.5}>
+          </AnimateIn>
+          <AnimateIn>
             <Typography variant='body1' mb={6} className='description'>
               {isMobile && (
                 <>
@@ -86,9 +67,9 @@ const Banner = () => {
               )}
               {!isMobile && <>打造新一代跨链服务基础设施，实现区块链互联网链间价值传递</>}
             </Typography>
-          </AnimationOnScroll>
+          </AnimateIn>
           {isMobile && <Box mx={-3} height={260} />}
-          <AnimationOnScroll animateIn='animate__fadeInUp' duration={0.5}>
+          <AnimateIn>
             <Link to='/quick' style={{marginRight: '20px'}}>
               <Button variant='outlined' size='large'>
                 <Box mr={2}>快速开始</Box>
@@ -108,7 +89,7 @@ const Banner = () => {
                 </ColorText>
               </Button>
             </a>
-          </AnimationOnScroll>
+          </AnimateIn>
         </Grid>
       </Container>
     </Box>

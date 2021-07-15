@@ -2,20 +2,20 @@ import React from 'react'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
 import {Box, Container, Grid, Typography} from '@material-ui/core'
-import {ColorText} from '../components/style'
-import Group from '../images/group.png'
-import GZH from '../images/gzh.png'
-import BG from '../images/about_bg.png'
-import GrowBG from '../images/about_grow_bg.png'
-import ContactBG from '../images/about_contact_bg.png'
-import Ball from '../images/roadmap_ball.png'
-import BallActive from '../images/roadmap_ball_active.png'
-import Star from '../images/about_star.png'
+import {AnimateIn, ColorText} from '../components/style'
+import BGT from '../images/about_bg_tn.png'
+import GrowBGT from '../images/about_grow_bg_tn.png'
+import ContactBGT from '../images/about_contact_bg_tn.png'
 import DatumRight from '../components/common/datum_right'
 import {theme} from '../components/theme'
+import {useProgressiveImage} from '../hooks'
+import {getStaticUrl} from '../helpers'
 
 const AboutPage = ({data}) => {
-  if (typeof window === undefined) return null
+  const bg1 = useProgressiveImage(BGT, getStaticUrl('about_bg.png'))
+  const bg2 = useProgressiveImage(GrowBGT, getStaticUrl('about_grow_bg.png'))
+  const bg3 = useProgressiveImage(ContactBGT, getStaticUrl('about_contact_bg.png'))
+
   return (
     <Box>
       <SEO title='关于我们' />
@@ -23,7 +23,7 @@ const AboutPage = ({data}) => {
         <Box
           pt={{md: 50, xs: 35}}
           sx={{
-            backgroundImage: `url(${BG}), url(${GrowBG}), url(${ContactBG})`,
+            backgroundImage: `url(${bg1}), url(${bg2}), url(${bg3})`,
             backgroundSize: {md: '2000px, 2000px, 2000px', xs: '1000px, 1000px, 1000px'},
             backgroundRepeat: 'no-repeat',
             backgroundPosition: {
@@ -33,21 +33,27 @@ const AboutPage = ({data}) => {
           }}
         >
           <Container maxWidth='lg'>
-            <Typography variant='h3' mb={8} textAlign='center'>
-              关于我们
-            </Typography>
-            <Typography variant='body1' textAlign='center' px={{xs: 3, md: 20}} className='description'>
-              依托区块链技术和多行业业务积累，为用户提供完备的数据和资产跨链解决方案，致力于安全高可用和通用易扩展的异构跨链服务，拥抱开源，与广大开发者共建万链互联、价值互通的区块链"互联网"。
-            </Typography>
+            <AnimateIn>
+              <Typography variant='h3' mb={8} textAlign='center'>
+                关于我们
+              </Typography>
+            </AnimateIn>
+            <AnimateIn>
+              <Typography variant='body1' textAlign='center' px={{xs: 3, md: 20}} className='description'>
+                依托区块链技术和多行业业务积累，为用户提供完备的数据和资产跨链解决方案，致力于安全高可用和通用易扩展的异构跨链服务，拥抱开源，与广大开发者共建万链互联、价值互通的区块链"互联网"。
+              </Typography>
+            </AnimateIn>
             <Box mt={{xs: 30, md: 40}} mb={10}>
               <Grid container>
-                <Grid item md={5} display='flex' alignItems='center'>
-                  <Typography variant='h2'>
-                    <ColorText>跨链</ColorText>
-                    <Box>行业领导者</Box>
-                  </Typography>
+                <Grid item md={4} display='flex' alignItems='center'>
+                  <AnimateIn>
+                    <Typography variant='h2'>
+                      <ColorText>跨链</ColorText>
+                      <Box>行业领导者</Box>
+                    </Typography>
+                  </AnimateIn>
                 </Grid>
-                <Grid item md={7}>
+                <Grid item md={8}>
                   <DatumRight />
                 </Grid>
               </Grid>
@@ -56,7 +62,9 @@ const AboutPage = ({data}) => {
               <Container maxWidth='lg'>
                 <Grid container>
                   <Grid item md={6}>
-                    <Typography variant='h3'>我们的成长历程</Typography>
+                    <AnimateIn>
+                      <Typography variant='h3'>我们的成长历程</Typography>
+                    </AnimateIn>
                   </Grid>
                 </Grid>
                 <Box
@@ -81,6 +89,7 @@ const AboutPage = ({data}) => {
                       fontWeight: 'normal',
                       textAlign: {xs: 'left', md: ''},
                       fontFamily: '"Titillium Web","Roboto","Helvetica","Arial",sans-serif !important',
+                      color: 'rgba(255,255,255,.7)',
                     },
                     '& h5': {
                       fontWeight: 'normal',
@@ -93,7 +102,9 @@ const AboutPage = ({data}) => {
                       height: {md: '120%', xs: '105%'},
                       // background: '#4266ad',
                       background:
-                        'linear-gradient(180deg, rgba(51,51,51,1) 0%, rgba(78,155,226,1) 0%, rgba(78,155,226,1) 70%, rgba(51,51,51,1) 100%);',
+                        'linear-gradient(180deg, rgba(78,155,226,1) 0%, rgba(79,162,231,1) 10%, rgba(80,167,235,0.5) 90%, rgba(78,155,226,0) 100%)',
+                      // background:
+                      //   'linear-gradient(180deg, rgba(51,51,51,1) 0%, rgba(78,155,226,1) 0%, rgba(78,155,226,1) 70%, rgba(51,51,51,1) 100%);',
                       left: {md: '50%', xs: 0},
                       top: {md: '0', xs: '40px'},
                     },
@@ -134,7 +145,7 @@ const AboutPage = ({data}) => {
                         </Typography>
                       </Grid>
                       <Grid item md={6}>
-                        <img src={Ball} alt='ball' width={32} className='ball first_ball' />
+                        <img src={getStaticUrl('roadmap_ball.png')} alt='ball' width={32} className='ball first_ball' />
                         <Typography variant='subtitle2' pl={4} mt={-2}>
                           2021.12
                         </Typography>
@@ -180,7 +191,7 @@ const AboutPage = ({data}) => {
                         </Box>
                       </Grid>
                       <Grid item md={6}>
-                        <img src={Ball} alt='ball' width={32} className='ball' />
+                        <img src={getStaticUrl('roadmap_ball.png')} alt='ball' width={32} className='ball' />
                       </Grid>
                     </Grid>
                   </Box>
@@ -189,8 +200,8 @@ const AboutPage = ({data}) => {
                     <Grid container>
                       <Grid item md={6} />
                       <Grid item md={6}>
-                        <img src={BallActive} alt='ball' width={32} className='ball' />
-                        <img src={Star} alt='star' height={47} className='star' />
+                        <img src={getStaticUrl('roadmap_ball_active.png')} alt='ball' width={32} className='ball' />
+                        <img src={getStaticUrl('about_star.png')} alt='star' height={47} className='star' />
                         <Typography variant='subtitle2' pl={4} mt={-2}>
                           2021.06
                         </Typography>
@@ -238,7 +249,7 @@ const AboutPage = ({data}) => {
                         </Box>
                       </Grid>
                       <Grid item md={6}>
-                        <img src={Ball} alt='ball' width={32} className='ball' />
+                        <img src={getStaticUrl('roadmap_ball.png')} alt='ball' width={32} className='ball' />
                       </Grid>
                     </Grid>
                   </Box>
@@ -252,7 +263,7 @@ const AboutPage = ({data}) => {
                         </Typography>
                       </Grid>
                       <Grid item md={6}>
-                        <img src={Ball} alt='ball' width={32} className='ball first_ball' />
+                        <img src={getStaticUrl('roadmap_ball.png')} alt='ball' width={32} className='ball first_ball' />
                         <Typography variant='subtitle2' pl={4} mt={-2}>
                           2020.09
                         </Typography>
@@ -294,7 +305,7 @@ const AboutPage = ({data}) => {
                         </Box>
                       </Grid>
                       <Grid item md={6}>
-                        <img src={Ball} alt='ball' width={32} className='ball' />
+                        <img src={getStaticUrl('roadmap_ball.png')} alt='ball' width={32} className='ball' />
                       </Grid>
                     </Grid>
                   </Box>
@@ -303,7 +314,7 @@ const AboutPage = ({data}) => {
                     <Grid container>
                       <Grid item md={6} />
                       <Grid item md={6}>
-                        <img src={Ball} alt='ball' width={32} className='ball' />
+                        <img src={getStaticUrl('roadmap_ball.png')} alt='ball' width={32} className='ball' />
                         <Typography variant='subtitle2' pl={4} mt={-2}>
                           2020.03
                         </Typography>
@@ -333,7 +344,7 @@ const AboutPage = ({data}) => {
                         </Typography>
                       </Grid>
                       <Grid item md={6}>
-                        <img src={Ball} alt='ball' width={32} className='ball first_ball' />
+                        <img src={getStaticUrl('roadmap_ball.png')} alt='ball' width={32} className='ball first_ball' />
                         <Typography variant='subtitle2' pl={4} mt={-2}>
                           2019.10
                         </Typography>
@@ -360,7 +371,6 @@ const AboutPage = ({data}) => {
             </Box>
             <Box
               pt={20}
-              pb={15}
               sx={{
                 '& .MuiTypography-body1': {
                   [theme.breakpoints.down('md')]: {
@@ -371,12 +381,14 @@ const AboutPage = ({data}) => {
             >
               <Grid container>
                 <Grid item md={6} xs={12} sx={{display: 'flex', alignItems: 'center'}}>
-                  <Typography variant='h3' mb={{md: 0, xs: 9}}>
-                    <Box>有任何问题</Box>
-                    欢迎联系我们
-                  </Typography>
+                  <AnimateIn>
+                    <Typography variant='h3' mb={{md: 0, xs: 9}}>
+                      <Box>有任何问题</Box>
+                      欢迎联系我们
+                    </Typography>
+                  </AnimateIn>
                 </Grid>
-                <Grid item md={6} xs={12}>
+                <Grid item md={6} xs={12} px={{md: 0, xs: 4}}>
                   <Typography variant='h5' mb={4}>
                     公司总部
                   </Typography>
@@ -391,18 +403,26 @@ const AboutPage = ({data}) => {
                   <Typography variant='h5' mt={12} mb={4}>
                     微信公众号
                   </Typography>
-                  <Grid container spacing={4}>
+                  <Grid
+                    container
+                    spacing={4}
+                    sx={{
+                      '& img': {
+                        width: {md: '145px', xs: '120px'},
+                      },
+                    }}
+                  >
                     <Grid item md={4} xs={6}>
                       <Typography variant='body1' mb={2}>
                         趣链科技公众号
                       </Typography>
-                      <img src={Group} alt='group' width={145} />
+                      <img src={getStaticUrl('group.png')} alt='group' />
                     </Grid>
                     <Grid item md={4} xs={6}>
                       <Typography variant='body1' mb={2}>
                         进入开源技术交流群
                       </Typography>
-                      <img src={GZH} alt='gzh' width={145} />
+                      <img src={getStaticUrl('gzh.png')} alt='gzh' />
                     </Grid>
                   </Grid>
                 </Grid>

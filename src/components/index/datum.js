@@ -1,5 +1,5 @@
 import {Box, Container, Grid, Typography} from '@material-ui/core'
-import {ColorText} from '../style'
+import {AnimateIn, ColorText} from '../style'
 import React from 'react'
 import DatumRight from '../common/datum_right'
 
@@ -11,10 +11,12 @@ const Datum = () => {
           <Grid container alignItems='stretch'>
             <Grid item md={4} display='flex' alignItems='center'>
               <Box>
-                <Typography variant='h2'>
-                  <ColorText>跨链</ColorText>
-                  <Box>行业领导者</Box>
-                </Typography>
+                <AnimateIn>
+                  <Typography variant='h2'>
+                    <ColorText>跨链</ColorText>
+                    <Box>行业领导者</Box>
+                  </Typography>
+                </AnimateIn>
               </Box>
             </Grid>
             <Grid item md={8}>

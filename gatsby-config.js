@@ -9,6 +9,13 @@ module.exports = {
     author: `@meshplus`,
   },
   plugins: [
+    {
+      resolve: 'gatsby-plugin-scroll-reveal',
+      options: {
+        threshold: 1,
+        disable: false,
+      },
+    },
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-image`,
     {

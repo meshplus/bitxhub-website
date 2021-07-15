@@ -1,6 +1,7 @@
 import {Box, Typography, useMediaQuery} from '@material-ui/core'
 import React, {useState} from 'react'
 import {theme} from '../theme'
+import {getStaticUrl} from '../../helpers'
 
 const DatumRight = () => {
   const [active, setActive] = useState({1: '', 2: 'active', 3: ''})
@@ -24,6 +25,9 @@ const DatumRight = () => {
             lineHeight: 1,
           },
         },
+        '& .MuiTypography-h5': {
+          fontSize: {md: '24px', xs: '14px'},
+        },
         '& .datum_meta': {
           display: 'block',
           marginLeft: '20px',
@@ -46,20 +50,30 @@ const DatumRight = () => {
           },
         },
         '& .datum_meta_list': {
-          pl: {md: 0, xs: 2},
+          pr: {md: 0, xs: '16px'},
+          pl: {md: 0, xs: 0},
           display: 'none',
           '& h6': {
             lineHeight: {xs: '20px', md: '26px'},
             fontWeight: 400,
+            fontSize: {md: '16px', xs: '12px'},
           },
         },
         '@keyframes A': {
           from: {backgroundSize: '0 215px'},
-          to: {backgroundSize: '590px 215px'},
+          to: {backgroundSize: '640px 215px'},
         },
         '@keyframes sA': {
           from: {backgroundSize: '0 109px'},
-          to: {backgroundSize: '320px 109px'},
+          to: {backgroundSize: '259px 109px'},
+        },
+        '@keyframes fA': {
+          from: {backgroundSize: '0 215px'},
+          to: {backgroundSize: '660px 215px'},
+        },
+        '@keyframes fsA': {
+          from: {backgroundSize: '0 109px'},
+          to: {backgroundSize: '289px 109px'},
         },
         '& .datum_item': {
           display: 'flex',
@@ -68,7 +82,7 @@ const DatumRight = () => {
           padding: {xs: '25px 0', md: '35px 0'},
           transition: 'background 0.3s ease',
           backgroundRepeat: 'no-repeat',
-          backgroundImage: `url(https://cdn.yourtheme.cn/data_card.png)`,
+          backgroundImage: `url(${getStaticUrl('data_card.png')})`,
           backgroundPosition: {xs: 'top 6px left 34px', md: 'top 1px left 70px'},
           backgroundSize: {xs: '0 109px', md: '0 215px'},
           '& .datum_ball_active': {
@@ -103,16 +117,18 @@ const DatumRight = () => {
         className={`datum_item ${active[1]}`}
         onMouseEnter={() => handleActive(1)}
       >
-        <img src='https://cdn.yourtheme.cn/datum_1.png' alt='datum' className={'datum_ball'} />
-        <img src='https://cdn.yourtheme.cn/datum_2.png' alt='datum' className={'datum_ball_active'} />
+        <img src={getStaticUrl('datum_1.png')} alt='datum' className={'datum_ball'} />
+        <img src={getStaticUrl('datum_2.png')} alt='datum' className={'datum_ball_active'} />
         <Box position='absolute' className='datum_num'>
           <Typography variant='h3'>3</Typography>
           <Typography variant='body1'>项</Typography>
         </Box>
-        <Box pl={{xs: 1, md: 6}}>
+        <Box pl={{xs: 2, md: 6}}>
           <Box className='datum_meta'>
             <Typography variant='h5'>参与测评</Typography>
-            <Typography variant='body2'>首批通过国家金融科技测评中心的跨链服务功能测试</Typography>
+            <Typography variant='body2' display={{md: 'block', xs: 'none'}}>
+              首批通过国家金融科技测评中心的跨链服务功能测试
+            </Typography>
           </Box>
           <Box className='datum_meta_list'>
             {isMobile ? (
@@ -136,17 +152,24 @@ const DatumRight = () => {
         ml={{xs: 2, md: 6}}
         className={`datum_item ${active[2]}`}
         onMouseEnter={() => handleActive(2)}
+        sx={{
+          '&.active': {
+            animation: {md: 'fA 0.4s ease-in-out forwards !important', xs: 'fsA 0.4s ease-in-out forwards !important'},
+          },
+        }}
       >
-        <img src='https://cdn.yourtheme.cn/datum_1.png' alt='datum' className={'datum_ball'} />
-        <img src='https://cdn.yourtheme.cn/datum_2.png' alt='datum' className={'datum_ball_active'} />
+        <img src={getStaticUrl('datum_1.png')} alt='datum' className={'datum_ball'} />
+        <img src={getStaticUrl('datum_2.png')} alt='datum' className={'datum_ball_active'} />
         <Box position='absolute' className={'datum_num'}>
           <Typography variant='h3'>4</Typography>
           <Typography variant='body1'>项</Typography>
         </Box>
-        <Box pl={{xs: 1, md: 6}}>
+        <Box pl={{xs: 2, md: 6}}>
           <Box className='datum_meta'>
             <Typography variant='h5'>标准制定</Typography>
-            <Typography variant='body2'>参与多项国际和国内区块链互操作标准制定</Typography>
+            <Typography variant='body2' display={{md: 'block', xs: 'none'}}>
+              参与多项国际和国内区块链互操作标准制定
+            </Typography>
           </Box>
           <Box className='datum_meta_list'>
             {isMobile ? (
@@ -163,7 +186,7 @@ const DatumRight = () => {
                   参与中国通信标准化协会(CCSA)《区块链链间互操作》团体标准制定
                 </Typography>
                 <Typography variant='subtitle2'>
-                  参与计算机协会区块链和分布式记账委员会(IEEE C/BDL)区块链互操作3项标准制定
+                  参与计算机协会区块链和分布式记账委员会区块链互操作3项标准制定
                 </Typography>
               </>
             )}
@@ -176,16 +199,18 @@ const DatumRight = () => {
         className={`datum_item ${active[3]}`}
         onMouseEnter={() => handleActive(3)}
       >
-        <img src='https://cdn.yourtheme.cn/datum_1.png' alt='datum' className={'datum_ball'} />
-        <img src='https://cdn.yourtheme.cn/datum_2.png' alt='datum' className={'datum_ball_active'} />
+        <img src={getStaticUrl('datum_1.png')} alt='datum' className={'datum_ball'} />
+        <img src={getStaticUrl('datum_2.png')} alt='datum' className={'datum_ball_active'} />
         <Box position='absolute' className={'datum_num'}>
           <Typography variant='h3'>23</Typography>
           <Typography variant='body1'>篇</Typography>
         </Box>
-        <Box pl={{xs: 1, md: 6}}>
+        <Box pl={{xs: 2, md: 6}}>
           <Box className='datum_meta'>
             <Typography variant='h5'>专利&论文</Typography>
-            <Typography variant='body2'>在跨链事务一致性保障、数据有效性验证、跨链协议等相关领域具有23篇</Typography>
+            <Typography variant='body2' display={{md: 'block', xs: 'none'}}>
+              在跨链事务一致性保障、数据有效性验证、跨链协议等相关领域具有23篇
+            </Typography>
           </Box>
           <Box className='datum_meta_list'>
             <Typography variant='subtitle2'>

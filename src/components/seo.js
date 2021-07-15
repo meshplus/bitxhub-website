@@ -70,7 +70,6 @@ function SEO({description, lang, meta, title}) {
         },
       ].concat(meta)}
     >
-      <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css' />
       <link
         rel='preload'
         href='//at.alicdn.com/t/font_2613564_k2u94lspi6.woff2'

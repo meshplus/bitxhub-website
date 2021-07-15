@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
-import {Box, Container, Divider, Typography} from '@material-ui/core'
-import {ColorText, ReadMore} from '../style'
-import RoadmapBall from '../../images/index_roadmap_ball.png'
+import {Box, Container, Divider, Grid, Typography} from '@material-ui/core'
+import {AnimateIn, ColorText, ReadMore} from '../style'
+import {getStaticUrl} from '../../helpers'
 
 const Roadmap = () => {
   const ina = {1: 'inactive', 2: '', 3: 'inactive', 4: 'inactive'}
@@ -21,11 +21,19 @@ const Roadmap = () => {
       sx={{
         zIndex: 1,
         position: 'relative',
+        '& .date2': {
+          color: 'rgba(255,255,255,0.8)',
+          fontSize: {md: '16px', xs: '12px'},
+        },
         '& .date, & .date2': {
           fontFamily: '"Titillium Web","Roboto","Helvetica","Arial",sans-serif !important',
         },
         '& .title': {
           color: 'rgba(255, 255, 255, 0.6)',
+          transform: 'translateY(-8px)',
+        },
+        '& .date': {
+          transform: 'translateY(8px)',
         },
         '& .hover_title': {
           fontSize: {md: '20px', xs: '16px'},
@@ -66,7 +74,7 @@ const Roadmap = () => {
           cursor: 'pointer',
           width: {md: '300px', xs: '170px'},
           height: {md: '250px', xs: '214px'},
-          backgroundImage: `url(https://cdn.yourtheme.cn/roadmap_shine.png)`,
+          backgroundImage: `url(${getStaticUrl('roadmap_shine.png')})`,
           backgroundSize: '0 0',
           backgroundRepeat: 'no-repeat',
           backgroundPosition: {md: '140px 140px', xs: '100px 100px'},
@@ -83,7 +91,8 @@ const Roadmap = () => {
               opacity: 1,
             },
             '& .roadmap_desc': {
-              display: 'block',
+              opacity: 1,
+              transform: 'translateY(0)',
             },
             '& .date': {
               display: 'none',
@@ -102,13 +111,15 @@ const Roadmap = () => {
           display: 'inline-block',
         },
         '& .roadmap_desc': {
-          display: 'none',
+          transition: 'opacity 500ms, transform 500ms',
+          opacity: 0,
+          transform: 'translateY(100px)',
           position: 'absolute',
           top: {md: '162px', xs: '133px'},
           width: {xs: '190px', md: '300px'},
           minHeight: '240px',
           textAlign: 'left',
-          backgroundImage: `url(https://cdn.yourtheme.cn/roadmap_card.png)`,
+          backgroundImage: `url(${getStaticUrl('roadmap_card.png')})`,
           backgroundSize: {md: '300px 241px', xs: '190px'},
           backgroundRepeat: 'no-repeat',
           // left: '50%',
@@ -123,7 +134,7 @@ const Roadmap = () => {
           '& ul': {
             color: 'rgba(255, 255, 255, 0.6)',
             paddingLeft: '20px',
-            fontSize: {md: '14px', xs: '12px'},
+            fontSize: {md: '16px', xs: '12px'},
             '& li': {
               marginBottom: '5px',
             },
@@ -133,9 +144,11 @@ const Roadmap = () => {
     >
       <Container maxWidth='lg'>
         <Box mb={{md: 14, xs: 6}} display={{xs: '', md: 'flex'}} alignItems='flex-end'>
-          <Typography variant='h3' mr={5}>
-            <ColorText mr={1}>BitXHub</ColorText>开源规划
-          </Typography>
+          <AnimateIn>
+            <Typography variant='h3' mr={5}>
+              <ColorText mr={1}>BitXHub</ColorText>开源规划
+            </Typography>
+          </AnimateIn>
           <ReadMore to='/about#roadmap' mb={1} />
         </Box>
         <Box sx={{overflowX: 'scroll', pb: {md: 32, xs: 30}}}>
@@ -169,12 +182,7 @@ const Roadmap = () => {
               <Typography variant='body1' className={`title`}>
                 DID组件开源
               </Typography>
-              <img
-                src='https://cdn.yourtheme.cn/index_roadmap_ball.png'
-                className={`roadmap_ball`}
-                alt='ball'
-                height={36}
-              />
+              <img src={getStaticUrl('index_roadmap_ball.png')} className={`roadmap_ball`} alt='ball' height={36} />
               <Typography variant='subtitle2' className={`hover_title`}>
                 DID组件开源
               </Typography>
@@ -201,12 +209,7 @@ const Roadmap = () => {
               <Typography variant='body1' className='title'>
                 跨链浏览器
               </Typography>
-              <img
-                src='https://cdn.yourtheme.cn/index_roadmap_ball.png'
-                className={`roadmap_ball`}
-                alt='ball'
-                height={36}
-              />
+              <img src={getStaticUrl('index_roadmap_ball.png')} className={`roadmap_ball`} alt='ball' height={36} />
               <Typography variant='subtitle2' className={`hover_title`}>
                 跨链浏览器
               </Typography>
@@ -236,7 +239,7 @@ const Roadmap = () => {
                 开放测试网
               </Typography>
               <img
-                src='https://cdn.yourtheme.cn/index_roadmap_ball.png'
+                src={getStaticUrl('index_roadmap_ball.png')}
                 className={`roadmap_ball ${active[3]} ${inactive[3]}`}
                 alt='ball'
                 height={36}
@@ -268,7 +271,7 @@ const Roadmap = () => {
               <Typography variant='body1' className={`title`}>
                 跨链治理框架
               </Typography>
-              <img src={RoadmapBall} className={`roadmap_ball`} alt='ball' height={36} />
+              <img src={getStaticUrl('index_roadmap_ball.png')} className={`roadmap_ball`} alt='ball' height={36} />
               <Typography variant='subtitle2' className={`hover_title`}>
                 跨链治理框架
               </Typography>

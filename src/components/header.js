@@ -55,7 +55,7 @@ const Header = ({siteTitle}) => {
       bgcolor={open ? 'rgba(0, 0, 0, 0)' : 'rgba(0, 0, 0, .8)'}
       left={0}
       right={0}
-      py={{xs: 2, sm: 2}}
+      py={{xs: 0, sm: 2}}
       zIndex={999}
       top={0}
       position='fixed'
@@ -101,11 +101,19 @@ const Header = ({siteTitle}) => {
             </Grid>
           </Box>
         </SwipeableDrawer>
-        <Box display='flex' alignItems='center'>
+        <Box
+          display='flex'
+          alignItems='center'
+          sx={{
+            '& img': {
+              height: {md: '60px', xs: '48px'},
+            },
+          }}
+        >
           <Link to='/'>
             <Box display='flex'>
               <Box mr={2}>
-                <img src={Logo} alt='Logo' height={60} />
+                <img src={Logo} alt='Logo' />
               </Box>
             </Box>
           </Link>
@@ -123,6 +131,7 @@ const Header = ({siteTitle}) => {
                 color: 'rgba(255,255,255,0.8)',
               },
               '& a': {
+                color: 'rgba(255,255,255,0.8)',
                 ml: 8,
                 '&:hover, &.active': {
                   background: '-webkit-linear-gradient(left, #7DBCFC, #2E7CFE, #01E1FF)',

@@ -42,7 +42,7 @@ const Article = ({data}) => {
       <Box
         pt={30}
         pb={{md: 10, xs: 5}}
-        mt={17}
+        mt={{md: 17, xs: 11}}
         sx={{
           backgroundImage: `linear-gradient(180deg , rgb(26 33 39 / 69%) 0%, #000 100%), url(${process.env.STRAPI_API_URL}${article.cover.formats.small.url})`,
           backgroundPosition: 'center top, center top',
@@ -51,6 +51,7 @@ const Article = ({data}) => {
           '& .date': {
             fontFamily: '"Titillium Web","Roboto","Helvetica","Arial",sans-serif !important',
             color: 'rgba(255, 255, 255, 0.7)',
+            fontSize: {md: '16px', xs: '12px'},
           },
         }}
       >
@@ -58,7 +59,7 @@ const Article = ({data}) => {
           <Typography
             variant='h4'
             mb={4}
-            color='primary'
+            color='#1DB5F4'
             fontFamily='"Roboto","Helvetica","Arial",sans-serif !important'
             fontSize={{md: '2.125rem', xs: '20px'}}
           >
@@ -132,6 +133,7 @@ const Article = ({data}) => {
                   fontFamily: 'Source Code Pro',
                 },
                 '& blockquote': {
+                  wordBreak: 'break-all',
                   margin: '30px 0 30px 0',
                   paddingLeft: '15px',
                   color: 'rgba(255, 255, 255, 0.6)',
