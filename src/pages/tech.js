@@ -48,22 +48,26 @@ const TechPage = ({data}) => {
       autoplay: false,
       loop: false,
     })
+    //
+    // animation.playSegments([200, 400], true)
+    // animation.addEventListener('enterFrame', e => console.log(e))
 
     setAnimation(animation)
   }, [])
 
   useEffect(() => {
+    // return
     if (animation) {
       if (step === 1) {
         prevStep === 0 && animation.playSegments([0, 100], true)
         prevStep === 2 && animation.playSegments([200, 100], true)
       } else if (step === 2) {
-        console.log(prevStep)
         prevStep === 1 && animation.playSegments([100, 200], true)
-        prevStep === 0 && animation.playSegments([0, 200], true)
+        prevStep === 0 && animation.playSegments([400, 200], true)
       } else {
         prevStep === 1 && animation.playSegments([100, 0], true)
-        prevStep === 2 && animation.playSegments([200, 0], true)
+        console.log(prevStep)
+        prevStep === 2 && animation.playSegments([200, 400], true)
       }
     }
   }, [step, animation, prevStep])
