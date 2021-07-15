@@ -169,7 +169,7 @@ const QuickPage = ({data}) => {
                 </Typography>
               </Fade>
               <Typography variant='body1' textAlign='center' mb={11}>
-                通过单独搭建bitxhub各个组件，以深入了解BitXHub
+                通过单独搭建BitXHub各个组件，以深入了解BitXHub
               </Typography>
               <Box overflow={{md: '', xs: 'scroll'}}>
                 <Box display='flex' alignItems='center' justifyContent='center' width={{md: '100%', xs: '820px'}}>

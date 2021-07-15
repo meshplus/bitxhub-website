@@ -205,11 +205,11 @@ const DatumRight = () => {
           <Box className='datum_meta'>
             <Typography variant='h5'>专利&论文</Typography>
             <Typography variant='body2' display={{md: 'block', xs: 'none'}}>
-              在跨链事务、数据有效性验证和跨链协议等相关领域具有23篇
+              在跨链事务、数据有效性验证和跨链协议等相关领域具有23篇专利
             </Typography>
           </Box>
           <Box className='datum_meta_list'>
-            <Typography variant='subtitle2'>在跨链事务、数据有效性验证和跨链协议等相关领域具有23篇</Typography>
+            <Typography variant='subtitle2'>在跨链事务、数据有效性验证和跨链协议等相关领域具有23篇专利</Typography>
           </Box>
         </Box>
       </Box>

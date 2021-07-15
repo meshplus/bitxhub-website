@@ -163,7 +163,7 @@ const AboutPage = ({data}) => {
                             联盟跨链自治
                           </Typography>
                           <Typography variant='body1'>
-                            支持统一的身份管理，跨链权限控制，节点管理及数据审计等服务
+                            支持统一的身份管理、跨链权限控制、节点管理及数据审计等服务
                           </Typography>
                         </Box>
                       </Grid>
@@ -400,7 +400,7 @@ const AboutPage = ({data}) => {
                   <Typography variant='h5' mt={12} mb={4}>
                     邮箱
                   </Typography>
-                  <Typography variant='body1'>杭州市滨江区丹枫路399号2号楼A楼2001室</Typography>
+                  <Typography variant='body1'>bitxhub@hyperchain.cn</Typography>
                   <Typography variant='h5' mt={12} mb={4}>
                     微信公众号
                   </Typography>

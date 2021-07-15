@@ -50,7 +50,7 @@ const Banner = () => {
         <Grid item md={6} xs={12} textAlign={{xs: 'center', md: 'left'}}>
           <Fade direction='up' duration={500}>
             <Typography variant='h2'>
-              <ColorText>万链互连</ColorText>
+              <ColorText>万链互联</ColorText>
             </Typography>
           </Fade>
           <Fade direction='up' duration={500}>

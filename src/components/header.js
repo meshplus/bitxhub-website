@@ -3,7 +3,6 @@ import {Link} from 'gatsby'
 import PropTypes from 'prop-types'
 import * as React from 'react'
 import {useState} from 'react'
-import MenuIcon from '@material-ui/icons/Menu'
 import Logo from '../images/logo.png'
 
 const menu = [

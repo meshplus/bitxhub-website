@@ -291,7 +291,7 @@ const TechPage = ({data}) => {
                     <Typography variant='h3'>的跨链网关</Typography>
                   </Fade>
                   <Typography variant='body1' mt={8}>
-                    通过插件机制实现网关核心功能模块与应用链交互模块的解耦，实现应用链高效和"零侵入"的适配机制。
+                    通过插件机制实现网关核心功能模块与应用链交互模块的解耦，实现应用链高效和“零侵入”的适配机制。
                   </Typography>
                 </Box>
               </Grid>
@@ -584,9 +584,7 @@ const TechPage = ({data}) => {
                       联盟治理
                     </Typography>
                     <Typography variant='body1' mb={4}>
-                      中继链节点构成联盟自治的基础，通过丰富的治理服务实现全方位的治理管控，此外，中
-                      继链还提供规范的提案模型、灵活的投票策略和科学的评价体系，充分保证成员
-                      规范工作、系统健康升级、联盟稳态发展。
+                      中继链节点构成联盟自治的基础，通过丰富的治理服务实现全方位的治理管控，此外，中继链还提供规范的提案模型、灵活的投票策略和科学的评价体系，充分保证成员规范工作、系统健康升级、联盟稳态发展。
                     </Typography>
                     <img src={getStaticUrl('drawer_2.png')} alt='demo' width='100%' />
                   </Box>
