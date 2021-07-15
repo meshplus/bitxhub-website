@@ -1,8 +1,9 @@
 import {Box, Button, Container, Grid, Typography} from '@material-ui/core'
 import {theme} from '../theme'
-import {AnimateIn, ColorText} from '../style'
+import {ColorText} from '../style'
 import {Link} from 'gatsby'
 import React from 'react'
+import {Fade} from 'react-awesome-reveal'
 
 const More = () => {
   return (
@@ -27,11 +28,11 @@ const More = () => {
         },
       }}
     >
-      <AnimateIn>
+      <Fade direction='up' duration={500}>
         <Typography variant='h3' mb={8}>
           <ColorText>了解更多</ColorText>
         </Typography>
-      </AnimateIn>
+      </Fade>
       <Container maxWidth='md'>
         <Grid container>
           <Grid item md={4} mb={4} xs={12}>

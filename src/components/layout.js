@@ -14,6 +14,7 @@ import {Box, Container, CssBaseline, Grid, ThemeProvider, Typography} from '@mat
 import './style.css'
 import {StaticImage} from 'gatsby-plugin-image'
 import 'swiper/swiper-bundle.css'
+import 'sal.js/dist/sal.css'
 
 const Layout = ({children}) => {
   const data = useStaticQuery(graphql`

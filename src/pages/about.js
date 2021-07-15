@@ -2,7 +2,7 @@ import React from 'react'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
 import {Box, Container, Grid, Typography} from '@material-ui/core'
-import {AnimateIn, ColorText} from '../components/style'
+import {ColorText} from '../components/style'
 import BGT from '../images/about_bg_tn.png'
 import GrowBGT from '../images/about_grow_bg_tn.png'
 import ContactBGT from '../images/about_contact_bg_tn.png'
@@ -10,6 +10,7 @@ import DatumRight from '../components/common/datum_right'
 import {theme} from '../components/theme'
 import {useProgressiveImage} from '../hooks'
 import {getStaticUrl} from '../helpers'
+import {Fade} from 'react-awesome-reveal'
 
 const AboutPage = ({data}) => {
   const bg1 = useProgressiveImage(BGT, getStaticUrl('about_bg.png'))
@@ -27,31 +28,31 @@ const AboutPage = ({data}) => {
             backgroundSize: {md: '2000px, 2000px, 2000px', xs: '1000px, 1000px, 1000px'},
             backgroundRepeat: 'no-repeat',
             backgroundPosition: {
-              md: 'center -60px, center 860px, center bottom -70px',
+              md: 'center -60px, center 860px, center bottom -20px',
               xs: 'center 20px, center 860px, center bottom -70px',
             },
           }}
         >
           <Container maxWidth='lg'>
-            <AnimateIn>
+            <Fade direction='up' duration={500}>
               <Typography variant='h3' mb={8} textAlign='center'>
                 关于我们
               </Typography>
-            </AnimateIn>
-            <AnimateIn>
+            </Fade>
+            <Fade direction='up' duration={500}>
               <Typography variant='body1' textAlign='center' px={{xs: 3, md: 20}} className='description'>
                 依托区块链技术和多行业业务积累，为用户提供完备的数据和资产跨链解决方案，致力于安全高可用和通用易扩展的异构跨链服务，拥抱开源，与广大开发者共建万链互联、价值互通的区块链"互联网"。
               </Typography>
-            </AnimateIn>
+            </Fade>
             <Box mt={{xs: 30, md: 40}} mb={10}>
               <Grid container>
                 <Grid item md={4} display='flex' alignItems='center'>
-                  <AnimateIn>
+                  <Fade direction='up' duration={500}>
                     <Typography variant='h2'>
                       <ColorText>跨链</ColorText>
                       <Box>行业领导者</Box>
                     </Typography>
-                  </AnimateIn>
+                  </Fade>
                 </Grid>
                 <Grid item md={8}>
                   <DatumRight />
@@ -62,9 +63,9 @@ const AboutPage = ({data}) => {
               <Container maxWidth='lg'>
                 <Grid container>
                   <Grid item md={6}>
-                    <AnimateIn>
+                    <Fade direction='up' duration={500}>
                       <Typography variant='h3'>我们的成长历程</Typography>
-                    </AnimateIn>
+                    </Fade>
                   </Grid>
                 </Grid>
                 <Box
@@ -381,12 +382,12 @@ const AboutPage = ({data}) => {
             >
               <Grid container>
                 <Grid item md={6} xs={12} sx={{display: 'flex', alignItems: 'center'}}>
-                  <AnimateIn>
+                  <Fade direction='up' duration={500}>
                     <Typography variant='h3' mb={{md: 0, xs: 9}}>
                       <Box>有任何问题</Box>
                       欢迎联系我们
                     </Typography>
-                  </AnimateIn>
+                  </Fade>
                 </Grid>
                 <Grid item md={6} xs={12} px={{md: 0, xs: 4}}>
                   <Typography variant='h5' mb={4}>

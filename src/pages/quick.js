@@ -5,9 +5,10 @@ import {Box, Button, Container, Grid, Typography} from '@material-ui/core'
 import BG1T from '../images/quick_bg_1_tn.png'
 import BG2T from '../images/quick_bg_2_tn.png'
 import lottie from 'lottie-web'
-import {AnimateIn, ColorText} from '../components/style'
+import {ColorText} from '../components/style'
 import {useProgressiveImage} from '../hooks'
 import {getStaticUrl} from '../helpers'
+import {Fade} from 'react-awesome-reveal'
 
 const QuickPage = ({data}) => {
   const divRef = useRef()
@@ -53,17 +54,17 @@ const QuickPage = ({data}) => {
         >
           <Container maxWidth='lg'>
             <Box pt={10} mb={30}>
-              <AnimateIn>
+              <Fade direction='up' duration={500}>
                 <Typography variant='h3' mb={4}>
                   快速开始
                 </Typography>
-              </AnimateIn>
-              <AnimateIn>
+              </Fade>
+              <Fade direction='up' duration={500}>
                 <Typography variant='body1' pr={5} mb={8} maxWidth='560px' className='description'>
                   通过Goduck可以一键搭建BitxHub快速体验跨链流程，
                   想深入了解BitXHub跨链技术的小伙伴也可以通过快速开始文档分步搭建
                 </Typography>
-              </AnimateIn>
+              </Fade>
             </Box>
             <Box
               mt={{xs: 5, md: 10}}
@@ -91,11 +92,11 @@ const QuickPage = ({data}) => {
               <Grid container>
                 <Grid item md={5} display='flex' alignItems='center'>
                   <Box>
-                    <AnimateIn>
+                    <Fade direction='up' duration={500}>
                       <Typography variant='h3' mb={4}>
                         一键体验
                       </Typography>
-                    </AnimateIn>
+                    </Fade>
                     <Typography variant='body1' pr={{md: 25}} mb={8}>
                       通过Goduck运维小工具来快速体验跨链流程
                     </Typography>
@@ -162,11 +163,11 @@ const QuickPage = ({data}) => {
                 },
               }}
             >
-              <AnimateIn>
+              <Fade direction='up' duration={500}>
                 <Typography variant='h3' textAlign='center' mb={3}>
                   系统搭建
                 </Typography>
-              </AnimateIn>
+              </Fade>
               <Typography variant='body1' textAlign='center' mb={11}>
                 通过单独搭建bitxhub各个组件，以深入了解BitXHub
               </Typography>

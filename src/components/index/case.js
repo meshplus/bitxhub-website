@@ -1,10 +1,11 @@
 import {Box, Container, Grid, SwipeableDrawer, Typography, useMediaQuery} from '@material-ui/core'
-import {AnimateIn, ColorText, ReadMoreNoHrefWithoutStyle} from '../style'
+import {ColorText, ReadMoreNoHrefWithoutStyle} from '../style'
 import {Swiper, SwiperSlide} from 'swiper/react'
 import React, {useState} from 'react'
 import {useWindowSize} from 'react-use'
 import {theme} from '../theme'
 import {getStaticUrl, getThemeUrl} from '../../helpers'
+import {Fade} from 'react-awesome-reveal'
 
 const Case = () => {
   const [open1, setOpen1] = useState(false)
@@ -17,11 +18,11 @@ const Case = () => {
   return (
     <Box pt={{md: 60, xs: 30}} pb={{md: 70, xs: 24}}>
       <Container maxWidth='lg'>
-        <AnimateIn>
+        <Fade direction='up' duration={500}>
           <Typography variant='h3' mb={{md: 14, xs: 8}}>
             <ColorText mr={1}>BitXHub</ColorText>构建解决方案
           </Typography>
-        </AnimateIn>
+        </Fade>
         <Box
           display='flex'
           justifyContent='flex-end'
@@ -128,11 +129,12 @@ const Case = () => {
                   sx={{'& .MuiDrawer-paper': {boxSizing: 'border-box', width: {md: width / 2, xs: width}}}}
                 >
                   <Box
-                    p={10}
+                    p={{xs: 4, md: 10}}
                     minHeight='100%'
                     display='flex'
                     flexDirection='column'
-                    justifyContent='center'
+                    pt={{md: 0, xs: 16}}
+                    justifyContent={{md: 'center', xs: 'flex-start'}}
                     position='relative'
                     style={{
                       color: '#fff',
@@ -191,12 +193,13 @@ const Case = () => {
                   sx={{'& .MuiDrawer-paper': {boxSizing: 'border-box', width: {md: width / 2, xs: width}}}}
                 >
                   <Box
-                    p={10}
+                    p={{xs: 4, md: 10}}
                     minHeight='100%'
                     display='flex'
                     flexDirection='column'
-                    justifyContent='center'
                     position='relative'
+                    pt={{md: 0, xs: 16}}
+                    justifyContent={{md: 'center', xs: 'flex-start'}}
                     style={{
                       color: '#fff',
                       borderRadius: '10px',
@@ -254,12 +257,13 @@ const Case = () => {
                   sx={{'& .MuiDrawer-paper': {boxSizing: 'border-box', width: {md: width / 2, xs: width}}}}
                 >
                   <Box
-                    p={10}
+                    p={{xs: 4, md: 10}}
                     minHeight='100%'
                     display='flex'
                     flexDirection='column'
-                    justifyContent='center'
                     position='relative'
+                    pt={{md: 0, xs: 16}}
+                    justifyContent={{md: 'center', xs: 'flex-start'}}
                     style={{
                       color: '#fff',
                       borderRadius: '10px',

@@ -1,7 +1,8 @@
 import {Box, Container, Grid, Typography} from '@material-ui/core'
-import {AnimateIn, ColorText} from '../style'
+import {ColorText} from '../style'
 import React from 'react'
 import DatumRight from '../common/datum_right'
+import {Fade} from 'react-awesome-reveal'
 
 const Datum = () => {
   return (
@@ -11,12 +12,12 @@ const Datum = () => {
           <Grid container alignItems='stretch'>
             <Grid item md={4} display='flex' alignItems='center'>
               <Box>
-                <AnimateIn>
+                <Fade direction='up' duration={500}>
                   <Typography variant='h2'>
                     <ColorText>跨链</ColorText>
                     <Box>行业领导者</Box>
                   </Typography>
-                </AnimateIn>
+                </Fade>
               </Box>
             </Grid>
             <Grid item md={8}>

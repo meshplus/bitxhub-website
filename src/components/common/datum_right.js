@@ -33,7 +33,7 @@ const DatumRight = () => {
           marginLeft: '20px',
           '& h5': {
             color: 'rgba(255, 255, 255, 0.5)',
-            marginBottom: '12px',
+            marginBottom: {md: '12px', xs: 0},
             position: 'relative',
             '&:before': {
               content: '" "',
@@ -61,19 +61,19 @@ const DatumRight = () => {
         },
         '@keyframes A': {
           from: {backgroundSize: '0 215px'},
-          to: {backgroundSize: '640px 215px'},
+          to: {backgroundSize: '605px 215px'},
         },
         '@keyframes sA': {
           from: {backgroundSize: '0 109px'},
-          to: {backgroundSize: '259px 109px'},
+          to: {backgroundSize: '280px 109px'},
         },
         '@keyframes fA': {
           from: {backgroundSize: '0 215px'},
-          to: {backgroundSize: '660px 215px'},
+          to: {backgroundSize: '605px 215px'},
         },
         '@keyframes fsA': {
           from: {backgroundSize: '0 109px'},
-          to: {backgroundSize: '289px 109px'},
+          to: {backgroundSize: '280px 109px'},
         },
         '& .datum_item': {
           display: 'flex',
@@ -83,7 +83,7 @@ const DatumRight = () => {
           transition: 'background 0.3s ease',
           backgroundRepeat: 'no-repeat',
           backgroundImage: `url(${getStaticUrl('data_card.png')})`,
-          backgroundPosition: {xs: 'top 6px left 34px', md: 'top 1px left 70px'},
+          backgroundPosition: {xs: 'top 7px left 40px', md: 'top 1px left 70px'},
           backgroundSize: {xs: '0 109px', md: '0 215px'},
           '& .datum_ball_active': {
             height: {xs: '70px', md: '139px'},
@@ -112,7 +112,7 @@ const DatumRight = () => {
     >
       <Box
         position='relative'
-        ml={{xs: 8, md: 15}}
+        ml={{xs: 3, md: 15}}
         mt={10}
         className={`datum_item ${active[1]}`}
         onMouseEnter={() => handleActive(1)}
@@ -149,7 +149,7 @@ const DatumRight = () => {
       </Box>
       <Box
         position='relative'
-        ml={{xs: 2, md: 6}}
+        ml={{xs: 0, md: 6}}
         className={`datum_item ${active[2]}`}
         onMouseEnter={() => handleActive(2)}
         sx={{
@@ -161,7 +161,7 @@ const DatumRight = () => {
         <img src={getStaticUrl('datum_1.png')} alt='datum' className={'datum_ball'} />
         <img src={getStaticUrl('datum_2.png')} alt='datum' className={'datum_ball_active'} />
         <Box position='absolute' className={'datum_num'}>
-          <Typography variant='h3'>4</Typography>
+          <Typography variant='h3'>7</Typography>
           <Typography variant='body1'>项</Typography>
         </Box>
         <Box pl={{xs: 2, md: 6}}>
@@ -180,14 +180,10 @@ const DatumRight = () => {
               </>
             ) : (
               <>
-                <Typography variant='subtitle2'>参与中国信通院——可信推进计划《区块链互操作白皮书》编写工作</Typography>
-                <Typography variant='subtitle2'>参与国际电联电信标准化部门(ITU-T)2项DLT互操作框架标准制定</Typography>
-                <Typography variant='subtitle2'>
-                  参与中国通信标准化协会(CCSA)《区块链链间互操作》团体标准制定
-                </Typography>
-                <Typography variant='subtitle2'>
-                  参与计算机协会区块链和分布式记账委员会区块链互操作3项标准制定
-                </Typography>
+                <Typography variant='subtitle2'>中国信通院可信推进计划《区块链互操作白皮书》编写工作</Typography>
+                <Typography variant='subtitle2'>国际电联电信标准化部门2项DLT互操作框架标准制定</Typography>
+                <Typography variant='subtitle2'>中国通信标准化协会《区块链链间互操作》团体标准制定</Typography>
+                <Typography variant='subtitle2'>计算机协会区块链和分布式记账委员会区块链互操作3项标准制定</Typography>
               </>
             )}
           </Box>
@@ -195,7 +191,7 @@ const DatumRight = () => {
       </Box>
       <Box
         position='relative'
-        ml={{xs: 8, md: 12}}
+        ml={{xs: 3, md: 12}}
         className={`datum_item ${active[3]}`}
         onMouseEnter={() => handleActive(3)}
       >
@@ -209,13 +205,11 @@ const DatumRight = () => {
           <Box className='datum_meta'>
             <Typography variant='h5'>专利&论文</Typography>
             <Typography variant='body2' display={{md: 'block', xs: 'none'}}>
-              在跨链事务一致性保障、数据有效性验证、跨链协议等相关领域具有23篇
+              在跨链事务、数据有效性验证和跨链协议等相关领域具有23篇
             </Typography>
           </Box>
           <Box className='datum_meta_list'>
-            <Typography variant='subtitle2'>
-              在跨链事务一致性保障、数据有效性验证、跨链协议等相关领域具有23篇
-            </Typography>
+            <Typography variant='subtitle2'>在跨链事务、数据有效性验证和跨链协议等相关领域具有23篇</Typography>
           </Box>
         </Box>
       </Box>

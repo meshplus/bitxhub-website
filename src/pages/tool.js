@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
 import {Box, Button, Container, Grid, Typography} from '@material-ui/core'
-import {AnimateIn, ColorText} from '../components/style'
+import {ColorText} from '../components/style'
 import BG1T from '../images/tool_bg_1_tn.png'
 import BG2T from '../images/tool_bg_2_tn.png'
 import Screen from '../images/screen.png'
@@ -11,6 +11,7 @@ import Typewriter from 'typewriter-effect'
 import Browser1 from '../images/tool_1.png'
 import {useProgressiveImage} from '../hooks'
 import {getStaticUrl} from '../helpers'
+import {Fade} from 'react-awesome-reveal'
 
 const ToolPage = ({data}) => {
   const bg1 = useProgressiveImage(BG1T, getStaticUrl('tool_bg_1.png'))
@@ -46,11 +47,11 @@ const ToolPage = ({data}) => {
               <Grid container>
                 <Grid item md={5} display='flex' alignItems='center'>
                   <Box>
-                    <Typography variant='h3' mb={3} display='flex'>
-                      <AnimateIn>
+                    <Fade direction='up' duration={500}>
+                      <Typography variant='h3' mb={3} display='flex'>
                         <ColorText>跨链</ColorText>，尽在掌握之中
-                      </AnimateIn>
-                    </Typography>
+                      </Typography>
+                    </Fade>
                     <Typography variant='body1' pr={{md: 25, xs: 0}} mb={{md: 20, xs: 10}}>
                       通过可视化方式进行中继链自治管理，实时查看跨链数据，即将上线，敬请期待。
                     </Typography>
@@ -83,12 +84,12 @@ const ToolPage = ({data}) => {
               <Grid container>
                 <Grid item md={5} display='flex' alignItems='center'>
                   <Box>
-                    <Typography variant='h3' mb={3} display='flex'>
-                      <AnimateIn>
+                    <Fade direction='up' duration={500}>
+                      <Typography variant='h3' mb={3} display='flex'>
                         <ColorText>一键</ColorText>
                         启动跨链系统
-                      </AnimateIn>
-                    </Typography>
+                      </Typography>
+                    </Fade>
                     <Typography variant='body1' pr={{md: 20, xs: 0}} mb={{md: 20, xs: 5}}>
                       Goduck跨链运维工具可以一键启动跨链组件、一键生成组件配置和一键启动跨链服务
                     </Typography>

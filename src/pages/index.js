@@ -2,7 +2,7 @@ import React, {useEffect, useRef} from 'react'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
 import {Box, Container, Grid, Typography} from '@material-ui/core'
-import {AnimateIn, ColorText, IndexBar, IndexDottedLine} from '../components/style'
+import {ColorText, IndexBar, IndexDottedLine} from '../components/style'
 import CaseBGT from '../images/index_case_bg_tn.png'
 import lottie from 'lottie-web'
 import IndexBG3T from '../images/index_bg_3_tn.png'
@@ -15,6 +15,7 @@ import More from '../components/index/more'
 import DataBGT from '../images/index_data_bg_tn.png'
 import {useProgressiveImage} from '../hooks'
 import {getStaticUrl} from '../helpers'
+import {Fade} from 'react-awesome-reveal'
 
 const Index = () => {
   const bgRef = useRef()
@@ -73,14 +74,14 @@ const Index = () => {
                 },
               }}
             >
-              <AnimateIn>
+              <Fade direction='up' duration={500}>
                 <Typography variant='h3' mb={10} textAlign={{md: 'left', xs: 'right'}}>
                   <ColorText mr={2}>万链如一</ColorText>一可链万
                 </Typography>
-              </AnimateIn>
+              </Fade>
               <Grid container spacing={4}>
                 <Grid item xs={6}>
-                  <AnimateIn>
+                  <Fade direction='up' duration={500}>
                     <IndexBar
                       p={{xs: 3, md: 5}}
                       titleMb={3}
@@ -92,10 +93,10 @@ const Index = () => {
                       }
                       desc='采用通用跨链传输协议，实现对异构/同构应用链的协议适配'
                     />
-                  </AnimateIn>
+                  </Fade>
                 </Grid>
                 <Grid item xs={6}>
-                  <AnimateIn>
+                  <Fade direction='up' duration={500}>
                     <IndexBar
                       p={{xs: 3, md: 5}}
                       titleMb={3}
@@ -107,10 +108,10 @@ const Index = () => {
                       }
                       desc='验证跨链交易的来源及交易证明是否满足指定的跨链验证规则'
                     />
-                  </AnimateIn>
+                  </Fade>
                 </Grid>
                 <Grid item xs={6}>
-                  <AnimateIn>
+                  <Fade direction='up' duration={500}>
                     <IndexBar
                       p={{xs: 3, md: 5}}
                       titleMb={3}
@@ -122,10 +123,10 @@ const Index = () => {
                       }
                       desc='内置事务管理合约，保证不同业务场景下跨链交易的事务性'
                     />
-                  </AnimateIn>
+                  </Fade>
                 </Grid>
                 <Grid item xs={6}>
-                  <AnimateIn>
+                  <Fade direction='up' duration={500}>
                     <IndexBar
                       p={{xs: 3, md: 5}}
                       titleMb={3}
@@ -137,7 +138,7 @@ const Index = () => {
                       }
                       desc='针对用户需要对托管数字资产全方位保护的解决方案'
                     />
-                  </AnimateIn>
+                  </Fade>
                 </Grid>
               </Grid>
             </Box>
@@ -156,12 +157,12 @@ const Index = () => {
         >
           <Container maxWidth='lg' style={{display: 'flex', alignItems: 'center'}}>
             <Grid item md={7}>
-              <AnimateIn>
+              <Fade direction='up' duration={500}>
                 <Typography variant='h3' mb={13} data-sal='fade'>
                   <ColorText>核心组件</ColorText>
                 </Typography>
-              </AnimateIn>
-              <AnimateIn>
+              </Fade>
+              <Fade direction='up' duration={500}>
                 <Box display='flex' alignItems='center' mb={{xs: 4, md: 8}} position='relative'>
                   <img src={getStaticUrl('index_3_1.png')} alt='ball' className='ball' />
                   <Box position='absolute' top='50%' left={-45} zIndex={-1} width={140}>
@@ -176,8 +177,8 @@ const Index = () => {
                     desc='实现通用跨链协议开放许可链，提供应用链管理、跨链交易验证与路由等服务'
                   />
                 </Box>
-              </AnimateIn>
-              <AnimateIn>
+              </Fade>
+              <Fade direction='up' duration={500}>
                 <Box display='flex' alignItems='center' position='relative' mb={{xs: 4, md: 8}}>
                   <img src={getStaticUrl('index_3_2.png')} alt='ball' className='ball' />
                   <Box position='absolute' top='50%' left={-45} zIndex={-1} width={140}>
@@ -192,8 +193,8 @@ const Index = () => {
                     desc='支持不同区块链间跨链消息的交互，担任收集和传播跨链交易的角色'
                   />
                 </Box>
-              </AnimateIn>
-              <AnimateIn>
+              </Fade>
+              <Fade direction='up' duration={500}>
                 <Box display='flex' alignItems='center' position='relative'>
                   <img src={getStaticUrl('index_3_3.png')} alt='ball' className='ball' />
                   <Box position='absolute' top='50%' left={-45} zIndex={-1} width={140}>
@@ -208,7 +209,7 @@ const Index = () => {
                     desc='承载具体应用业务逻辑，根据是否支持跨链协议分为同构应用链与异构应用链'
                   />
                 </Box>
-              </AnimateIn>
+              </Fade>
             </Grid>
             <Grid item md={5} />
           </Container>

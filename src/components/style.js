@@ -4,6 +4,7 @@ import clsx from 'clsx'
 import Moment from 'react-moment'
 import Link from 'gatsby-link'
 import {useInView} from 'react-intersection-observer'
+import {useDebounce} from 'react-use'
 
 export const ReadMore = ({to, ...other}) => {
   return (
@@ -126,10 +127,10 @@ export const Card = ({children, className, title, singleTitle, img, desc, date, 
         paddingTop: '50%',
         backgroundImage: `url(${img})`,
         backgroundRepeat: 'no-repeat',
-        backgroundSize: 'cover',
+        backgroundSize: '100%',
         transition: 'all .6s',
         transform: 'translateY(0)',
-        backgroundPosition: 'left center',
+        backgroundPosition: 'left top',
         '& .title': {
           fontFamily: '"Roboto","Helvetica","Arial",sans-serif !important',
           fontWeight: 500,
@@ -239,8 +240,8 @@ export const IndexDottedLine = () => {
   )
 }
 
-export const AnimateIn = ({threshold = 0, triggerOnce = false, ...remainingProps}) => {
-  const [ref, inView] = useInView({threshold, triggerOnce})
+export const AnimateIn = ({threshold = 0.5, triggerOnce = false, ...remainingProps}) => {
+  const [ref, inView] = useInView({threshold: 0.1, triggerOnce})
 
   return (
     <div
@@ -249,7 +250,7 @@ export const AnimateIn = ({threshold = 0, triggerOnce = false, ...remainingProps
         // adjust these as desired
         transition: 'opacity 500ms, transform 500ms',
         opacity: inView ? 1 : 0,
-        transform: `translateY(${inView ? 0 : 100}px)`,
+        transform: `translateY(${inView ? 0 : 60}px)`,
       }}
       {...remainingProps}
     />

@@ -2,14 +2,7 @@ import React, {useEffect, useState} from 'react'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
 import {Box, Button, Container, Grid, Typography, useMediaQuery} from '@material-ui/core'
-import {
-  AnimateIn,
-  Card,
-  ColorText,
-  HoverColorText,
-  ReadMoreWithoutStyle,
-  ReadMoreWithoutStyleRedirect,
-} from '../components/style'
+import {Card, ColorText, HoverColorText, ReadMoreWithoutStyle, ReadMoreWithoutStyleRedirect} from '../components/style'
 import {graphql, Link} from 'gatsby'
 import Union from '../images/union.svg'
 import Right from '../images/right.svg'
@@ -25,6 +18,7 @@ import BG1T from '../images/community_bg_tn.png'
 import BG2T from '../images/community_bg_2_tn.png'
 import BG3T from '../images/community_bg_3_tn.png'
 import {getStaticUrl} from '../helpers'
+import {Fade} from 'react-awesome-reveal'
 
 export const pageQuery = graphql`
   query {
@@ -110,22 +104,22 @@ const CommunityPage = ({data}) => {
           <SEO title='Community' />
           <Box pt={35}>
             {isMobile ? (
-              <AnimateIn>
+              <Fade direction='up' duration={500}>
                 <Typography variant='h3' mb={3} textAlign='center'>
                   打通价值孤岛
                 </Typography>
                 <Typography variant='h3' mb={3} textAlign='center'>
                   从开源开始
                 </Typography>
-              </AnimateIn>
+              </Fade>
             ) : (
-              <AnimateIn>
+              <Fade direction='up' duration={500}>
                 <Typography variant='h3' mb={3}>
                   打通价值孤岛 ，从开源开始
                 </Typography>
-              </AnimateIn>
+              </Fade>
             )}
-            <AnimateIn>
+            <Fade direction='up' duration={500}>
               <Typography
                 variant='body1'
                 mb={8}
@@ -135,8 +129,8 @@ const CommunityPage = ({data}) => {
               >
                 BitXHub的核心技术完全开源，加入我们一起构建区块链跨链世界
               </Typography>
-            </AnimateIn>
-            <AnimateIn>
+            </Fade>
+            <Fade direction='up' duration={500}>
               <Box textAlign={{md: 'left', xs: 'center'}}>
                 <Button variant='outlined' size='large'>
                   <Link to='/article/4'>
@@ -147,13 +141,13 @@ const CommunityPage = ({data}) => {
                   </Link>
                 </Button>
               </Box>
-            </AnimateIn>
+            </Fade>
             <Box mt={20}>
-              <AnimateIn>
+              <Fade direction='up' duration={500}>
                 <Typography variant='h4' mb={3}>
                   社区活动
                 </Typography>
-              </AnimateIn>
+              </Fade>
               <Box mt={8}>
                 <Grid container spacing={4}>
                   <Grid item md={8} xs={12}>
@@ -211,11 +205,11 @@ const CommunityPage = ({data}) => {
                   </Grid>
                 </Grid>
               </Box>
-              <AnimateIn>
+              <Fade direction='up' duration={500}>
                 <Typography variant='h4' mt={20} mb={3}>
                   新手任务
                 </Typography>
-              </AnimateIn>
+              </Fade>
               <Typography variant='body1' mb={8}>
                 加入我们，贡献你的力量
               </Typography>
@@ -307,11 +301,11 @@ const CommunityPage = ({data}) => {
                   </Grid>
                 </Grid>
               </Box>
-              <AnimateIn>
+              <Fade direction='up' duration={500}>
                 <Typography variant='h4' mt={20} mb={3}>
                   社区之星
                 </Typography>
-              </AnimateIn>
+              </Fade>
               <Typography variant='body1' mb={8}>
                 感谢杰出的社区贡献者
               </Typography>
@@ -348,11 +342,11 @@ const CommunityPage = ({data}) => {
                   </Grid>
                 ))}
               </Grid>
-              <AnimateIn>
+              <Fade direction='up' duration={500}>
                 <Typography variant='h4' mt={20} mb={8}>
                   社区学习库
                 </Typography>
-              </AnimateIn>
+              </Fade>
               <Grid container spacing={10}>
                 {data.allStrapiArticle.edges.map(article => (
                   <Grid item md={4} xs={12}>

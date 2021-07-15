@@ -1,7 +1,8 @@
 import React, {useState} from 'react'
 import {Box, Container, Divider, Grid, Typography} from '@material-ui/core'
-import {AnimateIn, ColorText, ReadMore} from '../style'
+import {ColorText, ReadMore} from '../style'
 import {getStaticUrl} from '../../helpers'
+import {Fade} from 'react-awesome-reveal'
 
 const Roadmap = () => {
   const ina = {1: 'inactive', 2: '', 3: 'inactive', 4: 'inactive'}
@@ -144,14 +145,14 @@ const Roadmap = () => {
     >
       <Container maxWidth='lg'>
         <Box mb={{md: 14, xs: 6}} display={{xs: '', md: 'flex'}} alignItems='flex-end'>
-          <AnimateIn>
+          <Fade direction='up' duration={500}>
             <Typography variant='h3' mr={5}>
               <ColorText mr={1}>BitXHub</ColorText>开源规划
             </Typography>
-          </AnimateIn>
+          </Fade>
           <ReadMore to='/about#roadmap' mb={1} />
         </Box>
-        <Box sx={{overflowX: 'scroll', pb: {md: 32, xs: 30}}}>
+        <Box sx={{overflowX: 'scroll', overflowY: 'hidden', pb: {md: 32, xs: 30}}}>
           <Box
             display='flex'
             alignItems='center'
