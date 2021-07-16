@@ -45,7 +45,7 @@ const Index = () => {
   // if (typeof window === 'undefined') return null
   return (
     <Layout>
-      <SEO title='Home' />
+      <SEO title='BitXHub(趣链跨链技术平台)' />
       <Box zIndex={-1} position='fixed' ref={bgRef} style={{top: '50%', transform: 'translateY(-50%)', right: '0px'}} />
       <Banner />
       {/* 2 */}

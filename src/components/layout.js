@@ -97,7 +97,7 @@ const Layout = ({children}) => {
               </a>
             </Grid>
             <Grid item xs={6} md='auto'>
-              <a href='https://meshplus.github.io/bitxhub/bitxhub/quick_start/'>
+              <a href='https://meshplus.github.io/bitxhub/bitxhub/quick_start.html'>
                 <i className='icon icon-wendang' />
                 文档
               </a>
