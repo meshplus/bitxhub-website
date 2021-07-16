@@ -124,13 +124,8 @@ export const Card = ({children, className, title, singleTitle, img, desc, date, 
       sx={{
         borderRadius: '12px',
         display: 'block',
-        paddingTop: '50%',
-        backgroundImage: `url(${img})`,
-        backgroundRepeat: 'no-repeat',
-        backgroundSize: '100%',
         transition: 'all .6s',
         transform: 'translateY(0)',
-        backgroundPosition: 'left top',
         '& .title': {
           fontFamily: '"Roboto","Helvetica","Arial",sans-serif !important',
           fontWeight: 500,
@@ -152,6 +147,15 @@ export const Card = ({children, className, title, singleTitle, img, desc, date, 
         },
       }}
     >
+      <Box
+        sx={{
+          paddingTop: '50%',
+          backgroundImage: `url(${img})`,
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center center',
+        }}
+      />
       <Box
         p={6}
         sx={{

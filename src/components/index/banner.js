@@ -29,7 +29,7 @@ const Banner = () => {
   return (
     <Box
       position='relative'
-      pt={{md: 80, xs: 23}}
+      pt={{lg: 80, md: 60, sm: 40, xs: 23}}
       pb={{md: 80, xs: 0}}
       sx={{
         backgroundImage: {xs: `url(${getThemeUrl('index-mobile-3.png')})`, md: `url()`},
@@ -43,7 +43,7 @@ const Banner = () => {
           position='absolute'
           zIndex={-2}
           ref={ref1}
-          style={{top: '50%', transform: 'translateY(-50%)', right: '0px'}}
+          style={{top: '50%', transform: 'translate(-50%, -50%)', left: '50%', width: '100%', maxWidth: '1600px'}}
         />
       )}
       <Container maxWidth='lg' style={{display: 'flex', alignItems: 'center'}}>

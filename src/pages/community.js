@@ -153,12 +153,14 @@ const CommunityPage = ({data}) => {
                   <Grid item md={8} xs={12}>
                     {data.allStrapiActivity.edges.slice(0, 1).map(activity => (
                       <Card
+                        key={activity.node.title}
                         link={activity.node.link}
                         singleTitle={true}
                         title={activity.node.title}
                         desc={activity.node.content.slice(0, 80)}
                         date={activity.node.date}
-                        img={`${process.env.STRAPI_API_URL}${activity.node.cover.url}`}
+                        // img={`${process.env.STRAPI_API_URL}${activity.node.cover.url}`}
+                        img='https://cdn.yourtheme.cn/222_21f592db94.png'
                       />
                     ))}
                   </Grid>
@@ -190,7 +192,7 @@ const CommunityPage = ({data}) => {
                       }}
                     >
                       {data.allStrapiActivity.edges.slice(1).map(activity => (
-                        <Box className='item'>
+                        <Box className='item' key={activity.node.title}>
                           <Typography variant='body1' mb={1}>
                             <Moment date={activity.node.date} format='YYYY.MM.DD' className='date' />
                           </Typography>
@@ -349,7 +351,7 @@ const CommunityPage = ({data}) => {
               </Fade>
               <Grid container spacing={10}>
                 {data.allStrapiArticle.edges.map(article => (
-                  <Grid item md={4} xs={12}>
+                  <Grid item md={4} xs={12} key={article.node.title}>
                     <Card
                       title={article.node.title}
                       link={`/article/${article.node.strapiId}`}
